@@ -1,11 +1,11 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "patches": [
     {
       "name": "Force hasSystemFeature true",
-      "description": "Return true for Pixel-experience feature queries so apps that gate on hasSystemFeature() unlock non-Pixel devices.",
-      "default": true,
+      "description": "Return true for Pixel-experience feature queries (fail-soft on fingerprint miss).",
+      "default": false,
       "dependencies": [],
       "compatiblePackages": null,
       "options": []
@@ -42,16 +42,16 @@
     },
     {
       "name": "Spoof Pixel build fingerprint check",
-      "description": "In-APK Pixel-model checks return true. Server-side attestation not affected.",
-      "default": true,
+      "description": "In-APK Pixel-model checks return true (fail-soft on fingerprint miss).",
+      "default": false,
       "dependencies": [],
       "compatiblePackages": null,
       "options": []
     },
     {
       "name": "Strip root detection",
-      "description": "Force common root-detection methods to return false. Hides Magisk/su probes at the in-app level.",
-      "default": true,
+      "description": "Force common root-detection methods to return false (fail-soft on fingerprint miss).",
+      "default": false,
       "dependencies": [],
       "compatiblePackages": null,
       "options": []

@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/chirag127/morphe-patches/compare/v1.0.0...v1.0.1) (2026-07-08)
+
+### 🐛 Bug Fixes
+
+* **universal:** fail-soft fingerprint miss (catch PatchException per patch) ([fcbabd5](https://github.com/chirag127/morphe-patches/commit/fcbabd5a82023d5699e6fc3443f567012825cc37))
+
 ## 1.0.0 (2026-07-08)
 
 ### 🐛 Bug Fixes

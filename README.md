@@ -11,7 +11,7 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;4 patches total
+> **[v1.0.1](https://github.com/chirag127/morphe-patches/releases/tag/v1.0.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;4 patches total
 <details open>
 <summary>📦 com.google.android.apps.pixel.creativeassistant&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -28,9 +28,9 @@ TODO: Update this about section with a brief introduction/summary about this rep
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Force hasSystemFeature true](#force-hassystemfeature-true) | Return true for Pixel-experience feature queries so apps that gate on hasSystemFeature() unlock non-Pixel devices. |  |
-| [Spoof Pixel build fingerprint check](#spoof-pixel-build-fingerprint-check) | In-APK Pixel-model checks return true. Server-side attestation not affected. |  |
-| [Strip root detection](#strip-root-detection) | Force common root-detection methods to return false. Hides Magisk/su probes at the in-app level. |  |
+| [Force hasSystemFeature true](#force-hassystemfeature-true) | Return true for Pixel-experience feature queries (fail-soft on fingerprint miss). |  |
+| [Spoof Pixel build fingerprint check](#spoof-pixel-build-fingerprint-check) | In-APK Pixel-model checks return true (fail-soft on fingerprint miss). |  |
+| [Strip root detection](#strip-root-detection) | Force common root-detection methods to return false (fail-soft on fingerprint miss). |  |
 
 </details>
 
