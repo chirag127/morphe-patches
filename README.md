@@ -11,7 +11,27 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.1](https://github.com/chirag127/morphe-patches/releases/tag/v1.3.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;24 patches total
+> **[v1.4.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;27 patches total
+<details open>
+<summary>📦 com.google.android.apps.recorder&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Pixel Recorder unlock (Poco F7)](#pixel-recorder-unlock-poco-f7) | Bypass in-APK Pixel-only gates on Pixel Recorder for non-Pixel devices. Server-side Gemini transcription NOT covered. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.google.android.apps.pixel.agent&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Pixel Screenshots unlock (Poco F7) — EXPERIMENTAL](#pixel-screenshots-unlock-poco-f7-experimental) | Bypass in-APK Pixel-only gates on Pixel Screenshots. AI indexing (on-device Gemini Nano) requires Tensor G3+ and will not work on Snapdragon. |  |
+
+</details>
+
 <details open>
 <summary>📦 com.google.android.apps.pixel.creativeassistant&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -19,6 +39,16 @@ TODO: Update this about section with a brief introduction/summary about this rep
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Pixel Studio unlock (Poco F7)](#pixel-studio-unlock-poco-f7) | Bypass in-APK Pixel-only gates on Poco F7. Uses narrowed fingerprints to avoid lifecycle-callback match. Server-side Play Integrity NOT bypassed. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.google.android.apps.weather&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Pixel Weather unlock (Poco F7)](#pixel-weather-unlock-poco-f7) | Bypass in-APK Pixel-only gates on Pixel Weather for non-Pixel devices. |  |
 
 </details>
 

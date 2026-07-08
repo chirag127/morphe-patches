@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/chirag127/morphe-patches/compare/v1.3.1...v1.4.0) (2026-07-08)
+
+### ✨ New Features
+
+* **pixel:** 3 Pixel target patches + matrix verify ([9355f18](https://github.com/chirag127/morphe-patches/commit/9355f188fd43f4bd20d927d2f6ea67a1ab6e5aeb))
+
 ## [1.3.1](https://github.com/chirag127/morphe-patches/compare/v1.3.0...v1.3.1) (2026-07-08)
 
 ### 🐛 Bug Fixes
