@@ -1,7 +1,7 @@
 {
-  "created_at": "",
-  "description": "",
-  "download_url": "",
+  "created_at": "2026-07-08T19:54:35",
+  "description": "## 1.0.0-dev.1 (2026-07-08)\n\n### 🐛 Bug Fixes\n\n* correct compatibleWith() overload types ([f412143](https://github.com/chirag127/morphe-patches/commit/f4121434226adf616d144812eb2c4a3a76bf253a))\n* mark gradlew executable ([be6504a](https://github.com/chirag127/morphe-patches/commit/be6504aba68e191ded1db587a181f1e9bc95f6fd))\n\n### ✨ New Features\n\n* initial device-detection removal patches (Pixel Studio target) ([4a41ca7](https://github.com/chirag127/morphe-patches/commit/4a41ca705fcc7cb9df4a254588d6afbb73ad1d1d))",
+  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.0.0-dev.1/patches-1.0.0-dev.1.mpp",
   "signature_download_url": "",
-  "version": ""
+  "version": "1.0.0-dev.1"
 }

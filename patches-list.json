@@ -1,5 +1,60 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "0.0.0",
-  "patches": []
+  "version": "1.0.0-dev.1",
+  "patches": [
+    {
+      "name": "Force hasSystemFeature true",
+      "description": "Return true for Pixel-experience feature queries so apps that gate on hasSystemFeature() unlock non-Pixel devices.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": null,
+      "options": []
+    },
+    {
+      "name": "Pixel Studio unlock (Poco F7)",
+      "description": "Bypass in-APK Pixel-only gates: hasSystemFeature, Pixel model check, root detection. Server-side Play Integrity NOT bypassed.",
+      "default": true,
+      "dependencies": [
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.google.android.apps.pixel.creativeassistant",
+          "name": null,
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Spoof Pixel build fingerprint check",
+      "description": "In-APK Pixel-model checks return true. Server-side attestation not affected.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": null,
+      "options": []
+    },
+    {
+      "name": "Strip root detection",
+      "description": "Force common root-detection methods to return false. Hides Magisk/su probes at the in-app level.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": null,
+      "options": []
+    }
+  ]
 }
