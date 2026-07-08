@@ -34,6 +34,29 @@ object Constants {
         "com.truecaller" to null,
     )
 
+    /**
+     * Google News (com.google.android.apps.magazines). No traditional AdMob
+     * entrypoints in app code — ad surfaces are native feed cards keyed by
+     * SPONSORED_ARTICLE_AD enum in obfuscated class `akxk`, plus IMA SDK for
+     * video/pause ads and `com.google.android.gms.ads.adshield` for integrity.
+     * Version pin left null; atomic patches are STUBs pending fingerprint work.
+     */
+    val COMPATIBILITY_GOOGLE_NEWS: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.magazines" to null,
+    )
+
+    /**
+     * GitHub Android app (closed source; Play Store only). Version pin left null; atomic
+     * patches target color palette entries in `res/values-night/colors.xml` and view-model
+     * anchors observed in the workflow-disassembled v1.255.x smali (see
+     * `disassembled-com.github.android` artifact: 108 files under `smali/com/github/android/comment/`
+     * plus preserved-name `ComposeCommentBottomSheetDialog.smali`; Firebase Analytics present
+     * in `smali_classes4/com/google/firebase/analytics/`).
+     */
+    val COMPATIBILITY_GITHUB_ANDROID: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.github.android" to null,
+    )
+
     /** Common Pixel-experience feature strings that in-APK checks target. */
     val PIXEL_FEATURE_STRINGS = listOf(
         "com.google.android.feature.PIXEL_EXPERIENCE",
