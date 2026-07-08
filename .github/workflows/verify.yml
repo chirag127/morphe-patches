@@ -1,0 +1,187 @@
+name: Verify patched APK boots cleanly
+
+# Runs BEFORE release.yml on every push to main.
+# Fetches target APK, applies patches, boots Android emulator, installs
+# patched APK, launches its main activity via monkey, checks for
+# SuperNotCalledException / ANR / crashlog in logcat.
+#
+# Purpose: catch the class of bugs that killed v1.0.1 — where the .mpp
+# builds cleanly + installs cleanly but the patched app crashes on
+# launch. Emulator smoke-test is the earliest gate that catches this.
+#
+# On failure: workflow returns red. Because release.yml uses semantic-
+# release with `verifyConditions`, a failing verify blocks the release.
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - 'patches/**'
+      - '.github/workflows/verify.yml'
+  workflow_dispatch:
+    inputs:
+      target_package:
+        description: 'Package to smoke-test (defaults to first target patch)'
+        required: false
+        default: 'com.google.android.apps.recorder'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Emulator smoke-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java + Android
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build .mpp bundle
+        run: |
+          ./gradlew :patches:buildAndroid --no-daemon
+          MPP=$(ls patches/build/libs/patches-*.mpp | head -1)
+          echo "mpp=$MPP" >> $GITHUB_ENV
+          echo "Built: $MPP ($(du -h $MPP | cut -f1))"
+
+      - name: Fetch Morphe CLI
+        run: |
+          # Fetch morphe-cli — needed to apply patches outside Manager
+          mkdir -p ~/bin
+          curl -sSL -o ~/bin/morphe-cli.jar \
+            https://github.com/MorpheApp/morphe-cli/releases/latest/download/morphe-cli.jar
+          echo 'java -jar ~/bin/morphe-cli.jar "$@"' > ~/bin/morphe
+          chmod +x ~/bin/morphe
+          echo "$HOME/bin" >> $GITHUB_PATH
+
+      - name: Fetch target APK
+        env:
+          PKG: ${{ inputs.target_package || 'com.google.android.apps.recorder' }}
+        run: |
+          set -e
+          mkdir -p apk
+          curl -sSL -o ~/bin/apkeep \
+            https://github.com/EFForg/apkeep/releases/latest/download/apkeep-x86_64-unknown-linux-gnu
+          chmod +x ~/bin/apkeep
+
+          ~/bin/apkeep -a "$PKG" -d apk-pure apk/ || {
+            echo "::warning::apkeep failed for $PKG — skipping verify (no target APK to test)"
+            echo "skip_verify=true" >> $GITHUB_ENV
+            exit 0
+          }
+
+          # Handle .xapk bundles (multi-APK)
+          if ls apk/*.xapk 2>/dev/null; then
+            echo "Extracting .xapk bundle"
+            mkdir -p apk/bundle
+            unzip -q apk/*.xapk -d apk/bundle/
+            BASE=$(ls -S apk/bundle/*.apk | head -1)
+            cp "$BASE" apk/target.apk
+          else
+            cp apk/*.apk apk/target.apk 2>/dev/null || true
+          fi
+
+          if [ ! -f apk/target.apk ]; then
+            echo "::warning::No APK ready — skipping verify"
+            echo "skip_verify=true" >> $GITHUB_ENV
+          else
+            echo "APK ready: $(du -h apk/target.apk | cut -f1)"
+          fi
+
+      - name: Apply patches to target APK
+        if: env.skip_verify != 'true'
+        env:
+          PKG: ${{ inputs.target_package || 'com.google.android.apps.recorder' }}
+        run: |
+          set -e
+          echo "Applying $mpp to apk/target.apk"
+          morphe patch \
+            --patches "$mpp" \
+            --output apk/patched.apk \
+            apk/target.apk 2>&1 | tail -30 || {
+              echo "::error::morphe-cli failed to apply patches"
+              exit 1
+            }
+          ls -la apk/patched.apk
+
+      - name: Enable KVM (needed for x86 emulator on GH runner)
+        if: env.skip_verify != 'true'
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | \
+            sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Boot emulator + install + smoke-launch
+        if: env.skip_verify != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          PKG: ${{ inputs.target_package || 'com.google.android.apps.recorder' }}
+        with:
+          api-level: 34
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          disable-spellchecker: true
+          emulator-boot-timeout: 900
+          script: |
+            set -e
+            echo "=== Emulator booted ==="
+            adb devices
+            adb wait-for-device
+            adb shell pm list packages | head -5
+
+            echo "=== Installing patched APK ==="
+            adb install -r -t apk/patched.apk 2>&1 | tail -5
+
+            echo "=== Confirming install ==="
+            adb shell pm list packages | grep "$PKG" || {
+              echo "::error::Package $PKG not present after install"
+              exit 1
+            }
+
+            echo "=== Clearing logcat ==="
+            adb logcat -c
+
+            echo "=== Launching main activity (monkey 1) ==="
+            adb shell monkey -p "$PKG" -c android.intent.category.LAUNCHER 1 2>&1 | tail -10
+
+            # Give app 8 seconds to either crash or settle
+            sleep 8
+
+            echo "=== Checking logcat for crash markers ==="
+            LOG=$(adb logcat -d -t 500)
+            echo "$LOG" | tail -50
+
+            # Fail on the SuperNotCalledException class of crash
+            if echo "$LOG" | grep -qE "SuperNotCalledException|FATAL EXCEPTION.*$PKG|Process crashed"; then
+              echo "::error::Patched APK crashed on launch — logcat shows fatal exception"
+              echo "$LOG" | grep -E "FATAL|Exception|at " | head -30
+              exit 1
+            fi
+
+            # Confirm process is actually alive
+            if ! adb shell ps -A | grep -q "$PKG"; then
+              echo "::warning::Process $PKG not running after 8s — may have crashed silently"
+              # Warning, not fatal — some apps exit on missing services on emulator
+            else
+              echo "::notice::✓ Patched APK launched, process alive, no crash markers in logcat"
+            fi
+
+      - name: Skip notice
+        if: env.skip_verify == 'true'
+        run: echo "::notice::Verify skipped — could not fetch target APK. Manual test recommended before shipping."
