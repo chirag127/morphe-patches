@@ -72,10 +72,25 @@ jobs:
           echo "Built: $MPP ($(du -h $MPP | cut -f1))"
 
       - name: Fetch Morphe CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
           mkdir -p ~/bin
-          curl -sSL -o ~/bin/morphe-cli.jar \
-            https://github.com/MorpheApp/morphe-cli/releases/latest/download/morphe-cli.jar
+          # Real asset name is versioned (e.g. morphe-cli-1.9.1-all.jar), NOT morphe-cli.jar
+          # Use `gh release download` with a wildcard pattern to grab the latest all-jar
+          # regardless of version bump.
+          gh release download --repo MorpheApp/morphe-cli \
+            --pattern 'morphe-cli-*-all.jar' \
+            --output ~/bin/morphe-cli.jar
+          # Sanity check — reject if <1MB (must be a real JAR, not a redirect page)
+          SIZE=$(stat -c%s ~/bin/morphe-cli.jar)
+          if [ "$SIZE" -lt 1000000 ]; then
+            echo "::error::morphe-cli.jar too small ($SIZE bytes) — likely a 404 page"
+            head -c 200 ~/bin/morphe-cli.jar
+            exit 1
+          fi
+          echo "Fetched morphe-cli.jar ($(du -h ~/bin/morphe-cli.jar | cut -f1))"
           echo 'java -jar ~/bin/morphe-cli.jar "$@"' > ~/bin/morphe
           chmod +x ~/bin/morphe
           echo "$HOME/bin" >> $GITHUB_PATH
