@@ -1,19 +1,19 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "patches": [
     {
-      "name": "Force hasSystemFeature true",
-      "description": "Return true for Pixel-experience feature queries (fail-soft on fingerprint miss).",
+      "name": "Force hasSystemFeature true (narrow)",
+      "description": "Return true from public static boolean methods calling PackageManager.hasSystemFeature with a String arg. Narrow-scoped to avoid lifecycle callbacks.",
       "default": false,
       "dependencies": [],
       "compatiblePackages": null,
       "options": []
     },
     {
-      "name": "Pixel Studio unlock (Poco F7) — EXPERIMENTAL, off by default",
-      "description": "⚠️ Known to cause SuperNotCalledException on MainActivity in v1.0.x. Off-by-default in v1.1.0 pending fingerprint rewrite from disassembled APK. Do not enable until v1.2+.",
-      "default": false,
+      "name": "Pixel Studio unlock (Poco F7)",
+      "description": "Bypass in-APK Pixel-only gates on Poco F7. Uses narrowed fingerprints to avoid lifecycle-callback match. Server-side Play Integrity NOT bypassed.",
+      "default": true,
       "dependencies": [
         "BytecodePatch",
         "BytecodePatch",
@@ -41,16 +41,16 @@
       "options": []
     },
     {
-      "name": "Spoof Pixel build fingerprint check",
-      "description": "In-APK Pixel-model checks return true (fail-soft on fingerprint miss).",
+      "name": "Spoof Pixel model check (narrow)",
+      "description": "In-APK utility methods checking Pixel model return true. Narrow-scoped to avoid lifecycle callbacks.",
       "default": false,
       "dependencies": [],
       "compatiblePackages": null,
       "options": []
     },
     {
-      "name": "Strip root detection",
-      "description": "Force common root-detection methods to return false (fail-soft on fingerprint miss).",
+      "name": "Strip root detection (narrow)",
+      "description": "Force public static boolean methods referencing \"Magisk\" to return false. Narrow-scoped.",
       "default": false,
       "dependencies": [],
       "compatiblePackages": null,

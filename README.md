@@ -11,14 +11,14 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.1.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;4 patches total
+> **[v1.2.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.2.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;4 patches total
 <details open>
 <summary>📦 com.google.android.apps.pixel.creativeassistant&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Pixel Studio unlock (Poco F7) — EXPERIMENTAL, off by default](#pixel-studio-unlock-poco-f7-experimental-off-by-default) | ⚠️ Known to cause SuperNotCalledException on MainActivity in v1.0.x. Off-by-default in v1.1.0 pending fingerprint rewrite from disassembled APK. Do not enable until v1.2+. |  |
+| [Pixel Studio unlock (Poco F7)](#pixel-studio-unlock-poco-f7) | Bypass in-APK Pixel-only gates on Poco F7. Uses narrowed fingerprints to avoid lifecycle-callback match. Server-side Play Integrity NOT bypassed. |  |
 
 </details>
 
@@ -28,9 +28,9 @@ TODO: Update this about section with a brief introduction/summary about this rep
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Force hasSystemFeature true](#force-hassystemfeature-true) | Return true for Pixel-experience feature queries (fail-soft on fingerprint miss). |  |
-| [Spoof Pixel build fingerprint check](#spoof-pixel-build-fingerprint-check) | In-APK Pixel-model checks return true (fail-soft on fingerprint miss). |  |
-| [Strip root detection](#strip-root-detection) | Force common root-detection methods to return false (fail-soft on fingerprint miss). |  |
+| [Force hasSystemFeature true (narrow)](#force-hassystemfeature-true-narrow) | Return true from public static boolean methods calling PackageManager.hasSystemFeature with a String arg. Narrow-scoped to avoid lifecycle callbacks. |  |
+| [Spoof Pixel model check (narrow)](#spoof-pixel-model-check-narrow) | In-APK utility methods checking Pixel model return true. Narrow-scoped to avoid lifecycle callbacks. |  |
+| [Strip root detection (narrow)](#strip-root-detection-narrow) | Force public static boolean methods referencing "Magisk" to return false. Narrow-scoped. |  |
 
 </details>
 

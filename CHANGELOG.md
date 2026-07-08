@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/chirag127/morphe-patches/compare/v1.1.0...v1.2.0) (2026-07-08)
+
+### ✨ New Features
+
+* **universal:** narrow fingerprints — PUBLIC STATIC boolean shape ([ee98f5b](https://github.com/chirag127/morphe-patches/commit/ee98f5b4b57e0ced9f80f04f44e387dfeb98237c))
+
 ## [1.1.0](https://github.com/chirag127/morphe-patches/compare/v1.0.2...v1.1.0) (2026-07-08)
 
 ### ✨ New Features

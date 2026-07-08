@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-08T21:03:38",
-  "description": "## [1.1.0](https://github.com/chirag127/morphe-patches/compare/v1.0.2...v1.1.0) (2026-07-08)\n\n### ✨ New Features\n\n* **verify:** auto emulator smoke-test before release ([e65cb7e](https://github.com/chirag127/morphe-patches/commit/e65cb7e21a719e3f77ccc075b46d71f4d47f57a7))",
-  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.1.0/patches-1.1.0.mpp",
+  "created_at": "2026-07-08T21:07:41",
+  "description": "## [1.2.0](https://github.com/chirag127/morphe-patches/compare/v1.1.0...v1.2.0) (2026-07-08)\n\n### ✨ New Features\n\n* **universal:** narrow fingerprints — PUBLIC STATIC boolean shape ([ee98f5b](https://github.com/chirag127/morphe-patches/commit/ee98f5b4b57e0ced9f80f04f44e387dfeb98237c))",
+  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.2.0/patches-1.2.0.mpp",
   "signature_download_url": "",
-  "version": "1.1.0"
+  "version": "1.2.0"
 }
