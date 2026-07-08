@@ -2,21 +2,16 @@ package app.chirag127.morphe.patches.shared
 
 /**
  * Package specifiers for compatibleWith() on patches.
- * Each entry is Pair(package-name, versions).
- * Versions = emptyArray() means "any version".
+ * Overload signature: vararg packages: Pair<String, Set<String>?>
+ * Pass `null` (or an empty set) to mean "any version".
  */
 object Constants {
     /** Google Pixel Studio (Pixel-9-exclusive image gen). */
-    val COMPATIBILITY_PIXEL_STUDIO = arrayOf(
-        "com.google.android.apps.pixel.creativeassistant" to emptyArray<String>(),
+    val COMPATIBILITY_PIXEL_STUDIO: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.pixel.creativeassistant" to null,
     )
 
-    /** Universal — applies to any APK. Used by device-detection remover. */
-    val COMPATIBILITY_UNIVERSAL = arrayOf(
-        "*" to emptyArray<String>(),
-    )
-
-    /** Common Pixel-experience feature strings the universal patches check for. */
+    /** Common Pixel-experience feature strings that in-APK checks target. */
     val PIXEL_FEATURE_STRINGS = listOf(
         "com.google.android.feature.PIXEL_EXPERIENCE",
         "com.google.android.feature.PIXEL_2017_EXPERIENCE",
