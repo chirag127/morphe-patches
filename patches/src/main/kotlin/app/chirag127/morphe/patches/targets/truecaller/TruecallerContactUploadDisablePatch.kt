@@ -12,7 +12,7 @@
  * TODO: disassemble Truecaller v26.10.6 APK, grep for:
  *   - "contactsSync", "syncContacts", "uploadContacts", "phonebookSync"
  *   - "com.truecaller.contactsync.*" package
- *   - WorkManager subclasses under com.truecaller/*/sync/
+ *   - WorkManager subclasses under com.truecaller/[dir]/sync/
  * Then author fingerprints + return-early strategy per contact-upload path.
  */
 
