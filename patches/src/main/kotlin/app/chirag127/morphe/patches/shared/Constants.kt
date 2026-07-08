@@ -11,6 +11,11 @@ object Constants {
         "com.google.android.apps.pixel.creativeassistant" to null,
     )
 
+    /** Truecaller. Version pinning left null (any); atomic patches target v26.10.6 fingerprints. */
+    val COMPATIBILITY_TRUECALLER: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.truecaller" to null,
+    )
+
     /** Common Pixel-experience feature strings that in-APK checks target. */
     val PIXEL_FEATURE_STRINGS = listOf(
         "com.google.android.feature.PIXEL_EXPERIENCE",
