@@ -1,3 +1,13 @@
+## [1.3.0](https://github.com/chirag127/morphe-patches/compare/v1.2.0...v1.3.0) (2026-07-08)
+
+### 🐛 Bug Fixes
+
+* **truecaller:** 3 compile errors from v1.3.0 attempt ([c888352](https://github.com/chirag127/morphe-patches/commit/c88835200294497a83f53be6acf82f32a7a937ab)), closes [#1](https://github.com/chirag127/morphe-patches/issues/1)
+
+### ✨ New Features
+
+* **truecaller:** add Truecaller patch suite (com.truecaller) ([6537cf2](https://github.com/chirag127/morphe-patches/commit/6537cf2894a700a4ee805726ddf481a6de85287a))
+
 ## [1.2.0](https://github.com/chirag127/morphe-patches/compare/v1.1.0...v1.2.0) (2026-07-08)
 
 ### ✨ New Features

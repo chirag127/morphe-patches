@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-08T21:07:41",
-  "description": "## [1.2.0](https://github.com/chirag127/morphe-patches/compare/v1.1.0...v1.2.0) (2026-07-08)\n\n### ✨ New Features\n\n* **universal:** narrow fingerprints — PUBLIC STATIC boolean shape ([ee98f5b](https://github.com/chirag127/morphe-patches/commit/ee98f5b4b57e0ced9f80f04f44e387dfeb98237c))",
-  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.2.0/patches-1.2.0.mpp",
+  "created_at": "2026-07-08T21:41:17",
+  "description": "## [1.3.0](https://github.com/chirag127/morphe-patches/compare/v1.2.0...v1.3.0) (2026-07-08)\n\n### 🐛 Bug Fixes\n\n* **truecaller:** 3 compile errors from v1.3.0 attempt ([c888352](https://github.com/chirag127/morphe-patches/commit/c88835200294497a83f53be6acf82f32a7a937ab)), closes [#1](https://github.com/chirag127/morphe-patches/issues/1)\n\n### ✨ New Features\n\n* **truecaller:** add Truecaller patch suite (com.truecaller) ([6537cf2](https://github.com/chirag127/morphe-patches/commit/6537cf2894a700a4ee805726ddf481a6de85287a))",
+  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.3.0/patches-1.3.0.mpp",
   "signature_download_url": "",
-  "version": "1.2.0"
+  "version": "1.3.0"
 }
