@@ -52,7 +52,7 @@ jobs:
           mkdir -p apk
           if [ -n "$APK_URL" ]; then
             echo "Fetching from provided URL: $APK_URL"
-            curl -L -A 'Mozilla/5.0' -o apk/target.apk "$APK_URL"
+            curl -L -A 'Mozilla/5.0' -o apk/target.raw "$APK_URL"
           else
             echo "No URL provided — trying apkeep (EFF's open-source APK fetcher)"
             curl -sSL -o ~/bin/apkeep \
@@ -61,17 +61,42 @@ jobs:
 
             # apkeep supports apkpure (no auth) — most reliable public mirror
             if ~/bin/apkeep -a "$PKG" -d apk-pure apk/; then
-              mv apk/*.apk apk/target.apk 2>/dev/null || \
-                mv apk/*.xapk apk/target.apk 2>/dev/null || true
+              # apkeep may drop .apk or .xapk (bundle) depending on how the app ships
+              cp apk/*.apk apk/target.raw 2>/dev/null || \
+                cp apk/*.xapk apk/target.raw 2>/dev/null || true
             fi
 
-            if [ ! -f apk/target.apk ]; then
+            if [ ! -f apk/target.raw ]; then
               echo "::error::Could not fetch $PKG from apk-pure. Provide apk_url manually."
               exit 1
             fi
           fi
+
+          # Detect xapk (zip container) vs single apk. Both start with PK.. header,
+          # but xapk contains manifest.json + multiple .apk siblings; apk contains
+          # AndroidManifest.xml + classes.dex.
+          echo "Inspecting fetched file..."
+          file apk/target.raw || true
+          if unzip -l apk/target.raw 2>&1 | grep -qE 'manifest\.json|config\.[a-z]+\.apk|com\.google\..*\.apk'; then
+            echo "Detected .xapk bundle — extracting base APK"
+            mkdir -p apk/bundle
+            unzip -q apk/target.raw -d apk/bundle/
+            ls -la apk/bundle/ | head -10
+            # Grab the biggest .apk in the bundle — that's the base
+            BASE=$(ls -S apk/bundle/*.apk 2>/dev/null | head -1)
+            if [ -z "$BASE" ]; then
+              echo "::error::.xapk bundle contained no .apk files"
+              exit 1
+            fi
+            echo "Base APK: $BASE ($(du -h "$BASE" | cut -f1))"
+            cp "$BASE" apk/target.apk
+          else
+            echo "Detected single APK"
+            cp apk/target.raw apk/target.apk
+          fi
+
           echo "size=$(stat -c%s apk/target.apk)" >> $GITHUB_OUTPUT
-          echo "APK fetched: $(du -h apk/target.apk)"
+          echo "APK ready: $(du -h apk/target.apk)"
 
       - name: Disassemble with apktool
         run: |
