@@ -9,13 +9,13 @@ import app.chirag127.morphe.patches.universal.rootDetectionStripPatch
 /**
  * Aggregate patch: unlock Pixel Studio on non-Pixel devices.
  *
- * Combines the three universal in-APK gate-bypasses. Play Integrity
- * server-side check is NOT covered — see docs/pixel-studio.md.
+ * Composes the three universal in-APK gate-bypasses via dependsOn.
+ * Because each dependency is fail-soft, a fingerprint miss on any single
+ * universal patch WILL NOT abort the target-patch chain.
  *
  * Package: com.google.android.apps.pixel.creativeassistant
- * Requires: server-side attestation to still succeed (usually via
- * TrickyStore + Pixel keybox on rooted Poco F7). Pure-patch install
- * likely fails the first server call. Verify on-device after install.
+ * Server-side Play Integrity is NOT bypassed. Pure-patch install may still
+ * fail on first server call. Verify on-device.
  */
 @Suppress("unused")
 val pixelStudioUnlockPatch = bytecodePatch(
@@ -32,8 +32,9 @@ val pixelStudioUnlockPatch = bytecodePatch(
     )
 
     execute {
-        // Composition patch — no extra bytecode edits beyond what the deps do.
-        // Target-specific hooks (e.g. sibling package presence check) go here
-        // once we disassemble the actual APK and confirm the check sites.
+        // Composition patch — no extra bytecode edits.
+        // Universal dependencies are fail-soft: each catches its own
+        // PatchException so a miss on one doesn't abort the chain.
+        // Add target-specific hooks here once actual APK is disassembled.
     }
 }
