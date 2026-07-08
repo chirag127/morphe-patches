@@ -52,6 +52,8 @@ jobs:
         run: npm install
 
       - name: Build .mpp bundle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew :patches:buildAndroid --no-daemon
           MPP=$(ls patches/build/libs/patches-*.mpp | head -1)
