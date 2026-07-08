@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-08T20:50:54",
-  "description": "## [1.0.2](https://github.com/chirag127/morphe-patches/compare/v1.0.1...v1.0.2) (2026-07-08)\n\n### 🐛 Bug Fixes\n\n* **pixelstudio:** disable target patch — v1.0.1 caused SuperNotCalledException ([d14f8c2](https://github.com/chirag127/morphe-patches/commit/d14f8c2c6572da9fe3d62bce76a619621cf9a117))",
-  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.0.2/patches-1.0.2.mpp",
+  "created_at": "2026-07-08T21:03:38",
+  "description": "## [1.1.0](https://github.com/chirag127/morphe-patches/compare/v1.0.2...v1.1.0) (2026-07-08)\n\n### ✨ New Features\n\n* **verify:** auto emulator smoke-test before release ([e65cb7e](https://github.com/chirag127/morphe-patches/commit/e65cb7e21a719e3f77ccc075b46d71f4d47f57a7))",
+  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.1.0/patches-1.1.0.mpp",
   "signature_download_url": "",
-  "version": "1.0.2"
+  "version": "1.1.0"
 }

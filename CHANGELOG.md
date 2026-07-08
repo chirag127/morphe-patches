@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/chirag127/morphe-patches/compare/v1.0.2...v1.1.0) (2026-07-08)
+
+### ✨ New Features
+
+* **verify:** auto emulator smoke-test before release ([e65cb7e](https://github.com/chirag127/morphe-patches/commit/e65cb7e21a719e3f77ccc075b46d71f4d47f57a7))
+
 ## [1.0.2](https://github.com/chirag127/morphe-patches/compare/v1.0.1...v1.0.2) (2026-07-08)
 
 ### 🐛 Bug Fixes
