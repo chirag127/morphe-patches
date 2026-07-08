@@ -11,6 +11,24 @@ object Constants {
         "com.google.android.apps.pixel.creativeassistant" to null,
     )
 
+    /** Google Pixel Recorder (Pixel-only voice recorder with AI transcription). */
+    val COMPATIBILITY_PIXEL_RECORDER: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.recorder" to null,
+    )
+
+    /** Google Pixel Weather (Pixel-9-exclusive weather app). */
+    val COMPATIBILITY_PIXEL_WEATHER: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.weather" to null,
+    )
+
+    /**
+     * Google Pixel Screenshots (Pixel-8+-exclusive on-device AI screenshot library).
+     * Package is `com.google.android.apps.pixel.agent` per prior research.
+     */
+    val COMPATIBILITY_PIXEL_SCREENSHOTS: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.pixel.agent" to null,
+    )
+
     /** Truecaller. Version pinning left null (any); atomic patches target v26.10.6 fingerprints. */
     val COMPATIBILITY_TRUECALLER: Array<Pair<String, Set<String>?>> = arrayOf(
         "com.truecaller" to null,
