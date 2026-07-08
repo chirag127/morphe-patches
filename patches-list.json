@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "patches": [
     {
       "name": "Force hasSystemFeature true",
@@ -11,9 +11,9 @@
       "options": []
     },
     {
-      "name": "Pixel Studio unlock (Poco F7)",
-      "description": "Bypass in-APK Pixel-only gates: hasSystemFeature, Pixel model check, root detection. Server-side Play Integrity NOT bypassed.",
-      "default": true,
+      "name": "Pixel Studio unlock (Poco F7) — EXPERIMENTAL, off by default",
+      "description": "⚠️ Known to cause SuperNotCalledException on MainActivity in v1.0.x. Off-by-default in v1.1.0 pending fingerprint rewrite from disassembled APK. Do not enable until v1.2+.",
+      "default": false,
       "dependencies": [
         "BytecodePatch",
         "BytecodePatch",

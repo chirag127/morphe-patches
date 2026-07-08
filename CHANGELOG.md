@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/chirag127/morphe-patches/compare/v1.0.1...v1.0.2) (2026-07-08)
+
+### 🐛 Bug Fixes
+
+* **pixelstudio:** disable target patch — v1.0.1 caused SuperNotCalledException ([d14f8c2](https://github.com/chirag127/morphe-patches/commit/d14f8c2c6572da9fe3d62bce76a619621cf9a117))
+
 ## [1.0.1](https://github.com/chirag127/morphe-patches/compare/v1.0.0...v1.0.1) (2026-07-08)
 
 ### 🐛 Bug Fixes

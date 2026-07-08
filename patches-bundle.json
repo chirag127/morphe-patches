@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-07-08T20:07:49",
-  "description": "## [1.0.1](https://github.com/chirag127/morphe-patches/compare/v1.0.0...v1.0.1) (2026-07-08)\n\n### 🐛 Bug Fixes\n\n* **universal:** fail-soft fingerprint miss (catch PatchException per patch) ([fcbabd5](https://github.com/chirag127/morphe-patches/commit/fcbabd5a82023d5699e6fc3443f567012825cc37))",
-  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.0.1/patches-1.0.1.mpp",
+  "created_at": "2026-07-08T20:50:54",
+  "description": "## [1.0.2](https://github.com/chirag127/morphe-patches/compare/v1.0.1...v1.0.2) (2026-07-08)\n\n### 🐛 Bug Fixes\n\n* **pixelstudio:** disable target patch — v1.0.1 caused SuperNotCalledException ([d14f8c2](https://github.com/chirag127/morphe-patches/commit/d14f8c2c6572da9fe3d62bce76a619621cf9a117))",
+  "download_url": "https://github.com/chirag127/morphe-patches/releases/download/v1.0.2/patches-1.0.2.mpp",
   "signature_download_url": "",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
