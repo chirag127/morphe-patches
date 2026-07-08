@@ -5,20 +5,20 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.PatchException
 
 /**
- * Neutralize root-detection methods. Matches methods returning boolean
- * that reference the "Magisk" string, replaces body with `return false`.
+ * Neutralize root-detection utility methods.
  *
- * Fail-soft: no-op on fingerprint miss.
+ * Narrow fingerprint: PUBLIC STATIC boolean method referencing "Magisk"
+ * string. Utility-method shape only.
  */
 @Suppress("unused")
 val rootDetectionStripPatch = bytecodePatch(
-    name = "Strip root detection",
-    description = "Force common root-detection methods to return false (fail-soft on fingerprint miss).",
+    name = "Strip root detection (narrow)",
+    description = "Force public static boolean methods referencing \"Magisk\" to return false. Narrow-scoped.",
     default = false,
 ) {
     execute {
         try {
-            RootDetectionFingerprint.method.replaceInstructions(
+            RootDetectionCheckerFingerprint.method.replaceInstructions(
                 0,
                 """
                     const/4 v0, 0x0
@@ -26,9 +26,8 @@ val rootDetectionStripPatch = bytecodePatch(
                 """,
             )
         } catch (_: PatchException) {
-            // No method matching the "Magisk"-string signature in this APK.
-            // Target may probe root via SafetyNet/PlayIntegrity instead
-            // (server-side, not patchable). No-op instead of aborting.
+            // No matching root-check utility method.
+            // No-op.
         }
     }
 }

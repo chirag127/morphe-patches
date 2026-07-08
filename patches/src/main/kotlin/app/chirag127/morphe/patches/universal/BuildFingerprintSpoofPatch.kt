@@ -7,22 +7,23 @@ import app.morphe.patcher.patch.PatchException
 /**
  * Force in-APK "is this a Pixel?" checks to return true.
  *
- * NOTE: does not touch Build.MANUFACTURER / Build.MODEL themselves —
- * those live in framework and can't be edited from within an APK.
- * Only patches call-sites INSIDE the target APK.
+ * Narrow fingerprint: PUBLIC STATIC boolean method with no args that
+ * references "Pixel" literal. Utility-method shape only — excludes
+ * onCreate(Bundle) and other lifecycle callbacks.
  *
- * Fail-soft: if the fingerprint doesn't match, log-and-continue instead
- * of aborting the patch chain.
+ * Framework Build.MANUFACTURER / Build.MODEL themselves are read from
+ * OS memory and can't be patched from within an APK. Only patches
+ * call-sites INSIDE the target APK.
  */
 @Suppress("unused")
 val buildFingerprintSpoofPatch = bytecodePatch(
-    name = "Spoof Pixel build fingerprint check",
-    description = "In-APK Pixel-model checks return true (fail-soft on fingerprint miss).",
+    name = "Spoof Pixel model check (narrow)",
+    description = "In-APK utility methods checking Pixel model return true. Narrow-scoped to avoid lifecycle callbacks.",
     default = false,
 ) {
     execute {
         try {
-            BuildModelPixelCheckFingerprint.method.replaceInstructions(
+            PixelModelCheckerFingerprint.method.replaceInstructions(
                 0,
                 """
                     const/4 v0, 0x1
@@ -30,10 +31,8 @@ val buildFingerprintSpoofPatch = bytecodePatch(
                 """,
             )
         } catch (_: PatchException) {
-            // Target has no method returning boolean that literally contains
-            // "Pixel". The check likely uses a different pattern (e.g. reflection,
-            // or check against Build.HARDWARE, or delegation to a sibling package).
-            // No-op instead of aborting.
+            // No public-static-no-arg method with "Pixel" literal.
+            // No-op.
         }
     }
 }

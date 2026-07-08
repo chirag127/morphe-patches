@@ -5,23 +5,28 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.PatchException
 
 /**
- * Force PackageManager.hasSystemFeature(...) to return true for Pixel feature strings.
+ * Force Pixel-check utility methods to return true.
  *
- * Client-side gate. Bypasses in-APK Pixel-experience checks. Does NOT
- * defeat server-side Play Integrity attestation.
+ * Narrow fingerprint: requires PUBLIC STATIC method returning Z with
+ * single String param that calls PackageManager.hasSystemFeature. This
+ * shape is typical of utility methods like `isPixelDevice(String feature)`,
+ * NOT Activity.onCreate / Application.onCreate (which return void and
+ * take Bundle).
  *
- * Fail-soft: if the fingerprint doesn't match a specific target, this
- * patch logs and continues instead of aborting the patch chain.
+ * Fail-soft: fingerprint miss = no-op instead of aborting chain.
+ * Prior version (v1.0.1) had a broad fingerprint that matched an
+ * Application.onCreate override and skipped super.onCreate() call,
+ * causing SuperNotCalledException. Fixed here.
  */
 @Suppress("unused")
 val hasSystemFeatureBypassPatch = bytecodePatch(
-    name = "Force hasSystemFeature true",
-    description = "Return true for Pixel-experience feature queries (fail-soft on fingerprint miss).",
+    name = "Force hasSystemFeature true (narrow)",
+    description = "Return true from public static boolean methods calling PackageManager.hasSystemFeature with a String arg. Narrow-scoped to avoid lifecycle callbacks.",
     default = false,
 ) {
     execute {
         try {
-            HasSystemFeatureFingerprint.method.replaceInstructions(
+            HasSystemFeatureCheckerFingerprint.method.replaceInstructions(
                 0,
                 """
                     const/4 v0, 0x1
@@ -29,9 +34,8 @@ val hasSystemFeatureBypassPatch = bytecodePatch(
                 """,
             )
         } catch (_: PatchException) {
-            // Fingerprint didn't match this APK — target likely doesn't call
-            // hasSystemFeature directly (feature-check may be via reflection or
-            // sibling-package presence). No-op instead of aborting chain.
+            // Target doesn't have a matching utility-method shape.
+            // No-op instead of aborting chain.
         }
     }
 }
