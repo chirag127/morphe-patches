@@ -1,0 +1,161 @@
+name: Disassemble APK for fingerprint discovery
+
+# Manually triggered — fetches a target APK from a public mirror,
+# disassembles with apktool + jadx, greps for Pixel/root-check patterns,
+# uploads smali + report as workflow artifact.
+#
+# Purpose: no personal laptop needed, no Pixel device needed.
+# The cloud runner produces the bytecode we iterate fingerprints against.
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: 'Target package (e.g. com.google.android.apps.pixel.creativeassistant)'
+        required: true
+        default: 'com.google.android.apps.pixel.creativeassistant'
+      apk_url:
+        description: 'Direct APK URL (from APKMirror-mirrored public source). Optional — if empty, workflow searches.'
+        required: false
+        default: ''
+
+jobs:
+  disassemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq default-jdk unzip curl grep
+
+          # apktool
+          mkdir -p ~/bin
+          curl -sSL https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool -o ~/bin/apktool
+          chmod +x ~/bin/apktool
+          curl -sSL https://github.com/iBotPeaches/Apktool/releases/download/v2.11.0/apktool_2.11.0.jar -o ~/bin/apktool.jar
+          echo "$HOME/bin" >> $GITHUB_PATH
+
+          # jadx (optional, for Java-level view)
+          curl -sSL https://github.com/skylot/jadx/releases/download/v1.5.4/jadx-1.5.4.zip -o /tmp/jadx.zip
+          unzip -q /tmp/jadx.zip -d ~/jadx
+          echo "$HOME/jadx/bin" >> $GITHUB_PATH
+
+      - name: Fetch APK
+        id: fetch
+        env:
+          PKG: ${{ inputs.package_name }}
+          APK_URL: ${{ inputs.apk_url }}
+        run: |
+          set -e
+          mkdir -p apk
+          if [ -n "$APK_URL" ]; then
+            echo "Fetching from provided URL: $APK_URL"
+            curl -L -A 'Mozilla/5.0' -o apk/target.apk "$APK_URL"
+          else
+            echo "No URL provided — trying apkeep (EFF's open-source APK fetcher)"
+            curl -sSL -o ~/bin/apkeep \
+              https://github.com/EFForg/apkeep/releases/latest/download/apkeep-x86_64-unknown-linux-gnu
+            chmod +x ~/bin/apkeep
+
+            # apkeep supports apkpure (no auth) — most reliable public mirror
+            if ~/bin/apkeep -a "$PKG" -d apk-pure apk/; then
+              mv apk/*.apk apk/target.apk 2>/dev/null || \
+                mv apk/*.xapk apk/target.apk 2>/dev/null || true
+            fi
+
+            if [ ! -f apk/target.apk ]; then
+              echo "::error::Could not fetch $PKG from apk-pure. Provide apk_url manually."
+              exit 1
+            fi
+          fi
+          echo "size=$(stat -c%s apk/target.apk)" >> $GITHUB_OUTPUT
+          echo "APK fetched: $(du -h apk/target.apk)"
+
+      - name: Disassemble with apktool
+        run: |
+          set -e
+          java -jar ~/bin/apktool.jar d -f apk/target.apk -o smali/ 2>&1 | tail -20
+          echo "smali/ tree:"
+          find smali -maxdepth 3 -type d | head -20
+
+      - name: Grep for Pixel-check patterns
+        run: |
+          set -e
+          mkdir -p report
+
+          echo "==== Manifest: uses-feature declarations ====" | tee report/pixel-features.txt
+          grep -A0 "uses-feature" smali/AndroidManifest.xml 2>/dev/null | tee -a report/pixel-features.txt || true
+          echo "" | tee -a report/pixel-features.txt
+
+          echo "==== PIXEL_EXPERIENCE feature string call-sites ====" | tee report/hassystemfeature.txt
+          grep -rn "PIXEL_EXPERIENCE\|com.google.android.feature.PIXEL\|PIXEL_20" smali/ 2>/dev/null | head -50 | tee -a report/hassystemfeature.txt || true
+          echo "" | tee -a report/hassystemfeature.txt
+
+          echo "==== hasSystemFeature call-sites ====" | tee report/hasfeature-calls.txt
+          grep -rn "hasSystemFeature" smali/ 2>/dev/null | head -30 | tee -a report/hasfeature-calls.txt || true
+          echo "" | tee -a report/hasfeature-calls.txt
+
+          echo "==== Build.MANUFACTURER / Build.MODEL reads ====" | tee report/build-reads.txt
+          grep -rn 'Landroid/os/Build;->MANUFACTURER\|Landroid/os/Build;->MODEL\|Landroid/os/Build;->BRAND' smali/ 2>/dev/null | head -30 | tee -a report/build-reads.txt || true
+          echo "" | tee -a report/build-reads.txt
+
+          echo "==== \"Pixel\" string literal call-sites (narrow) ====" | tee report/pixel-strings.txt
+          grep -rn '"Pixel"\|"pixel"' smali/ 2>/dev/null | head -30 | tee -a report/pixel-strings.txt || true
+          echo "" | tee -a report/pixel-strings.txt
+
+          echo "==== Root/Magisk detection call-sites ====" | tee report/root-detection.txt
+          grep -rn '"Magisk"\|"/system/xbin/su"\|"su_binary"\|"safetynet"' smali/ 2>/dev/null | head -30 | tee -a report/root-detection.txt || true
+          echo "" | tee -a report/root-detection.txt
+
+          echo "==== Play Integrity API call-sites ====" | tee report/play-integrity.txt
+          grep -rn "IntegrityManager\|integrity/IntegrityTokenRequest\|MEETS_STRONG_INTEGRITY" smali/ 2>/dev/null | head -30 | tee -a report/play-integrity.txt || true
+          echo "" | tee -a report/play-integrity.txt
+
+          echo "==== SUMMARY (line counts) ===="
+          wc -l report/*.txt
+
+      - name: Extract candidate fingerprints
+        run: |
+          set -e
+          cat > report/candidate-fingerprints.md <<'EOF'
+          # Candidate fingerprints — hand-tune from these
+
+          For each grep hit below, the pattern is:
+          `file:line`, then the smali line. The **file path** is the class,
+          the **method** it's in comes from the surrounding smali context
+          (`.method ...`). Read a few lines above/below to see the method
+          signature.
+
+          ## Manifest gates
+          EOF
+          cat report/pixel-features.txt >> report/candidate-fingerprints.md
+          echo "" >> report/candidate-fingerprints.md
+          echo '## hasSystemFeature call-sites' >> report/candidate-fingerprints.md
+          cat report/hasfeature-calls.txt >> report/candidate-fingerprints.md
+          echo '' >> report/candidate-fingerprints.md
+          echo '## Build.MANUFACTURER / MODEL reads' >> report/candidate-fingerprints.md
+          cat report/build-reads.txt >> report/candidate-fingerprints.md
+          echo '' >> report/candidate-fingerprints.md
+          echo '## "Pixel" string literals' >> report/candidate-fingerprints.md
+          cat report/pixel-strings.txt >> report/candidate-fingerprints.md
+          echo '' >> report/candidate-fingerprints.md
+          echo '## Root detection' >> report/candidate-fingerprints.md
+          cat report/root-detection.txt >> report/candidate-fingerprints.md
+          echo '' >> report/candidate-fingerprints.md
+          echo '## Play Integrity' >> report/candidate-fingerprints.md
+          cat report/play-integrity.txt >> report/candidate-fingerprints.md
+
+          echo "==== candidate-fingerprints.md ===="
+          head -80 report/candidate-fingerprints.md
+
+      - name: Upload smali + report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: disassembled-${{ inputs.package_name }}
+          path: |
+            smali/
+            report/
+          retention-days: 14
+          if-no-files-found: warn

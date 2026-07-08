@@ -9,19 +9,32 @@ import app.chirag127.morphe.patches.universal.rootDetectionStripPatch
 /**
  * Aggregate patch: unlock Pixel Studio on non-Pixel devices.
  *
- * Composes the three universal in-APK gate-bypasses via dependsOn.
- * Because each dependency is fail-soft, a fingerprint miss on any single
- * universal patch WILL NOT abort the target-patch chain.
+ * ⚠️ DEFAULT-OFF as of v1.1.0. Earlier auto-application caused
+ * `SuperNotCalledException` on MainActivity.onCreate because one of
+ * the universal fingerprints matched an Activity lifecycle method by
+ * accident and overwrote its body (skipping super.onCreate).
+ *
+ * ROOT CAUSE (from stack trace on Poco F7):
+ *   com.google.android.apps.pixel.merlin.tiktok.app.MainActivity
+ *   did not call through to super.onCreate()
+ *
+ * The fingerprints in this bundle are too-broad string-match filters
+ * ("Pixel", "Magisk"). They can only be tightened after disassembling
+ * the actual Pixel Studio APK — the `.github/workflows/disassemble.yml`
+ * cloud runner does that on demand, uploads smali as workflow artifact,
+ * and we iterate fingerprints against real bytecode.
+ *
+ * Until then, leave this OFF. Universal patches remain opt-in via
+ * Manager's per-patch toggle.
  *
  * Package: com.google.android.apps.pixel.creativeassistant
- * Server-side Play Integrity is NOT bypassed. Pure-patch install may still
- * fail on first server call. Verify on-device.
+ * Server-side Play Integrity is NOT bypassed anyway.
  */
 @Suppress("unused")
 val pixelStudioUnlockPatch = bytecodePatch(
-    name = "Pixel Studio unlock (Poco F7)",
-    description = "Bypass in-APK Pixel-only gates: hasSystemFeature, Pixel model check, root detection. Server-side Play Integrity NOT bypassed.",
-    default = true,
+    name = "Pixel Studio unlock (Poco F7) — EXPERIMENTAL, off by default",
+    description = "⚠️ Known to cause SuperNotCalledException on MainActivity in v1.0.x. Off-by-default in v1.1.0 pending fingerprint rewrite from disassembled APK. Do not enable until v1.2+.",
+    default = false,
 ) {
     compatibleWith(*COMPATIBILITY_PIXEL_STUDIO)
 
@@ -32,9 +45,7 @@ val pixelStudioUnlockPatch = bytecodePatch(
     )
 
     execute {
-        // Composition patch — no extra bytecode edits.
-        // Universal dependencies are fail-soft: each catches its own
-        // PatchException so a miss on one doesn't abort the chain.
-        // Add target-specific hooks here once actual APK is disassembled.
+        // Composition patch — no bytecode edits.
+        // Iteration blocked on APK disassembly (see .github/workflows/disassemble.yml).
     }
 }
