@@ -1,0 +1,18 @@
+This project includes work derived from open-source contributions.
+
+Credits:
+
+- RookieEnough
+  Disney+ fingerprint logic
+  Source:
+  https://gitlab.com/ReVanced/revanced-patches/-/blob/main/patches/src/main/kotlin/app/revanced/patches/disneyplus/ads/Fingerprints.kt
+
+- ReVanced Project
+  https://github.com/ReVanced
+
+Modifications:
+- Adapted to morphe-androidtv-patches architecture
+- Converted to ParameterizedFingerprint system
+- Integrated into modular patch framework
+
+All original authors retain credit for their contributions.

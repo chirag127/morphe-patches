@@ -1,0 +1,91 @@
+! Prime Video — DNS Ad-Suppression Filter List
+! Version: 4.6  (2026-06-30)
+! AdGuard Home syntax. Safe-harbor allows first, then blocks.
+!
+! Two Ad Pipelines: (1) Java/media3 ad-groups -> bytecode PATCH; (2) native SGAI ->
+! separate ad manifests on a dedicated ad host -> THIS list. Run both together.
+!
+! KEY DISTINCTION (confirmed by a with-ad HAR: content on pv-cdn.net + akamaized,
+! ads on avoddashs3ww-a.akamaihd.net, zero host overlap):
+!   akamaiZED.net = CONTENT (vod-dash-pv-ta-amazon.*)  -> ALLOW
+!   akamaiHD.net  = ADS     (avoddash* / *evtad*)       -> BLOCK
+
+! ── SAFE HARBOR (allow; $important always wins) ──────────────────────────────
+! Content / playback API prefixes on api.amazonvideo.com
+@@||keho.api.amazonvideo.com^$important
+@@||qgmg.api.amazonvideo.com^$important
+@@||p7kg.api.amazonvideo.com^$important
+@@||abxc3apcastp.na-f.api.amazonvideo.com^$important
+! Content CDNs — caught serving the movie; never block.
+@@||main.amazon.pv-cdn.net^$important
+@@/^[a-z0-9]*vod-dash-pv-ta-amazon\.akamaized\.net$/$important
+! Aux playback CDN (subtitles cf-timedtext + trickplay cf-trickplay)
+@@||aux.pv-cdn.net^$important
+! UI / artwork / content asset hosts
+@@||aiv-cdn.net^$important
+@@||images-na.ssl-images-amazon.com^$important
+@@||m.media-amazon.com^$important
+! Weblab experiments allowed wholesale EXCEPT the zoar/hercule ad triggers below
+@@||*.weblab.a2z.com^
+
+! ── AD HOSTS (block; dnsrewrite=0.0.0.0 = fast connection-refused) ────────────
+! Amazon ad platform (exchange / decisioning / aax)
+||amazon-adsystem.com^$dnsrewrite=0.0.0.0
+! SGAI ad decisioning + stitchers (api / ters-sgai1 / ters-draper1 .aiv-delivery)
+||aiv-delivery.net^$dnsrewrite=0.0.0.0
+! SGAI ad-media host (Akamai HD) — ads only, distinct from akamaized content
+||*avoddashs3ww-a.akamaihd.net^$dnsrewrite=0.0.0.0
+||*aivottevtad-a.akamaihd.net^$dnsrewrite=0.0.0.0
+||*vod-dash-pv-ta-amazon.akamaized.net^$dnsrewrite=0.0.0.0
+/^a\d+avod.*\.akamaihd\.net$/$dnsrewrite=0.0.0.0
+/^a\d+.*evtad.*\.akamaihd\.net$/$dnsrewrite=0.0.0.0
+/^a\d+.*vottevtad.*\.akamaihd\.net$/$dnsrewrite=0.0.0.0
+/^avoddash.*\.akamaihd\.net$/$dnsrewrite=0.0.0.0
+/.*evtad.*\.akamaihd\.net$/$dnsrewrite=0.0.0.0
+/avoddash.*\.akamaihd\.net$/$dnsrewrite=0.0.0.0
+! Ad-orchestration prefixes on the video API (content prefixes are safe-harbored)
+||threeplr*.api.amazonvideo.com^$dnsrewrite=0.0.0.0
+||nit*.api.amazonvideo.com^$dnsrewrite=0.0.0.0
+||vod-dash-pv.amazon.fastly-edge.com^$dnsrewrite=0.0.0.0
+! s0s7: fires every ad cycle; on-device test showed blocking cuts ads, content
+! intact. Revert to @@||s0s7.api.amazonvideo.com^$important if playback stalls.
+||s0s7.api.amazonvideo.com^$dnsrewrite=0.0.0.0
+! Weblab ad triggers ($important beats the weblab allow above)
+||zoar.triggers-v1.prod.mobile.weblab.a2z.com^$important$dnsrewrite=0.0.0.0
+||hercule.triggers-v1.prod.mobile.weblab.a2z.com^$important$dnsrewrite=0.0.0.0
+||regolith.prime-video.amazon.dev^$dnsrewrite=0.0.0.0
+
+! ── TELEMETRY / TRACKERS (privacy; no ad-delivery impact) ─────────────────────
+! Amazon clickstream (CSM / player events) — covers ipv6.unagi-na too
+||unagi.amazon.com^$dnsrewrite=0.0.0.0
+||unagi-na.amazon.com^$dnsrewrite=0.0.0.0
+||device-metrics-us.amazon.com^$dnsrewrite=0.0.0.0
+||fls-na.amazon.com^$dnsrewrite=0.0.0.0
+||p-v-logs.amazon.com^$dnsrewrite=0.0.0.0
+||global.telemetry.insights.video.a2z.com^$dnsrewrite=0.0.0.0
+! Minerva metric pipeline (hashed-subdomain pattern)
+/^[a-f0-9]{32,}\.[a-z0-9-]+\.prod\.service\.minerva\.devices\.a2z\.com$/$dnsrewrite=0.0.0.0
+! Sonar client QoE/diagnostics telemetry (sibling of regolith on
+! prime-video.amazon.dev). Telemetry only — not ad-delivery. Parent-domain
+! match covers all region/stage prefixes (prod.us-east-1.sonar.* etc.).
+||sonar.prime-video.amazon.dev^$dnsrewrite=0.0.0.0
+
+! ── GENERAL THIRD-PARTY TRACKERS (optional; not Prime-specific) ───────────────
+! A maintained list (HaGeZi) covers these better. Deliberately NOT blocked:
+!   1.datadog.pool.ntp.org (NTP — blocking risks clock drift -> DRM failure)
+||kochava.com^
+||moengage.com^
+||glanceapps.com^
+/^beacons[0-9]*\.(grp\.)?gvt[23]\.com$/
+||graph.facebook.com^
+||z-m-gateway.facebook.com^
+
+! ── HANDLED BY THE PATCH, NOT DNS (do not add here) ──────────────────────────
+!   atv-ps.amazon.com/cdp/getVideoAds      — ad PATH on a dual-use DRM host
+!   images-na.../images/S/pv-target-images — ad images are a PATH on a shared host
+!
+! WATCH (seen unblocked; do NOT block — content-collision risk):
+!   vod-dash-pv.amazon.fastly-edge.com        — fires near ad decisioning but
+!     "vod-dash" = content naming; blocking risks playback.
+!   *.mid-pop-vod-dash.main.amazon.pv-cdn.net  — "mid" variant on the content CDN;
+!     watch for midroll ads migrating onto the safe-harbored CDN.
