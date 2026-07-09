@@ -1,3 +1,13 @@
+## [1.6.0](https://github.com/chirag127/morphe-patches/compare/v1.5.1...v1.6.0) (2026-07-09)
+
+### 🐛 Bug Fixes
+
+* **constants:** add underscored aliases for authored patch imports ([4eb8630](https://github.com/chirag127/morphe-patches/commit/4eb8630374fa1be3b83ffa1ee764a77cd4406807))
+
+### ✨ New Features
+
+* 21-app STUB fanout partial (26 files) ([a48e524](https://github.com/chirag127/morphe-patches/commit/a48e524f7c87be388492c3b4213a1170f68de6a2))
+
 ## [1.5.1](https://github.com/chirag127/morphe-patches/compare/v1.5.0...v1.5.1) (2026-07-09)
 
 ### 🔧 Improvements
