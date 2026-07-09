@@ -134,26 +134,77 @@ jobs:
           }
           apksigner --version || true
 
+      - name: Check verify.yml passed this target
+        id: gate
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_NAME: ${{ matrix.target.name }}
+        run: |
+          # Only ship if the most recent verify run had this target green.
+          # Prevents shipping broken APKs to chirag127/morphe-releases (Poco F7 subscribed).
+          set -e
+          LATEST_VERIFY=$(gh run list --repo chirag127/morphe-patches \
+            --workflow verify.yml --branch main --limit 1 \
+            --json databaseId --jq '.[0].databaseId // ""')
+          if [ -z "$LATEST_VERIFY" ]; then
+            echo "::warning::No verify.yml run found — releasing without verify gate"
+            echo "gated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          JOB_CONCLUSION=$(gh run view "$LATEST_VERIFY" --repo chirag127/morphe-patches \
+            --json jobs \
+            --jq --arg t "$TARGET_NAME" '.jobs[] | select(.name | endswith("— " + $t)) | .conclusion' | head -1)
+          echo "Verify run $LATEST_VERIFY, target $TARGET_NAME → $JOB_CONCLUSION"
+          if [ "$JOB_CONCLUSION" = "success" ]; then
+            echo "gated=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Skipping release: verify job for $TARGET_NAME is '$JOB_CONCLUSION', not success"
+            echo "gated=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Fetch target APK
+        if: steps.gate.outputs.gated != 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p apk-in
-          apkeep -a "${{ matrix.target.pkg }}" apk-in/
-          APK=$(find apk-in -name '*.apk' -print -quit)
-          if [ -z "$APK" ]; then
-            echo "apkeep produced no APK for ${{ matrix.target.pkg }}" >&2
+          apkeep -a "${{ matrix.target.pkg }}" -d apk-pure apk-in/ || {
+            echo "::warning::apkeep failed for ${{ matrix.target.pkg }}"
+            exit 1
+          }
+          # Handle .xapk bundles — merge splits with APKEditor before morphe-cli
+          if ls apk-in/*.xapk 2>/dev/null; then
+            echo "Merging .xapk bundle"
+            APKEDITOR_URL=$(curl -fsSL -H "Authorization: Bearer $GITHUB_TOKEN" \
+              https://api.github.com/repos/REAndroid/APKEditor/releases/latest \
+              | jq -r '.assets[] | select(.name | test("^APKEditor-.*\\.jar$")) | .browser_download_url' | head -1)
+            curl -fsSL -o /tmp/apkeditor.jar "$APKEDITOR_URL"
+            java -jar /tmp/apkeditor.jar m -i "$(ls -1 apk-in/*.xapk | head -1)" -o apk-in/target.apk 2>&1 | tail -5
+          else
+            APK=$(find apk-in -name '*.apk' -print -quit)
+            [ -n "$APK" ] && cp "$APK" apk-in/target.apk
+          fi
+          if [ ! -f apk-in/target.apk ]; then
+            echo "apkeep + merge produced no APK for ${{ matrix.target.pkg }}" >&2
             exit 1
           fi
-          echo "APK_IN=$APK" >> "$GITHUB_ENV"
+          echo "APK_IN=apk-in/target.apk" >> "$GITHUB_ENV"
 
       - name: Apply patches
+        if: steps.gate.outputs.gated != 'true'
         run: |
           BUNDLE=$(find bundle -name '*.mpp' -print -quit)
           morphe-cli patch \
-            --bundle "$BUNDLE" \
-            --input "$APK_IN" \
-            --output "patched-${{ matrix.target.name }}.apk"
+            --patches "$BUNDLE" \
+            --out "patched-${{ matrix.target.name }}.apk" \
+            "$APK_IN"
+          [ -f "patched-${{ matrix.target.name }}.apk" ] || {
+            echo "::error::morphe-cli produced no patched APK"
+            exit 1
+          }
 
       - name: Decode keystore
+        if: steps.gate.outputs.gated != 'true'
         env:
           KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
         run: |
@@ -164,6 +215,7 @@ jobs:
           echo "$KEYSTORE_B64" | base64 -d > release.jks
 
       - name: Sign APK
+        if: steps.gate.outputs.gated != 'true'
         env:
           KEYSTORE_STORE_PASS: ${{ secrets.KEYSTORE_STORE_PASS }}
           KEYSTORE_KEY_PASS: ${{ secrets.KEYSTORE_KEY_PASS }}
@@ -179,6 +231,7 @@ jobs:
           apksigner verify --verbose "signed-${{ matrix.target.name }}.apk"
 
       - name: Publish release to chirag127/morphe-releases
+        if: steps.gate.outputs.gated != 'true'
         env:
           GH_TOKEN: ${{ secrets.RELEASES_WRITE_PAT }}
         run: |
@@ -186,7 +239,7 @@ jobs:
           gh release create "$TAG" \
             --repo chirag127/morphe-releases \
             --title "$TAG" \
-            --notes "Automated patched build of ${{ matrix.target.pkg }} — see workflow run for provenance." \
+            --notes "Automated patched build of ${{ matrix.target.pkg }} — verified green on GHA. See workflow run for provenance." \
             "signed-${{ matrix.target.name }}.apk" \
             || gh release upload "$TAG" \
                  --repo chirag127/morphe-releases \
