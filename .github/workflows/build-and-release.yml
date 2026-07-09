@@ -1,0 +1,185 @@
+name: Build and release patched APKs
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Daily at 03:17 UTC — off-peak, non-round minute per fleet convention.
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-and-release
+  cancel-in-progress: false
+
+jobs:
+  bundle:
+    name: Build .mpp bundle
+    runs-on: ubuntu-latest
+    outputs:
+      bundle-name: ${{ steps.bundle.outputs.name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build Android patch bundle
+        id: bundle
+        run: |
+          ./gradlew :patches:buildAndroid --no-daemon --stacktrace
+          BUNDLE=$(find patches/build -name '*.mpp' -print -quit)
+          if [ -z "$BUNDLE" ]; then
+            echo "No .mpp bundle produced" >&2
+            exit 1
+          fi
+          echo "name=$(basename "$BUNDLE")" >> "$GITHUB_OUTPUT"
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: patches-bundle
+          path: patches/build/**/*.mpp
+          retention-days: 7
+          if-no-files-found: error
+
+  release:
+    name: Patch and release — ${{ matrix.target.name }}
+    needs: bundle
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - { name: youtube,         pkg: com.google.android.youtube }
+          - { name: twitter,         pkg: com.twitter.android }
+          - { name: instagram,       pkg: com.instagram.android }
+          - { name: tiktok,          pkg: com.zhiliaoapp.musically }
+          - { name: reddit,          pkg: com.reddit.frontpage }
+          - { name: duolingo,        pkg: com.duolingo }
+          - { name: onedmplus,       pkg: idm.internet.download.manager.plus }
+          - { name: moonreader,      pkg: com.flyersoft.moonreaderp }
+          - { name: snapchat,        pkg: com.snapchat.android }
+          - { name: whatsapp,        pkg: com.whatsapp }
+          - { name: googlemaps,      pkg: com.google.android.apps.maps }
+          - { name: spotify,         pkg: com.spotify.music }
+          - { name: linkedin,        pkg: com.linkedin.android }
+          - { name: amazonshopping,  pkg: in.amazon.mShop.android.shopping }
+          - { name: primevideo,      pkg: com.amazon.avod.thirdpartyclient }
+          - { name: threads,         pkg: com.instagram.barcelona }
+          - { name: facebook,        pkg: com.facebook.katana }
+          - { name: notion,          pkg: notion.id }
+          - { name: todoist,         pkg: com.todoist }
+          - { name: anydo,           pkg: com.anydo }
+          - { name: miuimusic,       pkg: com.miui.player }
+          - { name: miuiweather,     pkg: com.miui.weather2 }
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Download patch bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: patches-bundle
+          path: bundle
+
+      - name: Install apkeep
+        run: |
+          curl -fsSL -o apkeep.tar.gz \
+            https://github.com/EFForg/apkeep/releases/latest/download/apkeep-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf apkeep.tar.gz
+          sudo mv apkeep-x86_64-unknown-linux-gnu/apkeep /usr/local/bin/apkeep
+          apkeep --version
+
+      - name: Install morphe-cli
+        run: |
+          curl -fsSL -o morphe-cli.jar \
+            https://github.com/chirag127/morphe-cli/releases/latest/download/morphe-cli-all.jar
+          echo '#!/usr/bin/env bash' | sudo tee /usr/local/bin/morphe-cli
+          echo 'exec java -jar /usr/local/lib/morphe-cli.jar "$@"' | sudo tee -a /usr/local/bin/morphe-cli
+          sudo mv morphe-cli.jar /usr/local/lib/morphe-cli.jar
+          sudo chmod +x /usr/local/bin/morphe-cli
+
+      - name: Install Android build-tools (apksigner)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq apksigner || {
+            # Fallback: pull from Android SDK if apt package unavailable
+            wget -q https://dl.google.com/android/repository/build-tools_r34-linux.zip
+            unzip -q build-tools_r34-linux.zip
+            sudo mv android-*/apksigner /usr/local/bin/
+          }
+          apksigner --version || true
+
+      - name: Fetch target APK
+        run: |
+          mkdir -p apk-in
+          apkeep -a "${{ matrix.target.pkg }}" apk-in/
+          APK=$(find apk-in -name '*.apk' -print -quit)
+          if [ -z "$APK" ]; then
+            echo "apkeep produced no APK for ${{ matrix.target.pkg }}" >&2
+            exit 1
+          fi
+          echo "APK_IN=$APK" >> "$GITHUB_ENV"
+
+      - name: Apply patches
+        run: |
+          BUNDLE=$(find bundle -name '*.mpp' -print -quit)
+          morphe-cli patch \
+            --bundle "$BUNDLE" \
+            --input "$APK_IN" \
+            --output "patched-${{ matrix.target.name }}.apk"
+
+      - name: Decode keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_B64 }}
+        run: |
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "KEYSTORE_B64 secret missing — run gen-keystore.yml first" >&2
+            exit 1
+          fi
+          echo "$KEYSTORE_B64" | base64 -d > release.jks
+
+      - name: Sign APK
+        env:
+          KEYSTORE_STORE_PASS: ${{ secrets.KEYSTORE_STORE_PASS }}
+          KEYSTORE_KEY_PASS: ${{ secrets.KEYSTORE_KEY_PASS }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+        run: |
+          apksigner sign \
+            --ks release.jks \
+            --ks-key-alias "$KEYSTORE_ALIAS" \
+            --ks-pass "pass:$KEYSTORE_STORE_PASS" \
+            --key-pass "pass:$KEYSTORE_KEY_PASS" \
+            --out "signed-${{ matrix.target.name }}.apk" \
+            "patched-${{ matrix.target.name }}.apk"
+          apksigner verify --verbose "signed-${{ matrix.target.name }}.apk"
+
+      - name: Publish release to chirag127/morphe-releases
+        env:
+          GH_TOKEN: ${{ secrets.RELEASES_WRITE_PAT }}
+        run: |
+          TAG="$(date -u +%Y.%m.%d)-${{ matrix.target.name }}"
+          gh release create "$TAG" \
+            --repo chirag127/morphe-releases \
+            --title "$TAG" \
+            --notes "Automated patched build of ${{ matrix.target.pkg }} — see workflow run for provenance." \
+            "signed-${{ matrix.target.name }}.apk" \
+            || gh release upload "$TAG" \
+                 --repo chirag127/morphe-releases \
+                 --clobber \
+                 "signed-${{ matrix.target.name }}.apk"
