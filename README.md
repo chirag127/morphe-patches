@@ -11,7 +11,33 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.4.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;27 patches total
+> **[v1.5.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.5.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;35 patches total
+<details open>
+<summary>📦 com.github.android&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [GitHub — AMOLED comment surface (STUB)](#github-amoled-comment-surface-stub) | STUB: extend AMOLED theme to comment-card backgrounds. Depends on base AMOLED patch; ViewHolder fingerprints pending. |  |
+| [GitHub — AMOLED dark theme (STUB)](#github-amoled-dark-theme-stub) | STUB: rewrite dark-theme backgrounds to true-black #000000. Resource-XML overrides pending; see file-level TODO. |  |
+| [GitHub — all patches](#github-all-patches) | Enables AMOLED theme + comment surface + telemetry strip. Water-only; no behavior or network changes. |  |
+| [GitHub — extended comment UX (STUB)](#github-extended-comment-ux-stub) | STUB placeholder for opt-in comment-UX enhancements (reactions summary, author-association badge, etc.). No behavior/network changes. |  |
+| [GitHub — telemetry strip (STUB)](#github-telemetry-strip-stub) | STUB: no-op Firebase Analytics logEvent/setUserProperty/setUserId. No network interception; water-only. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.google.android.apps.magazines&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Google News — all patches](#google-news-all-patches) | Enables every atomic Google News patch above. Toggle individual patches to opt out. |  |
+| [Google News — hide sponsored article cards (STUB)](#google-news-hide-sponsored-article-cards-stub) | STUB: hide SPONSORED_ARTICLE_AD feed cards. Fingerprints not yet authored. |  |
+| [Google News — remove ads (STUB)](#google-news-remove-ads-stub) | STUB: no-op ad-loader init methods for the news feed. Fingerprints not yet authored. |  |
+
+</details>
+
 <details open>
 <summary>📦 com.google.android.apps.recorder&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
