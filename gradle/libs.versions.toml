@@ -1,0 +1,21 @@
+[versions]
+morphe-patcher = "1.5.1"
+morphe-patches-library = "1.4.1-dev.6"
+# Tracking https://github.com/google/smali/issues/100.
+smali = "d92701d947"
+agp = "9.1.0"
+annotation = "1.9.1"
+gson = "2.14.0"
+guava = "33.6.0-jre"
+hiddenapibypass = "6.1"
+
+[libraries]
+morphe-patches-library = { module = "app.morphe:morphe-patches-library", version.ref = "morphe-patches-library" }
+morphe-extensions-library = { module = "app.morphe:morphe-extensions-library", version.ref = "morphe-patches-library" }
+annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+hiddenbypassapi = { module = "org.lsposed.hiddenapibypass:hiddenapibypass", version.ref = "hiddenapibypass"}
+
+[plugins]
+android-library = { id = "com.android.library" }
