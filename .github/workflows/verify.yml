@@ -186,13 +186,17 @@ jobs:
         run: |
           set -e
           echo "Applying $mpp to apk/target.apk"
-          morphe patch \
+          if ! morphe patch \
             --patches "$mpp" \
-            --output apk/patched.apk \
-            apk/target.apk 2>&1 | tail -30 || {
-              echo "::error::morphe-cli failed to apply patches"
-              exit 1
-            }
+            --out apk/patched.apk \
+            apk/target.apk 2>&1 | tail -30; then
+            echo "::error::morphe-cli failed to apply patches"
+            exit 1
+          fi
+          if [ ! -f apk/patched.apk ]; then
+            echo "::error::morphe-cli exited cleanly but did not produce apk/patched.apk"
+            exit 1
+          fi
           ls -la apk/patched.apk
 
       - name: Enable KVM (needed for x86 emulator on GH runner)
