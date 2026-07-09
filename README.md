@@ -11,7 +11,48 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.5.1](https://github.com/chirag127/morphe-patches/releases/tag/v1.5.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;35 patches total
+> **[v1.6.0](https://github.com/chirag127/morphe-patches/releases/tag/v1.6.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;61 patches total
+<details open>
+<summary>📦 com.reddit.frontpage&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [AdoboColorizeCommentIndentLines (STUB)](#adobocolorizecommentindentlines-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.reddit.frontpage. |  |
+
+</details>
+
+<details open>
+<summary>📦 in.amazon.mShop.android.shopping&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [AmazonShoppingRemoveSponsoredProducts (STUB)](#amazonshoppingremovesponsoredproducts-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on in.amazon.mShop.android.shopping. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.duolingo&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [DuolingoStreakShieldSpoof (STUB)](#duolingostreakshieldspoof-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.duolingo. |  |
+| [DuolingoSuperMaxUnlock (STUB)](#duolingosupermaxunlock-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.duolingo. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.facebook.katana&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [FacebookRemoveSponsoredPosts (STUB)](#facebookremovesponsoredposts-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.facebook.katana. |  |
+
+</details>
+
 <details open>
 <summary>📦 com.github.android&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
 <br>
@@ -35,6 +76,59 @@ TODO: Update this about section with a brief introduction/summary about this rep
 | [Google News — all patches](#google-news-all-patches) | Enables every atomic Google News patch above. Toggle individual patches to opt out. |  |
 | [Google News — hide sponsored article cards (STUB)](#google-news-hide-sponsored-article-cards-stub) | STUB: hide SPONSORED_ARTICLE_AD feed cards. Fingerprints not yet authored. |  |
 | [Google News — remove ads (STUB)](#google-news-remove-ads-stub) | STUB: no-op ad-loader init methods for the news feed. Fingerprints not yet authored. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.google.android.apps.maps&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [GoogleMapsAdStripDirections (STUB)](#googlemapsadstripdirections-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.google.android.apps.maps. |  |
+| [GoogleMapsHideSponsoredPOIs (STUB)](#googlemapshidesponsoredpois-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.google.android.apps.maps. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.instagram.android&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [InstagramHideReelsCompletely (STUB)](#instagramhidereelscompletely-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.instagram.android. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.linkedin.android&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [LinkedInRemovePromotedPosts (STUB)](#linkedinremovepromotedposts-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.linkedin.android. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.flyersoft.moonreaderp&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [MoonReaderObsidianExport (STUB)](#moonreaderobsidianexport-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.flyersoft.moonreaderp. |  |
+| [MoonReaderReadingTimeTracker (STUB)](#moonreaderreadingtimetracker-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.flyersoft.moonreaderp. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.twitter.android&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [PikoInlineThreadExpansion (STUB)](#pikoinlinethreadexpansion-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.twitter.android. |  |
+| [PikoQuoteTweetWithoutRetweet (STUB)](#pikoquotetweetwithoutretweet-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.twitter.android. |  |
 
 </details>
 
@@ -79,6 +173,60 @@ TODO: Update this about section with a brief introduction/summary about this rep
 </details>
 
 <details open>
+<summary>📦 com.amazon.avod.thirdpartyclient&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [PrimeVideoRegionUnlock (STUB)](#primevideoregionunlock-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.amazon.avod.thirdpartyclient. |  |
+| [PrimeVideoRemoveFreeTierAds (STUB)](#primevideoremovefreetierads-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.amazon.avod.thirdpartyclient. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.snapchat.android&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [SnapchatRemoveAds (STUB)](#snapchatremoveads-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.snapchat.android. |  |
+| [SnapchatSaveWithoutNotif (STUB)](#snapchatsavewithoutnotif-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.snapchat.android. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.spotify.music&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [SpotifyNoAds (STUB)](#spotifynoads-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.spotify.music. |  |
+| [SpotifyPremiumUnlock (STUB)](#spotifypremiumunlock-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.spotify.music. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.instagram.barcelona&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [ThreadsDistractionFree (STUB)](#threadsdistractionfree-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.instagram.barcelona. |  |
+| [ThreadsNoAds (STUB)](#threadsnoads-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.instagram.barcelona. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.zhiliaoapp.musically&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [TikTokIndiaRegionUnlock (STUB)](#tiktokindiaregionunlock-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.zhiliaoapp.musically. |  |
+
+</details>
+
+<details open>
 <summary>📦 com.truecaller&nbsp;&nbsp;•&nbsp;&nbsp;20 patches</summary>
 <br>
 
@@ -104,6 +252,28 @@ TODO: Update this about section with a brief introduction/summary about this rep
 | [Truecaller — remove ads](#truecaller-remove-ads) | No-ops after-call ad update sites (Lcom/truecaller/acs/ui/baz;->Rh and Ltw1/f;->Th). |  |
 | [Truecaller — strip outbound SMS watermark (STUB)](#truecaller-strip-outbound-sms-watermark-stub) | STUB: remove the "Sent via Truecaller" trailer from outbound SMS. Fingerprints not yet discovered. |  |
 | [Truecaller — strip third-party analytics + ad SDKs](#truecaller-strip-third-party-analytics-ad-sdks) | No-ops third-party telemetry, ad-network, and tracking SDK init calls (Clarity, CleverTap, AppsFlyer, Moloco, HMS, Freshchat, InMobi, Appnext, Vungle, Fyber, Mintegral, IronSource, HyBid, MLKit, Presence stream). |  |
+
+</details>
+
+<details open>
+<summary>📦 com.whatsapp&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [WhatsAppDualAccount (STUB)](#whatsappdualaccount-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.whatsapp. |  |
+| [WhatsAppReadReceiptSpoof (STUB)](#whatsappreadreceiptspoof-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.whatsapp. |  |
+
+</details>
+
+<details open>
+<summary>📦 com.google.android.youtube&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [YouTubeDislikeAutoNext (STUB)](#youtubedislikeautonext-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.google.android.youtube. |  |
+| [YouTubeLikeAutoNext (STUB)](#youtubelikeautonext-stub) | STUB placeholder. Real behavior authored after disassemble.yml runs on com.google.android.youtube. |  |
 
 </details>
 
