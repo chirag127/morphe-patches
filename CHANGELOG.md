@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/chirag127/morphe-patches/compare/v1.5.0...v1.5.1) (2026-07-09)
+
+### 🔧 Improvements
+
+* **ci:** Gradle + APK caching + expand verify matrix to 27 targets ([860c01e](https://github.com/chirag127/morphe-patches/commit/860c01e64f23451d4468d8f1f2888a4f3774566c))
+
 ## [1.5.0](https://github.com/chirag127/morphe-patches/compare/v1.4.0...v1.5.0) (2026-07-09)
 
 ### 🐛 Bug Fixes
