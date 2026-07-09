@@ -44,6 +44,28 @@ jobs:
           - { name: pixel-weather,     pkg: com.google.android.apps.weather }
           - { name: pixel-screenshots, pkg: com.google.android.apps.pixel.agent }
           - { name: github-android,    pkg: com.github.android }
+          - { name: youtube,           pkg: com.google.android.youtube }
+          - { name: twitter,           pkg: com.twitter.android }
+          - { name: instagram,         pkg: com.instagram.android }
+          - { name: tiktok,            pkg: com.zhiliaoapp.musically }
+          - { name: reddit,            pkg: com.reddit.frontpage }
+          - { name: duolingo,          pkg: com.duolingo }
+          - { name: onedmplus,         pkg: idm.internet.download.manager.plus }
+          - { name: moonreader,        pkg: com.flyersoft.moonreaderp }
+          - { name: snapchat,          pkg: com.snapchat.android }
+          - { name: whatsapp,          pkg: com.whatsapp }
+          - { name: googlemaps,        pkg: com.google.android.apps.maps }
+          - { name: spotify,           pkg: com.spotify.music }
+          - { name: linkedin,          pkg: com.linkedin.android }
+          - { name: amazonshopping,    pkg: in.amazon.mShop.android.shopping }
+          - { name: primevideo,        pkg: com.amazon.avod.thirdpartyclient }
+          - { name: threads,           pkg: com.instagram.barcelona }
+          - { name: facebook,          pkg: com.facebook.katana }
+          - { name: notion,            pkg: notion.id }
+          - { name: todoist,           pkg: com.todoist }
+          - { name: anydo,             pkg: com.anydo }
+          - { name: miuimusic,         pkg: com.miui.player }
+          - { name: miuiweather,       pkg: com.miui.weather2 }
     steps:
       - uses: actions/checkout@v4
 
@@ -52,6 +74,15 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'gradle.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -141,6 +172,13 @@ jobs:
           else
             echo "APK ready: $(du -h apk/target.apk | cut -f1)"
           fi
+
+      - name: Cache APKs
+        uses: actions/cache@v4
+        with:
+          path: apk/
+          key: apk-${{ matrix.target.pkg }}-${{ github.run_id }}
+          restore-keys: apk-${{ matrix.target.pkg }}-
 
       - name: Apply patches to target APK
         if: env.skip_verify != 'true'
