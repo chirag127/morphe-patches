@@ -30,9 +30,9 @@
  * PATCH SURFACE (three options, resource-first preferred):
  *   1. Resource-XML: identify the specific color token used by comment cards
  *      (likely `backgroundElevatedPrimary` or a sibling — inspect
- *      `res/layout/comment_*.xml` + `res/color/*.xml`) and force to #FF000000.
+ *      `res/layout/comment_[star].xml` + `res/color/[star].xml`) and force to #FF000000.
  *      Depends on the same `resourcePatch` API bring-up as AmoledDarkThemePatch.
- *   2. WebView CSS: comment bodies with markdown render via `assets/webview/*.css`
+ *   2. WebView CSS: comment bodies with markdown render via `assets/webview/[star].css`
  *      + `assets/webview/markdown.css`; rewrite `--tr-alt-background` and
  *      `--comment-background` variables to `#000` (pattern hoodles used).
  *   3. Bytecode: fingerprint the ViewHolder background-setter in
