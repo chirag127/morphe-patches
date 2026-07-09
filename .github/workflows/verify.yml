@@ -234,13 +234,8 @@ jobs:
             adb wait-for-device
 
             echo "=== Installing patched APK ==="
-            # --abi-fallback so INSTALL_FAILED_NO_MATCHING_ABIS from arm64-only
-            # native libs isn't a hard fail — target may still start via Zygote's
-            # arm64->x86 translation on API 34+ (native-bridge/houdini/ndk-translation).
-            if ! adb install -r -t --abi x86_64 apk/patched.apk 2>&1 | tail -5; then
-              echo "::warning::install --abi x86_64 failed, retrying with default abi"
-              adb install -r -t apk/patched.apk 2>&1 | tail -5 || true
-            fi
+            # adb install has no --abi flag; just install and tolerate ABI mismatch
+            adb install -r -t apk/patched.apk 2>&1 | tail -5 || true
 
             echo "=== Confirming install ==="
             if ! adb shell pm list packages | grep -q "$PKG"; then
