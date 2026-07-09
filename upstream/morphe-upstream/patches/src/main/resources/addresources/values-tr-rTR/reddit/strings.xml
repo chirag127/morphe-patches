@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Reklamlar</string>
+  <string name="morphe_hide_post_ads_title">Akış reklamlarını gizle</string>
+  <string name="morphe_hide_comment_ads_title">Yorum reklamlarını gizle</string>
+  <string name="morphe_screen_navigation_bar_title">Gezinme çubuğu</string>
+  <string name="morphe_hide_answers_button_title">Cevaplar düğmesini gizle</string>
+  <string name="morphe_hide_chat_button_title">Sohbet düğmesini gizle</string>
+  <string name="morphe_hide_create_button_title">Oluştur düğmesini gizle</string>
+  <string name="morphe_hide_discover_button_title">Keşfet veya Topluluklar düğmesini gizle</string>
+  <string name="morphe_hide_games_button_title">Oyunlar düğmesini gizle</string>
+  <string name="morphe_screen_sidebar_title">Kenar çubuğu</string>
+  <string name="morphe_hide_recently_visited_shelf_title">Son Ziyaret Edilenler rafını gizle</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">Reddit\'teki Oyunlar rafını gizle</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">Reddit Pro rafını gizle</string>
+  <string name="morphe_hide_about_shelf_title">Hakkında rafını gizle</string>
+  <string name="morphe_hide_resources_shelf_title">Kaynaklar rafını gizle</string>
+  <string name="morphe_screen_layout_title">Düzen</string>
+  <string name="morphe_disable_modern_home_title">Modern ana sayfa arayüzünü devre dışı bırak</string>
+  <string name="morphe_disable_screenshot_popup_title">Ekran görüntüsü açılır penceresini devre dışı bırak</string>
+  <string name="morphe_disable_screenshot_popup_summary">Ekran görüntüsü alındığında görünen açılır pencereyi devre dışı bırakır</string>
+  <string name="morphe_hide_ask_button_title">Sor düğmesini gizle</string>
+  <string name="morphe_hide_ask_button_summary">Arama çubuğundaki \"Sor\" düğmesini gizler</string>
+  <string name="morphe_hide_communities_shelf_title">Topluluklar rafını gizle</string>
+  <string name="morphe_hide_communities_shelf_summary">Subreddit\'lerdeki ilgili veya önerilen topluluklar rafını gizler</string>
+  <string name="morphe_hide_trending_shelves_title">Trendler rafını gizle</string>
+  <string name="morphe_hide_trending_shelves_summary">Arama önerilerinde Trendler rafını gizler</string>
+  <string name="morphe_remove_notification_dialog_title">Bildirim öneri iletişim kutusunu kaldır</string>
+  <string name="morphe_remove_notification_dialog_summary">Bir subreddit ziyaret edildiğinde bildirim önerisi iletişim kutusunu otomatik olarak kapatır</string>
+  <string name="morphe_show_view_count_title">Gönderilerde görüntüleme sayısını göster</string>
+  <string name="morphe_show_view_count_summary">Sınırlama: Yalnızca API yanıtı görüntüleme sayısını içeriyorsa kullanılabilir</string>
+  <string name="morphe_remove_nsfw_dialog_title">NSFW uyarı iletişim kutusunu kaldır</string>
+  <string name="morphe_remove_nsfw_dialog_summary">Bir subreddit\'i ziyaret ederken NSFW içerik uyarısını otomatik olarak kabul eder</string>
+  <string name="morphe_screen_miscellaneous_title">Çeşitli</string>
+  <string name="morphe_about_title">Hakkında</string>
+  <string name="morphe_about_summary">Yama sürümü ve resmi bağlantılar</string>
+  <string name="morphe_sanitize_sharing_links_title">Paylaşım bağlantılarını temizle</string>
+  <string name="morphe_sanitize_sharing_links_summary">Paylaşılan bağlantılardan izleme sorgu parametrelerini kaldırır</string>
+  <string name="morphe_open_links_directly_title">Bağlantıları doğrudan aç</string>
+  <string name="morphe_open_links_directly_summary">Harici bağlantıları açarken yönlendirme URL\'lerini atlar</string>
+  <string name="morphe_open_links_externally_title">Bağlantıları harici olarak aç</string>
+  <string name="morphe_open_links_externally_summary">Bağlantıları uygulama içi tarayıcı yerine tarayıcınızda açar</string>
+</resources>

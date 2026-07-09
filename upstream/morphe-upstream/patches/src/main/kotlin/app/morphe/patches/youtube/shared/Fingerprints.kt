@@ -1,0 +1,287 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.patches.youtube.shared
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
+import app.morphe.patcher.InstructionLocation.MatchAfterWithin
+import app.morphe.patcher.InstructionLocation.MatchFirst
+import app.morphe.patcher.OpcodesFilter
+import app.morphe.patcher.StringComparisonType
+import app.morphe.patcher.checkCast
+import app.morphe.patcher.fieldAccess
+import app.morphe.patcher.literal
+import app.morphe.patcher.methodCall
+import app.morphe.patcher.opcode
+import app.morphe.patcher.string
+import app.morphe.patches.all.misc.resources.ResourceType
+import app.morphe.patches.all.misc.resources.resourceLiteral
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+
+internal const val YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE = "Lcom/google/android/apps/youtube/app/watchwhile/MainActivity;"
+
+internal object ActionBarSearchResultsFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Landroid/view/View;",
+    filters = listOf(
+        resourceLiteral(ResourceType.LAYOUT, "action_bar_search_results_view_mic"),
+        methodCall(smali = "Landroid/view/View;->setLayoutDirection(I)V"),
+        resourceLiteral(ResourceType.ID, "search_query"),
+        checkCast(
+            type = "Landroid/widget/TextView;",
+            location = MatchAfterWithin(5)
+        )
+    )
+)
+
+internal object BackgroundPlaybackManagerShortsFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "Z",
+    parameters = listOf("L"),
+    filters = listOf(
+        literal(151635310),
+        opcode(Opcode.IGET_BOOLEAN, location = MatchAfterWithin(8)),
+    )
+)
+
+internal object EngagementPanelControllerFingerprint : Fingerprint(
+    returnType = "L",
+    parameters = listOf("L", "L", "Z", "Z"),
+    filters = listOf(
+        string("EngagementPanelController: cannot show EngagementPanel before EngagementPanelController.init() has been called."),
+        methodCall(smali = "Lj$/util/Optional;->orElse(Ljava/lang/Object;)Ljava/lang/Object;"),
+        methodCall(smali = "Lj$/util/Optional;->orElse(Ljava/lang/Object;)Ljava/lang/Object;"),
+        opcode(opcode = Opcode.CHECK_CAST, location = MatchAfterWithin(4)),
+        opcode(opcode = Opcode.IF_EQZ, location = MatchAfterImmediately()),
+        opcode(opcode = Opcode.IGET_OBJECT, location = MatchAfterImmediately()),
+        literal(45615449L),
+        methodCall(smali = "Ljava/util/ArrayDeque;->iterator()Ljava/util/Iterator;"),
+        fieldAccess(
+            opcode = Opcode.IGET_OBJECT,
+            type = "Ljava/lang/String;",
+            location = MatchAfterWithin(10)
+        )
+    )
+)
+
+internal object LayoutConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    filters = listOf(
+        literal(159962),
+        resourceLiteral(ResourceType.ID, "player_control_previous_button_touch_area"),
+        resourceLiteral(ResourceType.ID, "player_control_next_button_touch_area"),
+        methodCall(parameters = listOf("Landroid/view/View;", "I"))
+    )
+)
+
+internal object YouTubeMainActivityConstructorFingerprint : Fingerprint(
+    definingClass = YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    parameters = listOf()
+)
+
+internal object YouTubeMainActivityOnBackPressedFingerprint : Fingerprint(
+    definingClass = YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE,
+    name = "onBackPressed",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf(),
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_SUPER,
+            name = "onBackPressed"
+        ),
+        opcode(Opcode.RETURN_VOID)
+    )
+)
+
+internal object YouTubeActivityOnCreateFingerprint : Fingerprint(
+    definingClass = YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE,
+    name = "onCreate",
+    returnType = "V",
+    parameters = listOf("Landroid/os/Bundle;"),
+)
+
+internal object RollingNumberTextViewAnimationUpdateFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("Landroid/graphics/Bitmap;"),
+    filters = OpcodesFilter.opcodesToFilters(
+        Opcode.NEW_INSTANCE, // bitmap ImageSpan
+        Opcode.INVOKE_VIRTUAL,
+        Opcode.MOVE_RESULT_OBJECT,
+        Opcode.CONST_4,
+        Opcode.INVOKE_DIRECT,
+        Opcode.INVOKE_VIRTUAL,
+        Opcode.MOVE_RESULT,
+        Opcode.CONST_16,
+        Opcode.INVOKE_VIRTUAL,
+        Opcode.INVOKE_VIRTUAL,
+        Opcode.MOVE_RESULT,
+        Opcode.INT_TO_FLOAT,
+        Opcode.INVOKE_VIRTUAL, // set textview padding using bitmap width
+    ),
+    custom = { _, classDef ->
+        classDef.superclass == "Landroid/support/v7/widget/AppCompatTextView;" ||
+            classDef.superclass == "Lcom/google/android/libraries/youtube/rendering/ui/spec/typography/YouTubeAppCompatTextView;"
+    }
+)
+
+internal object SeekbarFingerprint : Fingerprint(
+    returnType = "V",
+    filters = listOf(
+        string("timed_markers_width"),
+    )
+)
+
+internal object SeekbarOnDrawFingerprint : Fingerprint(
+    classFingerprint = SeekbarFingerprint,
+    name = "onDraw",
+    filters = listOf(
+        methodCall(smali = "Ljava/lang/Math;->round(F)I"),
+        opcode(Opcode.MOVE_RESULT, location = MatchAfterImmediately())
+    )
+)
+
+internal object ToolBarButtonFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    filters = listOf(
+        resourceLiteral(ResourceType.ID, "menu_item_view"),
+        methodCall(smali = "Landroid/view/MenuItem;->setShowAsAction(I)V"),
+        fieldAccess(
+            type = "I",
+            opcode = Opcode.IGET
+        ),
+        opcode(Opcode.SGET_OBJECT),
+        methodCall(
+            opcode = Opcode.INVOKE_INTERFACE,
+            returnType = "I"
+        ),
+        opcode(Opcode.MOVE_RESULT, MatchAfterImmediately()),
+        fieldAccess(
+            opcode = Opcode.IGET_OBJECT,
+            type = "Landroid/widget/ImageView;",
+            location = MatchAfterWithin(6)
+        ),
+        methodCall(
+            definingClass = "Landroid/content/res/Resources;",
+            name = "getDrawable",
+            location = MatchAfterWithin(8)
+        ),
+        methodCall(
+            definingClass = "Landroid/widget/ImageView;",
+            name = "setImageDrawable",
+            location = MatchAfterWithin(4)
+        )
+    )
+)
+
+internal object PlaybackSpeedOnItemClickParentFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "L",
+    parameters = listOf("L", "Ljava/lang/String;"),
+    filters = listOf(
+        methodCall(name = "getSupportFragmentManager", location = MatchFirst()),
+        opcode(Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately()),
+        methodCall(
+            returnType = "L",
+            parameters = listOf("Ljava/lang/String;"),
+            location = MatchAfterImmediately()
+        ),
+        opcode(Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately()),
+        opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
+        opcode(Opcode.CHECK_CAST, location = MatchAfterImmediately()),
+    ),
+    custom = { _, classDef ->
+        classDef.methods.count() == 8
+    }
+)
+
+internal object VideoQualityChangedFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "L",
+    parameters = listOf("L"),
+    filters = listOf(
+        fieldAccess(
+            opcode = Opcode.IGET,
+            type = "I",
+            location = MatchFirst()
+        ),
+        literal(2, location = MatchAfterImmediately()),
+        opcode(Opcode.IF_NE, location = MatchAfterImmediately()),
+        opcode(Opcode.NEW_INSTANCE, location = MatchAfterImmediately()), // Obfuscated VideoQuality
+
+        opcode(Opcode.IGET_OBJECT, location = MatchAfterWithin(6)),
+        opcode(Opcode.CHECK_CAST),
+        fieldAccess( // Video resolution (human-readable).
+            opcode = Opcode.IGET,
+            type = "I",
+            location = MatchAfterImmediately()
+        )
+    )
+)
+
+internal object WatchNextResponseParserFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    parameters = listOf("Ljava/lang/Object;"),
+    returnType = "Ljava/util/List;",
+    filters = listOf(
+        literal(49399797L),
+        opcode(Opcode.SGET_OBJECT),
+        fieldAccess(
+            opcode = Opcode.IGET_OBJECT,
+            location = MatchAfterImmediately()
+        ),
+        literal(51779735L),
+        fieldAccess(
+            opcode = Opcode.IGET_OBJECT,
+            type = "Ljava/lang/Object;",
+            location = MatchAfterWithin(5)
+        ),
+        opcode(
+            Opcode.CHECK_CAST,
+            location = MatchAfterImmediately()
+        ),
+        literal(46659098L),
+    )
+)
+
+internal object SpannableStringBuilderFingerprint : Fingerprint(
+    returnType = "Ljava/lang/CharSequence;",
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_STATIC,
+            smali = SPANNABLE_STRING_REFERENCE
+        ),
+        methodCall(
+          opcode = Opcode.INVOKE_STATIC,
+            returnType = "V",
+            parameters = listOf(
+                "Landroid/text/SpannableString;",
+                "Ljava/lang/Object;",
+                "I",
+                "Z",
+                "I"
+            )
+        ),
+        string(
+            "Failed to set PB Style Run Extension in TextComponentSpec.",
+            comparison = StringComparisonType.STARTS_WITH
+        )
+    )
+)
+
+const val SPANNABLE_STRING_REFERENCE =
+    "Landroid/text/SpannableString;->valueOf(Ljava/lang/CharSequence;)Landroid/text/SpannableString;"
+

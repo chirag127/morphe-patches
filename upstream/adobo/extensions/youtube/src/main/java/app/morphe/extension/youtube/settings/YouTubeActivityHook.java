@@ -1,0 +1,191 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.extension.youtube.settings;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.preference.PreferenceFragment;
+import android.view.View;
+import android.widget.Toolbar;
+
+import com.google.android.gms.common.api.GoogleApiActivity;
+
+import app.morphe.extension.shared.ResourceType;
+import app.morphe.extension.shared.ResourceUtils;
+import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.settings.BaseActivityHook;
+import app.morphe.extension.youtube.patches.VersionCheckPatch;
+import app.morphe.extension.youtube.patches.spoof.SpoofAppVersionPatch;
+import app.morphe.extension.youtube.settings.preference.YouTubePreferenceFragment;
+import app.morphe.extension.youtube.settings.search.YouTubeSearchViewController;
+
+/**
+ * Hooks {@link GoogleApiActivity} to inject a custom {@link YouTubePreferenceFragment}
+ * with a toolbar and search functionality.
+ */
+@SuppressWarnings({"deprecation", "RedundantSuppression"})
+public class YouTubeActivityHook extends BaseActivityHook {
+
+    public static final boolean USE_BOLD_ICONS = Settings.SETTINGS_INITIALIZED.get()
+            && VersionCheckPatch.IS_20_31_OR_GREATER
+            && !SpoofAppVersionPatch.isSpoofingToLessThan("20.31.00")
+            && !Settings.RESTORE_OLD_SETTINGS_MENUS.get();
+
+    static {
+        Utils.setAppIsUsingBoldIcons(USE_BOLD_ICONS);
+    }
+
+    private static int currentThemeValueOrdinal = -1; // Must initially be a non-valid enum ordinal value.
+
+    /**
+     * Controller for managing search view components in the toolbar.
+     */
+    @SuppressLint("StaticFieldLeak")
+    public static YouTubeSearchViewController searchViewController;
+
+    /**
+     * Injection point.
+     */
+    @SuppressWarnings("unused")
+    public static void initialize(Activity parentActivity) {
+        BaseActivityHook.initialize(new YouTubeActivityHook(), parentActivity);
+    }
+
+    /**
+     * Customizes the activity theme based on dark/light mode.
+     */
+    @Override
+    protected void customizeActivityTheme(Activity activity) {
+        final var theme = Utils.isDarkModeEnabled()
+                ? "Theme.YouTube.Settings.Dark"
+                : "Theme.YouTube.Settings";
+        activity.setTheme(ResourceUtils.getIdentifierOrThrow(ResourceType.STYLE, theme));
+    }
+
+    /**
+     * Returns the toolbar background color based on dark/light mode.
+     */
+    @Override
+    protected int getToolbarBackgroundColor() {
+        final boolean darkModeEnabled = Utils.isDarkModeEnabled();
+        final String colorName = darkModeEnabled
+                ? "yt_black3"
+                : "yt_white1";
+        final int defaultColor = darkModeEnabled
+                ? 0xFFFFFF
+                : 0x000000;
+        return ResourceUtils.getColor(colorName, defaultColor);
+    }
+
+    /**
+     * Returns the navigation icon drawable for the toolbar.
+     */
+    @Override
+    protected Drawable getNavigationIcon() {
+        return YouTubePreferenceFragment.getBackButtonDrawable();
+    }
+
+    /**
+     * Returns the click listener for the navigation icon.
+     */
+    @Override
+    protected View.OnClickListener getNavigationClickListener(Activity activity) {
+        return view -> {
+            if (searchViewController != null && searchViewController.isSearchActive()) {
+                searchViewController.handleBackPress();
+            } else {
+                activity.finish();
+            }
+        };
+    }
+
+    /**
+     * Adds search view components to the toolbar for {@link YouTubePreferenceFragment}.
+     *
+     * @param activity The activity hosting the toolbar.
+     * @param toolbar  The configured toolbar.
+     * @param fragment The PreferenceFragment associated with the activity.
+     */
+    @Override
+    protected void onPostToolbarSetup(Activity activity, Toolbar toolbar, PreferenceFragment fragment) {
+        if (fragment instanceof YouTubePreferenceFragment) {
+            searchViewController = YouTubeSearchViewController.addSearchViewComponents(
+                    activity, toolbar, (YouTubePreferenceFragment) fragment);
+        }
+    }
+
+    /**
+     * Creates a new {@link YouTubePreferenceFragment} for the activity.
+     */
+    @Override
+    protected PreferenceFragment createPreferenceFragment() {
+        return new YouTubePreferenceFragment();
+    }
+
+    /**
+     * Injection point.
+     */
+    @SuppressWarnings("unused")
+    public static boolean useCairoSettingsFragment(boolean original) {
+        if (Settings.RESTORE_OLD_SETTINGS_MENUS.get()) {
+            return false;
+        }
+        // Spoofing can cause half broken settings menus of old and new settings.
+        if (SpoofAppVersionPatch.isSpoofingToLessThan("19.35.36")) {
+            return false;
+        }
+
+        // On the first launch of a clean install, forcing the Cairo menu can give a
+        // half broken appearance because all the preference icons may not be available yet.
+        // 19.34+ Cairo settings are always on, so it doesn't need to be forced anyway.
+        // Cairo setting will show on the next launch of the app.
+        return original;
+    }
+
+    /**
+     * Injection point.
+     * <p>
+     * Updates dark/light mode since YT settings can force light/dark mode
+     * which can differ from the global device settings.
+     */
+    @SuppressWarnings("unused")
+    public static void updateLightDarkModeStatus(Enum<?> value) {
+        final int themeOrdinal = value.ordinal();
+        if (currentThemeValueOrdinal != themeOrdinal) {
+            currentThemeValueOrdinal = themeOrdinal;
+            Utils.setIsDarkModeEnabled(themeOrdinal == 1);
+        }
+    }
+
+    /**
+     * Injection point.
+     * <p>
+     * Overrides {@link Activity#finish()} of the injection Activity.
+     *
+     * @return if the original activity finish method should be allowed to run.
+     */
+    @SuppressWarnings("unused")
+    public static boolean handleBackPress() {
+        if (searchViewController != null && searchViewController.isSearchActive()) {
+            return searchViewController.handleBackPress();
+        }
+        return false;
+    }
+
+    /**
+     * Injection point.
+     */
+    @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
+    public static boolean useBoldIcons(boolean original) {
+        return USE_BOLD_ICONS;
+    }
+}

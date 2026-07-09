@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2026 piko <https://github.com/crimera/piko>
+ *
+ * See the included NOTICE file for GPLv3 §7(b) terms that apply to this code.
+ */
+
+package app.morphe.extension.twitter.patches.links;
+
+import com.twitter.model.json.core.JsonUrlEntity;
+
+import app.morphe.extension.twitter.Pref;
+import app.morphe.extension.twitter.settings.SettingsStatus;
+import app.morphe.extension.crimera.PikoUtils;
+import com.x.models.ContextualPost;
+import com.x.models.CanonicalPost;
+import com.x.models.UserResult;
+import com.x.models.XUser;
+import java.net.URL;
+
+public class Urls {
+    private static final boolean unShortUrl;
+    static {
+        unShortUrl = SettingsStatus.unshortenlink && Pref.unShortUrl();
+    }
+    public static JsonUrlEntity unshort(JsonUrlEntity entity) {
+        try {
+            if(unShortUrl){
+                entity.e = entity.c;
+            }
+        } catch (Exception ex) {
+            PikoUtils.logger(ex);
+        }
+        return entity;
+    }
+
+    public static String changeDomain(String urlString) {
+        try {
+            String customDomainName = Pref.customSharingDomain();
+            // Check for domain extension
+            if(!(customDomainName.matches("^[A-Za-z0-9-]{1,63}\\.[A-Za-z]{2,6}$"))) {
+                //have .com as default extension just for safety reasons
+                customDomainName += ".com";
+            }
+            URL url = new URL(urlString);
+            String host = url.getHost();
+            if (host.equalsIgnoreCase("x.com") || host.equalsIgnoreCase("twitter.com")) {
+                return new URL(url.getProtocol(), customDomainName, url.getPort(), url.getFile()).toString();
+            }
+        } catch (Exception ex) {
+            PikoUtils.logger(ex);
+        }
+        return urlString;
+    }
+
+    public static String hookShareSheetLink(ContextualPost contextualPost, String link){
+        try {
+            if (SettingsStatus.legacyShareLink) {
+                CanonicalPost canonicalPost = contextualPost.getCanonicalPost();
+                XUser userResult = canonicalPost.getAuthor();
+                String username = userResult.getScreenName();
+                link = link.replace("/i/", "/" + username + "/");
+            }
+        }catch (Exception ex) {
+            PikoUtils.logger(ex);
+        }
+        return changeDomain(link);
+    }
+}

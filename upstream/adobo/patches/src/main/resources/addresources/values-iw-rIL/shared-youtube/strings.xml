@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">הפעל מחדש כדי לסיים את ההגדרות</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">שם האפליקציה</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">מותאם אישית</string>
+  <string name="morphe_custom_branding_icon_title">אייקון האפליקציה</string>
+  <string name="morphe_custom_branding_icon_entry_1">מקורי</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe שחור</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe כהה</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe אורות</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe משחק קליל</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe משחק שחור</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">מותאם אישית</string>
+  <string name="morphe_custom_branding_notification_icon_title">שeיברין יeיב</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">התאם את סמל האפליקציה</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">הודעת Morphe</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">היסטוריית הצפייה שלך לא נשמרת.&lt;br&gt;&lt;br&gt;סביר להניח שזה נגרם על ידי חוסם מודעות ברמת DNS או פרוקסי רשת.&lt;br&gt;&lt;br&gt;כדי לתקן זאת, רשום את &lt;b&gt;s.youtube.com&lt;/b&gt; ברשימת ההיתרים או כבה את כל חוסמי ה-DNS והפרוקסים.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">אל תציג שוב</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">זיוף זרמי וידאו</string>
+  <string name="morphe_spoof_video_streams_screen_summary">הגדר העלמת זהות לקוח כדי למנוע בעיות בהשמעה</string>
+  <string name="morphe_spoof_video_streams_title">זייף זרמי וידאו</string>
+  <string name="morphe_spoof_video_streams_summary">"מתקן בעיות בהשמעה עבור רוב המשתמשים על ידי בקשת זרם וידאו תואם
+
+אם אתה משתמש YouTube Premium, ייתכן שהגדרת אפשרות זו לא תהיה נחוצה"</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Не удалось получить доступ к потокам клиента</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">כיבוי הגדרה זו עלול לגרום לבעיות השמעה.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Попробуйте включить: Фальшивый поток > Войти в Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">לקוח ברירת מחדל</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Войти в Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Вы не вошли в Android VR. Нажмите здесь, чтобы войти</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Вы вошли в Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Чтобы использовать эту функцию, измените \'Default client\' на Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Войти в Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"התחברות לאנדרואיד VR תוכל לתקן בעיות תצוגה עבור כמה משתמשים
+
+להתחברות, לחץ על המשך למטה"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Продолжить</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Выйти</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Инструкции</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Код активации: %s
+
+1. Нажмите «Открыть сайт» ниже, чтобы открыть сайт «Подключить устройство»
+2. Вставьте с буфера обмена (или введите) код активации, показанный выше
+3. Войдите в Google при запросе. Если у вас несколько аккаунтов, выберите этот аккаунт YouTube
+4. Нажмите «Разрешить доступ YouTube VR»
+5. Вернитесь в это приложение после появления сообщения «Устройство подключено»"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Открыть сайт</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Не удалось выдать код активации</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Не удалось получить токен аутентификации</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Успешный вход</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Аутентификация сохранена
+
+• Настройки Morphe не будут импортироваться/экспортироваться для аутентификации Android VR
+• Если это приложение не используется в течение 6 месяцев, Google удалит эту аутентификацию
+• Если вы измените пароль Google или снимете регистрацию этого устройства, вам придется войти снова"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">Очнення (способность  временно недоступен (время вышло)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">התחברות לאנדרואיד VR פגה, נסה להתחבר ל-VR שוב</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 временно недоступен (статус %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">Очнення временно недоступен</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">לא ניתן להתחבר ל-VR, אישור אימות אתר לא אושר</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">לא ניתן להתחבר ל-VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Вышли из Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">טוקן התחברות ל-VR לא חוקי, נסה להתחבר ל-VR שוב</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">לשבט את עדכוני JavaScript של הנגן</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"נעילת סקריפט JavaScript של הנגן לגרסה ספציפית
+
+• יש לספק hash תקין של סקריפט JavaScript של הנגן
+• ה-hash של סקריפט JavaScript של הנגן תקף בערך חודש אחד, ו-GVS תבטל hashים מיושנים
+• ההפעלה תיכשל אם ה-hash בוטל"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"עליך לספק hash תקין של סקריפט JavaScript של הנגן.
+
+ההפעלה תיכשל אם ה-hash של סקריפט JavaScript של הנגן מיושן."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">‌Ԓ԰՞ԑ JavaScript ԲՈԴ</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">\"הזן hash JavaScript תקף של השחקן</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">השבת פרוטוקול QUIC</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">השבת אודיו DRC</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">כפה שפת שמע מקורית</string>
+  <string name="morphe_force_original_audio_summary">תמיד מנגן את רצועת האודיו המקורית של הסרטון במקום גרסה מדובבת</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">פרוקסי רשת</string>
+  <string name="morphe_proxy_screen_summary">נתב בקשות רשת נתמכות דרך פרוקסי</string>
+  <string name="morphe_proxy_enabled_title">הפעל פרוקסי</string>
+  <string name="morphe_proxy_enabled_summary">הזרמת בקשות רשת דרך פרוקסי HTTP או HTTPS מוגדר</string>
+  <string name="morphe_proxy_host_title">כתובת מארח של פרוקסי</string>
+  <string name="morphe_proxy_host_summary">שם מארח או כתובת IP של שרת הפרוקסי</string>
+  <string name="morphe_proxy_port_title">יציאת פרוקסי</string>
+  <string name="morphe_proxy_port_summary">יציאת שרת הפרוקסי</string>
+  <string name="morphe_proxy_https_title">השתמש בפרוקסי HTTPS</string>
+  <string name="morphe_proxy_https_summary">השתמש ב-HTTPS כדי להתחבר לשרת הפרוקסי במקום HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">אימות פרוקסי</string>
+  <string name="morphe_proxy_auth_enabled_summary">שליחת אימות Basic עם בקשות פרוקסי</string>
+  <string name="morphe_proxy_auth_username_title">שם משתמש לפרוקסי</string>
+  <string name="morphe_proxy_auth_username_summary">שם משתמש לאימות Basic בפרוקסי</string>
+  <string name="morphe_proxy_auth_password_title">סיסמת פרוקסי</string>
+  <string name="morphe_proxy_auth_password_summary">סיסמה לאימות Basic בפרוקסי</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">אפשר חזרה ישירה</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">התחבר ישירות אם הפרוקסי נכשל</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">הסתר מודעות מסך מלא</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">כדי להשתמש בתכונה זו, שנה \'זיוף זרמי וידאו\' ל-Android Reel או TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">טיהור קישורי שיתוף</string>
+  <string name="morphe_sanitize_sharing_links_summary">מסיר פרמטרים של שאילתות מעקב מקישורי שיתוף</string>
+  <string name="morphe_replace_music_with_youtube_title">שנה קישורי שיתוף ל-youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">מחליף את music.youtube.com ל-youtube.com בקישורים משותפים</string>
+  <string name="morphe_replace_links_with_shortener_title">שנה קישורי שיתוף ל-youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">כופה על סרטונים להשתמש בפורמט הקיצור youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">רשום פרוטוקול חוצץ</string>
+  <string name="morphe_debug_protobuffer_summary">מוסיף מידע נוסף של רישום עבור מפתחים כדי לזהות רכיבי אפליקציה</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"הפעלת הגדרה זו תתעד נתוני פריסה נוספים, כולל טקסט שעל המסך עבור רכיבי ממשק משתמש מסוימים.
+
+זה יכול לעזור לזהות רכיבים בעת יצירת מסננים מותאמים אישית.
+
+עם זאת, הפעלת הגדרה זו תתעד גם כמה נתוני משתמש כמו כתובת ה-IP שלך."</string>
+</resources>

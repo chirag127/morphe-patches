@@ -1,0 +1,150 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.extension.youtube.patches;
+
+import static app.morphe.extension.youtube.patches.VersionCheckPatch.IS_21_10_OR_GREATER;
+
+import android.app.Activity;
+
+import java.lang.ref.WeakReference;
+import java.util.Objects;
+
+import app.morphe.extension.shared.Logger;
+import app.morphe.extension.youtube.settings.Settings;
+
+@SuppressWarnings("unused")
+public class ShortsAutoplayPatch {
+
+    private enum ShortsLoopBehavior {
+        UNKNOWN,
+        /**
+         * Repeat the same Short forever!
+         */
+        REPEAT,
+        /**
+         * Play once, then advanced to the next Short.
+         */
+        SINGLE_PLAY,
+        /**
+         * Pause playback after 1 play.
+         */
+        END_SCREEN,
+        /**
+         * Play once, then advanced to the next Short.
+         * Only found in 21.10+
+         */
+        AUTO_ADVANCE,
+        /**
+         * Additional auto advance types, only found in 21.17+
+         * Enum suggests the Short plays more than once then advances,
+         * but forcing this with 21.17+ does not seem to work (YT code may not be complete).
+         */
+        AUTO_ADVANCE_POST_TWO_LOOPS,
+        AUTO_ADVANCE_POST_THREE_LOOPS,
+        AUTO_ADVANCE_POST_FOUR_LOOPS,
+        AUTO_ADVANCE_POST_FIVE_LOOPS;
+
+        static void setYTEnumValue(Enum<?> ytBehavior) {
+            for (ShortsLoopBehavior rvBehavior : values()) {
+                if (ytBehavior.name().endsWith(rvBehavior.name())) {
+                    rvBehavior.ytEnumValue = ytBehavior;
+
+                    Logger.printDebug(() -> rvBehavior + " set to YT enum: " + ytBehavior.name());
+                    return;
+                }
+            }
+
+            Logger.printException(() -> "Unknown Shorts loop behavior: " + ytBehavior.name());
+        }
+
+        /**
+         * YouTube enum value of the obfuscated enum type.
+         */
+        private Enum<?> ytEnumValue;
+    }
+
+    private static WeakReference<Activity> mainActivityRef = new WeakReference<>(null);
+
+
+    public static void setMainActivity(Activity activity) {
+        mainActivityRef = new WeakReference<>(activity);
+    }
+
+    /**
+     * @return If the app is currently in background PiP mode.
+     */
+    private static boolean isAppInBackgroundPiPMode() {
+        Activity activity = mainActivityRef.get();
+        return activity != null && activity.isInPictureInPictureMode();
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void setYTShortsRepeatEnum(Enum<?> ytEnum) {
+        try {
+            for (Enum<?> ytBehavior : Objects.requireNonNull(ytEnum.getClass().getEnumConstants())) {
+                ShortsLoopBehavior.setYTEnumValue(ytBehavior);
+            }
+        } catch (Exception ex) {
+            Logger.printException(() -> "setYTShortsRepeatEnum failure", ex);
+        }
+    }
+
+    /**
+     * Injection point.
+     */
+    public static Enum<?> changeShortsRepeatBehavior(Enum<?> original) {
+        try {
+            final boolean autoplay = isAppInBackgroundPiPMode()
+                    ? Settings.SHORTS_AUTOPLAY_BACKGROUND.get()
+                    : Settings.SHORTS_AUTOPLAY.get();
+
+            ShortsLoopBehavior autoPlayBehavior = IS_21_10_OR_GREATER
+                    ? ShortsLoopBehavior.AUTO_ADVANCE
+                    : ShortsLoopBehavior.SINGLE_PLAY;
+
+            Enum<?> overrideBehavior = (autoplay
+                    ? autoPlayBehavior
+                    : ShortsLoopBehavior.REPEAT).ytEnumValue;
+
+            if (overrideBehavior != null) {
+                Logger.printDebug(() -> {
+                    String name = (original == null ? "unknown (null)" : original.name());
+                    return overrideBehavior == original
+                            ? "Behavior setting is same as original. Using original: " + name
+                            : "Changing Shorts repeat behavior from: " + name + " to: " + overrideBehavior.name();
+                });
+
+                return overrideBehavior;
+            }
+
+            if (original == null) {
+                // Cannot return null, as null is used to indicate the Short was autoplayed.
+                // Unpatched app replaces null with unknown enum type (appears to fix for bad api data).
+                Enum<?> unknown = ShortsLoopBehavior.UNKNOWN.ytEnumValue;
+                Logger.printDebug(() -> "Original is null, returning: " + unknown.name());
+                return unknown;
+            }
+        } catch (Exception ex) {
+            Logger.printException(() -> "changeShortsRepeatState failure", ex);
+        }
+
+        return original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean isAutoPlay(Enum<?> original) {
+        return ShortsLoopBehavior.SINGLE_PLAY.ytEnumValue == original;
+    }
+}

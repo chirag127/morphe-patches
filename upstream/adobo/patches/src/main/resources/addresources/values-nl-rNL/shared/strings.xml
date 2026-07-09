@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.settings.settingsResourcePatch -->
+  <string name="morphe_settings_submenu_title">Instellingen</string>
+  <string name="morphe_settings_confirm_user_dialog_title">Weet je zeker dat je door wilt gaan?</string>
+  <string name="morphe_settings_save">Opslaan</string>
+  <string name="morphe_settings_reset">Terugzetten</string>
+  <string name="morphe_settings_reset_color">Kleur opnieuw instellen</string>
+  <string name="morphe_settings_color_invalid">Ongeldige kleur</string>
+  <string name="morphe_settings_restart_title">Opnieuw opstarten vereist</string>
+  <string name="morphe_settings_restart_dialog_message">Start de app opnieuw op om deze wijziging door te voeren.</string>
+  <string name="morphe_settings_restart">Opnieuw starten</string>
+  <!-- String is also duplicated in Reddit import / export preference -->
+  <string name="morphe_settings_import">Importeren</string>
+  <string name="morphe_settings_import_copy">Kopiëren</string>
+  <string name="morphe_settings_import_reset">Morphe-instellingen zijn teruggezet naar de standaardinstellingen</string>
+  <string name="morphe_settings_import_success">%d instellingen geïmporteerd</string>
+  <string name="morphe_settings_import_failure_parse">Importeren mislukt: %s</string>
+  <string name="morphe_settings_search_hint">Zoekinstellingen</string>
+  <string name="morphe_settings_search_no_results_title">Geen resultaten gevonden voor \", %s\"</string>
+  <string name="morphe_settings_search_no_results_summary">Probeer een ander trefwoord</string>
+  <string name="morphe_settings_search_recent_searches">Recente zoekopdrachten</string>
+  <string name="morphe_settings_search_remove_message">Verwijderen uit zoekgeschiedenis?</string>
+  <string name="morphe_settings_search_clear_history">Zoekgeschiedenis wissen</string>
+  <string name="morphe_settings_search_clear_history_message">Weet u zeker dat u alle zoekgeschiedenis wilt wissen?</string>
+  <string name="morphe_settings_search_tips_title">Zoektips</string>
+  <string name="morphe_settings_search_tips_summary">"• Tik op een pad om ernaartoe te navigeren
+• Lang indrukken op een instelling om ernaartoe te navigeren
+• Druk op Enter om een zoekopdracht op te slaan in de geschiedenis
+• Zoeken negeert hoofdletters en leestekens
+• Bovenliggende instellingen verschijnen boven uitgeschakelde onderliggende instellingen"</string>
+  <string name="morphe_settings_search_empty_history_title">Zoekgeschiedenis is leeg</string>
+  <string name="morphe_settings_search_empty_history_summary">Om zoekgeschiedenis op te slaan, typ een zoekopdracht en druk op Enter</string>
+  <string name="morphe_settings_search_history_title">Zoekgeschiedenis instellingen weergeven</string>
+  <string name="morphe_show_menu_icons_title">Pictogrammen voor Morphe-instellingen weergeven</string>
+  <string name="morphe_language_title">Morphe-taal</string>
+  <string name="morphe_language_user_dialog_message">"Vertalingen voor sommige talen kunnen ontbreken of onvolledig zijn.
+
+Om nieuwe talen te vertalen of bestaande vertalingen te verbeteren, bezoek morphe.software/translate"</string>
+  <string name="morphe_language_DEFAULT">App-taal</string>
+  <string name="morphe_pref_import_export_title">Importeren / Exporteren</string>
+  <string name="morphe_pref_import_export_summary">Morphe-instellingen importeren / exporteren</string>
+  <string name="morphe_settings_import_file">Importeren uit bestand</string>
+  <string name="morphe_settings_import_file_success">Instellingen succesvol geïmporteerd, tik op Opslaan om toe te passen</string>
+  <string name="morphe_settings_import_file_failed">Het importeren van instellingen is mislukt</string>
+  <string name="morphe_settings_export_file">Exporteren naar bestand</string>
+  <string name="morphe_settings_export_file_success">Instellingen succesvol geëxporteerd</string>
+  <string name="morphe_settings_export_file_failed">Het exporteren van instellingen is mislukt</string>
+  <!-- String is also duplicated in Reddit about preference -->
+  <string name="morphe_settings_about_links_body_version_current">U gebruikt de nieuwste Morphe Patches versie &lt;i&gt;%s&lt;/i&gt;</string>
+  <string name="morphe_settings_about_links_body_version_outdated">U gebruikt Morphe Patches versie &lt;i&gt;%1$s&lt;/i&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Bijwerking beschikbaar: &lt;i&gt;%2$s&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;Om uw patches bij te werken, gebruikt u Morphe om deze app opnieuw te patchen</string>
+  <string name="morphe_settings_about_links_dev_header">Opmerking</string>
+  <string name="morphe_settings_about_links_dev_body">Deze versie is een pre-release en u kunt onverwachte problemen ondervinden</string>
+  <string name="morphe_settings_about_links_header">Officiële links</string>
+  <string name="morphe_settings_about_links_website">Website</string>
+  <string name="morphe_settings_about_links_donate">Doneren</string>
+  <string name="morphe_settings_about_links_translations">Vertalingen</string>
+  <string name="morphe_settings_about_links_credits">Credits</string>
+  <string name="morphe_settings_about_links_dev_header_up_to_date">Up to date</string>
+  <string name="morphe_settings_about_links_dev_header_update_available">Update beschikbaar</string>
+  <string name="morphe_settings_about_contributors_current">Huidige ontwikkeling</string>
+  <string name="morphe_settings_about_contributors_prior">Eerdere ontwikkeling</string>
+  <string name="morphe_settings_about_links_morphe">Actieve ontwikkeling</string>
+  <string name="morphe_settings_about_links_rvx">2022 – 2025</string>
+  <string name="morphe_settings_about_links_rv">2022 – 2025</string>
+  <string name="morphe_settings_about_links_vanced">2019 – 2022</string>
+  <string name="morphe_settings_about_links_licenses">Licentiemeldingen</string>
+  <string name="morphe_settings_about_licenses_loading">Bezig met laden...</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_screen_title">Debuggen</string>
+  <string name="morphe_debug_screen_summary">Configureer geavanceerde ontwikkelaarsopties en diagnostische logs</string>
+  <string name="morphe_debug_title">Schakel debuglogboek in</string>
+  <string name="morphe_debug_stacktrace_title">Debug log stack trace</string>
+  <string name="morphe_debug_stacktrace_summary">Bevat stack traces in debuglogs om fouten te helpen identificeren</string>
+  <string name="morphe_debug_toast_on_error_title">Toon toastmelding bij Morphe error</string>
+  <string name="morphe_debug_toast_on_error_user_dialog_message">"Het uitschakelen van foutmeldingen verbergt alle Morphe-foutmeldingen.
+
+U wordt niet op de hoogte gesteld van onverwachte gebeurtenissen."</string>
+  <string name="morphe_debug_export_logs_title">Foutopsporingslogboeken exporteren</string>
+  <string name="morphe_debug_export_logs_summary">Export Morphe debug logs</string>
+  <string name="morphe_debug_export_logs_file">Exporteren naar bestand</string>
+  <string name="morphe_debug_export_logs_success">Debuglogboeken succesvol geëxporteerd</string>
+  <string name="morphe_debug_export_logs_failed">Mislukt om debuglogboeken te exporteren</string>
+  <string name="morphe_debug_logs_search_hint">Debuglogboeken doorzoeken...</string>
+  <string name="morphe_debug_export_logs_clear">Wissen</string>
+  <string name="morphe_debug_logs_disabled">Foutopsporing is uitgeschakeld</string>
+  <string name="morphe_debug_logs_none_found">Geen debuglogboeken gevonden</string>
+  <string name="morphe_debug_logs_copied_to_clipboard">Debuglogboeken gekopieerd</string>
+  <string name="morphe_debug_logs_failed_to_export">Mislukt om debuglogboeken te exporteren: %s</string>
+  <string name="morphe_debug_logs_clear_toast">Debuglogboeken gewist</string>
+  <string name="morphe_debug_feature_flags_manager_title">Functievlaggen Manager</string>
+  <string name="morphe_debug_feature_flags_manager_summary">Beheer booleaanse functievlaggen</string>
+  <string name="morphe_debug_feature_flags_manager_active_header">Actieve functie-flags (%d)</string>
+  <string name="morphe_debug_feature_flags_manager_blocked_header">Geblokkeerde functie-flags (%d)</string>
+  <string name="morphe_debug_feature_flags_manager_search_hint">Functie-flags zoeken...</string>
+  <string name="morphe_debug_feature_flags_manager_toast_saved">Functie-flags opgeslagen</string>
+  <string name="morphe_debug_feature_flags_manager_toast_reset">Functie-flags gereset</string>
+  <string name="morphe_debug_feature_flags_manager_toast_copied">Functie-flags gekopieerd naar klembord</string>
+  <string name="morphe_debug_feature_flags_manager_toast_no_flags">Start de app opnieuw om deze instelling te gebruiken</string>
+  <!-- Could be its own resource file, but for simplicity it's shared among all apps. -->
+  <!-- misc.gms.gmsCoreSupportResourcePatch -->
+  <string name="microg_settings_summary">Open de MicroG-instellingen</string>
+  <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="gms_core_toast_not_installed_message">MicroG is niet geïnstalleerd. Installeer het.</string>
+  <string name="gms_core_dialog_title">Actie vereist</string>
+  <!-- "Don't kill my app" should be kept in English and not translated -->
+  <string name="gms_core_dialog_not_whitelisted_not_allowed_in_background_message">"MicroG heeft geen toestemming om op de achtergrond te draaien.
+
+Volg de \"Don't kill my app\"-handleiding voor uw telefoon en pas de instructies toe op uw MicroG-instelling.
+
+Dit is vereist om de app te laten werken."</string>
+  <string name="gms_core_dialog_open_website_text">Website openen</string>
+  <string name="gms_core_dialog_not_whitelisted_using_battery_optimizations_message">"Batterijoptimalisaties voor MicroG moeten worden uitgeschakeld om problemen te voorkomen.
+
+Uitzchakelen van batterijoptimalisaties voor MicroG heeft geen negatieve invloed op de batterijgebruik.
+
+Druk op de knop Door en ga akkoord met wijzigingen in de optimalisatie."</string>
+  <string name="gms_core_dialog_continue_text">Doorgaan</string>
+  <string name="morphe_gms_core_battery_optimization_dialog_title">Toon MicroG dialoog voor batterijoptimalisatie</string>
+  <string name="morphe_gms_core_battery_optimization_dialog_user_dialog_message">"Het uitschakelen hiervan verbergt het MicroG-prompt voor batterijoptimalisatie.
+
+Als batterijoptimalisaties niet worden gewijzigd, kunt u het volgende ervaren:
+• De app kan willekeurig sluiten
+• Meldingen werken mogelijk niet
+• Achtergrondafspelen werkt mogelijk niet"</string>
+  <!-- misc.gms.linkHandlingPatch -->
+  <string name="morphe_link_handling_title">App-linkbeheer</string>
+  <string name="morphe_link_handling_summary">Configureer links om te openen in deze app</string>
+  <string name="morphe_link_handling_step1_title">Stap 1: Schakel originele app-koppelingen uit</string>
+  <string name="morphe_link_handling_step1_message">Open de instellingen van de originele app en schakel alle domeinkoppelingen uit</string>
+  <string name="morphe_link_handling_step2_title">Stap 2: Schakel gepatchte app-koppelingen in</string>
+  <string name="morphe_link_handling_step2_message">Open de instellingen van de gepatchte app en schakel alle domeinkoppelingen in</string>
+  <string name="morphe_link_handling_open">Open instellingen</string>
+  <!-- misc.checks.experimentalAppNoticePatch -->
+  <string name="morphe_experimental_app_version_dialog_title">🚨 Experimentele Waarschuwing 🚨</string>
+  <string name="morphe_experimental_app_version_dialog_message">"U gebruikt een experimentele app-versie van ⚠️ &lt;b&gt;%1$s&lt;/b&gt;
+&lt;br/&gt;&lt;br/&gt;
+🔧 Verwacht afwijkend app-gedrag of onbekende bugs terwijl we de patches voor deze app-versie verfijnen.
+&lt;br/&gt;&lt;br/&gt;
+Als u de meest probleemloze ervaring wilt, &lt;b&gt;verwijder&lt;/b&gt; dit dan en patch de aanbevolen app-versie van ✅ &lt;b&gt;%2$s&lt;/b&gt;"</string>
+  <string name="morphe_experimental_app_version_dialog_confirm">⚠️ Ik wil experimenteel</string>
+  <string name="morphe_experimental_app_version_dialog_open_homepage">✅ Ik wil stabiel</string>
+</resources>

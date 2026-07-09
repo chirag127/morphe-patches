@@ -1,0 +1,104 @@
+package app.morphe.patches.youtube.interaction.downloads
+
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
+import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.resourcePatch
+import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference
+import app.morphe.patches.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
+import app.morphe.patches.shared.misc.settings.preference.SwitchPreference
+import app.morphe.patches.shared.misc.settings.preference.TextPreference
+import app.morphe.patches.youtube.misc.playercontrols.addTopControl
+import app.morphe.patches.youtube.misc.playercontrols.initializeTopControl
+import app.morphe.patches.youtube.misc.playercontrols.injectVisibilityCheckCall
+import app.morphe.patches.youtube.misc.playercontrols.legacyPlayerControlsPatch
+import app.morphe.patches.youtube.misc.settings.PreferenceScreen
+import app.morphe.patches.youtube.misc.settings.settingsPatch
+import app.morphe.patches.youtube.shared.Constants.COMPATIBILITY_YOUTUBE
+import app.morphe.patches.youtube.shared.YouTubeActivityOnCreateFingerprint
+import app.morphe.patches.youtube.video.information.videoInformationPatch
+import app.morphe.util.ResourceGroup
+import app.morphe.util.copyResources
+
+private val downloadsResourcePatch = resourcePatch {
+    dependsOn(
+        legacyPlayerControlsPatch,
+        settingsPatch,
+    )
+
+    execute {
+        PreferenceScreen.PLAYER.addPreferences(
+            PreferenceScreenPreference(
+                key = "morphe_external_downloader_screen",
+                sorting = Sorting.UNSORTED,
+                preferences = setOf(
+                    SwitchPreference("morphe_external_downloader", summary = true),
+                    SwitchPreference("morphe_external_downloader_action_button", summary = true),
+                    TextPreference(
+                        "morphe_external_downloader_name",
+                        tag = "app.morphe.extension.youtube.settings.preference.ExternalDownloaderPreference",
+                    )
+                )
+            )
+        )
+
+        copyResources(
+            "downloads",
+            ResourceGroup(
+                "drawable",
+                "morphe_yt_download_button.xml",
+                "morphe_yt_download_button_bold.xml",
+            )
+        )
+    }
+
+    finalize {
+        addTopControl("downloads",
+            "@+id/morphe_external_download_button",
+            "@+id/morphe_external_download_button")
+    }
+}
+
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/youtube/patches/DownloadsPatch;"
+
+private const val EXTENSION_BUTTON = "Lapp/morphe/extension/youtube/videoplayer/ExternalDownloadButton;"
+
+@Suppress("unused")
+val downloadsPatch = bytecodePatch(
+    name = "Downloads",
+    description = "Adds support to download videos with an external downloader app " +
+        "using the in-app download button or a video player action button.",
+) {
+    dependsOn(
+        downloadsResourcePatch,
+        videoInformationPatch,
+        legacyPlayerControlsPatch
+    )
+
+    compatibleWith(COMPATIBILITY_YOUTUBE)
+
+    execute {
+        initializeTopControl(EXTENSION_BUTTON)
+        injectVisibilityCheckCall(EXTENSION_BUTTON)
+
+        // Main activity is used to launch downloader intent.
+        YouTubeActivityOnCreateFingerprint.method.addInstruction(
+            0,
+            "invoke-static/range { p0 .. p0 }, ${EXTENSION_CLASS}->setMainActivity(Landroid/app/Activity;)V"
+        )
+
+        OfflineVideoEndpointFingerprint.method.apply {
+            addInstructionsWithLabels(
+                0,
+                """
+                    invoke-static/range { p3 .. p3 }, $EXTENSION_CLASS->inAppDownloadButtonOnClick(Ljava/lang/String;)Z
+                    move-result v0
+                    if-eqz v0, :show_native_downloader
+                    return-void
+                    :show_native_downloader
+                    nop
+                """
+            )
+        }
+    }
+}

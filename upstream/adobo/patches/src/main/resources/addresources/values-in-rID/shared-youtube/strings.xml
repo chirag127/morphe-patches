@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Mulai ulang untuk menyelesaikan penyiapan</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Nama aplikasi</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Khusus</string>
+  <string name="morphe_custom_branding_icon_title">Ikon aplikasi</string>
+  <string name="morphe_custom_branding_icon_entry_1">Asli</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe hitam</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe gelap</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe terang</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe play terang</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe play hitam</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Kustom</string>
+  <string name="morphe_custom_branding_notification_icon_title">Ikon pemberitahuan</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Cocokkan ikon aplikasi</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe play</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Pemberitahuan Morphe</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">Riwayat tontonan Anda tidak sedang disimpan.&lt;br&gt;&lt;br&gt;Hal ini kemungkinan besar disebabkan oleh pemblokir iklan DNS atau proksi jaringan.&lt;br&gt;&lt;br&gt;Untuk memperbaikinya, masukkan daftar putih &lt;b&gt;s.youtube.com&lt;/b&gt; atau matikan semua pemblokir DNS dan proksi.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Jangan tampilkan lagi</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Palsukan aliran video</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Konfigurasikan pemalsuan klien untuk mencegah masalah pemutaran</string>
+  <string name="morphe_spoof_video_streams_title">Palsukan aliran video</string>
+  <string name="morphe_spoof_video_streams_summary">"Memperbaiki masalah pemutaran untuk sebagian besar pengguna dengan meminta aliran video yang kompatibel
+
+Jika Anda pengguna YouTube Premium, pengaturan ini mungkin tidak diperlukan"</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Tidak dapat mengambil aliran klien apa pun</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Mematikan pengaturan ini dapat menyebabkan masalah pemutaran.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Cobalah mengaktifkan: Palsukan aliran video &gt; Masuk Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Klien bawaan</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Masuk Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Tidak masuk ke Android VR. Ketuk disini untuk masuk</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Saat ini sedang masuk ke Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Untuk menggunakan fitur ini, ubah \'Klien bawaan\' ke Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Masuk ke Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Masuk ke Android VR dapat memperbaiki masalah pemutaran untuk beberapa pengguna
+
+Untuk masuk, tekan lanjutkan di bawah ini"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Lanjutkan</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Keluar</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Petunjuk</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Kode aktivasi: %s
+
+1. Ketuk 'Buka situs web' di bawah ini untuk membuka situs web 'Hubungkan perangkat'
+2. Tempel dari papan klip (atau ketik) kode aktivasi yang ditampilkan di atas
+3. Masuk ke Google jika diminta. Jika Anda memiliki beberapa akun, pilih akun YouTube ini
+4. Ketuk 'Izinkan akses YouTube VR'
+5. Kembali ke aplikasi ini setelah muncul pesan 'Perangkat terhubung'"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Buka situs web</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Gagal dalam menghasilkan kode aktivasi</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Gagal dalam menghasilkan token autentikasi</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Berhasil masuk</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Autentikasi disimpan
+
+• Pengaturan Morphe Anda tidak akan mengimpor/mengekspor autentikasi Android VR
+• Jika aplikasi ini tidak digunakan selama 6 bulan, Google akan menghapus autentikasi ini
+• Anda perlu masuk kembali jika Anda mengubah kata sandi Google Anda atau menghapus pendaftaran perangkat ini dari pengaturan Google Anda"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 sementara tidak tersedia (API kehabisan waktu)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Masuk ke Android VR telah kadaluwarsa, coba masuk ke VR lagi</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 sementara tidak tersedia (status %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 sementara tidak tersedia</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Tidak dapat masuk ke VR, autentikasi situs web tidak disetujui</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Tidak dapat masuk ke VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Keluar dari Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">Token masuk VR tidak sah, coba masuk ke VR lagi</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Nonaktifkan pembaruan pemutar JavaScript</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Mengunci JavaScript pemain ke versi tertentu
+
+• Hash JavaScript pemain yang valid diperlukan
+• Hash JavaScript pemain berlaku selama sekitar satu bulan, dan hash yang kedaluwarsa akan dicabut oleh GVS
+• Pemutaran gagal jika hash dicabut"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Anda harus memberikan hash pemutar JavaScript yang sah.
+
+Pemutaran akan gagal jika hash pemutar JavaScript sudah kedaluwarsa."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Hash pemutar JavaScript</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Masukkan hash pemutar JavaScript yang sah</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">Nonaktifkan protokol QUIC</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">Nonaktifkan audio DRC</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Paksa bahasa audio asli</string>
+  <string name="morphe_force_original_audio_summary">Selalu memutar trek audio asli video tersebut daripada versi sulih suara</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Proksi jaringan</string>
+  <string name="morphe_proxy_screen_summary">Arahkan permintaan jaringan yang didukung melalui proksi</string>
+  <string name="morphe_proxy_enabled_title">Aktifkan proksi</string>
+  <string name="morphe_proxy_enabled_summary">Merutekan permintaan jaringan yang didukung melalui proksi HTTP atau HTTPS yang telah dikonfigurasi</string>
+  <string name="morphe_proxy_host_title">Host proksi</string>
+  <string name="morphe_proxy_host_summary">Nama host atau alamat IP server proksi</string>
+  <string name="morphe_proxy_port_title">Port proksi</string>
+  <string name="morphe_proxy_port_summary">Port server proksi</string>
+  <string name="morphe_proxy_https_title">Gunakan proksi HTTPS</string>
+  <string name="morphe_proxy_https_summary">Gunakan HTTPS untuk terhubung ke server proksi daripada HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">Autentikasi proksi</string>
+  <string name="morphe_proxy_auth_enabled_summary">Mengirim autentikasi Dasar dengan permintaan proksi</string>
+  <string name="morphe_proxy_auth_username_title">Nama pengguna proksi</string>
+  <string name="morphe_proxy_auth_username_summary">Nama pengguna untuk autentikasi proksi Dasar</string>
+  <string name="morphe_proxy_auth_password_title">Kata sandi proksi</string>
+  <string name="morphe_proxy_auth_password_summary">Kata sandi untuk autentikasi proksi Dasar</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Izinkan penggantian langsung</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Terhubung secara langsung jika proksi gagal</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Sembunyikan iklan layar penuh</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">Untuk menggunakan fitur ini, ubah \'Palsukan aliran video\' ke Android Reel atau TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Bersihkan tautan berbagi</string>
+  <string name="morphe_sanitize_sharing_links_summary">Menghapus parameter kueri pelacakan dari tautan yang dibagikan</string>
+  <string name="morphe_replace_music_with_youtube_title">Ubah tautan berbagi ke youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Mengganti music.youtube.com dengan youtube.com di tautan yang dibagikan</string>
+  <string name="morphe_replace_links_with_shortener_title">Ubah tautan berbagi ke youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Memaksa video untuk menggunakan format pemendek URL youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Buffer protokol log</string>
+  <string name="morphe_debug_protobuffer_summary">Menambahkan informasi catatan tambahan untuk pengembang guna mengidentifikasi komponen aplikasi</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Mengaktifkan pengaturan ini akan mencatat data tata letak tambahan, termasuk teks pada layar untuk beberapa komponen UI.
+
+Ini dapat membantu mengidentifikasi komponen saat membuat penyaring khusus.
+
+Namun, mengaktifkan ini juga akan mencatat beberapa data pengguna seperti alamat IP Anda."</string>
+</resources>

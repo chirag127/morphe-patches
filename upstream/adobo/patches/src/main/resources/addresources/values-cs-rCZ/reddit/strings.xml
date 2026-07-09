@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Reklamy</string>
+  <string name="morphe_hide_post_ads_title">Skrýt reklamní obsah</string>
+  <string name="morphe_hide_comment_ads_title">Skrýt reklamy v komentářích</string>
+  <string name="morphe_screen_navigation_bar_title">Navigační panel</string>
+  <string name="morphe_hide_answers_button_title">Skrýt tlačítko Odpovědi</string>
+  <string name="morphe_hide_chat_button_title">Skrýt tlačítko Chatu</string>
+  <string name="morphe_hide_create_button_title">Skrýt tlačítko Vytvořit</string>
+  <string name="morphe_hide_discover_button_title">Skrýt tlačítko Objevit nebo Komunity</string>
+  <string name="morphe_hide_games_button_title">Skrýt tlačítko Hry</string>
+  <string name="morphe_screen_sidebar_title">Boční panel</string>
+  <string name="morphe_hide_recently_visited_shelf_title">Skrýt panel Nedávno navštívené</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">Skrýt panel Hry na Redditu</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">Skrýt panel Reddit Pro</string>
+  <string name="morphe_hide_about_shelf_title">Skrýt panel O nás</string>
+  <string name="morphe_hide_resources_shelf_title">Skrýt panel Zdroje</string>
+  <string name="morphe_screen_layout_title">Rozložení</string>
+  <string name="morphe_disable_modern_home_title">Zakázat moderní uživatelské rozhraní domovské stránky</string>
+  <string name="morphe_disable_screenshot_popup_title">Zakázat vyskakovací okno pro screenshot</string>
+  <string name="morphe_disable_screenshot_popup_summary">Zakáže vyskakovací okno, které se zobrazí při pořízení screenshotu</string>
+  <string name="morphe_hide_ask_button_title">Skrýt tlačítko Zeptej se</string>
+  <string name="morphe_hide_ask_button_summary">Skryje tlačítko Zeptej se v vyhledávacím řádku</string>
+  <string name="morphe_hide_communities_shelf_title">Skrýt panel komunit</string>
+  <string name="morphe_hide_communities_shelf_summary">Skryje panel souvisejících nebo doporučených komunit v subredditech</string>
+  <string name="morphe_hide_trending_shelves_title">Skrýt oblíbené regály</string>
+  <string name="morphe_hide_trending_shelves_summary">Skryje doporučené regály z kanálu a návrhů vyhledávání</string>
+  <string name="morphe_remove_notification_dialog_title">Odstranit dialogové okno s návrhem oznámení</string>
+  <string name="morphe_remove_notification_dialog_summary">Automaticky zavře dialog s návrhy oznámení při návštěvě subredditu</string>
+  <string name="morphe_show_view_count_title">Zobrazit počet zobrazení u příspěvků</string>
+  <string name="morphe_show_view_count_summary">Omezení: Dostupná pouze pokud odpověď API obsahuje počet zobrazení</string>
+  <string name="morphe_remove_nsfw_dialog_title">Odstranit dialogové okno s upozorněním NSFW</string>
+  <string name="morphe_remove_nsfw_dialog_summary">Automaticky akceptuje upozornění na obsah NSFW při návštěvě subredditu</string>
+  <string name="morphe_screen_miscellaneous_title">Různé</string>
+  <string name="morphe_about_title">O aplikaci</string>
+  <string name="morphe_about_summary">Verze aplikace a oficiální odkazy</string>
+  <string name="morphe_sanitize_sharing_links_title">Vyčistit sdílené odkazy</string>
+  <string name="morphe_sanitize_sharing_links_summary">Odstraňuje sledovací parametry dotazu z sdílených odkazů</string>
+  <string name="morphe_open_links_directly_title">Otevírat odkazy přímo</string>
+  <string name="morphe_open_links_directly_summary">Obejít přesměrovací URL při otevírání externích odkazů</string>
+  <string name="morphe_open_links_externally_title">Otevřít odkazy externě</string>
+  <string name="morphe_open_links_externally_summary">Otevírá odkazy ve vašem prohlížeči namísto vestavěného prohlížeče</string>
+</resources>

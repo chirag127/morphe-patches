@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Hirdetések</string>
+  <string name="morphe_hide_post_ads_title">Hirdetések elrejtése</string>
+  <string name="morphe_hide_comment_ads_title">Hozzászólás hirdetések elrejtése</string>
+  <string name="morphe_screen_navigation_bar_title">Navigációs sáv</string>
+  <string name="morphe_hide_answers_button_title">Válasz gomb elrejtése</string>
+  <string name="morphe_hide_chat_button_title">Csevegés gomb elrejtése</string>
+  <string name="morphe_hide_create_button_title">Létrehozás gomb elrejtése</string>
+  <string name="morphe_hide_discover_button_title">Felfedezés vagy Közösségek gomb elrejtése</string>
+  <string name="morphe_hide_games_button_title">Játékok gomb elrejtése</string>
+  <string name="morphe_screen_sidebar_title">Oldalsáv</string>
+  <string name="morphe_hide_recently_visited_shelf_title">Elkeresett látogatott polc elrejtése</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">Játékok a Redditen sáv elrejtése</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">Reddit Pro sáv elrejtése</string>
+  <string name="morphe_hide_about_shelf_title">Névjegysáv elrejtése</string>
+  <string name="morphe_hide_resources_shelf_title">Források sáv elrejtése</string>
+  <string name="morphe_screen_layout_title">Elrendezés</string>
+  <string name="morphe_disable_modern_home_title">A modern kezdőképernyő felület letiltása</string>
+  <string name="morphe_disable_screenshot_popup_title">Képernyőfotó-felugró párbeszéd letiltása</string>
+  <string name="morphe_disable_screenshot_popup_summary">Letiltja a képernyőfotó készítésekor megjelenő felugró párbeszédet</string>
+  <string name="morphe_hide_ask_button_title">Kérdezz gomb elrejtése</string>
+  <string name="morphe_hide_ask_button_summary">Elrejti a Kérdezz gombot a keresősávban</string>
+  <string name="morphe_hide_communities_shelf_title">Közösségek polc elrejtése</string>
+  <string name="morphe_hide_communities_shelf_summary">Elrejti a kapcsolódó vagy javasolt közösségek polcát a subredditeken.</string>
+  <string name="morphe_hide_trending_shelves_title">Elrejtett népszerű polcok</string>
+  <string name="morphe_hide_trending_shelves_summary">Elrejti a népszerű polcokat a hírekből és a keresési javaslatokból.</string>
+  <string name="morphe_remove_notification_dialog_title">Értesítési javaslat ablak eltávolítása</string>
+  <string name="morphe_remove_notification_dialog_summary">Automatikusan elutasítja az értesítési javaslatok ablakot egy subreddit felkeresésekor</string>
+  <string name="morphe_show_view_count_title">Megtekintésszám megjelenítése a posztokon</string>
+  <string name="morphe_show_view_count_summary">Korlátozás: Csak akkor érhető el, ha az API-válasz tartalmazza a megtekintések számát</string>
+  <string name="morphe_remove_nsfw_dialog_title">NSFW tartalomra figyelmeztető ablak elrejtése</string>
+  <string name="morphe_remove_nsfw_dialog_summary">Automatikusan elfogadja az NSFW-figyelmeztetést egy subreddit felkeresésekor</string>
+  <string name="morphe_screen_miscellaneous_title">Egyéb</string>
+  <string name="morphe_about_title">Névjegy</string>
+  <string name="morphe_about_summary">Módosítás verziója és hivatalos linkek</string>
+  <string name="morphe_sanitize_sharing_links_title">Megosztási linkek tisztítása</string>
+  <string name="morphe_sanitize_sharing_links_summary">Eltávolítja a nyomkövetést a megosztott linkekből</string>
+  <string name="morphe_open_links_directly_title">Linkek közvetlen megnyitása</string>
+  <string name="morphe_open_links_directly_summary">Kihagyja az átirányításokat a külső linkek megnyitásakor</string>
+  <string name="morphe_open_links_externally_title">Linkek megnyitása külső alkalmazásban</string>
+  <string name="morphe_open_links_externally_summary">​A linkeket a beépített böngésző helyett a saját böngésződben nyitja meg</string>
+</resources>

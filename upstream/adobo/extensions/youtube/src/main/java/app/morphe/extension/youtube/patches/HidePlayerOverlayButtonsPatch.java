@@ -1,0 +1,191 @@
+package app.morphe.extension.youtube.patches;
+
+import static app.morphe.extension.shared.ResourceUtils.getIdentifierOrThrow;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.ResourceType;
+import app.morphe.extension.shared.Utils;
+import app.morphe.extension.youtube.settings.Settings;
+
+@SuppressWarnings("unused")
+public final class HidePlayerOverlayButtonsPatch {
+
+    public static final int FULLSCREEN_HIDDEN_Y_OFFSET = 100000;
+
+    private static final boolean HIDE_AUTOPLAY_BUTTON_ENABLED = Settings.HIDE_AUTOPLAY_BUTTON.get();
+    private static final Boolean HIDE_FULLSCREEN_BUTTON_ENABLED = Settings.HIDE_FULLSCREEN_BUTTON.get();
+
+    /**
+     * Injection point.
+     */
+    public static boolean hideAutoplayButton() {
+        return HIDE_AUTOPLAY_BUTTON_ENABLED;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static int hideCastButton(int original) {
+        return Settings.HIDE_CAST_BUTTON.get() ? View.GONE : original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean getCastButtonOverride(boolean original) {
+        if (Settings.HIDE_CAST_BUTTON.get()) {
+            return false;
+        }
+
+        return original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void hideCaptionsButton(ImageView imageView) {
+        if (imageView == null) return;
+
+        imageView.setVisibility(Settings.HIDE_CAPTIONS_BUTTON.get() ? ImageView.GONE : ImageView.VISIBLE);
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void hideCollapseButton(ImageView imageView) {
+        if (!Settings.HIDE_COLLAPSE_BUTTON.get()) return;
+
+        // Make the collapse button invisible
+        imageView.setImageResource(android.R.color.transparent);
+        imageView.setImageAlpha(0);
+        imageView.setEnabled(false);
+
+        // Adjust layout params if RelativeLayout
+        var layoutParams = imageView.getLayoutParams();
+        if (layoutParams instanceof android.widget.RelativeLayout.LayoutParams) {
+            android.widget.RelativeLayout.LayoutParams lp = new android.widget.RelativeLayout.LayoutParams(0, 0);
+            imageView.setLayoutParams(lp);
+        } else {
+            Logger.printDebug(() -> "Unknown collapse button layout params: " + layoutParams);
+        }
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void setTitleAnchorStartMargin(View titleAnchorView) {
+        if (!Settings.HIDE_COLLAPSE_BUTTON.get()) return;
+
+        var layoutParams = titleAnchorView.getLayoutParams();
+        if (layoutParams instanceof android.widget.RelativeLayout.LayoutParams relativeParams) {
+            relativeParams.setMarginStart(0);
+        } else {
+            Logger.printDebug(() -> "Unknown title anchor layout params: " + layoutParams);
+        }
+    }
+
+    private static final boolean HIDE_PLAYER_PREVIOUS_NEXT_BUTTONS_ENABLED
+            = Settings.HIDE_PLAYER_PREVIOUS_NEXT_BUTTONS.get();
+
+    private static final int PLAYER_CONTROL_PREVIOUS_BUTTON_TOUCH_AREA_ID = getIdentifierOrThrow(
+            ResourceType.ID, "player_control_previous_button_touch_area");
+
+    private static final int PLAYER_CONTROL_NEXT_BUTTON_TOUCH_AREA_ID = getIdentifierOrThrow(
+            ResourceType.ID, "player_control_next_button_touch_area");
+
+    /**
+     * Injection point.
+     */
+    public static void hidePreviousNextButtons(View parentView) {
+        if (!HIDE_PLAYER_PREVIOUS_NEXT_BUTTONS_ENABLED) {
+            return;
+        }
+
+        // Must use a deferred call to main thread to hide the button.
+        // Otherwise, the layout crashes if set to hidden now.
+        Utils.runOnMainThread(() -> {
+            hideView(parentView, PLAYER_CONTROL_PREVIOUS_BUTTON_TOUCH_AREA_ID);
+            hideView(parentView, PLAYER_CONTROL_NEXT_BUTTON_TOUCH_AREA_ID);
+        });
+    }
+
+
+    private static final int PLAYER_OVERFLOW_BUTTON_ID = getIdentifierOrThrow(
+            ResourceType.ID, "player_overflow_button");
+    /**
+     * Injection point.
+     */
+    public static void hideSettingsButton(View parentView) {
+        if (!Settings.HIDE_SETTINGS_BUTTON.get()) {
+            return;
+        }
+
+        Utils.runOnMainThread(() -> hideView(parentView, PLAYER_OVERFLOW_BUTTON_ID));
+    }
+
+    /**
+     * Injection point.
+     */
+    public static ImageView hideFullscreenButton(ImageView imageView) {
+        if (!HIDE_FULLSCREEN_BUTTON_ENABLED) {
+            return imageView;
+        }
+
+        if (LegacyPlayerControlsPatch.RESTORE_OLD_PLAYER_BUTTONS) {
+            imageView.setVisibility(View.GONE);
+            return null;
+        }
+
+        // Cannot remove the button because the bold overlay player buttons
+        // rely on the draw updates to control fade in/out.
+        // Move the button offscreen so it's not visible anymore.
+        imageView.setY(imageView.getY() - FULLSCREEN_HIDDEN_Y_OFFSET);
+        return imageView;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static View hidePlayerControlButtonsBackground(View rootView) {
+        try {
+            if (!Settings.HIDE_PLAYER_CONTROL_BUTTONS_BACKGROUND.get()) {
+                return rootView;
+            }
+
+            // Each button is an ImageView with a background set to another drawable.
+            removeImageViewsBackgroundRecursive(rootView);
+        } catch (Exception ex) {
+            Logger.printException(() -> "removePlayerControlButtonsBackground failure", ex);
+        }
+
+        return rootView;
+    }
+
+    private static void hideView(View parentView, int resourceId) {
+        View nextPreviousButton = parentView.findViewById(resourceId);
+
+        if (nextPreviousButton == null) {
+            Logger.printException(() -> "Could not find player previous/next button");
+            return;
+        }
+
+        Logger.printDebug(() -> "Hiding previous/next button");
+        Utils.hideViewByRemovingFromParentUnderCondition(true, nextPreviousButton);
+    }
+
+    private static void removeImageViewsBackgroundRecursive(View currentView) {
+        if (currentView instanceof ImageView imageView) {
+            imageView.setBackground(null);
+        }
+
+        if (currentView instanceof ViewGroup viewGroup) {
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                removeImageViewsBackgroundRecursive(viewGroup.getChildAt(i));
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Morphe.YouTubeMusic.Settings" parent="@style/Theme.YouTubeMusic.Settings.Compat.Base">
+        <item name="android:actionBarSize">@dimen/action_bar_height</item>
+        <item name="android:textColorHint">@color/ytm_text_color_secondary</item>
+        <item name="android:textColorTertiary">@color/ytm_text_color_secondary</item>
+        <item name="android:listDivider">@null</item>
+        <item name="android:textColor">@color/abc_primary_text_material_dark</item>
+        <item name="android:textColorSecondary">@color/abc_secondary_text_material_dark</item>
+        <item name="android:colorAccent">@color/ytm_text_color_primary</item>
+    </style>
+</resources>

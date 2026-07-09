@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Iklan</string>
+  <string name="morphe_screen_navigation_bar_title">Bar pandu arah</string>
+  <string name="morphe_screen_sidebar_title">Bar sisi</string>
+  <string name="morphe_disable_modern_home_title">Lumpuhkan antara muka laman utama moden</string>
+  <string name="morphe_screen_miscellaneous_title">Lain-lain</string>
+  <string name="morphe_about_title">Mengenai</string>
+</resources>

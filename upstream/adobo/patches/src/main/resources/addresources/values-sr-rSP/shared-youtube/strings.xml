@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Поново покрените да бисте завршили постављање</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Назив апликације</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Цустом</string>
+  <string name="morphe_custom_branding_icon_title">Иконица апликације</string>
+  <string name="morphe_custom_branding_icon_entry_1">Оригинална</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe сен</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe тамно</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe светл</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Морфе плеј светло</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Морфе плеј црно</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Цустом</string>
+  <string name="morphe_custom_branding_notification_icon_title">Икона обавештења</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Усклади икона апликације</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe плеј</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Morphe обавештење</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">Ваша историја гледања се не чува.&lt;br&gt;&lt;br&gt;Ово је највероватније узроковано DNS блокатором огласа или мрежним проксијем.&lt;br&gt;&lt;br&gt;Да бисте ово поправили, ставите на белу листу &lt;b&gt;s.youtube.com&lt;/b&gt; или искључите све DNS блокаторе и проксије.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Не приказуј поново</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Лажирани видео стримови</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Конфигуришите лажирање клијента да бисте избегли проблеме са репродукцијом</string>
+  <string name="morphe_spoof_video_streams_title">Лажирани видео стримови</string>
+  <string name="morphe_spoof_video_streams_summary">"Решава проблеме са репродукцијом за већину корисника захтевајући компатибилан видео стрим
+
+Ако сте корисник YouTube Premium-а, ова поставка вам можда неће бити потребна."</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Не можемо да узмемо било који поток клијента</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Искључивање овог подешавања може изазвати проблеме са репродукцијом.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Пokusajte да укључите: Нагласи поток видеа > Пријава на Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Подразумевани клијент</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Најава на Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Нije најављен на Android VR. Уплити овде за најаву.</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Профилисан на Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Да бисте користили овај филтри претपоставите \'Подразу Meadow\' на Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Најавите се на Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Prijavljivanje na Android VR može popraviti problema sa reprodukcijom za neke korisnike
+
+Da bi se prijavili, pritisnite nastavak ispod"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Настави</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Одјави</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Инструкције</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Активациони код: %s
+
+1. Кликните на 'Отвори веб страницу' испод за отварање веб приступача 'Прикључи приступао'
+2. Уставите са клипборда (или пропишите) активациони код изнад
+3. Пријавите се на Google ако је упито. Ако имате више налога, изaberите овај YouTube налог
+4. Кликните на 'Дозволи приступ YouTube VR'
+5. Вратите се у ово апликацију након пролaska поруке 'Уређај је прикључен'"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Отвори веб-сајт</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Неуспешно је издат активациони код</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Неуспешно је издат дозволни пречкод</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Успешно пријављен</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Дозвола снимања
+
+• Ваша Морфе подешења неће увозити/извозити дозволу за приступ Android VR
+• Након што ово апликације није коришћена за 6 месецих, Google ће уbrisati ову дозвolu
+• Мораћete се поново пријавити ако изmenите лозинку Google или ако деактивirateте овај уређај из наставних Google"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 привремено није доступан (API је истекао)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Prijavljivanje na Android VR je isteklo, pokušajte ponovo da se prijavite na VR</string>
+  <string name="morphe_oauth2_connection_failure_status">Онлајн протокол OAuth2 привремено није доступан (status %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 привремено није доступан</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Ne mogu se prijaviti na VR, web autentikacija nije odobrena</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Не може се ући у VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Одјављен са Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">Неважећи токен за улаз у VR, покушајте поново да уђете у VR</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Искукључите ажурирање JavaScript плеера</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Закључава JavaScript плејера на одређену верзију
+
+• Потребан је важећи хеш JavaScript плејера
+• Хешеви JavaScript плејера важе приближно месец дана, а застарели хешеви ће бити опозвани од стране GVS-а
+• Репродукција ће пропасти ако је хеш опозван."</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Морате да набавите важећи хеш JavaScript плејера.
+
+Репродукција ће пропасти ако је хеш JavaScript плејера застарео."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Хаш JavaScript играча</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Унесите валидан JavaScript хеш играча</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">Oнемогући протокол QUIC</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">Онемогућити аудио ДРЦ</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Присили оригинални језик звука</string>
+  <string name="morphe_force_original_audio_summary">Увек пушта оригиналну аудио нумеру видеа уместо синхронизоване верзије.</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Мрежни прокси</string>
+  <string name="morphe_proxy_screen_summary">Усмеравање подржаних мрежних захтева преко проксија</string>
+  <string name="morphe_proxy_enabled_title">Омогући прокси</string>
+  <string name="morphe_proxy_enabled_summary">Проксирање мрежних захтева кроз конфигурисани ХТТП или ХТТПС прокси</string>
+  <string name="morphe_proxy_host_title">Прокси хост</string>
+  <string name="morphe_proxy_host_summary">Назив хоста или ИП адреса прокси сервера</string>
+  <string name="morphe_proxy_port_title">Прокси порт</string>
+  <string name="morphe_proxy_port_summary">Порт прокси сервера</string>
+  <string name="morphe_proxy_https_title">Користи ХТТПС прокси</string>
+  <string name="morphe_proxy_https_summary">Користи ХТТПС за повезивање на прокси сервер уместо ХТТП</string>
+  <string name="morphe_proxy_auth_enabled_title">Прокси аутентификација</string>
+  <string name="morphe_proxy_auth_enabled_summary">Слање основне аутентификације са прокси захтевима</string>
+  <string name="morphe_proxy_auth_username_title">Ваше корисничко име</string>
+  <string name="morphe_proxy_auth_username_summary">Корисничко име за основну прокси аутентификацију</string>
+  <string name="morphe_proxy_auth_password_title">Прокси корисничко име</string>
+  <string name="morphe_proxy_auth_password_summary">Лозинка за основну прокси аутентификацију</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Омогући директан пад</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Повезивање директно ако прокси не успе</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Сакриј огласе преко целог екрана</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">Да бисте користили ову функцију, промените ‘Лажирани видео снимци’ на Андроид Риел или ТВ</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Очисти дељене линкове</string>
+  <string name="morphe_sanitize_sharing_links_summary">Уклања параметре упита за праћење из дељених линкова.</string>
+  <string name="morphe_replace_music_with_youtube_title">Промени линкове за дељење на youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Замењује music.youtube.com са youtube.com у дељеним линковима</string>
+  <string name="morphe_replace_links_with_shortener_title">Промени линкове за дељење на youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Форсира видео записе да користе скраћену URL формулу youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Протоколски бафер за евидентирање</string>
+  <string name="morphe_debug_protobuffer_summary">Додаје додатне информације за евидентирање за програмере како би се идентификовали делови апликације</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Омогућавањем ове опције ће се евидентирати додатни подаци о изгледу, укључујући текст на екрану за неке компоненте корисничког интерфејса.
+
+Ово може помоћи у идентификацији компоненти приликом прављења прилагођених филтера.
+
+Међутим, омогућавање овога ће такође евидентирати неке корисничке податке, као што је ваша IP адреса."</string>
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Auglýsingar</string>
+  <string name="morphe_hide_post_ads_title">Felja auglýsingar á fóræðinu</string>
+  <string name="morphe_hide_comment_ads_title">Felja auglýsingar á athugasmdum</string>
+  <string name="morphe_screen_navigation_bar_title">Siglingarstika</string>
+  <string name="morphe_hide_answers_button_title">Felja Svara hnappinn</string>
+  <string name="morphe_hide_chat_button_title">Felja Spjall hnappinn</string>
+  <string name="morphe_hide_create_button_title">Felja Búa til hnappinn</string>
+  <string name="morphe_hide_discover_button_title">Felja Uppgötva eða Samfélög hnappinn</string>
+  <string name="morphe_hide_games_button_title">Felja Leiki hnappinn</string>
+  <string name="morphe_screen_sidebar_title">Hliðar</string>
+  <string name="morphe_hide_recently_visited_shelf_title">Felja nýlega heimsótta hillu</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">Felja Leiki á Reddit hillu</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">Felja Reddit Pro hillu</string>
+  <string name="morphe_hide_about_shelf_title">Felja Um hillu</string>
+  <string name="morphe_hide_resources_shelf_title">Felja Auðlinda hillu</string>
+  <string name="morphe_screen_layout_title">Útlaga</string>
+  <string name="morphe_disable_modern_home_title">Gerja nýjara heimili af virkni</string>
+  <string name="morphe_disable_screenshot_popup_title">Gerja af virkni skjásnaps glugga</string>
+  <string name="morphe_disable_screenshot_popup_summary">Gerir af virkni gluggann sem birtist þegar skjásnaps er tekinn</string>
+  <string name="morphe_hide_ask_button_title">Felja Spyrja hnappinn</string>
+  <string name="morphe_hide_ask_button_summary">Felur Spyrja hnappinn í leitastiku</string>
+  <string name="morphe_hide_communities_shelf_title">Fela samfélagasafna</string>
+  <string name="morphe_hide_communities_shelf_summary">Felur tengda eða tillögð samfélagasafna á undirredditum</string>
+  <string name="morphe_hide_trending_shelves_title">Fela vinsælu hillur</string>
+  <string name="morphe_hide_trending_shelves_summary">Felur Trending hillirnir úr fóræði og leitarsuggestions</string>
+  <string name="morphe_remove_notification_dialog_title">Fjarlægja tilkynningartillögu gluggann</string>
+  <string name="morphe_remove_notification_dialog_summary">Fjarlægir sjálfkrafa tilkynningartillögu gluggann þegar heimsótt er undirredditt</string>
+  <string name="morphe_show_view_count_title">Sýna skoðanir á færslum</string>
+  <string name="morphe_show_view_count_summary">Takmörkun: Aðeins fáanlegt ef API svarið inniheldur skoðanir</string>
+  <string name="morphe_remove_nsfw_dialog_title">Fjarlægja NSFW viðvörun gluggann</string>
+  <string name="morphe_remove_nsfw_dialog_summary">Fjarlægir sjálfkrafa NSFW efnisviðvörun þegar heimsótt er undirredditt</string>
+  <string name="morphe_screen_miscellaneous_title">Ýmislegt</string>
+  <string name="morphe_about_title">Um</string>
+  <string name="morphe_about_summary">Pantanúmer útgáfa og opinberar tenglar</string>
+  <string name="morphe_sanitize_sharing_links_title">Hreinsa deiliskjótatengla</string>
+  <string name="morphe_sanitize_sharing_links_summary">Fjarlægir rekja breytur úr deiliskjótatenglum</string>
+  <string name="morphe_open_links_directly_title">Opna tengla beint</string>
+  <string name="morphe_open_links_directly_summary">Bypassar umleiðslur slóða þegar opnað eru utanaðliggjandi tenglar</string>
+  <string name="morphe_open_links_externally_title">Opna tengla utanað</string>
+  <string name="morphe_open_links_externally_summary">Opnar tengla í vafra þínum frekar en vafra í appinu</string>
+</resources>

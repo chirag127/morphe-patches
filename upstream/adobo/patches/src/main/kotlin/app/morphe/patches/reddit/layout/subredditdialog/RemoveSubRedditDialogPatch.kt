@@ -1,0 +1,71 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ */
+package app.morphe.patches.reddit.layout.subredditdialog
+
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
+import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patches.reddit.misc.settings.settingsPatch
+import app.morphe.patches.reddit.shared.Constants.COMPATIBILITY_REDDIT
+import app.morphe.util.setExtensionIsPatchIncluded
+import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+
+private const val EXTENSION_CLASS =
+    "Lapp/morphe/extension/reddit/patches/RemoveSubRedditDialogPatch;"
+
+@Suppress("unused")
+val removeSubRedditDialogPatch = bytecodePatch(
+    name = "Remove subreddit dialog",
+    description = "Adds options to remove the NSFW community warning and notifications suggestion dialogs by dismissing them automatically."
+) {
+    compatibleWith(COMPATIBILITY_REDDIT)
+
+    dependsOn(
+        settingsPatch
+    )
+
+    execute {
+        mapOf(
+            FrequentUpdatesHandlerFingerprint to "spoofLoggedInStatus",
+            NSFWAlertEmitFingerprint to "spoofHasBeenVisitedStatus"
+        ).forEach { (fingerprint, methodName) ->
+            fingerprint.let {
+                it.method.apply {
+                    val index = it.instructionMatches[2].index
+                    val register =
+                        getInstruction<OneRegisterInstruction>(index).registerA
+
+                    addInstructions(
+                        index,
+                        """
+                            invoke-static { v$register }, $EXTENSION_CLASS->$methodName(Z)Z
+                            move-result v$register
+                        """
+                    )
+                }
+            }
+        }
+
+        NSFWAlertShowDialogFingerprint.matchAll(1 .. 2).forEach { match ->
+            match.let {
+                it.method.apply {
+                    val index = it.instructionMatches[3].index
+                    val register = getInstruction<OneRegisterInstruction>(index).registerA
+
+                    addInstruction(
+                        index + 1,
+                        "invoke-static { v$register }, " +
+                                "$EXTENSION_CLASS->dismissNSFWDialog(Ljava/lang/Object;)V"
+                    )
+                }
+            }
+        }
+
+        setExtensionIsPatchIncluded(EXTENSION_CLASS)
+    }
+}

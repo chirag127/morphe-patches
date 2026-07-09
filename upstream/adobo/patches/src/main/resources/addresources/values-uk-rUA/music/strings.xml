@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- layout.branding.customBrandingPatch -->
+  <!-- layout.branding.header.changeHeaderPatch -->
+  <string name="morphe_header_logo_title">Логотип заголовка</string>
+  <string name="morphe_header_logo_entry_1">Стандартний</string>
+  <string name="morphe_header_logo_entry_3">Власний</string>
+  <!-- misc.settings.settingsPatch -->
+  <!-- In languages where "About" is ambiguous, translate this as "About Morphe" (i.e., About this app). -->
+  <string name="morphe_settings_music_screen_0_about_title">Про Morphe</string>
+  <string name="morphe_settings_music_screen_1_ads_title">Реклама</string>
+  <string name="morphe_settings_music_screen_2_general_title">Загальні</string>
+  <string name="morphe_settings_music_screen_3_player_title">Плеєр</string>
+  <string name="morphe_settings_music_screen_6_misc_title">Різне</string>
+  <!-- ad.general.hideAdsPatch -->
+  <string name="morphe_music_hide_get_premium_label_title">Приховати пункт \"Підписатися на Music Premium\"</string>
+  <!-- ad.video.hideVideoAdsPatch -->
+  <string name="morphe_music_hide_video_ads_title">Приховати відеорекламу</string>
+  <!-- interaction.crossfade.crossfadePatch -->
+  <string name="morphe_music_crossfade_screen_title">Плавний перехід</string>
+  <string name="morphe_music_crossfade_screen_summary">Плавно зводити треки один в інший</string>
+  <string name="morphe_music_crossfade_enabled_title">Увімкнути плавний перехід</string>
+  <string name="morphe_music_crossfade_curve_title">Крива згасання</string>
+  <string name="morphe_music_crossfade_curve_entry_equal_power">Рівномірна потужність</string>
+  <string name="morphe_music_crossfade_curve_entry_ease_out_cubic">Незначна затримка</string>
+  <string name="morphe_music_crossfade_curve_entry_ease_out_quad">М’яке згладжування</string>
+  <string name="morphe_music_crossfade_curve_entry_smoothstep">Плавна S-крива</string>
+  <!-- Empty string because custom preference handles the title itself -->
+  <string name="morphe_music_crossfade_curve_preview_outgoing">Вихідний</string>
+  <string name="morphe_music_crossfade_curve_preview_incoming">Вхідний</string>
+  <string name="morphe_music_crossfade_duration_title">Тривалість плавного переходу</string>
+  <string name="morphe_crossfade_duration_250ms">250 мілісекунд</string>
+  <string name="morphe_crossfade_duration_500ms">500 мілісекунд</string>
+  <string name="morphe_crossfade_duration_750ms">750 мілісекунд</string>
+  <string name="morphe_crossfade_duration_1000ms">1 секунда</string>
+  <string name="morphe_crossfade_duration_2000ms">2 секунди</string>
+  <string name="morphe_crossfade_duration_3000ms">3 секунди</string>
+  <string name="morphe_crossfade_duration_4000ms">4 секунди</string>
+  <string name="morphe_crossfade_duration_5000ms">5 секунд</string>
+  <string name="morphe_crossfade_duration_6000ms">6 секунд</string>
+  <string name="morphe_crossfade_duration_7000ms">7 секунд</string>
+  <string name="morphe_crossfade_duration_8000ms">8 секунд</string>
+  <string name="morphe_crossfade_duration_9000ms">9 секунд</string>
+  <string name="morphe_crossfade_duration_10000ms">10 секунд</string>
+  <string name="morphe_crossfade_duration_11000ms">11 секунд</string>
+  <string name="morphe_crossfade_duration_12000ms">12 секунд</string>
+  <string name="morphe_music_crossfade_on_skip_title">Плавний перехід при ручному перемиканні</string>
+  <string name="morphe_music_crossfade_on_skip_summary">Застосовує плавний перехід при ручному перемиканні треку</string>
+  <string name="morphe_music_crossfade_on_auto_advance_title">Плавний перехід при автоматичному переході</string>
+  <string name="morphe_music_crossfade_on_auto_advance_summary">Застосовує плавний перехід після природного завершення треку</string>
+  <string name="morphe_music_crossfade_session_control_title">Керування сесією</string>
+  <string name="morphe_music_crossfade_session_control_summary">Утримуйте кнопку перемішування, щоб призупинити або відновити плавний перехід</string>
+  <string name="morphe_music_crossfade_paused_toast">Плавний перехід призупинено для цієї сесії</string>
+  <string name="morphe_music_crossfade_resumed_toast">Плавний перехід відновлено</string>
+  <string name="morphe_music_crossfade_video_mode_disabled_toast">Режим відео недоступний, коли ввімкнено плавний перехід</string>
+  <string name="morphe_music_crossfade_cast_unstable_toast">Плавний перехід призупинено під час трансляції або дублювання звуку. Плавний перехід через трансляцію/дублювання нестабільний, і можливо, ніколи не бути виправленим</string>
+  <string name="morphe_music_crossfade_about_title">Інформація</string>
+  <string name="morphe_music_crossfade_about_summary">Як працює плавний перехід — і коли він не працює</string>
+  <!-- Banner row has no text; it shows a full-width graphic via a custom layout. -->
+  <string name="morphe_music_crossfade_about_how_title">Як це працює</string>
+  <string name="morphe_music_crossfade_about_how_summary">"Плавний перехід накладає кінець однієї пісні на початок наступної, поступово знижуючи звук однієї та підвищуючи звук іншої впродовж обраної тривалості та за обраною кривою.
+
+Він працює як при автоматичному переході (коли пісня завершується сама), так і при ручному перемиканні — для кожного є власний перемикач вище. При автоматичному переході змішування починається за кілька секунд до завершення пісні.
+
+Потребує YouTube Music 9.x або новішої версії."</string>
+  <string name="morphe_music_crossfade_about_best_title">Найкраще працює з</string>
+  <string name="morphe_music_crossfade_about_best_summary">Звичайне відтворення треку за треком та автоперехід, повтор одного треку (трек плавно переходить сам у себе) і локальний звук — динамік телефону, дротові навушники, Bluetooth або USB.</string>
+  <string name="morphe_music_crossfade_about_quirks_title">Працює не зовсім правильно</string>
+  <string name="morphe_music_crossfade_about_quirks_summary">"Музичні відео відтворюються лише як аудіо, коли увімкнено плавний перехід (довге натискання на перемішування для призупинення, якщо потрібне відео)
+
+Треки коротші за тривалість переходу можуть пропускати перехід
+
+Екран блокування або сповіщення можуть короткочасно показувати застарілий стан під час переходу"</string>
+  <string name="morphe_music_crossfade_about_known_title">Відомі проблеми</string>
+  <string name="morphe_music_crossfade_about_known_summary">"Музичне відео, встановлене першим треком — або запущене не з поточної черги — може на короткий час показуватися як відео, перш ніж увімкнеться режим лише аудіо
+
+Призупинення плавного переходу для перегляду музичного відео може залишити деякі відео чорними (ті, чий звук надходить із самого відео). Призупинення плавного переходу перед вибором треку допомагає уникнути цього"</string>
+  <string name="morphe_music_crossfade_about_unsupported_title">Не працює взагалі</string>
+  <string name="morphe_music_crossfade_about_unsupported_summary">"Трансляція або дублювання звуку (Chromecast, дублювання екрана чи звуку) — плавний перехід призупиняється, оскільки він нестабільний у цьому випадку, і можливо, ніколи не бути виправленим
+
+YouTube Music 8.x — плавний перехід працює лише на версії 9.x і новіших"</string>
+  <string name="morphe_music_crossfade_about_credit_title">Подяки</string>
+  <string name="morphe_music_crossfade_about_credit_summary">Функція плавного переходу від VazerOG</string>
+  <!-- interaction.permanentrepeat.permanentRepeatPatch -->
+  <string name="morphe_music_play_permanent_repeat_title">Увімкнути постійний повтор</string>
+  <!-- layout.buttons.hideButtonsPatch -->
+  <string name="morphe_music_hide_cast_button_title">Приховати кнопку трансляції</string>
+  <string name="morphe_music_hide_history_button_title">Приховати кнопку історії</string>
+  <string name="morphe_music_hide_notification_button_title">Приховати кнопку сповіщень</string>
+  <string name="morphe_music_hide_search_button_title">Приховати кнопку пошуку</string>
+  <!-- layout.startpage.changeStartPagePatch -->
+  <string name="morphe_change_start_page_title">Початкова сторінка</string>
+  <string name="morphe_change_start_page_entry_default">За замовчуванням</string>
+  <string name="morphe_change_start_page_entry_charts">Хіт-паради</string>
+  <string name="morphe_change_start_page_entry_episodes_for_later">Послухати пізніше</string>
+  <string name="morphe_change_start_page_entry_explore">Навігація</string>
+  <string name="morphe_change_start_page_entry_history">Історія</string>
+  <string name="morphe_change_start_page_entry_library">Бібліотека</string>
+  <string name="morphe_change_start_page_entry_liked_music">Музика, яка сподобалась</string>
+  <string name="morphe_change_start_page_entry_playlists">Списки відтворення</string>
+  <string name="morphe_change_start_page_entry_search">Пошук</string>
+  <string name="morphe_change_start_page_entry_subscriptions">Підписки</string>
+  <!-- layout.compactheader.hideCategoryBarPatch -->
+  <string name="morphe_music_hide_category_bar_title">Приховати панель категорій</string>
+  <!-- layout.miniplayer.changeMiniplayerColorPatch -->
+  <string name="morphe_music_change_miniplayer_color_title">Змінити колір мініплеєра</string>
+  <string name="morphe_music_change_miniplayer_color_summary">Підлаштовує колір мініплеєра під повноекранний плеєр</string>
+  <!-- layout.miniplayer.miniplayerNextPreviousButtonsPatch -->
+  <string name="morphe_music_miniplayer_next_button_title">Показати кнопку наступного треку в мініплеєрі</string>
+  <string name="morphe_music_miniplayer_previous_button_title">Показати кнопку попереднього треку в мініплеєрі</string>
+  <!-- layout.miniplayer.enableForcedMiniplayerPatch -->
+  <string name="morphe_music_enable_forced_miniplayer_title">Увімкнути примусово мініплеєр</string>
+  <string name="morphe_music_enable_forced_miniplayer_summary">Запобігає автоматичному розгортанню плеєра на весь екран при запуску нового треку</string>
+  <!-- layout.miniplayer.enableSwipeToDismissMiniplayerPatch -->
+  <string name="morphe_music_enable_swipe_to_dismiss_miniplayer_title">Увімкнути закриття мініплеєра свайпом</string>
+  <string name="morphe_music_enable_swipe_to_dismiss_miniplayer_summary">Дозволяє закрити мініплеєр, провівши по ньому вниз</string>
+  <!-- layout.navigationbar.navigationBarPatch -->
+  <string name="morphe_music_navigation_bar_screen_title">Панель навігації</string>
+  <string name="morphe_music_navigation_bar_screen_summary">Виберіть кнопки, що будуть показуватися на нижній навігаційній панелі</string>
+  <!-- 'Home' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_home_button_title">Приховати кнопку \"Додому\"</string>
+  <!-- 'Samples' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_samples_button_title">Приховати кнопку \"Семпли\"</string>
+  <!-- 'Explore' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_explore_button_title">Приховати кнопку \"Навігація\"</string>
+  <!-- 'Library' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_library_button_title">Приховати кнопку \"Бібліотека\"</string>
+  <!-- 'Upgrade' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_upgrade_button_title">Приховати кнопку \"Підписка\"</string>
+  <string name="morphe_music_hide_navigation_bar_title">Приховати панель навігації</string>
+  <string name="morphe_music_hide_navigation_bar_labels_title">Приховати підписи кнопок навігації</string>
+  <!-- layout.upgradebutton.hideUpgradeButtonPatch -->
+  <string name="morphe_music_hide_upgrade_button_title">Приховати кнопку \"Підписка\"</string>
+  <!-- interaction.scrobbling.scrobblingPatch -->
+  <string name="morphe_music_scrobbling_summary">Налаштуйте інтеграцію з Last.fm та ListenBrainz</string>
+  <string name="morphe_music_scrobbling_summary_logged_out">Не авторизовано. Натисніть, щоб налаштувати</string>
+  <string name="morphe_music_scrobbling_log_out">Вийти</string>
+  <string name="morphe_music_scrobbling_logged_out_toast">Вихід виконано</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_enabled_title">Увімкнути scrobbling</string>
+  <string name="morphe_music_scrobbling_now_playing_title">Надсилати статус \"Відтворюється зараз\"</string>
+  <string name="morphe_music_scrobbling_min_song_duration_title">Мінімальна тривалість треку</string>
+  <!-- 'scrobbled' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_min_song_duration_summary">Треки коротші за це значення не будуть scrobble</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_percent_title">Відсоток затримки scrobble</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_percent_summary">Запускати scrobble після прослуховування цього відсотка треку</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_seconds_title">Затримка scrobble у секундах</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_seconds_summary">Запускати scrobble після прослуховування протягом цієї кількості секунд</string>
+  <string name="morphe_music_listenbrainz_token_title">Обліковий запис ListenBrainz</string>
+  <string name="morphe_music_listenbrainz_token_summary_logged_in">Авторизовано. Натисніть для керування облікoвим записом</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_listenbrainz_token_dialog_instruction">Введіть ваш User Token ListenBrainz, щоб увімкнути scrobbling</string>
+  <string name="morphe_music_listenbrainz_token_dialog_hint">Токен</string>
+  <string name="morphe_music_listenbrainz_token_dialog_get_token">Отримати токен</string>
+  <string name="morphe_music_listenbrainz_token_dialog_verify">Перевірити</string>
+  <string name="morphe_music_listenbrainz_token_status_empty">Будь ласка, введіть токен</string>
+  <string name="morphe_music_listenbrainz_token_status_validating">Перевірка...</string>
+  <string name="morphe_music_listenbrainz_token_status_valid">Дійсний токен! Користувач: %s</string>
+  <string name="morphe_music_listenbrainz_token_status_invalid">Недійсний токен: %s</string>
+  <string name="morphe_music_listenbrainz_token_status_invalid_unknown">невідомо</string>
+  <string name="morphe_music_listenbrainz_token_status_failed">Перевірка не вдалася: %s</string>
+  <string name="morphe_music_listenbrainz_token_toast_cleared">Токен очищено</string>
+  <string name="morphe_music_listenbrainz_token_toast_saved">Токен збережено</string>
+  <string name="morphe_music_listenbrainz_token_toast_invalid_warning">Увага: Збережений токен недійсний!</string>
+  <string name="morphe_music_lastfm_love_on_like_title">Позначати треки \"Love\"</string>
+  <string name="morphe_music_lastfm_love_on_like_summary">Автоматично позначати треки як \"Love\" на Last.fm, коли вони вподобані на YouTube Music (і знімати позначку при знятті вподобання або при дизлайку)</string>
+  <string name="morphe_music_lastfm_token_title">Обліковий запис Last.fm</string>
+  <string name="morphe_music_lastfm_token_summary_logged_in">Авторизовано як %s. Натисніть для керування облiковим записом</string>
+  <string name="morphe_music_lastfm_token_dialog_instruction">Введіть ваші облікові дані Last.fm для входу</string>
+  <string name="morphe_music_lastfm_token_dialog_username_hint">Ім\'я користувача</string>
+  <string name="morphe_music_lastfm_token_dialog_password_hint">Пароль</string>
+  <string name="morphe_music_lastfm_token_dialog_login">Увійти</string>
+  <string name="morphe_music_lastfm_token_status_empty">Будь ласка, введіть ім\'я користувача та пароль</string>
+  <string name="morphe_music_lastfm_token_status_logging_in">Вхід...</string>
+  <string name="morphe_music_lastfm_token_status_success">Успішний вхід!</string>
+  <string name="morphe_music_lastfm_token_status_no_session">Не вдалося отримати сесію від Last.fm</string>
+  <string name="morphe_music_lastfm_token_status_failed">Вхід не вдався: %s</string>
+  <string name="morphe_music_lastfm_token_toast_saved">Облікові дані Last.fm збережено!</string>
+  <string name="morphe_settings_music_scrobbling_metadata_title">Очищення метаданих</string>
+  <string name="morphe_music_scrobbling_metadata_cleanup_title">Очистити метадані</string>
+  <string name="morphe_music_scrobbling_metadata_cleanup_summary">Автоматично прибирати типове сміття (наприклад, \"Official Video\", \"Remaster\", \"Live\") з назв треків, виконавців та альбомів перед scrobbling</string>
+  <string name="morphe_music_scrobbling_custom_regex_title">Власне очищення за допомогою регулярних виразів</string>
+  <string name="morphe_music_scrobbling_custom_regex_summary">Введіть власний регулярний вираз для видалення додаткового тексту з назв треків, виконавців або альбомів. Приклад: (?i)\\s*\\((clean|explicit)\\)</string>
+  <string name="morphe_music_scrobbling_parse_title_title">Визначати виконавця та трек із назви</string>
+  <string name="morphe_music_scrobbling_parse_title_summary">Визначає виконавця та назву треку з заголовка відео за допомогою роздільника \" - \". Корисно для перезавантаженого контенту, де назва каналу може використовуватись як виконавець.</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_about_title">Про scrobbling</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_about_summary">"Scrobbling автоматично відстежує музику, яку ви відтворюєте на YouTube Music, і синхронізує її з вашим профілем на Last.fm або ListenBrainz
+
+Щоб scrobbling надійно працював у фоновому режимі, переконайтеся, що для YouTube Music у налаштуваннях використання батареї системою встановлено значення \"Без обмежень\""</string>
+</resources>
