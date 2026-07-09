@@ -167,6 +167,17 @@ object Constants {
         "com.miui.weather2" to null,
     )
 
+    // Aliases for downstream authoring convenience. Some patches were authored
+    // with underscored names; keep both spellings resolving to the same array
+    // rather than churn every import site.
+    val COMPATIBILITY_MOON_READER = COMPATIBILITY_MOONREADER
+    val COMPATIBILITY_PRIME_VIDEO = COMPATIBILITY_PRIMEVIDEO
+    val COMPATIBILITY_GOOGLE_MAPS = COMPATIBILITY_GOOGLEMAPS
+    val COMPATIBILITY_AMAZON_SHOPPING = COMPATIBILITY_AMAZONSHOPPING
+    val COMPATIBILITY_ANY_DO = COMPATIBILITY_ANYDO
+    val COMPATIBILITY_MIUI_MUSIC = COMPATIBILITY_MIUIMUSIC
+    val COMPATIBILITY_MIUI_WEATHER = COMPATIBILITY_MIUIWEATHER
+
     /** Common Pixel-experience feature strings that in-APK checks target. */
     val PIXEL_FEATURE_STRINGS = listOf(
         "com.google.android.feature.PIXEL_EXPERIENCE",
