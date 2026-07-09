@@ -1,0 +1,267 @@
+syntax = "proto3";
+
+package app.morphe.extension.youtube.innertube;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "app.morphe.extension.youtube.innertube";
+
+message NextResponse {
+    PrimaryContents primaryContents = 7;
+}
+
+message PrimaryContents {
+    SingleColumnWatchNextResults singleColumnWatchNextResults = 51779735;
+}
+
+message SingleColumnWatchNextResults {
+    PrimaryResults primaryResults = 1;
+}
+
+message PrimaryResults {
+    SecondaryResults secondaryResults = 49399797;
+}
+
+message SecondaryResults {
+    repeated SecondaryContents secondaryContents = 1;
+}
+
+message SecondaryContents {
+    oneof data {
+        SlimVideoMetadataSectionRenderer slimVideoMetadataSectionRenderer = 216561405;
+        ItemSectionRenderer itemSectionRenderer = 50195462;
+        ShelfRenderer shelfRenderer = 51845067;
+    }
+}
+
+message SlimVideoMetadataSectionRenderer {
+    repeated TertiaryContents tertiaryContents = 1;
+    string videoId = 2;
+}
+
+message ItemSectionRenderer {
+    repeated TertiaryContents tertiaryContents = 1;
+    string sectionIdentifier = 7;
+}
+
+message ShelfRenderer {
+    Content content = 5;
+}
+
+message Content {
+    HorizontalListRenderer horizontalListRenderer = 51431404;
+}
+
+message HorizontalListRenderer {
+    int32 visibleItemCount = 7;
+}
+
+message TertiaryContents {
+    ElementRenderer elementRenderer = 153515154;
+}
+
+message Commands {
+    ShowSheetCommand showSheetCommand = 443434441;
+}
+
+message ShowSheetCommand {
+    PanelLoadingStrategy panelLoadingStrategy = 1;
+}
+
+message PanelLoadingStrategy {
+    InlineContent inlineContent = 1;
+}
+
+message InlineContent {
+    PanelContentRenderer panelContentRenderer = 441573002;
+}
+
+message PanelContentRenderer {
+    PanelHeader panelHeader = 1;
+}
+
+message PanelHeader {
+    ElementRenderer elementRenderer = 153515154;
+}
+
+message ElementRenderer {
+    NewElement newElement = 172660663;
+}
+
+message NewElement {
+    Type type = 1;
+    Properties properties = 2;
+}
+
+message Properties {
+    IdentifierProperties identifierProperties = 183314536;
+}
+
+message IdentifierProperties {
+    string identifier = 1; // litho identifier
+}
+
+message Type {
+    ComponentType componentType = 168777401;
+}
+
+message ComponentType {
+    Model model = 5;
+}
+
+message Model {
+    oneof data {
+        BottomSheetHeaderModel bottomSheetHeaderModel = 269594834;
+        VideoActionBarModel videoActionBarModel = 389155117;
+        VideoMetadataCarouselModel videoMetadataCarouselModel = 408379376;
+        YoutubeModel youtubeModel = 413471385;
+    }
+}
+
+message BottomSheetHeaderModel {
+    HeaderContent headerContent = 1;
+}
+
+message HeaderContent {
+    string titleText = 1;
+}
+
+// region video metadata carousel
+
+message VideoMetadataCarouselModel {
+    Data data = 1;
+}
+
+message Data {
+    repeated CarouselTitleDatas carouselTitleDatas = 1;
+    repeated CarouselItemDatas carouselItemDatas = 2;
+}
+
+message CarouselTitleDatas {
+    string title = 1;
+}
+
+message CarouselItemDatas {
+}
+
+// endregion
+
+// region collapsed video action bar
+
+message YoutubeModel {
+    ViewModel viewModel = 1;
+}
+
+message ViewModel {
+    oneof data {
+        CompactifyVideoActionBarViewModel compactifyVideoActionBarViewModel = 2185;
+        QualitySheetHeaderViewModel qualitySheetHeaderViewModel = 449024803;
+        QuickQualitySheetContentViewModel quickQualitySheetContentViewModel = 449854123;
+        CaptionsSheetContentViewModel captionsSheetContentViewModel = 461956826;
+    }
+}
+
+message CompactifyVideoActionBarViewModel {
+    repeated ActionButtons actionButtons = 1;
+}
+
+message QualitySheetHeaderViewModel {
+}
+
+message QuickQualitySheetContentViewModel {
+    QualityHeader qualityHeader = 1;
+    QualityFooter qualityFooter = 8;
+    bool enablePlayerAdapter = 9;
+}
+
+message QualityHeader {
+}
+
+message QualityFooter {
+    QualitySheetFooterViewModel qualitySheetFooterViewModel = 514785317;
+}
+
+message QualitySheetFooterViewModel {
+}
+
+message CaptionsSheetContentViewModel {
+    SettingsCtaText SettingsCtaText = 6;
+    bool enablePlayerAdapter1 = 10;
+    bool enablePlayerAdapter2 = 11;
+}
+
+message SettingsCtaText {
+}
+
+// endregion
+
+// region non-collapsed video action bar
+
+message VideoActionBarModel {
+    VideoActionBarData videoActionBarData = 17;
+}
+
+message VideoActionBarData {
+    repeated ActionButtons actionButtons = 1;
+}
+
+// endregion
+
+message ActionButtons {
+    PrimaryButtonViewModel primaryButtonViewModel = 10;
+}
+
+message PrimaryButtonViewModel {
+    oneof data {
+        AccountLinkButtonViewModel accountLinkButtonViewModel = 492031756;
+        AddToPlaylistButtonViewModel addToPlaylistButtonViewModel = 484598023;
+        SecondaryButtonViewModel secondaryButtonViewModel = 461054335;
+        ClipButtonViewModel clipButtonViewModel = 490025863;
+        CompactChannelBarViewModel compactChannelBarViewModel = 1107;
+        DislikeButtonViewModel dislikeButtonViewModel = 484590786;
+        DownloadButtonViewModel downloadButtonViewModel = 33561776;
+        LikeButtonViewModel likeButtonViewModel = 484585818;
+        OverflowMenuButtonViewModel overflowMenuButtonViewModel = 37098;
+        SegmentedLikeDislikeButtonViewModel segmentedLikeDislikeButtonViewModel = 484586709;
+    }
+}
+
+message AccountLinkButtonViewModel {
+    string accountLinkStatusEntityKey = 2;
+}
+
+message AddToPlaylistButtonViewModel {
+    string addToPlaylistEntityKey = 2;
+}
+
+message SecondaryButtonViewModel {
+    string iconName = 2;
+    optional string accessibilityId = 17;
+}
+
+message ClipButtonViewModel {
+    string videoActionButtonEnablementEntityKey = 2;
+}
+
+message CompactChannelBarViewModel {
+    bool enableCompactChannelBarInnerRefactor = 29;
+}
+
+message DislikeButtonViewModel {
+    string dislikeEntityKey = 2;
+}
+
+message DownloadButtonViewModel {
+    string videoId = 1;
+}
+
+message LikeButtonViewModel {
+    string likeStatusEntityKey = 3;
+}
+
+message OverflowMenuButtonViewModel {
+    bool forceEnablePushoverOverflowMenuItems = 4;
+}
+
+message SegmentedLikeDislikeButtonViewModel {
+    string teasersOrderEntityKey = 10;
+}

@@ -1,0 +1,73 @@
+package app.morphe.extension.youtube.patches;
+
+import app.morphe.extension.youtube.settings.Settings;
+import app.morphe.extension.youtube.shared.PlayerType;
+import app.morphe.extension.youtube.shared.ShortsPlayerState;
+
+@SuppressWarnings("unused")
+public class BackgroundPlaybackPatch {
+
+    private static final boolean REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS
+            = Settings.REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS.get();
+
+    private static final boolean REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS_SHORTS
+            = !Settings.DISABLE_SHORTS_BACKGROUND_PLAYBACK.get();
+
+    /**
+     * Injection point.
+     */
+    public static boolean isPatchEnabled() {
+        return REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean enableFeatureFlag(boolean original) {
+        if (REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS) return true;
+        return original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean disableFeatureFlag(boolean original) {
+        if (REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS) return false;
+        return original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean isBackgroundPlaybackAllowed(boolean original) {
+        if (!REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS) return original;
+
+        if (original) return true;
+
+        // Steps to verify most edge cases (with Shorts background playback set to off):
+        // 1. Open a regular video
+        // 2. Minimize app (PiP should appear)
+        // 3. Reopen app
+        // 4. Open a Short (without closing the regular video)
+        //    (try opening both Shorts in the video player suggestions AND Shorts from the home feed)
+        // 5. Minimize the app (PIP should not appear)
+        // 6. Reopen app
+        // 7. Close the Short
+        // 8. Resume playing the regular video
+        // 9. Minimize the app (PiP should appear)
+        if (ShortsPlayerState.isOpen()) {
+            return false;
+        }
+
+        // Check if the video player is opened and it's not playing in the feed.
+        PlayerType current = PlayerType.getCurrent();
+        return !current.isNoneOrHidden() && current != PlayerType.INLINE_MINIMAL;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean isBackgroundShortsPlaybackAllowed(boolean original) {
+        return REMOVE_BACKGROUND_PLAYBACK_RESTRICTIONS_SHORTS;
+    }
+}

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.settings.settingsResourcePatch -->
+  <string name="morphe_settings_submenu_title">설정</string>
+  <string name="morphe_settings_confirm_user_dialog_title">계속하시겠습니까?</string>
+  <string name="morphe_settings_save">저장</string>
+  <string name="morphe_settings_reset">초기화</string>
+  <string name="morphe_settings_reset_color">색상 초기화</string>
+  <string name="morphe_settings_color_invalid">잘못된 색상입니다</string>
+  <string name="morphe_settings_restart_title">다시 시작하세요</string>
+  <string name="morphe_settings_restart_dialog_message">이 변경 사항을 적용하려면 앱을 다시 시작하세요.</string>
+  <string name="morphe_settings_restart">다시 시작</string>
+  <!-- String is also duplicated in Reddit import / export preference -->
+  <string name="morphe_settings_import">가져오기</string>
+  <string name="morphe_settings_import_copy">복사</string>
+  <string name="morphe_settings_import_reset">Morphe 설정을 기본값으로 초기화합니다</string>
+  <string name="morphe_settings_import_success">%d 개의 설정을 가져왔습니다</string>
+  <string name="morphe_settings_import_failure_parse">설정을 가져올 수 없습니다: %s</string>
+  <string name="morphe_settings_search_hint">설정 검색</string>
+  <string name="morphe_settings_search_no_results_title">\'%s\'에 대한 검색 결과가 없습니다</string>
+  <string name="morphe_settings_search_no_results_summary">다른 키워드를 검색해 보세요</string>
+  <string name="morphe_settings_search_recent_searches">최근 검색어</string>
+  <string name="morphe_settings_search_remove_message">검색 기록에서 제거하시겠습니까?</string>
+  <string name="morphe_settings_search_clear_history">검색 기록 지우기</string>
+  <string name="morphe_settings_search_clear_history_message">모든 검색 기록을 지우시겠습니까?</string>
+  <string name="morphe_settings_search_tips_title">검색 팁</string>
+  <string name="morphe_settings_search_tips_summary">"• 경로를 탭하여 설정 카테고리로 이동할 수 있습니다
+• 설정을 길게 탭하여 설정 위치로 이동할 수 있습니다
+• 엔터키를 탭하여 검색어를 기록에 저장할 수 있습니다
+• 검색할 경우에 대소문자와 구두점이 무시됩니다
+• 상위 설정이 비활성화된 하위 설정 위에 표시됩니다"</string>
+  <string name="morphe_settings_search_empty_history_title">검색 기록이 비어 있습니다</string>
+  <string name="morphe_settings_search_empty_history_summary">검색 기록을 저장하려면 검색어를 입력하고 엔터키를 탭하세요</string>
+  <string name="morphe_settings_search_history_title">설정 검색 기록 표시하기</string>
+  <string name="morphe_show_menu_icons_title">Morphe 설정 아이콘 표시하기</string>
+  <string name="morphe_language_title">Morphe 언어</string>
+  <string name="morphe_language_user_dialog_message">"일부 언어의 번역이 누락되었거나 완료되지 않았을 수 있습니다.
+
+새 언어를 번역하거나 기존 번역을 개선하려면 morphe.software/translate 를 방문하세요."</string>
+  <string name="morphe_language_DEFAULT">앱 언어</string>
+  <string name="morphe_pref_import_export_title">가져오기 / 내보내기</string>
+  <string name="morphe_pref_import_export_summary">Morphe 설정을 가져오거나 내보낼 수 있습니다</string>
+  <string name="morphe_settings_import_file">파일에서 가져오기</string>
+  <string name="morphe_settings_import_file_success">설정을 성공적으로 가져왔습니다. 적용하려면 저장 버튼을 탭하세요</string>
+  <string name="morphe_settings_import_file_failed">설정을 가져올 수 없습니다</string>
+  <string name="morphe_settings_export_file">파일로 내보내기</string>
+  <string name="morphe_settings_export_file_success">설정을 성공적으로 내보냈습니다</string>
+  <string name="morphe_settings_export_file_failed">설정을 내보낼 수 없습니다</string>
+  <!-- String is also duplicated in Reddit about preference -->
+  <string name="morphe_settings_about_links_body_version_current">Morphe Patches &lt;i&gt;%s&lt;/i&gt;&lt;br&gt;최신 버전을 사용하는 중입니다</string>
+  <string name="morphe_settings_about_links_body_version_outdated">Morphe Patches &lt;i&gt;%1$s&lt;/i&gt;&lt;br&gt;버전을 사용하는 중입니다&lt;br&gt;&lt;br&gt;&lt;b&gt;업데이트 사용 가능: &lt;i&gt;%2$s&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;패치를 업데이트하려면&lt;br&gt;Morphe를 사용하여&lt;br&gt;이 앱을 다시 패치하세요</string>
+  <string name="morphe_settings_about_links_dev_header">알림</string>
+  <string name="morphe_settings_about_links_dev_body">Pre-release 버전이므로&lt;br&gt;예상되지 않은 문제점이&lt;br&gt;발생할 수 있습니다</string>
+  <string name="morphe_settings_about_links_header">공식 링크</string>
+  <string name="morphe_settings_about_links_website">웹사이트</string>
+  <string name="morphe_settings_about_links_donate">후원하기</string>
+  <string name="morphe_settings_about_links_translations">번역에 도움주기</string>
+  <string name="morphe_settings_about_links_credits">크레딧</string>
+  <string name="morphe_settings_about_links_dev_header_up_to_date">최신 버전</string>
+  <string name="morphe_settings_about_links_dev_header_update_available">업데이트 사용 가능</string>
+  <string name="morphe_settings_about_contributors_current">현재 개발</string>
+  <string name="morphe_settings_about_contributors_prior">이전 개발</string>
+  <string name="morphe_settings_about_links_morphe">현재 개발</string>
+  <string name="morphe_settings_about_links_rvx">2022 &#8209; 2025</string>
+  <string name="morphe_settings_about_links_rv">2022 &#8209; 2025</string>
+  <string name="morphe_settings_about_links_vanced">2019 &#8209; 2022</string>
+  <string name="morphe_settings_about_links_licenses">라이선스 고지</string>
+  <string name="morphe_settings_about_licenses_loading">불러오는 중...</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_screen_title">디버그</string>
+  <string name="morphe_debug_screen_summary">고급 개발자 옵션 및 진단 로그를 설정할 수 있습니다</string>
+  <string name="morphe_debug_title">디버그 로그 활성화하기</string>
+  <string name="morphe_debug_stacktrace_title">디버그 로그 스택 트레이스</string>
+  <string name="morphe_debug_stacktrace_summary">오류를 식별하는 데 도움이 되도록 디버그 로그에 스택 트레이스를 포함합니다</string>
+  <string name="morphe_debug_toast_on_error_title">Morphe 오류 메시지 표시하기</string>
+  <string name="morphe_debug_toast_on_error_user_dialog_message">"오류 메시지를 비활성화하면 모든 Morphe 오류 알림이 숨겨집니다.
+
+예상되지 않은 이벤트에 대한 알림을 받지 못할 수 있습니다."</string>
+  <string name="morphe_debug_export_logs_title">디버그 로그 내보내기</string>
+  <string name="morphe_debug_export_logs_summary">Morphe 디버그 로그를 내보낼 수 있습니다</string>
+  <string name="morphe_debug_export_logs_file">파일로 내보내기</string>
+  <string name="morphe_debug_export_logs_success">디버그 로그를 성공적으로 내보냈습니다</string>
+  <string name="morphe_debug_export_logs_failed">디버그 로그를 내보낼 수 없습니다</string>
+  <string name="morphe_debug_logs_search_hint">디버그 로그 검색...</string>
+  <string name="morphe_debug_export_logs_clear">지우기</string>
+  <string name="morphe_debug_logs_disabled">디버그 로그가 비활성화되어 있습니다</string>
+  <string name="morphe_debug_logs_none_found">디버그 로그를 찾을 수 없습니다</string>
+  <string name="morphe_debug_logs_copied_to_clipboard">디버그 로그를 복사하였습니다</string>
+  <string name="morphe_debug_logs_failed_to_export">디버그 로그를 내보낼 수 없습니다: %s</string>
+  <string name="morphe_debug_logs_clear_toast">디버그 로그를 삭제하였습니다</string>
+  <string name="morphe_debug_feature_flags_manager_title">기능 플래그 관리자</string>
+  <string name="morphe_debug_feature_flags_manager_summary">부울 기능 플래그를 관리할 수 있습니다</string>
+  <string name="morphe_debug_feature_flags_manager_active_header">활성된 기능 플래그 (%d)</string>
+  <string name="morphe_debug_feature_flags_manager_blocked_header">차단된 기능 플래그 (%d)</string>
+  <string name="morphe_debug_feature_flags_manager_search_hint">기능 플래그 검색...</string>
+  <string name="morphe_debug_feature_flags_manager_toast_saved">기능 플래그를 저장하였습니다</string>
+  <string name="morphe_debug_feature_flags_manager_toast_reset">기능 플래그를 초기화하였습니다</string>
+  <string name="morphe_debug_feature_flags_manager_toast_copied">기능 플래그를 클립보드에 복사하였습니다</string>
+  <string name="morphe_debug_feature_flags_manager_toast_no_flags">이 설정을 사용하려면 앱을 다시 시작하세요</string>
+  <!-- Could be its own resource file, but for simplicity it's shared among all apps. -->
+  <!-- misc.gms.gmsCoreSupportResourcePatch -->
+  <string name="microg_settings_summary">MicroG 설정을 실행할 수 있습니다</string>
+  <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="gms_core_toast_not_installed_message">MicroG가 설치되어 있지 않습니다. 설치하세요.</string>
+  <string name="gms_core_dialog_title">필수 조치</string>
+  <!-- "Don't kill my app" should be kept in English and not translated -->
+  <string name="gms_core_dialog_not_whitelisted_not_allowed_in_background_message">"MicroG에는 백그라운드에서 실행할 수 있는 권한이 없습니다.
+
+본 기기의 \"Don't kill my app\" 가이드를 참고하여 MicroG 설치에 관한 지침을 적용하세요.
+
+이러한 조치 없이는 앱이 정상적으로 작동하지 않습니다."</string>
+  <string name="gms_core_dialog_open_website_text">웹사이트 열기</string>
+  <string name="gms_core_dialog_not_whitelisted_using_battery_optimizations_message">"MicroG 앱 배터리 최적화를 비활성화(제한 없음)하여 앱 문제를 방지할 수 있습니다.
+
+MicroG 앱 배터리 최적화를 비활성화(제한 없음)하더라도, 배터리 사용량에 부정적인 영향을 미치지 않습니다.
+
+앱 배터리 최적화를 비활성화(제한 없음)하려면 '계속하기' 버튼을 탭하세요."</string>
+  <string name="gms_core_dialog_continue_text">계속하기</string>
+  <string name="morphe_gms_core_battery_optimization_dialog_title">MicroG 배터리 최적화 다이얼로그 표시하기</string>
+  <string name="morphe_gms_core_battery_optimization_dialog_user_dialog_message">"이 설정을 비활성화하면 MicroG 배터리 최적화 다이얼로그가 숨겨집니다.
+
+배터리 최적화를 변경하지 않으면 다음과 같은 문제가 발생할 수 있습니다:
+• 앱이 갑자기 종료될 수 있습니다
+• 알림이 작동하지 않을 수 있습니다
+• 백그라운드 재생이 작동하지 않을 수 있습니다"</string>
+  <!-- misc.gms.linkHandlingPatch -->
+  <string name="morphe_link_handling_title">앱 링크 처리</string>
+  <string name="morphe_link_handling_summary">이 앱에서 열도록 링크를 설정할 수 있습니다</string>
+  <string name="morphe_link_handling_step1_title">1단계: 순정 앱 링크 비활성화</string>
+  <string name="morphe_link_handling_step1_message">순정 앱 설정을 열고 모든 도메인 링크를 비활성화합니다</string>
+  <string name="morphe_link_handling_step2_title">2단계: 패치된 앱 링크 활성화</string>
+  <string name="morphe_link_handling_step2_message">패치된 앱 설정을 열고 모든 도메인 링크를 활성화합니다</string>
+  <string name="morphe_link_handling_open">설정 열기</string>
+  <!-- misc.checks.experimentalAppNoticePatch -->
+  <string name="morphe_experimental_app_version_dialog_title">🚨 실험 버전 알림 🚨</string>
+  <string name="morphe_experimental_app_version_dialog_message">"실험 앱 버전 ⚠️ &lt;b&gt;%1$s&lt;/b&gt; ⚠️ 을 사용 중입니다.&lt;br/&gt;&lt;br/&gt;🔧 이 앱 버전에 맞게 패치를 최적화하는 과정에 있으므로, 예상되지 않은 동작이나 알 수 없는 버그가 발생할 수 있습니다.&lt;br/&gt;&lt;br/&gt;안정적으로 앱을 사용하기를 원한다면, &lt;b&gt;이 앱을 제거&lt;/b&gt;하고 권장 앱 버전 ✅ &lt;b&gt;%2$s&lt;/b&gt; ✅ 으로 패치하세요."</string>
+  <string name="morphe_experimental_app_version_dialog_confirm">⚠️ 실험 버전을 사용하겠습니다</string>
+  <string name="morphe_experimental_app_version_dialog_open_homepage">✅ 안정 버전을 사용하겠습니다</string>
+</resources>

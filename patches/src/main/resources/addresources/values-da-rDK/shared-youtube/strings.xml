@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Genstart for at færdiggøre opsætningen</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Appnavn</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Brugerdefineret</string>
+  <string name="morphe_custom_branding_icon_title">Appikon</string>
+  <string name="morphe_custom_branding_icon_entry_1">Original</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe mørke</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe mørk</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe lille</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe afspilning af lys</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe afspilning af sort</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Brugerdefineret</string>
+  <string name="morphe_custom_branding_notification_icon_title">Notifikationsikon</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Match appikon</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe play</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Morphe Meddelelse</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">Din afspilningshistorik gemmes ikke.&lt;br&gt;&lt;br&gt;Dette skyldes sandsynligvis en DNS-annonceblokker eller netværksproxy.&lt;br&gt;&lt;br&gt;For at løse dette, whitelist &lt;b&gt;s.youtube.com&lt;/b&gt; eller slå alle DNS-blokkere og proxyservere fra.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Vis ikke igen</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Spoof videostreams</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Spoof klientens videostreams for at forhindre afspilningsproblemer</string>
+  <string name="morphe_spoof_video_streams_title">Spoof videostreams</string>
+  <string name="morphe_spoof_video_streams_summary">"Løser afspilningsproblemer for de fleste brugere ved at anmode om en kompatibel videostream.
+
+Hvis du er en YouTube Premium-bruger, er denne indstilling muligvis ikke nødvendig."</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Kunne ikke hente nogen klient streams</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Deaktivering af denne indstilling kan forårsage afspilningsproblemer.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Prøv at aktivere: Spoof videostreams &gt; Android VR log ind</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Standard klient</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Android VR log ind</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Ikke logget ind i Android VR. Tryk her for at logge ind</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Logget ind i Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">For at bruge denne funktion, ændr \'Standardklient\' til Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Log ind i Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Indlogning på Android VR kan fikse afspilningsproblemer for nogle brugere
+
+For at logge ind, tryk på fortsæt nedenfor"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Fortsæt</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Log ud</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Anvisninger</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Aktiveringskode: %s
+
+1. Tryk på 'Åbn hjemmeside' nedenfor for at åbne 'Tilslut en enhed' hjemmesiden
+2. Indsæt fra udklipsholderen (eller indtast) den viste aktiveringskode ovenfor
+3. Log ind på Google hvis der spørges. Hvis du har flere kontoer, vælg denne YouTube-konto
+4. Tryk på 'Tillad YouTube VR' adgang
+5. Vend tilbage til denne app efter at du har nået 'Enheden er tilsluttet' beskeden"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Åbn hjemmeside</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Kunne ikke udstede en aktiveringskode</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Kunne ikke udstede en autoriseringskode</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Succesfuldt logget ind</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Autentificering gemt
+
+• Dine Morphe indstillinger vil ikke importere/eksportere Android VR autentificering
+• Hvis denne app ikke bruges i 6 måneder, vil Google fjerne denne autentificering
+• Du skal logge ind igen, hvis du ændrer din Google-adgangskode eller deautoriserer denne enhed fra dine Google-instillinger"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 er midlertidigt utilgængelig (API timeout)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Android VR-indlogning er udløbet, prøv at logge ind på VR igen</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 er midlertidigt utilgængelig (status %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 er midlertidigt utilgængelig</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Kan ikke logge ind på VR, website autentificering blev ikke godkendt</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Kan ikke logge ind på VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Logget ud af Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">Ugyldigt VR-logge-ind token, prøv at logge ind i VR igen</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Deaktiver JavaScript-opdatering for afspiller</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Låser JavaScript for afspilleren til en bestemt version
+
+• Der kræves en gyldig hash for afspiller JavaScript
+• Hashes for afspiller JavaScript er gyldige i cirka en måned, og ugyldige hashes vil blive tilbagekaldt af GVS
+• Afspilningen mislykkes, hvis hashen er blevet tilbagekaldt"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Du skal angive en gyldig hash for afspiller JavaScript.
+
+Afspilningen vil mislykkes, hvis hashen for afspiller JavaScript er forældet."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Afspillerens JavaScript hash</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Indtast en gyldig afspiller JavaScript hash</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">Deaktiver QUIC-protokol</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">Deaktiver DRC lyd</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Tving originalt lydsprog</string>
+  <string name="morphe_force_original_audio_summary">Spiller altid videoens originale lydspor i stedet for en dubbet version</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Netværksproxy</string>
+  <string name="morphe_proxy_screen_summary">Send understøttede netværksanmodninger gennem en proxy</string>
+  <string name="morphe_proxy_enabled_title">Aktivér proxy</string>
+  <string name="morphe_proxy_enabled_summary">Ruter understøttede netværksanmodninger gennem en konfigureret HTTP- eller HTTPS-proxy.</string>
+  <string name="morphe_proxy_host_title">Proxy-host</string>
+  <string name="morphe_proxy_host_summary">Værtsnavn eller IP-adresse på proxyserveren</string>
+  <string name="morphe_proxy_port_title">Proxy-port</string>
+  <string name="morphe_proxy_port_summary">Port for proxyserveren</string>
+  <string name="morphe_proxy_https_title">Brug HTTPS-proxy</string>
+  <string name="morphe_proxy_https_summary">Brug HTTPS til at oprette forbindelse til proxyserveren i stedet for HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">Proxy-godkendelse</string>
+  <string name="morphe_proxy_auth_enabled_summary">Sender Basic-godkendelse med proxy-anmodninger</string>
+  <string name="morphe_proxy_auth_username_title">Proxy-brugernavn</string>
+  <string name="morphe_proxy_auth_username_summary">Brugernavn til Basic-proxy-godkendelse</string>
+  <string name="morphe_proxy_auth_password_title">Proxy-adgangskode</string>
+  <string name="morphe_proxy_auth_password_summary">Adgangskode til Basic-proxy-godkendelse</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Tillad direkte fallback</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Opret forbindelse direkte, hvis proxyen fejler</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Skjul fuldskærmsannoncer</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">For at bruge denne funktion, skal du ændre \'Spoof video streams\' til Android Reel eller TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Rens delingslinks</string>
+  <string name="morphe_sanitize_sharing_links_summary">Fjerner sporing af forespørgselsparametre fra delte links</string>
+  <string name="morphe_replace_music_with_youtube_title">Skift delingslinks til youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Erstatter music.youtube.com med youtube.com i delte links.</string>
+  <string name="morphe_replace_links_with_shortener_title">Skift delingslinks til youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Tvinger videoer til at bruge det forkortede youtu.be URL-format</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Debug log protokolbuffer</string>
+  <string name="morphe_debug_protobuffer_summary">Tilføjer yderligere logningsinformation til udviklere for at identificere app-komponenter</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Aktivering af denne indstilling logger yderligere layoutdata, bl.a. skærmtekst for visse UI-komponenter.
+
+Det kan hjælpe med at finde komponenter til egne filtre.
+
+Det logger dog også brugerdata som din IP-adresse."</string>
+</resources>

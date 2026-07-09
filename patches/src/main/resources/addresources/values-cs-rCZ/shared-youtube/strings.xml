@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Restartovat pro dokončení nastavení</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Název aplikace</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Vlastní</string>
+  <string name="morphe_custom_branding_icon_title">Ikona aplikace</string>
+  <string name="morphe_custom_branding_icon_entry_1">Původní</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe černá</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe tmavý</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe světlo</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe play světlo</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe play černá</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Vlastní</string>
+  <string name="morphe_custom_branding_notification_icon_title">Oznámení</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Přizpůsob ikonu aplikace</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe přehrávání</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Upozornění Morphe</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">Vaše historie sledování není ukládána.&lt;br&gt;&lt;br&gt;Toto je s největší pravděpodobností způsobeno blokátorem reklam DNS nebo síťovým proxy.&lt;br&gt;&lt;br&gt;Pro opravu toho přidejte na bílý seznam &lt;b&gt;s.youtube.com&lt;/b&gt; nebo vypněte všechny blokátory DNS a proxy.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Znovu nezobrazovat</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Falšovat video streamy</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Konfigurace maskování klienta pro prevenci problémů s přehráváním</string>
+  <string name="morphe_spoof_video_streams_title">Falšovat video streamy</string>
+  <string name="morphe_spoof_video_streams_summary">"Opravuje problémy s přehráváním pro většinu uživatelů požadavkem na kompatibilní video stream.
+
+Pokud jste uživatel YouTube Premium, toto nastavení nemusí být potřeba."</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Nepodařilo se načíst žádné streamy klientů</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Vypnutí tohoto nastavení může způsobit problémy s přehráváním</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Zkuste zapnout: Spoof video streams &gt; Sign in to Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Výchozí klient</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Sign in to Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Nejsme přihlášeni k Android VR. Stiskněte Zde pro přihlášení</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Právě jsme přihlášeni do Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Pro použití této funkce změňte výchozího klienta na Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Přihlášení do Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Přihlášení do Android VR může vyřešit problémy s přehráváním pro některé uživatele
+
+Pro přihlášení stiskněte pokračovat níže"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Pokračovat</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Odhlásit se</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Nálepky</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Kód pro aktivaci: %s
+
+1. Stiskněte Otevřít web níže, aby otevřeli webovou stránku Connect a device (Připojit zařízení)
+2. Vložte z klipboru (nebo přepište) kód pro aktivaci zobrazený výše
+3. Přihlašte se do Googlu, pokud bude požadováno. Pokud máte několik účtů, zvolte tento účet YouTube
+4. Stiskněte Povolit přístup YouTube VR
+5. Po dosažení zprávy Device connected (Zařízení připojeno) vraťte se do této aplikace."</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Otevřít web</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Selhalo vydání kódu pro aktivaci</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Selhalo přidání ověřovacího tokenu</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Přihlášení bylo úspěšné</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Ověření uloženo
+
+• Váš konfigurační profil Morphe nebude importován nebo exportován Android VR ověření
+• Pokud tento aplikace nepoužijete během 6 měsíců, odstraní Google toto ověření
+• Jestliže změníte své heslo Googlu nebo odstraníte toto zařízení z Vašich nastavení Googlu, budete muset znovu se přihlásit."</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 dočasně není k dispozici (Časový limit API)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Přihlášení do Android VR vypršelo, zkuste se přihlásit do VR znovu</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 dočasně není k dispozici (stav %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 dočasně není k dispozici</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Nelze se přihlásit do VR, autentizace webové stránky nebyla schválena</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Nemůže se přihlásit do VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Odhlášení z Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">Neplatný token pro přihlášení do VR, zkuste se přihlásit do VR znovu</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Vypnout aktualizaci JavaScriptu přehrávače</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Uzamkne JavaScript přehrávače na konkrétní verzi
+
+• Je vyžadován platný hash JavaScriptu přehrávače
+• Hash JavaScriptu přehrávače jsou platné přibližně jeden měsíc a GVS zruší platnost zastaralých hashů
+• Přehrávání se nezdaří, pokud je hash zrušen."</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Musíte zadat platný hash JavaScriptu přehrávače.
+
+Přehrávání se nezdaří, pokud je hash JavaScriptu přehrávače zastaralý."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Haš JavaScript přehrávače</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Zadejte platný hash JavaScript přehrávače</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">Vypnout protokol QUIC</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">Vypnout zvuk DRC</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Vynutit původní jazyk zvuku</string>
+  <string name="morphe_force_original_audio_summary">Vždy přehrává původní zvukovou stopu videa namísto dabované verze</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Síťový proxy</string>
+  <string name="morphe_proxy_screen_summary">Směrování síťových požadavků přes proxy</string>
+  <string name="morphe_proxy_enabled_title">Povolit proxy</string>
+  <string name="morphe_proxy_enabled_summary">Směrování síťových požadavků přes konfigurovanou HTTP nebo HTTPS proxy</string>
+  <string name="morphe_proxy_host_title">Proxy hostitel</string>
+  <string name="morphe_proxy_host_summary">Hostname nebo IP adresa proxy serveru</string>
+  <string name="morphe_proxy_port_title">Proxy port</string>
+  <string name="morphe_proxy_port_summary">Port proxy serveru</string>
+  <string name="morphe_proxy_https_title">Použít HTTPS proxy</string>
+  <string name="morphe_proxy_https_summary">Použít HTTPS pro připojení k proxy serveru namísto HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">Autentizace proxy</string>
+  <string name="morphe_proxy_auth_enabled_summary">Odesílá základní autentizaci s požadavky proxy</string>
+  <string name="morphe_proxy_auth_username_title">Vaše uživatelské jméno</string>
+  <string name="morphe_proxy_auth_username_summary">Uživatelské jméno pro základní autentizaci proxy</string>
+  <string name="morphe_proxy_auth_password_title">Proxy heslo</string>
+  <string name="morphe_proxy_auth_password_summary">Heslo pro základní autentizaci proxy</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Povolit přímé přepojení</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Připojit se přímo, pokud proxy selže</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Skrýt celostránkové reklamy</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">Pro použití této funkce změňte \'Zfalšovat video streamy\' na Android Reel nebo TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Vyčistit sdílené odkazy</string>
+  <string name="morphe_sanitize_sharing_links_summary">Odstraňuje sledovací parametry dotazů ze sdílených odkazů</string>
+  <string name="morphe_replace_music_with_youtube_title">Změnit odkazy pro sdílení na youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Nahrazuje music.youtube.com za youtube.com v sdílených odkazech.</string>
+  <string name="morphe_replace_links_with_shortener_title">Změnit odkazy pro sdílení na youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Nutí videa používat zkrácený formát URL youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Protokolový buffer pro ladicí logy</string>
+  <string name="morphe_debug_protobuffer_summary">Přidává další informace pro protokolování vývojářům pro identifikaci komponent aplikace</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Povolením tohoto nastavení se bude zaznamenávat další data rozvržení, včetně textu na obrazovce pro některé komponenty uživatelského rozhraní.
+
+To může pomoci identifikovat komponenty při vytváření vlastních filtrů.
+
+Povolením této možnosti se však budou zaznamenávat i některá uživatelská data, jako je vaše IP adresa."</string>
+</resources>

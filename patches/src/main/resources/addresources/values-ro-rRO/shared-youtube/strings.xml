@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Reporniți pentru a finaliza configurarea</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Numele aplicației</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Personalizat</string>
+  <string name="morphe_custom_branding_icon_title">Pictograma aplicației</string>
+  <string name="morphe_custom_branding_icon_entry_1">Original</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe negru</string>
+  <string name="morphe_custom_branding_icon_entry_3">Închis Morphe</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe întunecat</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe joacă ușor</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe joacă negru</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Personalizat</string>
+  <string name="morphe_custom_branding_notification_icon_title">Icon de notificare</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Potrivește pictograma aplicației</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe play</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Notificare Morphe</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">Istoricul de vizionare nu este salvat.&lt;br&gt;&lt;br&gt;Cel mai probabil este cauzată de un DNS de blocare a anunțurilor sau de un proxy de rețea.&lt;br&gt;&lt;br&gt;Pentru a remedia acest lucru, lista albă &lt;b&gt;s.youtube.com&lt;/b&gt; sau pentru a opri toate blocantele DNS și proxy-urile.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Nu mai afișa</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Falsifică fluxurile video</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Configurează falsificarea clientului pentru a preveni problemele de redare</string>
+  <string name="morphe_spoof_video_streams_title">Spoof video stream-uri</string>
+  <string name="morphe_spoof_video_streams_summary">"Remediază problemele de redare pentru majoritatea utilizatorilor prin solicitarea unui flux video compatibil
+
+Dacă ești un utilizator YouTube Premium, această setare s-ar putea să nu fie necesară"</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Nu s-a putut încărca nicio client stream</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Dezactivarea acestei setări poate cauza probleme de redare.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Încearcă activarea: Spoof video streams > Autentificare Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Client implicit</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Autentificare Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Nu te-ai autentificat la Android VR. Apasă aici pentru a te autentifica</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Ești autentificat actualmente la Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Pentru a utiliza această funcție, schimbă \'Default client\' în Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Autentificare la Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Apăsarea la Android VR poate rezolva problema reproducerii pentru unii utilizatori
+
+Pentru a te apăsa, apăsă butonul Continu de mai jos"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Continua</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Dezautentificare</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Instrucțiuni</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Cod de autentificare: %s
+
+1. Apasă 'Open website' de mai jos pentru a deschide site-ul 'Conectează un dispozitiv'
+2. Copiază din clipboard (sau tastează) codul de autentificare de mai sus
+3. Autentifichează-te la Google dacă este cerut. Dacă ai mai multe conturi, alege acest cont YouTube
+4. Apasă 'Permite accesului YouTube VR'
+5. Înapoiază în această aplicație după apariția mesajului 'Dispozitiv conectat'"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Deschide site-ul</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Eșit să emit codul de activare</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Eșit să emit codul de autentificare</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Autentificare cu succes</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Autentificare salvată
+
+• Configurațiile Morphe nu vor importa/exporta autentificarea Android VR
+• Dacă această aplicație nu este folosită timp de 6 luni, Google va șterge această autentificare
+• Dacă schimbi parola Google sau deblochezi acest dispozitiv din setări Google, vei avea nevoie să te autentifici din nou"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 este momentan indisponibil (API a expirat)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Apărarea la Android VR a expirat, încearcă din nou</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 este momentan indisponibil (status %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 este momentan indisponibil</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Nu se poate apăra la VR, autentificarea website-ului nu a fost aprobată</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Nu puteți vă conecta la VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Delogat din Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">Tokenul de autentificare pentru VR este invalid, încercați să vă conectați la VR din nou</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Dezactivează actualizarea JavaScript a player-ului</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Blochează scriptul JavaScript al playerului la o versiune specifică
+
+• Este necesar un hash valid al scriptului JavaScript al playerului
+• Hash-urile scriptului JavaScript al playerului sunt valide timp de aproximativ o lună, iar hash-urile depășite vor fi revocate de GVS
+• Redarea eșuează dacă hash-ul este revocat"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Trebuie să furnizați un hash valid al scriptului JavaScript al playerului.
+
+Redarea va eșua dacă hash-ul scriptului JavaScript al playerului este depășit."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Hash JavaScript al juc\u00e3torului</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Introduceți un hash JavaScript al jucătorului valid</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">Dezactivați protocolul QUIC</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">Dezactivați sunetul DRC</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Forțează limba audio originală</string>
+  <string name="morphe_force_original_audio_summary">Redă întotdeauna piesa audio originală a videoclipului în loc de o versiune dublată</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Proxy de rețea</string>
+  <string name="morphe_proxy_screen_summary">Direcționează cererile de rețea prin intermediul unui proxy</string>
+  <string name="morphe_proxy_enabled_title">Activează proxy</string>
+  <string name="morphe_proxy_enabled_summary">Rutările cererilor de rețea suportate printr-un proxy HTTP sau HTTPS configurat</string>
+  <string name="morphe_proxy_host_title">Gazda proxy</string>
+  <string name="morphe_proxy_host_summary">Numele de domeniu sau adresa IP a serverului proxy</string>
+  <string name="morphe_proxy_port_title">Portul proxy</string>
+  <string name="morphe_proxy_port_summary">Portul serverului proxy</string>
+  <string name="morphe_proxy_https_title">Utilizează proxy HTTPS</string>
+  <string name="morphe_proxy_https_summary">Utilizează HTTPS pentru a te conecta la serverul proxy în loc de HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">Autentificare proxy</string>
+  <string name="morphe_proxy_auth_enabled_summary">Trimite autentificare Basic cu cererile proxy</string>
+  <string name="morphe_proxy_auth_username_title">Numele de utilizator proxy</string>
+  <string name="morphe_proxy_auth_username_summary">Nume de utilizator pentru autentificarea Basic proxy</string>
+  <string name="morphe_proxy_auth_password_title">Parola proxy</string>
+  <string name="morphe_proxy_auth_password_summary">Parola pentru autentificarea Basic proxy</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Permite revenire directă</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Conectează-te direct dacă proxy-ul eșuează</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Ascunde reclame pe tot ecranul</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">Pentru a utiliza această funcție, modificați \"Falsificare fluxuri video\" la Android Reel sau TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Igienizează linkurile de partajare</string>
+  <string name="morphe_sanitize_sharing_links_summary">Elimină parametrii de interogare de urmărire din linkurile partajate</string>
+  <string name="morphe_replace_music_with_youtube_title">Schimbați linkurile de partajare la youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Înlocuiește music.youtube.com cu youtube.com în link-urile partajate</string>
+  <string name="morphe_replace_links_with_shortener_title">Schimbați linkurile de partajare la youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Forțează clipurile video să utilizeze formatul URL scurtat youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Jurnal protocol buffer</string>
+  <string name="morphe_debug_protobuffer_summary">Adaugă informații suplimentare de înregistrare pentru dezvoltatori pentru a identifica componentele aplicației</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Activarea acestei setări va înregistra date suplimentare despre aspect, inclusiv textul de pe ecran pentru unele componente UI.
+
+Acest lucru poate ajuta la identificarea componentelor atunci când creați filtre personalizate.
+
+Cu toate acestea, activarea acestei opțiuni va înregistra și unele date ale utilizatorului, cum ar fi adresa dvs. IP."</string>
+</resources>
