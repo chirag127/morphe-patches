@@ -154,13 +154,12 @@ jobs:
             exit 0
           }
 
-          # Handle .xapk bundles (multi-APK)
+          # Handle .xapk bundles (multi-APK) — morphe-cli needs a merged standalone APK
           if ls apk/*.xapk 2>/dev/null; then
-            echo "Extracting .xapk bundle"
-            mkdir -p apk/bundle
-            unzip -q apk/*.xapk -d apk/bundle/
-            BASE=$(ls -S apk/bundle/*.apk | head -1)
-            cp "$BASE" apk/target.apk
+            echo "Merging .xapk bundle into standalone APK"
+            curl -fsSL -o ~/bin/apkeditor.jar \
+              https://github.com/REAndroid/APKEditor/releases/latest/download/APKEditor.jar
+            java -jar ~/bin/apkeditor.jar m -i "$(ls -1 apk/*.xapk | head -1)" -o apk/target.apk 2>&1 | tail -5
           else
             cp apk/*.apk apk/target.apk 2>/dev/null || true
           fi
