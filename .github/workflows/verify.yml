@@ -50,7 +50,6 @@ jobs:
           - { name: tiktok,            pkg: com.zhiliaoapp.musically }
           - { name: reddit,            pkg: com.reddit.frontpage }
           - { name: duolingo,          pkg: com.duolingo }
-          - { name: onedmplus,         pkg: idm.internet.download.manager.plus }
           - { name: moonreader,        pkg: com.flyersoft.moonreaderp }
           - { name: snapchat,          pkg: com.snapchat.android }
           - { name: whatsapp,          pkg: com.whatsapp }
