@@ -1,0 +1,68 @@
+package app.morphe.patches.mapy.premium
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
+import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patches.Constants
+import app.morphe.util.indexOfFirstInstructionOrThrow
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+
+private object UserInfoFromJsonFingerprint : Fingerprint (
+    name = "fromJson",
+    definingClass = "/UserInfo\$Companion;",
+    strings = listOf("premium")
+)
+
+private object FeaturesSyntheticInitFingerprint : Fingerprint (
+    name = "<init>",
+    definingClass = "/FeaturesApiModel;",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.SYNTHETIC, AccessFlags.CONSTRUCTOR),
+    parameters = listOf("I", "Z", "Z", "Z", "I", "Z", "Z", "Z", "Z", "Ljava/lang/Integer;")
+)
+
+@Suppress("unused")
+val unlockPremiumPatch = bytecodePatch(
+    name = "Unlock premium features",
+) {
+    compatibleWith(Constants.COMPATIBILITY_MAPY)
+
+    execute {
+        UserInfoFromJsonFingerprint.method.apply {
+            val stringAssignInstructionIndex = UserInfoFromJsonFingerprint.stringMatches.first().index
+
+            val resultPremiumIndex = indexOfFirstInstructionOrThrow(
+                stringAssignInstructionIndex,
+                Opcode.MOVE_RESULT,
+            )
+
+            val premiumRegister = getInstruction<OneRegisterInstruction>(resultPremiumIndex).registerA
+
+            addInstruction(
+                resultPremiumIndex + 1,
+                "const/16 v${premiumRegister}, 0x1"
+            )
+        }
+
+        FeaturesSyntheticInitFingerprint.method.addInstructions(
+            0,
+            """
+                const/4 p2, 0x1      # userBadge
+                const/4 p3, 0x1      # advancedMyMaps
+                const/4 p4, 0x1      # premiumSupport
+                const/4 p5, -0x1     # offlineMapCount
+                const/4 p6, 0x1      # customNavigationSpeeds
+                const/4 p7, 0x1      # advancedRouting
+                const/4 p8, 0x1      # watchSupport
+                const/4 p9, 0x1      # peakfinder
+                
+                const/16 p10, 0x270f  # peakfinder limit to 9999
+                invoke-static {p10}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+                move-result-object p10 
+            """
+        )
+    }
+}
