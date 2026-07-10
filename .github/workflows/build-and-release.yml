@@ -44,6 +44,8 @@ jobs:
 
       - name: Build Android patch bundle
         id: bundle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew :patches:buildAndroid --no-daemon --stacktrace
           BUNDLE=$(find patches/build -name '*.mpp' -print -quit)
