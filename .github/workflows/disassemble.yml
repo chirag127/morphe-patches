@@ -176,7 +176,7 @@ jobs:
           head -80 report/candidate-fingerprints.md
 
       - name: Upload smali + report as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: disassembled-${{ inputs.package_name }}
           path: |
