@@ -45,7 +45,7 @@ jobs:
           - { name: pixel-screenshots, pkg: com.google.android.apps.pixel.agent }
           - { name: github-android,    pkg: com.github.android }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup Java + Android
         uses: actions/setup-java@v5
