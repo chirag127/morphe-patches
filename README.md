@@ -1,5 +1,13 @@
 # Morphe Patches — chirag127
 
+[![License: GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue?style=flat-square)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/chirag127/morphe-patches?style=flat-square)](https://github.com/chirag127/morphe-patches/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/chirag127/morphe-patches?style=flat-square)](https://github.com/chirag127/morphe-patches/commits/main)
+[![Build & release](https://github.com/chirag127/morphe-patches/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/chirag127/morphe-patches/actions/workflows/build-and-release.yml)
+[![Kotlin](https://img.shields.io/badge/Kotlin-JDK%2021-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+
+> ⭐ If this bundle is useful, please **star the repo** — it helps others find it.
+
 ## What this is
 
 Unofficial Morphe/ReVanced-lineage patch bundle for ~30 Android apps, targeting Poco F7 (HyperOS 3 / Android 15) but device-agnostic across Android 12+. GPL-3.0-or-later.
@@ -7,6 +15,33 @@ Unofficial Morphe/ReVanced-lineage patch bundle for ~30 Android apps, targeting 
 This repo produces a single `.mpp` (Morphe patch bundle) you feed to Morphe Manager. Patches strip ads, unlock Pixel-exclusive apps on non-Pixel hardware, override themes, and add small quality-of-life features on top of Piko/Morphe/Rushi/Hoodle patch stacks.
 
 Nothing here is affiliated with ReVanced, Morphe, or any of the upstream authors we subtree from. This is a personal fork bundle — use at your own risk.
+
+---
+
+## How it fits together
+
+```mermaid
+flowchart TD
+    subgraph Upstream["upstream/ (10 subtreed bundles, daily cron sync)"]
+        U1[Rushi · 89 apps]
+        U2[Hoodle · 52 apps]
+        U3[Piko · Twitter/X]
+        U4[MorpheApp base framework]
+        U5[…6 more]
+    end
+    subgraph OnTop["on-top/ (our patches)"]
+        P1[Truecaller · 21 atomic patches]
+        P2[Pixel-app device-check bypass]
+        P3[YouTube / GitHub / News layers]
+    end
+    Upstream --> PREC{PatchPrecedence.kt\nconflict resolution}
+    OnTop --> PREC
+    PREC --> GRADLE["./gradlew :patches:buildAndroid\n(JDK 21)"]
+    GRADLE --> MPP["patches-&lt;version&gt;.mpp"]
+    MPP --> MM[Morphe Manager on device]
+    APK[Official APK\napkmirror / apkpure] --> MM
+    MM --> OUT[Signed patched APK installed]
+```
 
 ---
 
