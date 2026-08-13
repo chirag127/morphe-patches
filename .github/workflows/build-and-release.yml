@@ -110,10 +110,10 @@ jobs:
 
       - name: Install apkeep
         run: |
-          curl -fsSL -o apkeep.tar.gz \
-            https://github.com/EFForg/apkeep/releases/latest/download/apkeep-x86_64-unknown-linux-gnu.tar.gz
-          tar -xzf apkeep.tar.gz
-          sudo mv apkeep-x86_64-unknown-linux-gnu/apkeep /usr/local/bin/apkeep
+          curl -fsSL -o apkeep \
+            https://github.com/EFForg/apkeep/releases/download/1.0.0/apkeep-x86_64-unknown-linux-gnu
+          chmod +x apkeep
+          sudo mv apkeep /usr/local/bin/apkeep
           apkeep --version
 
       - name: Install morphe-cli
