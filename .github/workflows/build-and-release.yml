@@ -118,8 +118,13 @@ jobs:
 
       - name: Install morphe-cli
         run: |
+          # Pinned to the last CLI release. Upstream MorpheApp/morphe-cli was renamed to
+          # MorpheApp/morphe-desktop at v1.11.0 (GUI-only, no headless CLI), so
+          # .../releases/latest/download/ no longer serves a CLI jar. v1.10.0 is the last
+          # stable CLI with the `patch -p <bundle> -o <out> <apk>` interface used below.
+          # The old repo path 301-redirects to the renamed repo, preserving this asset.
           curl -fsSL -o morphe-cli.jar \
-            https://github.com/chirag127/morphe-cli/releases/latest/download/morphe-cli-all.jar
+            https://github.com/MorpheApp/morphe-cli/releases/download/v1.10.0/morphe-cli-1.10.0-all.jar
           echo '#!/usr/bin/env bash' | sudo tee /usr/local/bin/morphe-cli
           echo 'exec java -jar /usr/local/lib/morphe-cli.jar "$@"' | sudo tee -a /usr/local/bin/morphe-cli
           sudo mv morphe-cli.jar /usr/local/lib/morphe-cli.jar
