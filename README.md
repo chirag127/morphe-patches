@@ -1,3 +1,5 @@
+
+
 # Morphe Patches — chirag127
 
 [![License: GPL-3.0-or-later](https://img.shields.io/badge/license-GPL--3.0--or--later-blue?style=flat-square)](./LICENSE)
@@ -101,7 +103,7 @@ Legend for the **Status** column:
 |---|---|---|---|---|
 | Pixel Recorder | `com.google.android.apps.recorder` | Bypass device check | Transcription server-side — works on Poco once installed | BROKEN — crash on launch, see [#XX](https://github.com/chirag127/morphe-patches/issues) |
 | Pixel Weather | `com.google.android.apps.weather` | Bypass device check | Uses Google's weather backend | BROKEN — crash on launch, see [#XX](https://github.com/chirag127/morphe-patches/issues) |
-| Pixel Screenshots | `com.google.android.apps.pixel.screenshots` | Bypass device check | On-device Gemini OCR | BROKEN — crash on launch, see [#XX](https://github.com/chirag127/morphe-patches/issues) |
+| Pixel Screenshots | `com.google.android.apps.pixel.agent` | Bypass device check | On-device Gemini OCR | BROKEN — crash on launch, see [#XX](https://github.com/chirag127/morphe-patches/issues) |
 | Pixel Studio | `com.google.android.apps.pixel.creativeassistant` | Bypass device check | On-device image gen | BROKEN — crash on launch, see [#XX](https://github.com/chirag127/morphe-patches/issues) |
 
 These four all hit the same root cause: the Android 15 QPR2 build shipped a hardware attestation check that the current bypass shim doesn't defeat. Fingerprints for the new check need re-authoring against the latest Pixel APKs.
