@@ -66,7 +66,7 @@ jobs:
           - { name: miuimusic,         pkg: com.miui.player }
           - { name: miuiweather,       pkg: com.miui.weather2 }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup Java + Android
         uses: actions/setup-java@v5
@@ -84,7 +84,7 @@ jobs:
           restore-keys: gradle-${{ runner.os }}-
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 'lts/*'
           cache: 'npm'
