@@ -14,6 +14,7 @@ updates:
     schedule:
       interval: weekly
     ignore:
+      - dependency-name: "@chirag127/*"   # workspace/path deps Dependabot can't resolve
       # version 10.x and later may not generate release notes correctly
       - dependency-name: "conventional-changelog-conventionalcommits"
 

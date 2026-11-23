@@ -1,0 +1,556 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.patches.shared.layout.branding
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
+import app.morphe.patcher.patch.PatchException
+import app.morphe.patcher.patch.ResourcePatch
+import app.morphe.patcher.patch.ResourcePatchBuilder
+import app.morphe.patcher.patch.ResourcePatchContext
+import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.resourcePatch
+import app.morphe.patcher.patch.stringOption
+import app.morphe.patches.all.misc.packagename.setOrGetFallbackPackageName
+import app.morphe.patches.shared.misc.fix.bitmap.fixRecycledBitmapPatch
+import app.morphe.patches.all.misc.resources.resourceMappingPatch
+import app.morphe.patches.shared.misc.settings.preference.BasePreference
+import app.morphe.patches.shared.misc.settings.preference.BasePreferenceScreen
+import app.morphe.patches.shared.misc.settings.preference.ListPreference
+import app.morphe.patches.shared.misc.settings.preference.noTitleUnsortedPreferenceCategory
+import app.morphe.util.ResourceGroup
+import app.morphe.util.copyResources
+import app.morphe.util.findElementByAttributeValueOrThrow
+import app.morphe.util.removeFromParent
+import app.morphe.util.returnEarly
+import app.morphe.util.trimIndentMultiline
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
+import org.w3c.dom.Element
+import org.w3c.dom.NodeList
+import java.io.File
+import java.util.logging.Logger
+
+private val mipmapDirectories = mapOf(
+    // Target app does not have ldpi icons.
+    "mipmap-mdpi" to "108x108 px",
+    "mipmap-hdpi" to "162x162 px",
+    "mipmap-xhdpi" to "216x216 px",
+    "mipmap-xxhdpi" to "324x324 px",
+    "mipmap-xxxhdpi" to "432x432 px"
+)
+
+private val iconStyleNames = arrayOf(
+    "black",
+    "dark",
+    "light",
+    "play",
+    "play_black",
+)
+
+private const val ORIGINAL_USER_ICON_STYLE_NAME = "original"
+private const val CUSTOM_USER_ICON_STYLE_NAME = "custom"
+
+private const val LAUNCHER_RESOURCE_NAME_PREFIX = "morphe_launcher_"
+private const val LAUNCHER_ADAPTIVE_BACKGROUND_PREFIX = "morphe_adaptive_background_"
+private const val LAUNCHER_ADAPTIVE_FOREGROUND_PREFIX = "morphe_adaptive_foreground_"
+private const val LAUNCHER_ADAPTIVE_MONOCHROME_PREFIX = "morphe_adaptive_monochrome"
+private const val NOTIFICATION_ICON_NAME = "morphe_notification_icon"
+
+private val USER_CUSTOM_ADAPTIVE_FILE_NAMES = arrayOf(
+    "$LAUNCHER_ADAPTIVE_BACKGROUND_PREFIX$CUSTOM_USER_ICON_STYLE_NAME.png",
+    "$LAUNCHER_ADAPTIVE_FOREGROUND_PREFIX$CUSTOM_USER_ICON_STYLE_NAME.png"
+)
+
+private const val USER_CUSTOM_MONOCHROME_FILE_NAME = "${LAUNCHER_ADAPTIVE_MONOCHROME_PREFIX}_$CUSTOM_USER_ICON_STYLE_NAME.xml"
+
+// Custom notification icon can be provided as an XML vector drawable or a PNG raster image.
+private const val USER_CUSTOM_NOTIFICATION_ICON_XML_FILE_NAME = "${NOTIFICATION_ICON_NAME}_$CUSTOM_USER_ICON_STYLE_NAME.xml"
+private const val USER_CUSTOM_NOTIFICATION_ICON_PNG_FILE_NAME = "${NOTIFICATION_ICON_NAME}_$CUSTOM_USER_ICON_STYLE_NAME.png"
+
+// Drawable DPI directories for PNG notification icons.
+private val notificationIconPngDirectories = mapOf(
+    "drawable-mdpi" to "24x24 px",
+    "drawable-hdpi" to "36x36 px",
+    "drawable-xhdpi" to "48x48 px",
+    "drawable-xxhdpi" to "72x72 px",
+    "drawable-xxxhdpi" to "96x96 px",
+)
+
+internal const val EXTENSION_CLASS = "Lapp/morphe/extension/shared/patches/CustomBrandingPatch;"
+
+/**
+ * Shared custom branding patch for YouTube and YT Music.
+ */
+internal fun baseCustomBrandingPatch(
+    originalLauncherIconName: String,
+    originalNotificationIconName: String,
+    originalAppName: String,
+    originalAppPackageName: String,
+    isYouTubeMusic: Boolean,
+    numberOfPresetAppNames: Int,
+    mainActivityOnCreateFingerprint: Fingerprint,
+    mainActivityName: String,
+    activityAliasNameWithIntents: String,
+    preferenceScreen: BasePreferenceScreen.Screen,
+    block: ResourcePatchBuilder.() -> Unit,
+    executeBlock: ResourcePatchContext.() -> Unit = {}
+): ResourcePatch = resourcePatch(
+    name = "Custom branding",
+    description = "Adds options to change the app icon and app name. " +
+            "Branding cannot be changed for mounted (root) installations."
+) {
+    val customName by stringOption(
+        key = "customName",
+        title = "App name",
+        description = "Custom app name."
+    )
+
+    val customIcon by stringOption(
+        key = "customIcon",
+        title = "Custom icon",
+        description = """
+            Folder with images to use as a custom icon.
+            
+            The folder must contain one or more of the following folders, depending on the DPI of the device:
+            ${mipmapDirectories.keys.joinToString("\n") { "- $it" }}
+            
+            Each of the folders must contain all of the following files:
+            ${USER_CUSTOM_ADAPTIVE_FILE_NAMES.joinToString("\n")}
+            
+            The image dimensions must be as follows:
+            ${mipmapDirectories.map { (dpi, dim) -> "- $dpi: $dim" }.joinToString("\n")}
+
+            Optionally, the path contains a 'drawable' folder with a monochrome icon file:
+            $USER_CUSTOM_MONOCHROME_FILE_NAME
+
+            Optionally, the path contains a notification icon in one of the following formats:
+            - XML vector drawable placed in 'drawable':
+              $USER_CUSTOM_NOTIFICATION_ICON_XML_FILE_NAME
+            - PNG raster images placed in the matching 'drawable-<dpi>' folders:
+              ${notificationIconPngDirectories.map { (dpi, dim) -> "- $dpi/$USER_CUSTOM_NOTIFICATION_ICON_PNG_FILE_NAME ($dim)" }.joinToString("\n")}
+        """.trimIndentMultiline()
+    )
+
+    block()
+
+    dependsOn(
+        resourceMappingPatch,
+        fixRecycledBitmapPatch,
+        bytecodePatch {
+            execute {
+                mainActivityOnCreateFingerprint.method.addInstruction(
+                    0,
+                    "invoke-static { }, $EXTENSION_CLASS->setBranding()V"
+                )
+
+                NumberOfPresetAppNamesExtensionFingerprint.method.returnEarly(numberOfPresetAppNames)
+                UserProvidedCustomNameExtensionFingerprint.method.returnEarly(customName != null)
+                UserProvidedCustomIconExtensionFingerprint.method.returnEarly(customIcon != null)
+                OriginalLauncherIconNameExtensionFingerprint.method.returnEarly(originalLauncherIconName)
+                OriginalNotificationIconNameExtensionFingerprint.method.returnEarly(originalNotificationIconName)
+
+                NotificationBuilderFingerprint.let {
+                    it.method.apply {
+                        mapOf(
+                            2 to "getColor",
+                            0 to "getSmallIcon"
+                        ).forEach { (offset, methodName) ->
+                            val index = it.instructionMatches[offset].index
+                            val register = getInstruction<FiveRegisterInstruction>(index).registerD
+
+                            addInstructions(
+                                index,
+                                """
+                                    invoke-static { v$register }, $EXTENSION_CLASS->$methodName(I)I
+                                    move-result v$register                                
+                                """
+                            )
+                        }
+                    }
+                }
+
+                NotificationIconFingerprint.let {
+                    it.method.apply {
+                        val index = it.instructionMatches.last().index
+                        val register = getInstruction<TwoRegisterInstruction>(index).registerA
+
+                        addInstructions(
+                            index,
+                            """
+                                invoke-static { v$register }, $EXTENSION_CLASS->getSmallIcon(I)I
+                                move-result v$register                                
+                            """
+                        )
+                    }
+                }
+            }
+        },
+        resourcePatch {
+            finalize {
+                val useCustomName = customName != null
+                val useCustomIcon = customIcon != null
+                val isRootInstall = setOrGetFallbackPackageName(originalAppPackageName) == originalAppPackageName
+
+                // Can only check if app is root installation by checking if change package name patch is in use.
+                // and can only do that in the finalize block here.
+                // The UI preferences cannot be selectively added here, because the settings finalize block
+                // may have already run and the settings are already wrote to file.
+                // Instead, show a warning if any patch option was used (A rooted device launcher ignores the manifest changes),
+                // and the non-functional in-app settings are removed on app startup by extension code.
+                if (isRootInstall && (useCustomName || useCustomIcon)) {
+                    Logger.getLogger(this::class.java.name).warning(
+                        "Custom branding does not work with root installation. No changes applied."
+                    )
+                }
+
+                if (!isRootInstall || useCustomName) {
+                    document("AndroidManifest.xml").use { document ->
+                        val application = document.getElementsByTagName("application").item(0) as Element
+                        application.setAttribute(
+                            "android:label",
+                            if (useCustomName) {
+                                // Use custom name everywhere.
+                                customName!!
+                            } else {
+                                // The YT application name can appear in some places alongside the system
+                                // YouTube app, such as the settings app list and in the "open with" file picker.
+                                // Because the YouTube app cannot be completely uninstalled and only disabled,
+                                // use a custom name for this situation to disambiguate which app is which.
+                                "@string/morphe_custom_branding_name_entry_2"
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    )
+
+    execute {
+        val useCustomName = customName != null
+        val useCustomIcon = customIcon != null
+
+        val preferences = mutableSetOf<BasePreference>()
+
+        preferences += if (useCustomName) {
+            ListPreference(
+                key = "morphe_custom_branding_name",
+                entriesKey = "morphe_custom_branding_name_custom_entries",
+                entryValuesKey = "morphe_custom_branding_name_custom_entry_values"
+            )
+        } else {
+            ListPreference("morphe_custom_branding_name")
+        }
+
+        if (useCustomIcon) {
+            preferences += ListPreference(
+                key = "morphe_custom_branding_icon",
+                tag = "app.morphe.extension.shared.settings.preference.IconListPreference",
+                entriesKey = "morphe_custom_branding_icon_custom_entries",
+                entryValuesKey = "morphe_custom_branding_icon_custom_entry_values"
+            )
+            preferences += ListPreference(
+                key = "morphe_custom_branding_notification_icon",
+                tag = "app.morphe.extension.shared.settings.preference.NotificationIconListPreference",
+                entriesKey = "morphe_custom_branding_notification_icon_custom_entries",
+                entryValuesKey = "morphe_custom_branding_notification_icon_custom_entry_values"
+            )
+        } else {
+            preferences += ListPreference(
+                key = "morphe_custom_branding_icon",
+                tag = "app.morphe.extension.shared.settings.preference.IconListPreference"
+            )
+            preferences += ListPreference(
+                key = "morphe_custom_branding_notification_icon",
+                tag = "app.morphe.extension.shared.settings.preference.NotificationIconListPreference"
+            )
+        }
+
+        preferenceScreen.addPreferences(noTitleUnsortedPreferenceCategory(preferences))
+
+        iconStyleNames.forEach { style ->
+            copyResources(
+                "custom-branding",
+                ResourceGroup(
+                    "drawable",
+                    "$LAUNCHER_ADAPTIVE_BACKGROUND_PREFIX$style.xml",
+                    "$LAUNCHER_ADAPTIVE_FOREGROUND_PREFIX$style.xml",
+                    "${LAUNCHER_ADAPTIVE_MONOCHROME_PREFIX}_$style.xml",
+                    "${NOTIFICATION_ICON_NAME}_$style.xml",
+                ),
+                ResourceGroup(
+                    "mipmap-anydpi",
+                    "$LAUNCHER_RESOURCE_NAME_PREFIX$style.xml"
+                )
+            )
+        }
+
+        copyResources(
+            "custom-branding",
+            // Copy template user icon, because the aliases must be added even if no user icon is provided.
+            ResourceGroup(
+                "drawable",
+                USER_CUSTOM_MONOCHROME_FILE_NAME,
+                USER_CUSTOM_NOTIFICATION_ICON_XML_FILE_NAME,
+            ),
+            ResourceGroup(
+                "mipmap-anydpi",
+                "$LAUNCHER_RESOURCE_NAME_PREFIX$CUSTOM_USER_ICON_STYLE_NAME.xml"
+            )
+        )
+
+        // Copy template icon files.
+        mipmapDirectories.keys.forEach { dpi ->
+            copyResources(
+                "custom-branding",
+                ResourceGroup(
+                    dpi,
+                    "$LAUNCHER_ADAPTIVE_BACKGROUND_PREFIX$CUSTOM_USER_ICON_STYLE_NAME.png",
+                    "$LAUNCHER_ADAPTIVE_FOREGROUND_PREFIX$CUSTOM_USER_ICON_STYLE_NAME.png",
+                )
+            )
+        }
+
+        document("AndroidManifest.xml").use { document ->
+            // Create launch aliases that can be programmatically selected in app.
+            fun createAlias(
+                aliasName: String,
+                iconMipmapName: String,
+                appNameIndex: Int,
+                useCustomName: Boolean,
+                enabled: Boolean,
+                intents: NodeList
+            ): Element {
+                val label = if (useCustomName) {
+                    if (customName == null) {
+                        "Custom" // Dummy text, and normally cannot be seen.
+                    } else {
+                        customName!!
+                    }
+                } else if (appNameIndex == 1) {
+                    // Indexing starts at 1.
+                    originalAppName
+                } else {
+                    "@string/morphe_custom_branding_name_entry_$appNameIndex"
+                }
+                val alias = document.createElement("activity-alias")
+                alias.setAttribute("android:name", aliasName)
+                alias.setAttribute("android:enabled", enabled.toString())
+                alias.setAttribute("android:exported", "true")
+                alias.setAttribute("android:icon", "@mipmap/$iconMipmapName")
+                alias.setAttribute("android:label", label)
+                alias.setAttribute("android:targetActivity", mainActivityName)
+
+                // Copy all intents from the original alias so long press actions still work.
+                if (isYouTubeMusic) {
+                    val intentFilter = document.createElement("intent-filter").apply {
+                        val action = document.createElement("action")
+                        action.setAttribute("android:name", "android.intent.action.MAIN")
+                        appendChild(action)
+
+                        val category = document.createElement("category")
+                        category.setAttribute("android:name", "android.intent.category.LAUNCHER")
+                        appendChild(category)
+                    }
+                    alias.appendChild(intentFilter)
+                } else {
+                    for (i in 0 until intents.length) {
+                        alias.appendChild(
+                            intents.item(i).cloneNode(true)
+                        )
+                    }
+                }
+
+                return alias
+            }
+
+            val application = document.getElementsByTagName("application").item(0) as Element
+            val intentFilters = document.childNodes.findElementByAttributeValueOrThrow(
+                "android:name",
+                activityAliasNameWithIntents
+            ).childNodes
+
+            // If user provides a custom icon, then change the application icon ('static' icon)
+            // which shows as the push notification for some devices, in the app settings,
+            // and as the icon for the apk before installing.
+            // This icon cannot be dynamically selected and this change must only be done if the
+            // user provides an icon otherwise there is no way to restore the original YouTube icon.
+            if (useCustomIcon) {
+                application.setAttribute(
+                    "android:icon",
+                    "@mipmap/morphe_launcher_custom"
+                )
+            }
+
+            val enabledNameIndex = if (useCustomName) numberOfPresetAppNames else 1 // 1 indexing
+            val enabledIconIndex = if (useCustomIcon) iconStyleNames.size else 0 // 0 indexing
+
+            for (appNameIndex in 1 .. numberOfPresetAppNames) {
+                fun aliasName(name: String): String = ".morphe_" + name + '_' + appNameIndex
+
+                val useCustomNameLabel = (useCustomName && appNameIndex == numberOfPresetAppNames)
+
+                // Original icon.
+                application.appendChild(
+                    createAlias(
+                        aliasName = aliasName(ORIGINAL_USER_ICON_STYLE_NAME),
+                        iconMipmapName = originalLauncherIconName,
+                        appNameIndex = appNameIndex,
+                        useCustomName = useCustomNameLabel,
+                        enabled = false,
+                        intentFilters
+                    )
+                )
+
+                // Bundled icons.
+                iconStyleNames.forEachIndexed { iconIndex, style ->
+                    application.appendChild(
+                        createAlias(
+                            aliasName = aliasName(style),
+                            iconMipmapName = LAUNCHER_RESOURCE_NAME_PREFIX + style,
+                            appNameIndex = appNameIndex,
+                            useCustomName = useCustomNameLabel,
+                            enabled = (appNameIndex == enabledNameIndex && iconIndex == enabledIconIndex),
+                            intentFilters
+                        )
+                    )
+                }
+
+                // User provided custom icon.
+                //
+                // Must add all aliases even if the user did not provide a custom icon of their own.
+                // This is because if the user installs with an option, then repatches without the option,
+                // the alias must still exist because if it was previously enabled, and then it's removed
+                // the app will become broken and cannot launch. Even if the app data is cleared
+                // it still cannot be launched and the only fix is to uninstall the app.
+                // To prevent this, always include all aliases and use dummy data if needed.
+                application.appendChild(
+                    createAlias(
+                        aliasName = aliasName(CUSTOM_USER_ICON_STYLE_NAME),
+                        iconMipmapName = LAUNCHER_RESOURCE_NAME_PREFIX + CUSTOM_USER_ICON_STYLE_NAME,
+                        appNameIndex = appNameIndex,
+                        useCustomName = useCustomNameLabel,
+                        enabled = appNameIndex == enabledNameIndex && useCustomIcon,
+                        intentFilters
+                    )
+                )
+            }
+
+            // Remove the main action from the original alias, otherwise two apps icons
+            // can be shown in the launcher. Can only be done after adding the new aliases.
+            intentFilters.findElementByAttributeValueOrThrow(
+                "android:name",
+                "android.intent.action.MAIN"
+            ).removeFromParent()
+        }
+
+        // Copy custom icons last, so if the user enters an invalid icon path
+        // and an exception is thrown then the critical manifest changes are still made.
+        if (useCustomIcon) {
+            // Copy user provided files
+            val iconPathFile = File(customIcon!!.trim())
+
+            if (!iconPathFile.exists()) {
+                throw PatchException(
+                    "The custom icon path cannot be found: " + iconPathFile.absolutePath
+                )
+            }
+
+            if (!iconPathFile.isDirectory) {
+                throw PatchException(
+                    "The custom icon path must be a folder: " + iconPathFile.absolutePath
+                )
+            }
+
+            val resourceDirectory = get("res")
+            var copiedFiles = false
+
+            // For each source folder, copy the files to the target resource directories.
+            iconPathFile.listFiles {
+                    file -> file.isDirectory && file.name in mipmapDirectories
+            }!!.forEach { dpiSourceFolder ->
+                val targetDpiFolder = resourceDirectory.resolve(dpiSourceFolder.name)
+                if (!targetDpiFolder.exists()) {
+                    // Should never happen.
+                    throw IllegalStateException("Resource not found: $dpiSourceFolder")
+                }
+
+                val customFiles = dpiSourceFolder.listFiles { file ->
+                    file.isFile && file.name in USER_CUSTOM_ADAPTIVE_FILE_NAMES
+                }!!
+
+                if (customFiles.isNotEmpty() && customFiles.size != USER_CUSTOM_ADAPTIVE_FILE_NAMES.size) {
+                    throw PatchException("Must include all required icon files " +
+                            "but only found " + customFiles.map { it.name })
+                }
+
+                customFiles.forEach { imgSourceFile ->
+                    val imgTargetFile = targetDpiFolder.resolve(imgSourceFile.name)
+                    imgSourceFile.copyTo(target = imgTargetFile, overwrite = true)
+
+                    copiedFiles = true
+                }
+            }
+
+            // Copy monochrome icon if provided.
+            val drawableSourceFolder = iconPathFile.resolve("drawable")
+            if (drawableSourceFolder.exists()) {
+                val monochromeFile = drawableSourceFolder.resolve(USER_CUSTOM_MONOCHROME_FILE_NAME)
+                if (monochromeFile.exists()) {
+                    monochromeFile.copyTo(
+                        target = resourceDirectory.resolve("drawable/$USER_CUSTOM_MONOCHROME_FILE_NAME"),
+                        overwrite = true
+                    )
+                    copiedFiles = true
+                }
+
+                // XML vector notification icon.
+                val notificationXml = drawableSourceFolder.resolve(USER_CUSTOM_NOTIFICATION_ICON_XML_FILE_NAME)
+                if (notificationXml.exists()) {
+                    notificationXml.copyTo(
+                        target = resourceDirectory.resolve("drawable/$USER_CUSTOM_NOTIFICATION_ICON_XML_FILE_NAME"),
+                        overwrite = true
+                    )
+                    copiedFiles = true
+                }
+            }
+
+            // PNG notification icons.
+            // If any DPI folder is present, copy what's available.
+            iconPathFile.listFiles { file ->
+                file.isDirectory && file.name in notificationIconPngDirectories
+            }!!.forEach { dpiSourceFolder ->
+                val pngFile = dpiSourceFolder.resolve(USER_CUSTOM_NOTIFICATION_ICON_PNG_FILE_NAME)
+                if (pngFile.exists()) {
+                    val targetFolder = resourceDirectory.resolve(dpiSourceFolder.name)
+                    if (!targetFolder.exists()) {
+                        throw IllegalStateException("Resource directory not found: ${dpiSourceFolder.name}")
+                    }
+                    pngFile.copyTo(
+                        target = targetFolder.resolve(USER_CUSTOM_NOTIFICATION_ICON_PNG_FILE_NAME),
+                        overwrite = true
+                    )
+                    copiedFiles = true
+                }
+            }
+
+            if (!copiedFiles) {
+                throw PatchException("Expected to find directories and files: "
+                        + USER_CUSTOM_ADAPTIVE_FILE_NAMES.contentToString()
+                        + "\nBut none were found in the provided option file path: " + iconPathFile.absolutePath)
+            }
+        }
+
+        executeBlock()
+    }
+}

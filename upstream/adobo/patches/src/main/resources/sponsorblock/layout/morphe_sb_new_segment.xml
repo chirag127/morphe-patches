@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/morphe_sb_new_segment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="0dip">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/morphe_sb_new_segment_rewind"
+                android:layout_width="52.0dip"
+                android:layout_height="52.0dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:padding="10.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morphe_sb_backward_bold" />
+
+            <ImageButton
+                android:id="@+id/morphe_sb_new_segment_forward"
+                android:layout_width="52.0dip"
+                android:layout_height="52.0dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:padding="10.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morphe_sb_forward_bold" />
+
+            <ImageButton
+                android:id="@+id/morphe_sb_new_segment_adjust"
+                android:layout_width="52.0dip"
+                android:layout_height="52.0dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:padding="10.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morphe_sb_adjust_bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:layout_marginStart="8.0dip"
+            android:layout_marginEnd="8.0dip"
+            android:alpha="0.2"
+            android:background="#FFFFFF" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/morphe_sb_new_segment_compare"
+                android:layout_width="52.0dip"
+                android:layout_height="52.0dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:padding="10.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morphe_sb_compare_bold" />
+
+            <ImageButton
+                android:id="@+id/morphe_sb_new_segment_edit"
+                android:layout_width="52.0dip"
+                android:layout_height="52.0dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:padding="10.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morphe_sb_edit_bold" />
+
+            <ImageButton
+                android:id="@+id/morphe_sb_new_segment_publish"
+                android:layout_width="52.0dip"
+                android:layout_height="52.0dip"
+                android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:padding="10.0dip"
+                android:scaleType="fitCenter"
+                android:src="@drawable/morphe_sb_publish_bold" />
+        </LinearLayout>
+    </LinearLayout>
+</merge>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Διαφημίσεις</string>
+  <string name="morphe_hide_post_ads_title">Απόκρυψη διαφημίσεων ροής</string>
+  <string name="morphe_hide_comment_ads_title">Απόκρυψη διαφημίσεων στα σχόλια</string>
+  <string name="morphe_screen_navigation_bar_title">Γραμμή πλοήγησης</string>
+  <string name="morphe_hide_answers_button_title">Απόκρυψη κουμπιού \"Απαντήσεις\"</string>
+  <string name="morphe_hide_chat_button_title">Απόκρυψη κουμπιού \"Συνομιλία\"</string>
+  <string name="morphe_hide_create_button_title">Απόκρυψη κουμπιού \"Δημιουργία\"</string>
+  <string name="morphe_hide_discover_button_title">Απόκρυψη των κουμπιών \"Ανακάλυψη ή Κοινότητα\"</string>
+  <string name="morphe_hide_games_button_title">Απόκρυψη κουμπιού \"Παιχνίδια\"</string>
+  <string name="morphe_screen_sidebar_title">Πλαϊνή γραμμή</string>
+  <string name="morphe_hide_recently_visited_shelf_title">Απόκρυψη ραφιού \"Πρόσφατα Επισκεφτήκατε\"</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">Απόκρυψη \"Παιχνιδιών\" στο ράφι Reddit</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">Απόκρυψη ραφιού \"Reddit Pro\"</string>
+  <string name="morphe_hide_about_shelf_title">Απόκρυψη ραφιού \"Σχετικά με\"</string>
+  <string name="morphe_hide_resources_shelf_title">Απόκρυψη ραφιού \"Πόροι\"</string>
+  <string name="morphe_screen_layout_title">Διάταξη</string>
+  <string name="morphe_disable_modern_home_title">Απενεργοποίηση σύγχρονου περιβάλλοντος εργασίας</string>
+  <string name="morphe_disable_screenshot_popup_title">Απενεργοποίηση αναδυόμενου παραθύρου στη λήψη στιγμιότυπου οθόνης</string>
+  <string name="morphe_disable_screenshot_popup_summary">Απενεργοποιεί το αναδυόμενο παράθυρο που εμφανίζεται κατά τη λήψη στιγμιότυπου της οθόνης</string>
+  <string name="morphe_hide_ask_button_title">Απόκρυψη κουμπιού</string>
+  <string name="morphe_hide_ask_button_summary">Αποκρύπτει το κουμπί στην γραμμή αναζήτησης</string>
+  <string name="morphe_hide_communities_shelf_title">Απόκρυψη ράφιου κοινοτήτων</string>
+  <string name="morphe_hide_communities_shelf_summary">Αποκρύπτει το ράφι με τις σχετικές ή προτεινόμενες κοινότητες στα subreddits</string>
+  <string name="morphe_hide_trending_shelves_title">Απόκρυψη δημοφιλών ραφιών</string>
+  <string name="morphe_hide_trending_shelves_summary">Απόκρυψη των προτεινόμενων κατηγοριών από τη ροή και τις προτάσεις αναζήτησης</string>
+  <string name="morphe_remove_notification_dialog_title">Αφαίρεση του διαλόγου \"Προτεινόμενη Ειδοποίηση\"</string>
+  <string name="morphe_remove_notification_dialog_summary">Απορρίπτει αυτόματα το παράθυρο διαλόγου υποδείξεων ειδοποιήσεων κατά την επίσκεψη σε ένα subreddit</string>
+  <string name="morphe_show_view_count_title">Εμφάνιση αριθμού προβολών στις δημοσιεύσεις</string>
+  <string name="morphe_show_view_count_summary">Περιορισμός: Διαθέσιμο μόνο εάν η απάντηση του API περιλαμβάνει τον αριθμό προβολών</string>
+  <string name="morphe_remove_nsfw_dialog_title">Αφαίρεση διαλόγου προειδοποίησης \"NSFW\"</string>
+  <string name="morphe_remove_nsfw_dialog_summary">Αποδέχεται αυτόματα την προειδοποίηση περιεχομένου NSFW κατά την επίσκεψη σε ένα subreddit</string>
+  <string name="morphe_screen_miscellaneous_title">Διάφορα</string>
+  <string name="morphe_about_title">Σχετικά με</string>
+  <string name="morphe_about_summary">Έκδοση τροποποιήσεων και επίσημοι σύνδεσμοι</string>
+  <string name="morphe_sanitize_sharing_links_title">Καθαρισμός συνδέσμων κατά την κοινοποίηση</string>
+  <string name="morphe_sanitize_sharing_links_summary">Αφαιρεί τις παραμέτρους ερωτήματος παρακολούθησης από τους συνδέσμους που κοινοποιούνται</string>
+  <string name="morphe_open_links_directly_title">Άνοιγμα συνδέσμων στην εφαρμογή</string>
+  <string name="morphe_open_links_directly_summary">Παρακάμπτει τις διευθύνσεις URL ανακατεύθυνσης κατά το άνοιγμα εξωτερικών συνδέσμων</string>
+  <string name="morphe_open_links_externally_title">Άνοιγμα συνδέσμων εξωτερικά</string>
+  <string name="morphe_open_links_externally_summary">Ανοίγει συνδέσμους στο πρόγραμμα περιήγησής σας αντί για το ενσωματωμένο πρόγραμμα περιήγησης</string>
+</resources>

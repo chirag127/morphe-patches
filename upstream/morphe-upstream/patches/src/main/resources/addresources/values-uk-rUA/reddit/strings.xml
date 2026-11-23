@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">Реклама</string>
+  <string name="morphe_hide_post_ads_title">Приховати рекламу у стрічці</string>
+  <string name="morphe_hide_comment_ads_title">Приховати рекламу у коментарях</string>
+  <string name="morphe_screen_navigation_bar_title">Панель навігації</string>
+  <string name="morphe_hide_answers_button_title">Приховати кнопку \"Відповіді\"</string>
+  <string name="morphe_hide_chat_button_title">Приховати кнопку \"Чат\"</string>
+  <string name="morphe_hide_create_button_title">Приховати кнопку \"Створити\"</string>
+  <string name="morphe_hide_discover_button_title">Приховати кнопку \"Відкривати\" або \"Спільноти\"</string>
+  <string name="morphe_hide_games_button_title">Приховати кнопку \"Ігри\"</string>
+  <string name="morphe_screen_sidebar_title">Бічна панель</string>
+  <string name="morphe_hide_recently_visited_shelf_title">Приховати панель \"Нещодавно відвідані\"</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">Приховати панель \"Ігри на Reddit\"</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">Приховати панель \"Reddit Pro\"</string>
+  <string name="morphe_hide_about_shelf_title">Приховати панель \"Інформація\"</string>
+  <string name="morphe_hide_resources_shelf_title">Приховати панель \"Ресурси\"</string>
+  <string name="morphe_screen_layout_title">Макет</string>
+  <string name="morphe_disable_modern_home_title">Вимкнути сучасний домашній екран</string>
+  <string name="morphe_disable_screenshot_popup_title">Вимкнути спливаюче вікно знімку екрана</string>
+  <string name="morphe_disable_screenshot_popup_summary">Вимикає спливаюче вікно, яке з\'являється під час створення знімка екрана</string>
+  <string name="morphe_hide_ask_button_title">Приховати кнопку \"Запитати\"</string>
+  <string name="morphe_hide_ask_button_summary">Приховує кнопку \"Запитати\" у рядку пошуку</string>
+  <string name="morphe_hide_communities_shelf_title">Приховати панель спільнот</string>
+  <string name="morphe_hide_communities_shelf_summary">Приховує панель пов\'язаних або рекомендованих спільнот у сабредітах</string>
+  <string name="morphe_hide_trending_shelves_title">Приховати панелі \"Популярне\"</string>
+  <string name="morphe_hide_trending_shelves_summary">Приховує панелі \"Популярне\" зі стрічки та пошукових підказок</string>
+  <string name="morphe_remove_notification_dialog_title">Видалити діалог пропозиції сповіщень</string>
+  <string name="morphe_remove_notification_dialog_summary">Автоматично закриває діалог пропозиції сповіщень при відвідуванні субредіту</string>
+  <string name="morphe_show_view_count_title">Показувати кількість переглядів у публікаціях</string>
+  <string name="morphe_show_view_count_summary">Обмеження: Доступно лише якщо відповідь API містить кількість переглядів</string>
+  <string name="morphe_remove_nsfw_dialog_title">Видалити діалог попередження NSFW</string>
+  <string name="morphe_remove_nsfw_dialog_summary">Автоматично підтверджує попередження про контент для дорослих при відвідуванні субредіту</string>
+  <string name="morphe_screen_miscellaneous_title">Різне</string>
+  <string name="morphe_about_title">Про Morphe</string>
+  <string name="morphe_about_summary">Версія патчів та офіційні посилання</string>
+  <string name="morphe_sanitize_sharing_links_title">Очищення посилань для поширення</string>
+  <string name="morphe_sanitize_sharing_links_summary">Видаляє параметри відстеження з посилань при поширенні</string>
+  <string name="morphe_open_links_directly_title">Відкривати посилання напряму</string>
+  <string name="morphe_open_links_directly_summary">Оминає URL-адреси переспрямування при відкритті зовнішніх посилань</string>
+  <string name="morphe_open_links_externally_title">Відкривати посилання ззовні</string>
+  <string name="morphe_open_links_externally_summary">Відкриває посилання у браузері замість вбудованого браузера застосунку</string>
+</resources>

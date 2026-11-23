@@ -1,0 +1,16 @@
+package app.morphe.patches.youtube.layout.hide.signintotvpopup
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patches.all.misc.resources.ResourceType
+import app.morphe.patches.all.misc.resources.resourceLiteral
+
+internal object SignInToTVPopupFingerprint : Fingerprint(
+    returnType = "Z",
+    parameters = listOf("Ljava/lang/String;", "Z", "L"),
+    filters = listOf(
+        resourceLiteral(
+            ResourceType.STRING,
+            "mdx_seamless_tv_sign_in_drawer_fragment_title"
+        )
+    )
+)

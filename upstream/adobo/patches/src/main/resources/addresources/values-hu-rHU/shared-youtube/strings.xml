@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Indíts újra a beállítások befejezéséhez</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Alkalmazás neve</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Egyéni</string>
+  <string name="morphe_custom_branding_icon_title">Alkalmazás ikonja</string>
+  <string name="morphe_custom_branding_icon_entry_1">Eredeti</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe fekete</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe sötét</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe világos</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe világos játék</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe fekete játék</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Egyéni</string>
+  <string name="morphe_custom_branding_notification_icon_title">Értesítési ikon</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Alkalmazás ikonjának módosítása</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe lejátszás</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Morphe Értesítés</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">A megtekintési előzmények mentése nem történik meg.&lt;br&gt;&lt;br&gt;Ezt valószínűleg egy DNS-hirdetésblokkoló vagy hálózati proxy okozza.&lt;br&gt;&lt;br&gt;A probléma megoldásához vegye fel az engedélyezőlistára az &lt;b&gt;s.youtube.com&lt;/b&gt; domaint vagy kapcsolja ki az összes DNS-blokkolót és proxyt.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Ne jelenjen meg többet</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Videó streamek hamisítása</string>
+  <string name="morphe_spoof_video_streams_screen_summary">A kliens videó streamek hamisítása a lejátszási problémák elkerülése érdekében</string>
+  <string name="morphe_spoof_video_streams_title">Hamis videó stream</string>
+  <string name="morphe_spoof_video_streams_summary">"Javítja a lejátszási problémákat a legtöbb felhasználó számára azáltal, hogy kompatibilis videostreamet kér
+
+Ha YouTube Premium-felhasználó vagy, ez a beállítás nem feltétlenül szükséges."</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Nem találtunk ügyfelek által megosztott folyamokat</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Ennek a beállításnak a kikapcsolása lejátszási problémákat okozhat.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Próbálja meg a következők engedélyezését: Spoof video streams &gt; Android VR bejelentkezés</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Alapértelmezett kliens</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Android VR bejelentkezés</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Nem vagy bejelentkezve az Android VR-ben. Vágja le a kurzort itt a bejelentkezéshez</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Jelenleg bejelentkezve az Android VR-ben</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Ehhez a funkcionálisitásért, változtassa meg a \"Default client\" (alap ügyfél) beállítás lehetőséget az Android VR-ba</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Bejelentkezés az Android VR-ba</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Android VR-ba belépéssel megoldhatók a lejátszás problémái
+
+Belépéshez nyomd meg a folytatást alul"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Folytatás</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Kijelentkezés</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Utasítások</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Engedélykód: %s
+
+1. Nyomja meg az \"Open website\" (Webhely megnyitása) lehetőséget a fenti weboldal megnyitásához, hogy a \"Connect a device\" (Eszköz kapcsolása) weboldalt nyissa meg
+2. Illessze be a klipborító (vagy írja le) fenti képernyőn található engedélykódot
+3. Ha a promptot (leütöttékbirod) kérdés feltételezi, jelentkezzen be a Google be. Ha több fiókját használja, válassza ki ezt a YouTube fiókot
+4. Válaszoljon \"Allow YouTube VR\" (Engedélyezés a YouTube VR számára)
+5. A \"Device connected\" (Eszköz kapcsolva) üzenettel való visszatérés után térjen vissza ez az alkalmazás"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Webhely megnyitása</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Sikertelen volt az engedélykód kiállítása</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Sikertelen volt az elérési jogkivonat kiállítása</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Sikeresen bejelentkezett</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Elérési jogkivonat el lett mentve
+
+• A Morphe beállításai nem exportálhatnak/be nem importhatnak Android VR-hez elérési jogkivonatot
+• Ha ez az alkalmazás 6 hónapig nem használatos, a Google eltávolítja ezt az elérési jogkivonatot
+• Ha megváltoztatja a Google jelszavát vagy eltávolítja ezt az eszközt a Google beállításairól, újra be kell jelentkeznie"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">Az OAuth2 átmenetileg nem elérhető (az API időtúllépés miatt)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Android VR belépés lejárt, próbáld meg újra belépni a VR-ba</string>
+  <string name="morphe_oauth2_connection_failure_status">Az OAuth2 átmenetileg nem elérhető (állapot %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">Az OAuth2 átmenetileg nem elérhető</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Nem lehetséges a VR-ba belépni, a webhely hitelesítése nem lett jóváhagyva</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Nem tud bejelentkezni a VR-ba: %s</string>
+  <string name="morphe_oauth2_toast_reset">Kijelentkezett az Android VR-ből</string>
+  <string name="morphe_oauth2_toast_invalid">Érvénytelen VR bejelentkezési token, próbálja meg újra a bejelentkezést a VR-ba</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Kapcsold ki a lejátszó JavaScript frissítését</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Rögzíti a lejátszó JavaScript verzióját egy adott változatra
+
+• Érvényes lejátszó JavaScript hash szükséges
+• A lejátszó JavaScript hash körülbelül egy hónapig érvényes, a lejárt hash-eket a GVS visszavonja
+• A lejátszás meghiúsul, ha a hash érvénytelen."</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Érvényes lejátszó JavaScript hash-t kell megadnia.
+
+A lejátszás meghiúsul, ha a lejátszó JavaScript hash elavult."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Játékos JavaScript hash</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Adjon meg egy érvényes játékos JavaScript hasht</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">QUIC protokoll letiltása</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">DRC hang letiltása</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Eredeti hang kikényszerítése</string>
+  <string name="morphe_force_original_audio_summary">Mindig az eredeti hangszálat játssza le a videóhoz, a szinkronizált helyett</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Hálózati proxy</string>
+  <string name="morphe_proxy_screen_summary">A hálózati kérések proxy-n keresztül történő irányítása.</string>
+  <string name="morphe_proxy_enabled_title">Proxy engedélyezése</string>
+  <string name="morphe_proxy_enabled_summary">A konfigurált HTTP vagy HTTPS proxy segítségével továbbítja a hálózati kéréseket.</string>
+  <string name="morphe_proxy_host_title">Proxy szerver címe</string>
+  <string name="morphe_proxy_host_summary">A proxy szerver hosztneve vagy IP-címe</string>
+  <string name="morphe_proxy_port_title">Proxy port</string>
+  <string name="morphe_proxy_port_summary">A proxy szerver portja</string>
+  <string name="morphe_proxy_https_title">HTTPS proxy használata</string>
+  <string name="morphe_proxy_https_summary">HTTP helyett HTTPS használata a proxy szerverhez való csatlakozáshoz</string>
+  <string name="morphe_proxy_auth_enabled_title">Proxy hitelesítés</string>
+  <string name="morphe_proxy_auth_enabled_summary">Alap hitelesítést küld a proxy kérésekkel</string>
+  <string name="morphe_proxy_auth_username_title">Proxy felhasználónév</string>
+  <string name="morphe_proxy_auth_username_summary">Felhasználónév az alap proxy hitelesítéshez</string>
+  <string name="morphe_proxy_auth_password_title">Proxy jelszó</string>
+  <string name="morphe_proxy_auth_password_summary">Jelszó az alap proxy hitelesítéshez</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Közvetlen kapcsolódás engedélyezése</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Közvetlenül csatlakozzon, ha a proxy nem válaszol.</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Teljesképernyős-hirdetések elrejtése</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">A funkció használatához módosítsa a \"Videóstreamek hamisítása\" beállítást Android Reel vagy TV-re</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Megosztási linkek tisztítása</string>
+  <string name="morphe_sanitize_sharing_links_summary">Eltávolítja a követési paramétereket a megosztott linkekből</string>
+  <string name="morphe_replace_music_with_youtube_title">Módosítsa a megosztási linkeket youtube.com-ra</string>
+  <string name="morphe_replace_music_with_youtube_summary">A megosztott linkekben lecseréli a music.youtube.com-ot a youtube.com-ra</string>
+  <string name="morphe_replace_links_with_shortener_title">Módosítsa a megosztási linkeket youtu.be-ra</string>
+  <string name="morphe_replace_links_with_shortener_summary">Erősíti a videók használatát a rövidített youtu.be URL formátummal</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Naplózási protokoll puffer</string>
+  <string name="morphe_debug_protobuffer_summary">További naplózási információkat ad a fejlesztőknek az alkalmazás komponenseinek azonosításához.</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"​A beállítás engedélyezése további elrendezési adatokat naplóz, beleértve egyes felületi elemek képernyőn megjelenő szövegeit is.
+
+​Ez segíthet az összetevők beazonosításában egyedi szűrők készítésekor.
+
+​Azonban a funkció bekapcsolása bizonyos felhasználói adatokat, például az IP-címedet is naplózni fogja."</string>
+</resources>

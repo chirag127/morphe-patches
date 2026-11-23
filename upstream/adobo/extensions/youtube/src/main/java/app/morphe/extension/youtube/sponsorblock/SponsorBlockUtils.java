@@ -1,0 +1,769 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.extension.youtube.sponsorblock;
+
+import static app.morphe.extension.shared.StringRef.str;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.util.Pair;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+import java.text.NumberFormat;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.ui.CustomDialog;
+import app.morphe.extension.shared.ui.Dim;
+import app.morphe.extension.shared.ui.SheetBottomDialog;
+import app.morphe.extension.shared.sponsorblock.SegmentPlaybackController;
+import app.morphe.extension.shared.sponsorblock.objects.CategoryBehaviour;
+import app.morphe.extension.shared.sponsorblock.objects.SegmentCategory;
+import app.morphe.extension.shared.sponsorblock.objects.SponsorSegment;
+import app.morphe.extension.shared.sponsorblock.objects.SponsorSegment.SegmentVote;
+import app.morphe.extension.shared.sponsorblock.requests.SBRequester;
+import app.morphe.extension.shared.sponsorblock.requests.SBRequester.SegmentSubmitAction;
+import app.morphe.extension.youtube.patches.VideoInformation;
+import app.morphe.extension.youtube.settings.Settings;
+import app.morphe.extension.youtube.sponsorblock.ui.SponsorBlockViewController;
+
+/**
+ * Not thread safe. All fields/methods must be accessed from the main thread.
+ */
+public class SponsorBlockUtils {
+    private static final int LOCKED_COLOR = Color.parseColor("#FFC83D");
+    private static final String MANUAL_EDIT_TIME_TEXT_HINT = "hh:mm:ss.sss";
+    private static final Pattern manualEditTimePattern
+            = Pattern.compile("((\\d{1,2}):)?(\\d{1,2}):(\\d{2})(\\.(\\d{1,3}))?");
+    private static final NumberFormat statsNumberFormatter = NumberFormat.getNumberInstance();
+
+    private static long newSponsorSegmentDialogShownMillis;
+    private static long newSponsorSegmentStartMillis = -1;
+    private static long newSponsorSegmentEndMillis = -1;
+    private static boolean newSponsorSegmentPreviewed;
+    private static SegmentCategory newUserCreatedSegmentCategory;
+    private static final DialogInterface.OnClickListener segmentTypeListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            try {
+                SegmentCategory category = SegmentCategory.categoriesWithoutUnsubmitted()[which];
+                final boolean enableButton;
+                if (category.behaviour == CategoryBehaviour.IGNORE) {
+                    Utils.showToastLong(str("morphe_sb_new_segment_disabled_category"));
+                    enableButton = false;
+                } else {
+                    newUserCreatedSegmentCategory = category;
+                    enableButton = true;
+                }
+
+                ((AlertDialog) dialog)
+                        .getButton(DialogInterface.BUTTON_POSITIVE)
+                        .setEnabled(enableButton);
+            } catch (Exception ex) {
+                Logger.printException(() -> "segmentTypeListener failure", ex);
+            }
+        }
+    };
+    private static final DialogInterface.OnClickListener segmentCategorySelectedDialogListener = (dialog, which) -> {
+        dialog.dismiss();
+        submitNewSegment();
+    };
+    private static final EditByHandSaveDialogListener editByHandSaveDialogListener = new EditByHandSaveDialogListener();
+    private static void showEditByHandInputDialog(boolean isStart, Context context) {
+        final EditText textView = new EditText(context);
+        textView.setHint(MANUAL_EDIT_TIME_TEXT_HINT);
+        if (isStart) {
+            if (newSponsorSegmentStartMillis >= 0)
+                textView.setText(formatSegmentTime(newSponsorSegmentStartMillis));
+        } else {
+            if (newSponsorSegmentEndMillis >= 0)
+                textView.setText(formatSegmentTime(newSponsorSegmentEndMillis));
+        }
+
+        editByHandSaveDialogListener.settingStart = isStart;
+        editByHandSaveDialogListener.editTextRef = new WeakReference<>(textView);
+
+        Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
+                context,
+                str(isStart ? "morphe_sb_new_segment_time_start" : "morphe_sb_new_segment_time_end"),
+                null,
+                textView,
+                null,
+                () -> editByHandSaveDialogListener.saveTime(false),
+                null,
+                str("morphe_sb_new_segment_now"),
+                () -> editByHandSaveDialogListener.saveTime(true),
+                true
+        );
+        dialogPair.first.show();
+    }
+    private static void onSegmentVoteClicked(Context context, SponsorSegment segment) {
+        try {
+            SegmentVote[] voteOptions = (segment.category == SegmentCategory.HIGHLIGHT)
+                    ? SegmentVote.voteTypesWithoutCategoryChange // Highlight segments cannot change category.
+                    : SegmentVote.values();
+            final int voteOptionsLength = voteOptions.length;
+            final boolean userIsVip = Settings.SB_USER_IS_VIP.get();
+            CharSequence[] items = new CharSequence[voteOptionsLength];
+
+            for (int i = 0; i < voteOptionsLength; i++) {
+                SegmentVote voteOption = voteOptions[i];
+                CharSequence title = voteOption.title.toString();
+                if (userIsVip && segment.isLocked && voteOption.highlightIfVipAndVideoIsLocked) {
+                    SpannableString coloredTitle = new SpannableString(title);
+                    coloredTitle.setSpan(new ForegroundColorSpan(LOCKED_COLOR),
+                            0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    title = coloredTitle;
+                }
+                items[i] = title;
+            }
+
+            new AlertDialog.Builder(context).setItems(items, (dialog1, which1) -> {
+                SegmentVote voteOption = voteOptions[which1];
+                switch (voteOption) {
+                    case UPVOTE:
+                    case DOWNVOTE:
+                        SBRequester.voteForSegmentOnBackgroundThread(segment, voteOption);
+                        break;
+                    case CATEGORY_CHANGE:
+                        onNewCategorySelect(segment, context);
+                        break;
+                }
+            }).show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "onSegmentVoteClicked failure", ex);
+        }
+    }
+
+    private SponsorBlockUtils() {
+    }
+
+    static void setNewSponsorSegmentPreviewed() {
+        newSponsorSegmentPreviewed = true;
+    }
+
+    static void clearUnsubmittedSegmentTimes() {
+        newSponsorSegmentDialogShownMillis = 0;
+        newSponsorSegmentEndMillis = newSponsorSegmentStartMillis = -1;
+        newSponsorSegmentPreviewed = false;
+    }
+
+    private static void submitNewSegment() {
+        try {
+            Utils.verifyOnMainThread();
+            final SegmentCategory segmentCategory = newUserCreatedSegmentCategory;
+            final boolean isHighlight = segmentCategory == SegmentCategory.HIGHLIGHT;
+            final long start = newSponsorSegmentStartMillis;
+            final long end = (isHighlight ? start : newSponsorSegmentEndMillis);
+            final String videoId = VideoInformation.getVideoId();
+            final long videoLength = VideoInformation.getVideoLength();
+            SegmentSubmitAction submitType = isHighlight ? SegmentSubmitAction.HIGHLIGHT : SegmentSubmitAction.SKIP;
+
+            if (start < 0 || end < 0 || videoLength <= 0 || videoId.isEmpty() || segmentCategory == null) {
+                Logger.printException(() -> "Invalid parameters");
+                return;
+            }
+            if (!isHighlight && start >= end) {
+                Logger.printException(() -> "Invalid parameters");
+                return;
+            }
+
+            clearUnsubmittedSegmentTimes();
+            Utils.runOnBackgroundThread(() -> {
+                try {
+                    SBRequester.submitSegments(videoId, segmentCategory, submitType, start, end, videoLength);
+                    SegmentPlaybackController.executeDownloadSegments(videoId);
+                } catch (Exception ex) {
+                    Logger.printException(() -> "submitNewSegment failure", ex);
+                }
+            });
+        } catch (Exception ex) {
+            Logger.printException(() -> "submitNewSegment failure", ex);
+        }
+    }
+
+    public static void onMarkLocationClicked() {
+        try {
+            Utils.verifyOnMainThread();
+            newSponsorSegmentDialogShownMillis = VideoInformation.getVideoTime();
+            Context context = SponsorBlockViewController.getOverLaysViewGroupContext();
+
+            Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
+                    context,
+                    str("morphe_sb_new_segment_title"),
+                    str("morphe_sb_new_segment_mark_time_as_question",
+                            formatSegmentTime(newSponsorSegmentDialogShownMillis)),
+                    null,
+                    str("morphe_sb_new_segment_mark_end"),
+                    () -> newSponsorSegmentEndMillis = newSponsorSegmentDialogShownMillis,
+                    null,
+                    str("morphe_sb_new_segment_mark_start"),
+                    () -> newSponsorSegmentStartMillis = newSponsorSegmentDialogShownMillis,
+                    true,
+                    false
+            );
+            dialogPair.first.show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "onMarkLocationClicked failure", ex);
+        }
+    }
+
+    public static void onPublishClicked() {
+        try {
+            Utils.verifyOnMainThread();
+            Context context = SponsorBlockViewController.getOverLaysViewGroupContext();
+
+            final boolean hasStart = newSponsorSegmentStartMillis >= 0;
+            final boolean hasEnd = newSponsorSegmentEndMillis >= 0;
+
+            if (!hasStart && !hasEnd) {
+                Utils.showToastShort(str("morphe_sb_new_segment_mark_locations_first"));
+                return;
+            }
+
+            if (hasStart && !hasEnd) {
+                // Only start marked - offer to submit start as highlight.
+                Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
+                        context,
+                        str("morphe_sb_new_segment_highlight_title"),
+                        str("morphe_sb_new_segment_highlight_content",
+                                formatSegmentTime(newSponsorSegmentStartMillis)),
+                        null,
+                        str("morphe_sb_new_segment_highlight_submit"),
+                        () -> {
+                            newUserCreatedSegmentCategory = SegmentCategory.HIGHLIGHT;
+                            newSponsorSegmentEndMillis = newSponsorSegmentStartMillis;
+                            submitNewSegment();
+                        },
+                        () -> {}, null, null, true
+                );
+                dialogPair.first.show();
+                return;
+            }
+
+            // Both start and end marked.
+            if (newSponsorSegmentStartMillis >= newSponsorSegmentEndMillis) {
+                Utils.showToastShort(str("morphe_sb_new_segment_start_is_before_end"));
+                return;
+            }
+
+            if (!newSponsorSegmentPreviewed) {
+                Utils.showToastShort(str("morphe_sb_new_segment_preview_segment_first"));
+                return;
+            }
+
+            // Normal segment submit flow - show confirm then category picker.
+            final long segmentLength = (newSponsorSegmentEndMillis - newSponsorSegmentStartMillis) / 1000;
+            Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
+                    context,
+                    str("morphe_sb_new_segment_confirm_title"),
+                    str("morphe_sb_new_segment_confirm_content",
+                            formatSegmentTime(newSponsorSegmentStartMillis),
+                            formatSegmentTime(newSponsorSegmentEndMillis),
+                            getTimeSavedString(segmentLength)),
+                    null,
+                    str("morphe_sb_new_segment_confirm_submit"),
+                    () -> {
+                        SponsorBlockViewController.hideNewSegmentLayout();
+                        SegmentCategory[] categories = SegmentCategory.categoriesWithoutUnsubmitted();
+                        CharSequence[] titles = new CharSequence[categories.length];
+                        for (int i = 0, length = categories.length; i < length; i++) {
+                            titles[i] = categories[i].getTitleWithColorDot();
+                        }
+                        newUserCreatedSegmentCategory = null;
+                        new AlertDialog.Builder(SponsorBlockViewController.getOverLaysViewGroupContext())
+                                .setTitle(str("morphe_sb_new_segment_choose_category"))
+                                .setSingleChoiceItems(titles, -1, segmentTypeListener)
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .setPositiveButton(android.R.string.ok, segmentCategorySelectedDialogListener)
+                                .show()
+                                .getButton(DialogInterface.BUTTON_POSITIVE)
+                                .setEnabled(false);
+                    },
+                    () -> {}, null, null, true
+            );
+            dialogPair.first.show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "onPublishClicked failure", ex);
+        }
+    }
+
+    public static void onVotingClicked(Context context) {
+        try {
+            Utils.verifyOnMainThread();
+            SponsorSegment[] segments = SegmentPlaybackController.getSegments();
+            if (segments == null || segments.length == 0) {
+                // Button is hidden if no segments exist.
+                // But if prior video had segments, and current video does not,
+                // then the button persists until the overlay fades out (this is intentional, as abruptly hiding the button is jarring).
+                Utils.showToastShort(str("morphe_sb_vote_no_segments"));
+                return;
+            }
+
+            final int numberOfSegments = segments.length;
+            List<CharSequence> titleList = new ArrayList<>(numberOfSegments);
+            List<SponsorSegment> segmentList = new ArrayList<>(numberOfSegments);
+            for (SponsorSegment segment : segments) {
+                if (segment.category == SegmentCategory.UNSUBMITTED) {
+                    continue;
+                }
+
+                SpannableStringBuilder spannableBuilder = new SpannableStringBuilder();
+
+                spannableBuilder.append(segment.category.getTitleWithColorDot());
+                spannableBuilder.append('\n');
+
+                String startTime = formatSegmentTime(segment.start);
+                if (segment.category == SegmentCategory.HIGHLIGHT) {
+                    spannableBuilder.append(startTime);
+                } else {
+                    String toFromString = str("morphe_sb_vote_segment_time_to_from",
+                            startTime, formatSegmentTime(segment.end));
+                    spannableBuilder.append(toFromString);
+                }
+
+                spannableBuilder.setSpan(new StyleSpan(android.graphics.Typeface.BOLD),
+                        0, spannableBuilder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                titleList.add(spannableBuilder);
+                segmentList.add(segment);
+            }
+
+            if (titleList.isEmpty()) {
+                Utils.showToastShort(str("morphe_sb_vote_no_segments"));
+                return;
+            }
+
+            CharSequence[] titles = titleList.toArray(new CharSequence[0]);
+            SponsorSegment[] filteredSegments = segmentList.toArray(new SponsorSegment[0]);
+
+            new AlertDialog.Builder(context).setItems(titles, (dialog, which) ->
+                    onSegmentVoteClicked(context, filteredSegments[which])).show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "onVotingClicked failure", ex);
+        }
+    }
+
+    private static void onNewCategorySelect(SponsorSegment segment, Context context) {
+        try {
+            Utils.verifyOnMainThread();
+            final SegmentCategory[] values = SegmentCategory.categoriesWithoutHighlights();
+            CharSequence[] titles = new CharSequence[values.length];
+            for (int i = 0; i < values.length; i++) {
+                titles[i] = values[i].getTitleWithColorDot();
+            }
+
+            new AlertDialog.Builder(context)
+                    .setTitle(str("morphe_sb_new_segment_choose_category"))
+                    .setItems(titles, (dialog, which) -> SBRequester.voteToChangeCategoryOnBackgroundThread(segment, values[which]))
+                    .show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "onNewCategorySelect failure", ex);
+        }
+    }
+
+    public static void onPreviewClicked() {
+        try {
+            Utils.verifyOnMainThread();
+            if (newSponsorSegmentStartMillis < 0 || newSponsorSegmentEndMillis < 0) {
+                Utils.showToastShort(str("morphe_sb_new_segment_mark_locations_first"));
+            } else if (newSponsorSegmentStartMillis >= newSponsorSegmentEndMillis) {
+                Utils.showToastShort(str("morphe_sb_new_segment_start_is_before_end"));
+            } else {
+                SegmentPlaybackController.removeUnsubmittedSegments(); // If user hits preview more than once before playing.
+                SegmentPlaybackController.addUnsubmittedSegment(
+                        new SponsorSegment(SegmentCategory.UNSUBMITTED, null,
+                                newSponsorSegmentStartMillis, newSponsorSegmentEndMillis, false));
+                VideoInformation.seekTo(newSponsorSegmentStartMillis - 2000);
+            }
+        } catch (Exception ex) {
+            Logger.printException(() -> "onPreviewClicked failure", ex);
+        }
+    }
+
+    public static void showErrorDialog(String dialogMessage) {
+        Utils.runOnMainThreadNowOrLater(() -> {
+            Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
+                    SponsorBlockViewController.getOverLaysViewGroupContext(),
+                    null,
+                    dialogMessage,
+                    null,
+                    null,
+                    () -> {},
+                    null, null, null, true
+            );
+            dialogPair.first.setCancelable(false);
+            dialogPair.first.show();
+        });
+    }
+
+    public static void onEditByHandClicked() {
+        try {
+            Utils.verifyOnMainThread();
+            Context context = SponsorBlockViewController.getOverLaysViewGroupContext();
+            Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
+                    context,
+                    str("morphe_sb_new_segment_edit_by_hand_title"),
+                    str("morphe_sb_new_segment_edit_by_hand_content"),
+                    null,
+                    str("morphe_sb_new_segment_mark_end"),
+                    () -> showEditByHandInputDialog(false, context),
+                    null,
+                    str("morphe_sb_new_segment_mark_start"),
+                    () -> showEditByHandInputDialog(true, context),
+                    true,
+                    false
+            );
+            dialogPair.first.show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "onEditByHandClicked failure", ex);
+        }
+    }
+
+    public static String getNumberOfSkipsString(int viewCount) {
+        return statsNumberFormatter.format(viewCount);
+    }
+
+    private static long parseSegmentTime(String time) {
+        Matcher matcher = manualEditTimePattern.matcher(time);
+        if (!matcher.matches()) {
+            return -1;
+        }
+        String hoursStr = matcher.group(2); // Hours are optional.
+        String minutesStr = matcher.group(3);
+        String secondsStr = matcher.group(4);
+        String millisecondsStr = matcher.group(6); // Milliseconds are optional.
+
+        try {
+            final int hours = (hoursStr != null) ? Integer.parseInt(hoursStr) : 0;
+            //noinspection ConstantConditions
+            final int minutes = Integer.parseInt(minutesStr);
+            //noinspection ConstantConditions
+            final int seconds = Integer.parseInt(secondsStr);
+            final int milliseconds;
+            if (millisecondsStr != null) {
+                // Pad out with zeros if not all decimal places were used.
+                millisecondsStr = String.format(Locale.US, "%-3s", millisecondsStr).replace(' ', '0');
+                milliseconds = Integer.parseInt(millisecondsStr);
+            } else {
+                milliseconds = 0;
+            }
+
+            return (hours * 3600000L) + (minutes * 60000L) + (seconds * 1000L) + milliseconds;
+        } catch (NumberFormatException ex) {
+            Logger.printInfo(() -> "Time format exception: " + time, ex);
+            return -1;
+        }
+    }
+
+    private static String formatSegmentTime(long segmentTime) {
+        // Use same time formatting as shown in the video player.
+        final long videoLength = VideoInformation.getVideoLength();
+
+        // Cannot use DateFormatter, as videos over 24 hours will roll over and not display correctly.
+        final long hours = TimeUnit.MILLISECONDS.toHours(segmentTime);
+        final long minutes = TimeUnit.MILLISECONDS.toMinutes(segmentTime) % 60;
+        final long seconds = TimeUnit.MILLISECONDS.toSeconds(segmentTime) % 60;
+        final long milliseconds = segmentTime % 1000;
+
+        final String formatPattern;
+        Object[] formatArgs = {minutes, seconds, milliseconds};
+
+        if (videoLength < (10 * 60 * 1000)) {
+            formatPattern = "%01d:%02d.%03d"; // Less than 10 minutes.
+        } else if (videoLength < (60 * 60 * 1000)) {
+            formatPattern = "%02d:%02d.%03d"; // Less than 1 hour.
+        } else if (videoLength < (10 * 60 * 60 * 1000)) {
+            formatPattern = "%01d:%02d:%02d.%03d"; // Less than 10 hours.
+            formatArgs = new Object[]{hours, minutes, seconds, milliseconds};
+        } else {
+            formatPattern = "%02d:%02d:%02d.%03d"; // Why is this on YouTube?
+            formatArgs = new Object[]{hours, minutes, seconds, milliseconds};
+        }
+
+        return String.format(Locale.US, formatPattern, formatArgs);
+    }
+
+    public static String getTimeSavedString(long totalSecondsSaved) {
+        Duration duration = Duration.ofSeconds(totalSecondsSaved);
+        final long hours = duration.toHours();
+        final long minutes = duration.toMinutes() % 60;
+
+        // Format all numbers so non-western numbers use a consistent appearance.
+        String minutesFormatted = statsNumberFormatter.format(minutes);
+        if (hours > 0) {
+            String hoursFormatted = statsNumberFormatter.format(hours);
+            return str("morphe_sb_stats_saved_hour_format", hoursFormatted, minutesFormatted);
+        }
+
+        final long seconds = duration.getSeconds() % 60;
+        String secondsFormatted = statsNumberFormatter.format(seconds);
+        if (minutes > 0) {
+            return str("morphe_sb_stats_saved_minute_format", minutesFormatted, secondsFormatted);
+        }
+
+        return str("morphe_sb_stats_saved_second_format", secondsFormatted);
+    }
+
+    public static void showChannelWhitelistDialog(Context context) {
+        try {
+            Utils.verifyOnMainThread();
+
+            SheetBottomDialog.DraggableLinearLayout mainLayout =
+                    SheetBottomDialog.createMainLayout(context, null);
+            mainLayout.setPadding(Dim.dp16, 0, Dim.dp16, Dim.dp16);
+
+            TextView titleView = new TextView(context);
+            titleView.setText(str("morphe_sb_channel_whitelist_title"));
+            titleView.setTextSize(18);
+            titleView.setTypeface(Typeface.DEFAULT_BOLD);
+            titleView.setTextColor(Utils.getAppForegroundColor());
+            titleView.setGravity(Gravity.CENTER_HORIZONTAL);
+            LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            titleParams.setMargins(0, Dim.dp8, 0, Dim.dp16);
+            titleView.setLayoutParams(titleParams);
+            mainLayout.addView(titleView);
+
+            LinearLayout dynamicContainer = new LinearLayout(context);
+            dynamicContainer.setOrientation(LinearLayout.VERTICAL);
+            mainLayout.addView(dynamicContainer);
+
+            buildWhitelistContent(context, dynamicContainer);
+
+            SheetBottomDialog.SlideDialog dialog =
+                    SheetBottomDialog.createSlideDialog(context, mainLayout, 300);
+            dialog.show();
+        } catch (Exception ex) {
+            Logger.printException(() -> "showChannelWhitelistDialog failure", ex);
+        }
+    }
+
+    private static void buildWhitelistContent(Context context, LinearLayout container) {
+        container.removeAllViews();
+
+        String currentChannelId = VideoInformation.getChannelId();
+        if (!currentChannelId.isEmpty()) {
+            String currentChannelName = VideoInformation.getChannelName();
+            String currentDisplayName = currentChannelName.isEmpty() ? currentChannelId : currentChannelName;
+
+            TextView sectionLabel = new TextView(context);
+            sectionLabel.setText(str("morphe_sb_channel_whitelist_current_channel"));
+            sectionLabel.setTextSize(13);
+            sectionLabel.setTextColor(Utils.getAppForegroundColor());
+            sectionLabel.setAlpha(0.7f);
+            LinearLayout.LayoutParams labelParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            labelParams.setMargins(0, 0, 0, Dim.dp4);
+            sectionLabel.setLayoutParams(labelParams);
+            container.addView(sectionLabel);
+
+            LinearLayout currentRow = new LinearLayout(context);
+            currentRow.setOrientation(LinearLayout.HORIZONTAL);
+            currentRow.setGravity(Gravity.CENTER_VERTICAL);
+            LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            rowParams.setMargins(0, 0, 0, Dim.dp12);
+            currentRow.setLayoutParams(rowParams);
+
+            TextView channelIdText = new TextView(context);
+            channelIdText.setText(currentDisplayName);
+            channelIdText.setTextSize(14);
+            channelIdText.setTextColor(Utils.getAppForegroundColor());
+            channelIdText.setLayoutParams(new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+            channelIdText.setEllipsize(TextUtils.TruncateAt.END);
+            channelIdText.setSingleLine(true);
+            currentRow.addView(channelIdText);
+
+            boolean isWhitelisted = SponsorBlockChannelWhitelist.isChannelWhitelisted(currentChannelId);
+            Button actionBtn = CustomDialog.createButton(
+                    context, null,
+                    isWhitelisted
+                            ? str("morphe_sb_channel_whitelist_remove")
+                            : str("morphe_sb_channel_whitelist_add"),
+                    () -> {
+                        if (SponsorBlockChannelWhitelist.isChannelWhitelisted(currentChannelId)) {
+                            SponsorBlockChannelWhitelist.removeChannel(currentChannelId);
+                            Utils.showToastShort(str("morphe_sb_channel_whitelist_channel_removed"));
+                        } else {
+                            SponsorBlockChannelWhitelist.addChannel(currentChannelId, currentChannelName);
+                            Utils.showToastShort(str("morphe_sb_channel_whitelist_channel_added"));
+                        }
+                        buildWhitelistContent(context, container);
+                    },
+                    !isWhitelisted, false
+            );
+            LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, Dim.dp36);
+            btnParams.setMargins(Dim.dp8, 0, 0, 0);
+            actionBtn.setLayoutParams(btnParams);
+            currentRow.addView(actionBtn);
+            container.addView(currentRow);
+
+            View divider = new View(context);
+            divider.setBackgroundColor(Utils.isDarkModeEnabled() ? 0x26FFFFFF : 0x26000000);
+            LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, Dim.dp1);
+            dividerParams.setMargins(0, 0, 0, Dim.dp12);
+            divider.setLayoutParams(dividerParams);
+            container.addView(divider);
+        }
+
+        TextView channelsHeader = new TextView(context);
+        channelsHeader.setText(str("morphe_sb_channel_whitelist_channels_header"));
+        channelsHeader.setTextSize(13);
+        channelsHeader.setTextColor(Utils.getAppForegroundColor());
+        channelsHeader.setAlpha(0.7f);
+        LinearLayout.LayoutParams headerParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        headerParams.setMargins(0, 0, 0, Dim.dp8);
+        channelsHeader.setLayoutParams(headerParams);
+        container.addView(channelsHeader);
+
+        LinkedHashMap<String, String> channels = SponsorBlockChannelWhitelist.getWhitelistedChannels();
+
+        if (channels.isEmpty()) {
+            TextView emptyView = new TextView(context);
+            emptyView.setText(str("morphe_sb_channel_whitelist_empty"));
+            emptyView.setTextSize(14);
+            emptyView.setTextColor(Utils.getAppForegroundColor());
+            emptyView.setAlpha(0.5f);
+            emptyView.setGravity(Gravity.CENTER_HORIZONTAL);
+            LinearLayout.LayoutParams emptyParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            emptyParams.setMargins(0, Dim.dp8, 0, Dim.dp8);
+            emptyView.setLayoutParams(emptyParams);
+            container.addView(emptyView);
+        } else {
+            ScrollView scrollView = new ScrollView(context);
+            scrollView.setVerticalScrollBarEnabled(false);
+            scrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+            scrollView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    Math.min(Dim.pctHeight(40), channels.size() * Dim.dp(44))));
+
+            LinearLayout listContainer = new LinearLayout(context);
+            listContainer.setOrientation(LinearLayout.VERTICAL);
+
+            for (Map.Entry<String, String> entry : channels.entrySet()) {
+                String id = entry.getKey();
+                String name = entry.getValue();
+                String displayName = name.isEmpty() ? id : name;
+                listContainer.addView(buildChannelRow(context, id, displayName, container));
+            }
+
+            scrollView.addView(listContainer);
+            container.addView(scrollView);
+        }
+    }
+
+    private static LinearLayout buildChannelRow(Context context, String channelId, String displayName, LinearLayout container) {
+        LinearLayout row = new LinearLayout(context);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER_VERTICAL);
+        LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        rowParams.setMargins(0, 0, 0, Dim.dp8);
+        row.setLayoutParams(rowParams);
+
+        TextView idText = new TextView(context);
+        idText.setText(displayName);
+        idText.setTextSize(14);
+        idText.setTextColor(Utils.getAppForegroundColor());
+        idText.setLayoutParams(new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        idText.setEllipsize(TextUtils.TruncateAt.END);
+        idText.setSingleLine(true);
+        row.addView(idText);
+
+        Button removeBtn = CustomDialog.createButton(
+                context, null,
+                str("morphe_sb_channel_whitelist_remove"),
+                () -> {
+                    SponsorBlockChannelWhitelist.removeChannel(channelId);
+                    Utils.showToastShort(str("morphe_sb_channel_whitelist_channel_removed"));
+                    buildWhitelistContent(context, container);
+                },
+                false, false
+        );
+        LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, Dim.dp36);
+        btnParams.setMargins(Dim.dp8, 0, 0, 0);
+        removeBtn.setLayoutParams(btnParams);
+        row.addView(removeBtn);
+
+        return row;
+    }
+
+    private static class EditByHandSaveDialogListener implements DialogInterface.OnClickListener {
+        private boolean settingStart;
+        private WeakReference<EditText> editTextRef = new WeakReference<>(null);
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            saveTime(which == DialogInterface.BUTTON_NEUTRAL);
+        }
+
+        public void saveTime(boolean useCurrentTime) {
+            try {
+                final EditText editText = editTextRef.get();
+                if (editText == null) return;
+
+                final long time;
+                if (useCurrentTime) {
+                    time = VideoInformation.getVideoTime();
+                } else {
+                    time = parseSegmentTime(editText.getText().toString());
+                    if (time < 0) {
+                        Utils.showToastLong(str("morphe_sb_new_segment_edit_by_hand_parse_error"));
+                        return;
+                    }
+                }
+
+                if (settingStart) {
+                    newSponsorSegmentStartMillis = Math.max(time, 0);
+                } else {
+                    newSponsorSegmentEndMillis = time;
+                }
+
+                if (useCurrentTime) {
+                    showEditByHandInputDialog(settingStart, editText.getContext());
+                }
+            } catch (Exception ex) {
+                Logger.printException(() -> "EditByHandSaveDialogListener failure", ex);
+            }
+        }
+    }
+}

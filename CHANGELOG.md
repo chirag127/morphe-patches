@@ -1,3 +1,32 @@
+## [1.6.0](https://github.com/chirag127/morphe-patches/compare/v1.5.1...v1.6.0) (2026-07-09)
+
+### 🐛 Bug Fixes
+
+* **constants:** add underscored aliases for authored patch imports ([4eb8630](https://github.com/chirag127/morphe-patches/commit/4eb8630374fa1be3b83ffa1ee764a77cd4406807))
+
+### ✨ New Features
+
+* 21-app STUB fanout partial (26 files) ([a48e524](https://github.com/chirag127/morphe-patches/commit/a48e524f7c87be388492c3b4213a1170f68de6a2))
+
+## [1.5.1](https://github.com/chirag127/morphe-patches/compare/v1.5.0...v1.5.1) (2026-07-09)
+
+### 🔧 Improvements
+
+* **ci:** Gradle + APK caching + expand verify matrix to 27 targets ([860c01e](https://github.com/chirag127/morphe-patches/commit/860c01e64f23451d4468d8f1f2888a4f3774566c))
+
+## [1.5.0](https://github.com/chirag127/morphe-patches/compare/v1.4.0...v1.5.0) (2026-07-09)
+
+### 🐛 Bug Fixes
+
+* **github-comment-surface:** nested /* in doc comment closed outer block ([3277965](https://github.com/chirag127/morphe-patches/commit/327796575126373fc7a649996fcc720ea7e1014f))
+* **verify:** correct morphe-cli fetch — versioned asset name ([c8bbe3e](https://github.com/chirag127/morphe-patches/commit/c8bbe3ebddedc8348a857e24cecc316b73376ac1))
+
+### ✨ New Features
+
+* 22-app fanout — 6 subtrees + on-top + 16 fresh-RE + auto-build pipeline ([f5f01bf](https://github.com/chirag127/morphe-patches/commit/f5f01bfad9873df1703d89ffbb5c45f876032fb2))
+* **github-app:** initial water-patch bundle for com.github.android ([249b743](https://github.com/chirag127/morphe-patches/commit/249b7432816650d8134e4ff24838a896e0a171ac))
+* **googlenews:** initial Google News ad-strip patches (STUB, default=false) ([af9b01b](https://github.com/chirag127/morphe-patches/commit/af9b01bf3516ce738687e869d713506ac25a2f1e))
+
 ## [1.4.0](https://github.com/chirag127/morphe-patches/compare/v1.3.1...v1.4.0) (2026-07-08)
 
 ### ✨ New Features

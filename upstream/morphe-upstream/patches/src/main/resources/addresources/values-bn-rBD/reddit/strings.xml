@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <string name="morphe_screen_ads_title">বিজ্ঞাপন</string>
+  <string name="morphe_hide_post_ads_title">ফিড বিজ্ঞাপন লুকান</string>
+  <string name="morphe_hide_comment_ads_title">মন্তব্য বিজ্ঞাপনের লুকান</string>
+  <string name="morphe_screen_navigation_bar_title">নেভিগেশন বার</string>
+  <string name="morphe_hide_answers_button_title">উত্তর বোতাম লুকান</string>
+  <string name="morphe_hide_chat_button_title">চ্যাট বোতাম লুকান</string>
+  <string name="morphe_hide_create_button_title">তৈরি বোতাম লুকান</string>
+  <string name="morphe_hide_discover_button_title">ডিসকভার বা কমিউনিটিস বোতাম লুকান</string>
+  <string name="morphe_hide_games_button_title">গেমস বোতাম লুকান</string>
+  <string name="morphe_screen_sidebar_title">সাইডবার</string>
+  <string name="morphe_hide_recently_visited_shelf_title">সাম্প্রতিক ভিজিট করা শেল্ফ লুকান</string>
+  <string name="morphe_hide_games_on_reddit_shelf_title">রেডিট শেল্ফে গেমস লুকান</string>
+  <string name="morphe_hide_reddit_pro_shelf_title">রেডিট প্রো শেল্ফ লুকান</string>
+  <string name="morphe_hide_about_shelf_title">অ্যাবাউট শেল্ফ লুকান</string>
+  <string name="morphe_hide_resources_shelf_title">রিসোর্স শেল্ফ লুকান</string>
+  <string name="morphe_screen_layout_title">বিন্যাস</string>
+  <string name="morphe_disable_modern_home_title">আধুনিক হোম ইউআই নিষ্ক্রিয় করুন</string>
+  <string name="morphe_disable_screenshot_popup_title">স্ক্রিনশট পপআপ নিষ্ক্রিয় করুন</string>
+  <string name="morphe_disable_screenshot_popup_summary">স্ক্রিনশট নেওয়ার সময় যে পপআপটি দেখা যায় সেটি নিষ্ক্রিয় করা হয়েছে</string>
+  <string name="morphe_hide_ask_button_title">লুকানোর বোতামটি জিজ্ঞাসা করুন</string>
+  <string name="morphe_hide_ask_button_summary">সার্চ বারে জিজ্ঞাসা করার বোতামটি লুকায়</string>
+  <string name="morphe_hide_communities_shelf_title">কমিউনিটি শেলফ লুকিয়ে রাখুন</string>
+  <string name="morphe_hide_communities_shelf_summary">সাবরেডিটগুলোর ভেতরের সম্পর্কিত বা প্রস্তাবিত কমিউনিটি শেলফ লুকিয়ে রাখে</string>
+  <string name="morphe_hide_trending_shelves_title">ট্রেন্ডিং শেলফগুলো লুকিয়ে রাখুন</string>
+  <string name="morphe_hide_trending_shelves_summary">অনুসন্ধান পরামর্শ এবং ফিড থেকে \'ট্রেন্ডিং\' শেলফগুলি লুকায়</string>
+  <string name="morphe_remove_notification_dialog_title">নোটিফিকেশন পরামর্শ ডায়ালগ সরান</string>
+  <string name="morphe_remove_notification_dialog_summary">সাবরেডিট ভিজিট করার সময় স্বয়ংক্রিয়ভাবে নোটিফিকেশন পরামর্শ ডায়ালগটি খারিজ করে দেয়</string>
+  <string name="morphe_show_view_count_title">পোস্টগুলিতে ভিউ গণনা দেখান</string>
+  <string name="morphe_show_view_count_summary">সীমাবদ্ধতা: শুধুমাত্র API প্রতিক্রিয়াতে ভিউ গণনা অন্তর্ভুক্ত থাকলে উপলব্ধ হবে</string>
+  <string name="morphe_remove_nsfw_dialog_title">NSFW সতর্কতা ডায়ালগ সরান</string>
+  <string name="morphe_remove_nsfw_dialog_summary">সাবরেডিট ভিজিট করার সময় স্বয়ংক্রিয়ভাবে NSFW বিষয়বস্তু সতর্কতা গ্রহণ করে</string>
+  <string name="morphe_screen_miscellaneous_title">বিবিধ</string>
+  <string name="morphe_about_title">মর্ফ সম্পর্কে</string>
+  <string name="morphe_about_summary">সংস্করণ এবং অফিসিয়াল লিঙ্ক</string>
+  <string name="morphe_sanitize_sharing_links_title">শেয়ারিং লিঙ্ক স্যানিটাইজ করুন</string>
+  <string name="morphe_sanitize_sharing_links_summary">শেয়ার করা লিঙ্ক থেকে ট্র্যাকিং ক্যোয়ারি প্যারামিটার সরানো হয়েছে</string>
+  <string name="morphe_open_links_directly_title">লিঙ্ক সরাসরি খুলুন</string>
+  <string name="morphe_open_links_directly_summary">বাহ্যিক লিঙ্ক খোলার সময় রিডাইরেক্ট URLগুলি বাইপাস করে</string>
+  <string name="morphe_open_links_externally_title">\'\'</string>
+  <string name="morphe_open_links_externally_summary">ইন-অ্যাপ ব্রাউজারের পরিবর্তে আপনার ব্রাউজারে লিঙ্ক খোলে</string>
+</resources>

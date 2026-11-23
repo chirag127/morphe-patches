@@ -34,6 +34,150 @@ object Constants {
         "com.truecaller" to null,
     )
 
+    /**
+     * Google News (com.google.android.apps.magazines). No traditional AdMob
+     * entrypoints in app code — ad surfaces are native feed cards keyed by
+     * SPONSORED_ARTICLE_AD enum in obfuscated class `akxk`, plus IMA SDK for
+     * video/pause ads and `com.google.android.gms.ads.adshield` for integrity.
+     * Version pin left null; atomic patches are STUBs pending fingerprint work.
+     */
+    val COMPATIBILITY_GOOGLE_NEWS: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.magazines" to null,
+    )
+
+    /**
+     * GitHub Android app (closed source; Play Store only). Version pin left null; atomic
+     * patches target color palette entries in `res/values-night/colors.xml` and view-model
+     * anchors observed in the workflow-disassembled v1.255.x smali (see
+     * `disassembled-com.github.android` artifact: 108 files under `smali/com/github/android/comment/`
+     * plus preserved-name `ComposeCommentBottomSheetDialog.smali`; Firebase Analytics present
+     * in `smali_classes4/com/google/firebase/analytics/`).
+     */
+    val COMPATIBILITY_GITHUB_ANDROID: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.github.android" to null,
+    )
+
+    /** YouTube (Google). Piko/on-top variants layer on Morphe base. */
+    val COMPATIBILITY_YOUTUBE: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.youtube" to null,
+    )
+
+    /** Twitter / X. */
+    val COMPATIBILITY_TWITTER: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.twitter.android" to null,
+    )
+
+    /** Instagram. */
+    val COMPATIBILITY_INSTAGRAM: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.instagram.android" to null,
+    )
+
+    /** TikTok (musically package on Play Store). */
+    val COMPATIBILITY_TIKTOK: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.zhiliaoapp.musically" to null,
+    )
+
+    /** Reddit official app. */
+    val COMPATIBILITY_REDDIT: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.reddit.frontpage" to null,
+    )
+
+    /** Duolingo. */
+    val COMPATIBILITY_DUOLINGO: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.duolingo" to null,
+    )
+
+    /** 1DM+ (paid downloader). */
+    val COMPATIBILITY_1DMPLUS: Array<Pair<String, Set<String>?>> = arrayOf(
+        "idm.internet.download.manager.plus" to null,
+    )
+
+    /** Moon+ Reader Pro. */
+    val COMPATIBILITY_MOONREADER: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.flyersoft.moonreaderp" to null,
+    )
+
+    /** Snapchat. */
+    val COMPATIBILITY_SNAPCHAT: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.snapchat.android" to null,
+    )
+
+    /** WhatsApp. */
+    val COMPATIBILITY_WHATSAPP: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.whatsapp" to null,
+    )
+
+    /** Google Maps. */
+    val COMPATIBILITY_GOOGLEMAPS: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.google.android.apps.maps" to null,
+    )
+
+    /** Spotify. */
+    val COMPATIBILITY_SPOTIFY: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.spotify.music" to null,
+    )
+
+    /** LinkedIn. */
+    val COMPATIBILITY_LINKEDIN: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.linkedin.android" to null,
+    )
+
+    /** Amazon Shopping (India). */
+    val COMPATIBILITY_AMAZONSHOPPING: Array<Pair<String, Set<String>?>> = arrayOf(
+        "in.amazon.mShop.android.shopping" to null,
+    )
+
+    /** Amazon Prime Video. */
+    val COMPATIBILITY_PRIMEVIDEO: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.amazon.avod.thirdpartyclient" to null,
+    )
+
+    /** Threads (Meta). */
+    val COMPATIBILITY_THREADS: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.instagram.barcelona" to null,
+    )
+
+    /** Facebook. */
+    val COMPATIBILITY_FACEBOOK: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.facebook.katana" to null,
+    )
+
+    /** Notion. */
+    val COMPATIBILITY_NOTION: Array<Pair<String, Set<String>?>> = arrayOf(
+        "notion.id" to null,
+    )
+
+    /** Todoist. */
+    val COMPATIBILITY_TODOIST: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.todoist" to null,
+    )
+
+    /** Any.do. */
+    val COMPATIBILITY_ANYDO: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.anydo" to null,
+    )
+
+    /** Xiaomi MIUI Music. */
+    val COMPATIBILITY_MIUIMUSIC: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.miui.player" to null,
+    )
+
+    /** Xiaomi MIUI Weather. */
+    val COMPATIBILITY_MIUIWEATHER: Array<Pair<String, Set<String>?>> = arrayOf(
+        "com.miui.weather2" to null,
+    )
+
+    // Aliases for downstream authoring convenience. Some patches were authored
+    // with underscored names; keep both spellings resolving to the same array
+    // rather than churn every import site.
+    val COMPATIBILITY_MOON_READER = COMPATIBILITY_MOONREADER
+    val COMPATIBILITY_PRIME_VIDEO = COMPATIBILITY_PRIMEVIDEO
+    val COMPATIBILITY_GOOGLE_MAPS = COMPATIBILITY_GOOGLEMAPS
+    val COMPATIBILITY_AMAZON_SHOPPING = COMPATIBILITY_AMAZONSHOPPING
+    val COMPATIBILITY_ANY_DO = COMPATIBILITY_ANYDO
+    val COMPATIBILITY_MIUI_MUSIC = COMPATIBILITY_MIUIMUSIC
+    val COMPATIBILITY_MIUI_WEATHER = COMPATIBILITY_MIUIWEATHER
+
     /** Common Pixel-experience feature strings that in-APK checks target. */
     val PIXEL_FEATURE_STRINGS = listOf(
         "com.google.android.feature.PIXEL_EXPERIENCE",

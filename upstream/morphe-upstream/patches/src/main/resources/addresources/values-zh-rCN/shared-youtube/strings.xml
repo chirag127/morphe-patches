@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">重启以完成设置</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">应用名称</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">自定义</string>
+  <string name="morphe_custom_branding_icon_title">应用图标</string>
+  <string name="morphe_custom_branding_icon_entry_1">原始</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe 黑色</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe 深色</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe 暗色调</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe 玩转光影</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe 玩转黑色</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">自定义</string>
+  <string name="morphe_custom_branding_notification_icon_title">通知图标</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">匹配应用图标</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe 玩乐</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Morphe 通知</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">您的观看历史记录未保存。&lt;br&gt;&lt;br&gt;这很可能是由 DNS 广告拦截器或网络代理造成的。&lt;br&gt;&lt;br&gt;要解决此问题，请将 &lt;b&gt;s.youtube.com&lt;/b&gt; 添加到白名单或关闭所有 DNS 广告拦截器和代理。</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">不再显示</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">欺骗视频流</string>
+  <string name="morphe_spoof_video_streams_screen_summary">配置客户端欺骗以防止播放问题</string>
+  <string name="morphe_spoof_video_streams_title">伪造视频流</string>
+  <string name="morphe_spoof_video_streams_summary">"通过请求兼容的视频流来修复大多数用户播放问题。
+
+如果您是YouTube Premium用户，则可能不需要此设置。"</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">无法获取任何客户端流</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">关闭此设置可能会导致播放问题。</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">请尝试启用：欺骗视频流 &gt; 登录 Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">默认客户端</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Android VR 登录</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">未登录 Android VR。点击此处登录</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">当前已登录 Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">要使用此功能，请将“默认客户端”更改为Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">登录 Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"登录Android VR可以解决一些用户的播放问题
+
+要登录，请按下面的“继续”按钮"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">继续</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">登出</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">说明</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"激活码：%s
+
+1. 点击'打开网站'访问'连接设备'页面
+2. 粘贴（或输入）上方显示的激活码
+3. 如有提示，请使用 Google 登录。如果有多账户，请选择此 YouTube 账户
+4. 允许 YouTube VR 访问权限
+5. 等待显示'设备已连接'后返回应用"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">打开网站</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">无法获取激活码</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">无法获取身份验证令牌</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">登录成功</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"身份验证保存成功
+
+• 您的 Morphe 设置将无法导出/导入 Android VR 认证
+• 长期未使用时，该认证可能被 Google 移除
+• 更改 Google 密码或在 Google 设置中注销本设备后，需重新登录"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 暂时不可用（API 超时）</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Android VR登录已过期，请重新登录VR</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 暂时不可用（状态：%d）</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 暂时不可用</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">无法登录VR，网站认证未批准</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">无法登录 VR：%s</string>
+  <string name="morphe_oauth2_toast_reset">已从 Android VR 登出</string>
+  <string name="morphe_oauth2_toast_invalid">无效的 VR 登录令牌，请重新登录 VR</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">禁用播放器 JavaScript 更新</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"将播放器 JavaScript 锁定到特定版本
+
+• 需要有效的播放器 JavaScript 哈希值
+• 播放器 JavaScript 哈希值有效期约为一个月，过期的哈希值将被 GVS 取消
+• 如果哈希值被取消，播放将失败"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"您需要提供有效的播放器 JavaScript 哈希值。
+
+如果播放器 JavaScript 哈希值已过期，播放将失败。"</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Player JavaScript hash</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">输入有效的 Player JavaScript 哈希</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">禁用QUIC协议</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">禁用 DRC 音频</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">强制使用原始音频语言</string>
+  <string name="morphe_force_original_audio_summary">始终播放视频的原始音频轨道，而不是配音版本</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">网络代理</string>
+  <string name="morphe_proxy_screen_summary">通过代理路由支持的网络请求</string>
+  <string name="morphe_proxy_enabled_title">启用代理</string>
+  <string name="morphe_proxy_enabled_summary">通过配置的 HTTP 或 HTTPS 代理路由支持的网络请求</string>
+  <string name="morphe_proxy_host_title">代理主机</string>
+  <string name="morphe_proxy_host_summary">代理服务器的主机名或 IP 地址</string>
+  <string name="morphe_proxy_port_title">代理端口</string>
+  <string name="morphe_proxy_port_summary">代理服务器的端口</string>
+  <string name="morphe_proxy_https_title">使用 HTTPS 代理</string>
+  <string name="morphe_proxy_https_summary">使用 HTTPS 连接到代理服务器，而不是 HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">代理身份验证</string>
+  <string name="morphe_proxy_auth_enabled_summary">使用 Basic 身份验证发送代理请求</string>
+  <string name="morphe_proxy_auth_username_title">您的用户名</string>
+  <string name="morphe_proxy_auth_username_summary">Basic 代理身份验证的用户名</string>
+  <string name="morphe_proxy_auth_password_title">显示密码</string>
+  <string name="morphe_proxy_auth_password_summary">Basic 代理身份验证的密码</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">允许直接回退</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">如果代理失败，则直接连接</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">隐藏全屏广告</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">要使用此功能，请将“伪造视频流”更改为 Android Reel 或 TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">净化分享链接</string>
+  <string name="morphe_sanitize_sharing_links_summary">从共享链接中删除跟踪查询参数</string>
+  <string name="morphe_replace_music_with_youtube_title">将分享链接更改为 youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">将共享链接中的music.youtube.com替换为youtube.com</string>
+  <string name="morphe_replace_links_with_shortener_title">将分享链接更改为 youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">强制视频使用缩短的 youtu.be URL 格式</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">记录协议缓冲区</string>
+  <string name="morphe_debug_protobuffer_summary">为开发者添加额外的日志记录信息，以识别应用组件</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"启用此设置将记录额外的布局数据，包括某些 UI 组件的屏幕文本。
+
+这有助于在创建自定义过滤器时识别组件。
+
+但是，启用此设置也会记录一些用户数据，例如您的 IP 地址。"</string>
+</resources>

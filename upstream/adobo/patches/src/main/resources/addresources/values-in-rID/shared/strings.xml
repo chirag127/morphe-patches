@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.settings.settingsResourcePatch -->
+  <string name="morphe_settings_submenu_title">Pengaturan</string>
+  <string name="morphe_settings_confirm_user_dialog_title">Apakah Anda yakin ingin melanjutkan?</string>
+  <string name="morphe_settings_save">Simpan</string>
+  <string name="morphe_settings_reset">Setel ulang</string>
+  <string name="morphe_settings_reset_color">Setel ulang warna</string>
+  <string name="morphe_settings_color_invalid">Warna tidak sah</string>
+  <string name="morphe_settings_restart_title">Memerlukan mulai ulang</string>
+  <string name="morphe_settings_restart_dialog_message">Mulai ulang aplikasi agar perubahan ini dapat diterapkan.</string>
+  <string name="morphe_settings_restart">Mulai ulang</string>
+  <!-- String is also duplicated in Reddit import / export preference -->
+  <string name="morphe_settings_import">Impor</string>
+  <string name="morphe_settings_import_copy">Salin</string>
+  <string name="morphe_settings_import_reset">Pengaturan Morphe diatur ke bawaan</string>
+  <string name="morphe_settings_import_success">%d Pengaturan diimpor</string>
+  <string name="morphe_settings_import_failure_parse">Impor gagal: %s</string>
+  <string name="morphe_settings_search_hint">Pengaturan pencarian</string>
+  <string name="morphe_settings_search_no_results_title">Tidak ada hasil yang ditemukan untuk \'%s\'</string>
+  <string name="morphe_settings_search_no_results_summary">Coba kata kunci lain</string>
+  <string name="morphe_settings_search_recent_searches">Pencarian terbaru</string>
+  <string name="morphe_settings_search_remove_message">Hapus dari riwayat pencarian?</string>
+  <string name="morphe_settings_search_clear_history">Hapus riwayat pencarian</string>
+  <string name="morphe_settings_search_clear_history_message">Apakah Anda yakin ingin menghapus semua riwayat pencarian?</string>
+  <string name="morphe_settings_search_tips_title">Tips Pencarian</string>
+  <string name="morphe_settings_search_tips_summary">"• Ketuk jalur untuk menelusuri ke jalur tersebut
+• Tekan lama pada pengaturan untuk menelusuri ke jalur tersebut
+• Tekan Enter untuk menyimpan kueri pencarian ke riwayat
+• Pencarian mengabaikan huruf besar/kecil dan tanda baca
+• Pengaturan utama muncul di atas pengaturan sampingan yang dinonaktifkan"</string>
+  <string name="morphe_settings_search_empty_history_title">Riwayat pencarian kosong</string>
+  <string name="morphe_settings_search_empty_history_summary">Untuk menyimpan riwayat pencarian, ketik kueri pencarian dan tekan Enter</string>
+  <string name="morphe_settings_search_history_title">Tampilkan pengaturan riwayat pencarian</string>
+  <string name="morphe_show_menu_icons_title">Tampilkan ikon pengaturan Morphe</string>
+  <string name="morphe_language_title">Bahasa Morphe</string>
+  <string name="morphe_language_user_dialog_message">"Terjemahan untuk beberapa bahasa mungkin hilang atau tidak lengkap.
+
+Untuk menerjemahkan bahasa baru atau meningkatkan terjemahan yang sudah ada, kunjungi morphe.software/translate"</string>
+  <string name="morphe_language_DEFAULT">Bahasa aplikasi</string>
+  <string name="morphe_pref_import_export_title">Impor / Ekspor</string>
+  <string name="morphe_pref_import_export_summary">Impor / Ekspor pengaturan Morphe</string>
+  <string name="morphe_settings_import_file">Impor dari berkas</string>
+  <string name="morphe_settings_import_file_success">Pengaturan berhasil diimpor, ketuk Simpan untuk menerapkan</string>
+  <string name="morphe_settings_import_file_failed">Gagal mengimpor pengaturan</string>
+  <string name="morphe_settings_export_file">Ekspor ke berkas</string>
+  <string name="morphe_settings_export_file_success">Pengaturan berhasil diekspor</string>
+  <string name="morphe_settings_export_file_failed">Gagal mengekspor pengaturan</string>
+  <!-- String is also duplicated in Reddit about preference -->
+  <string name="morphe_settings_about_links_body_version_current">Anda menggunakan Tambalan Morphe terbaru versi &lt;i&gt;%s&lt;/i&gt;</string>
+  <string name="morphe_settings_about_links_body_version_outdated">Anda menggunakan Tambalan Morphe versi &lt;i&gt;%1$s&lt;/i&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Pembaruan tersedia: &lt;i&gt;%2$s&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;Untuk memperbarui tambalan Anda, gunakan Morphe untuk menambal ulang aplikasi ini</string>
+  <string name="morphe_settings_about_links_dev_header">Catatan</string>
+  <string name="morphe_settings_about_links_dev_body">Versi ini adalah pra-rilis dan Anda mungkin mengalami masalah yang tidak terduga</string>
+  <string name="morphe_settings_about_links_header">Tautan resmi</string>
+  <string name="morphe_settings_about_links_website">Situs Web</string>
+  <string name="morphe_settings_about_links_donate">Donasi</string>
+  <string name="morphe_settings_about_links_translations">Terjemahan</string>
+  <string name="morphe_settings_about_links_credits">Kredit</string>
+  <string name="morphe_settings_about_links_dev_header_up_to_date">Terbaru</string>
+  <string name="morphe_settings_about_links_dev_header_update_available">Pembaruan tersedia</string>
+  <string name="morphe_settings_about_contributors_current">Pengembangan saat ini</string>
+  <string name="morphe_settings_about_contributors_prior">Pengembangan sebelumnya</string>
+  <string name="morphe_settings_about_links_morphe">Pengembangan aktif</string>
+  <string name="morphe_settings_about_links_rvx">2022 &#8209; 2025</string>
+  <string name="morphe_settings_about_links_rv">2022 &#8209; 2025</string>
+  <string name="morphe_settings_about_links_vanced">2019 &#8209; 2022</string>
+  <string name="morphe_settings_about_links_licenses">Pemberitahuan lisensi</string>
+  <string name="morphe_settings_about_licenses_loading">Memuat...</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_screen_title">Debug</string>
+  <string name="morphe_debug_screen_summary">Konfigurasikan pilihan pengembang lanjutan dan catatan diagnostik</string>
+  <string name="morphe_debug_title">Aktifkan pencatatan debug</string>
+  <string name="morphe_debug_stacktrace_title">Jejak stack catatan debug</string>
+  <string name="morphe_debug_stacktrace_summary">Menyertakan jejak stack dalam catatan debug untuk membantu mengidentifikasi kesalahan</string>
+  <string name="morphe_debug_toast_on_error_title">Tampilkan pesan timbul pada kesalahan Morphe</string>
+  <string name="morphe_debug_toast_on_error_user_dialog_message">"Mematikan pesan timbul kesalahan menyembunyikan semua pemberitahuan kesalahan Morphe.
+
+Anda tidak akan diberi tahu tentang kejadian yang tidak terduga."</string>
+  <string name="morphe_debug_export_logs_title">Ekspor pencatatan debug</string>
+  <string name="morphe_debug_export_logs_summary">Ekspor pencatatan debug Morphe</string>
+  <string name="morphe_debug_export_logs_file">Ekspor ke berkas</string>
+  <string name="morphe_debug_export_logs_success">Pencatatan debug berhasil diekspor</string>
+  <string name="morphe_debug_export_logs_failed">Gagal mengekspor pencatatan debug</string>
+  <string name="morphe_debug_logs_search_hint">Cari pencatatan debug...</string>
+  <string name="morphe_debug_export_logs_clear">Bersihkan</string>
+  <string name="morphe_debug_logs_disabled">Pencatatan debug dinonaktifkan</string>
+  <string name="morphe_debug_logs_none_found">Tidak ditemukan pencatatan debug</string>
+  <string name="morphe_debug_logs_copied_to_clipboard">Pencatatan debug disalin</string>
+  <string name="morphe_debug_logs_failed_to_export">Gagal mengekspor pencatatan debug: %s</string>
+  <string name="morphe_debug_logs_clear_toast">Pencatatan debug telah dibersihkan</string>
+  <string name="morphe_debug_feature_flags_manager_title">Fitur pengelolaan tanda</string>
+  <string name="morphe_debug_feature_flags_manager_summary">Kelola tanda fitur boolean</string>
+  <string name="morphe_debug_feature_flags_manager_active_header">Tanda fitur aktif (%d)</string>
+  <string name="morphe_debug_feature_flags_manager_blocked_header">Tanda fitur yang diblokir (%d)</string>
+  <string name="morphe_debug_feature_flags_manager_search_hint">Cari tanda fitur...</string>
+  <string name="morphe_debug_feature_flags_manager_toast_saved">Tanda fitur disimpan</string>
+  <string name="morphe_debug_feature_flags_manager_toast_reset">Tanda fitur diatur ulang</string>
+  <string name="morphe_debug_feature_flags_manager_toast_copied">Tanda fitur disalin ke papan klip</string>
+  <string name="morphe_debug_feature_flags_manager_toast_no_flags">Mulai ulang aplikasi untuk menggunakan pengaturan ini</string>
+  <!-- Could be its own resource file, but for simplicity it's shared among all apps. -->
+  <!-- misc.gms.gmsCoreSupportResourcePatch -->
+  <string name="microg_settings_summary">Buka pengaturan MicroG</string>
+  <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="gms_core_toast_not_installed_message">MicroG belum dipasang. Pasang dulu.</string>
+  <string name="gms_core_dialog_title">Diperlukan tindakan</string>
+  <!-- "Don't kill my app" should be kept in English and not translated -->
+  <string name="gms_core_dialog_not_whitelisted_not_allowed_in_background_message">"MicroG tidak memiliki izin untuk berjalan di latar belakang.
+
+Ikuti panduan \"Don't kill my app\" untuk ponsel Anda dan terapkan instruksi ke pemasangan MicroG Anda.
+
+Ini diperlukan agar aplikasi berfungsi."</string>
+  <string name="gms_core_dialog_open_website_text">Buka situs web</string>
+  <string name="gms_core_dialog_not_whitelisted_using_battery_optimizations_message">"Pengoptimalan baterai MicroG harus dinonaktifkan untuk mencegah masalah.
+
+Menonaktifkan pengoptimalan MicroG tidak akan berdampak buruk pada penggunaan baterai.
+
+Ketuk tombol lanjutkan dan izinkan perubahan pengoptimalan."</string>
+  <string name="gms_core_dialog_continue_text">Lanjutkan</string>
+  <string name="morphe_gms_core_battery_optimization_dialog_title">Tampilkan dialog optimalisasi baterai MicroG</string>
+  <string name="morphe_gms_core_battery_optimization_dialog_user_dialog_message">"Menonaktifkan ini akan menyembunyikan perintah optimasi baterai MicroG.
+
+Jika optimasi baterai tidak diubah, Anda mungkin mengalami:
+• Aplikasi mungkin secara acak tertutup
+• Pemberitahuan mungkin tidak berfungsi
+• Pemutaran latar belakang mungkin tidak berfungsi"</string>
+  <!-- misc.gms.linkHandlingPatch -->
+  <string name="morphe_link_handling_title">Penanganan tautan aplikasi</string>
+  <string name="morphe_link_handling_summary">Konfigurasi tautan untuk dibuka di aplikasi ini</string>
+  <string name="morphe_link_handling_step1_title">Langkah 1: Nonaktifkan tautan aplikasi asli</string>
+  <string name="morphe_link_handling_step1_message">Buka pengaturan aplikasi asli dan nonaktifkan semua tautan domain</string>
+  <string name="morphe_link_handling_step2_title">Langkah 2: Aktifkan tautan aplikasi yang ditambal</string>
+  <string name="morphe_link_handling_step2_message">Buka pengaturan aplikasi yang ditambal dan aktifkan semua tautan domain</string>
+  <string name="morphe_link_handling_open">Buka pengaturan</string>
+  <!-- misc.checks.experimentalAppNoticePatch -->
+  <string name="morphe_experimental_app_version_dialog_title">🚨 Peringatan Uji Coba 🚨</string>
+  <string name="morphe_experimental_app_version_dialog_message">"Anda menggunakan versi aplikasi uji coba ⚠️ &lt;b&gt;%1$s&lt;/b&gt;
+&lt;br/&gt;&lt;br/&gt;
+🔧 Harap bersiap dengan perilaku aplikasi yang tidak biasa atau bug yang belum teridentifikasi saat kami menyempurnakan tambalan untuk versi aplikasi ini.
+&lt;br/&gt;&lt;br/&gt;
+Jika Anda ingin pengalaman yang paling bebas masalah, maka &lt;b&gt;hapus pemasangan&lt;/b&gt; ini dan tambal versi aplikasi yang direkomendasikan ✅ &lt;b&gt;%2$s&lt;/b&gt;"</string>
+  <string name="morphe_experimental_app_version_dialog_confirm">⚠️ Saya ingin versi uji coba</string>
+  <string name="morphe_experimental_app_version_dialog_open_homepage">✅ Saya ingin versi stabil</string>
+</resources>

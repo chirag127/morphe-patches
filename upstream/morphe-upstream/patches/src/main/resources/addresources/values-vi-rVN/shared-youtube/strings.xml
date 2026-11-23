@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Khởi động lại để hoàn tất thiết lập</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Tên ứng dụng</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Tùy chỉnh</string>
+  <string name="morphe_custom_branding_icon_title">Biểu tượng ứng dụng</string>
+  <string name="morphe_custom_branding_icon_entry_1">Gốc</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe đen</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe tối</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe sáng</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe play sáng</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe play đen</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Morphe tỉ lệ</string>
+  <string name="morphe_custom_branding_notification_icon_title">Biểu tượng thông báo</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Khớp biểu tượng ứng dụng</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe play</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Thông báo Morphe</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">Nhật ký xem của bạn hiện không được lưu lại.&lt;br&gt;&lt;br&gt;Nguyên nhân thường là do DNS chặn quảng cáo hoặc proxy mạng.&lt;br&gt;&lt;br&gt;Vì vậy, hãy thử thêm &lt;b&gt;s.youtube.com&lt;/b&gt; vào danh sách cho phép, hoặc tắt tất cả DNS và proxy.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Không hiện lại</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Giả mạo luồng phát video</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Cấu hình giả mạo client nhằm tránh lỗi khi phát</string>
+  <string name="morphe_spoof_video_streams_title">Giả mạo luồng phát video</string>
+  <string name="morphe_spoof_video_streams_summary">"Sửa lỗi phát cho hầu hết người dùng bằng cách đổi luồng video tương thích.
+
+Nếu bạn đã mua gói Premium, có thể không cần phải bật cài đặt này."</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Không thể lấy bất kỳ luồng phát nào</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Tắt cài đặt này có thể gây ra lỗi khi phát.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Hãy thử bật: Giả mạo luồng phát video &gt; Đăng nhập Android VR</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Client mặc định</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Đăng nhập Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Chưa đăng nhập Android VR. Bấm vào đây để đăng nhập</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Đã đăng nhập vào Android VR</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Để dùng tính năng này, thay đổi \"Client mặc định\" thành Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Đăng nhập vào Android VR</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Đăng nhập Android VR có thể sửa lỗi phát cho một số người dùng
+
+Bấm tiếp tục bên dưới để đăng nhập"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Tiếp tục</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Đăng xuất</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Hướng dẫn</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Mã kích hoạt: %s
+
+1. Bấm \"Mở trang web\" dưới đây để mở trang web \"Kết nối thiết bị\"
+2. Dán từ bảng nhớ tạm (hoặc gõ trực tiếp) mã kích hoạt được hiển thị ở trên
+3. Đăng nhập vào Google nếu được yêu cầu. Nếu bạn có nhiều tài khoản thì chọn tài khoản YouTube này
+4. Bấm \"Cho phép\" YouTube VR truy cập
+5. Quay lại ứng dụng sau khi nhận được thông báo \"Kết nối thiết bị thành công\""</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Mở trang web</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Thất bại khi cấp mã kích hoạt</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Thất bại khi cấp mã xác thực</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Đã đăng nhập thành công</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Đã lưu xác thực
+
+• Các cài đặt Morphe của bạn sẽ không nhập/xuất xác thực Android VR
+• Nếu ứng dụng này không được sử dụng trong 6 tháng thì Google sẽ xóa xác thực này
+• Nếu bạn thay đổi mật khẩu Google hoặc xóa bỏ cài đặt thiết bị này khỏi cài đặt Google thì cần đăng nhập lại"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 tạm thời không khả dụng (API đã hết thời gian chờ)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Phiên đăng nhập Android VR đã hết hạn, hãy thử đăng nhập lại vào VR</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 tạm thời không khả dụng (trạng thái %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 tạm thời không khả dụng</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">Không thể đăng nhập vào VR vì xác thực qua trang web không được chấp thuận</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">Không thể đăng nhập vào VR: %s</string>
+  <string name="morphe_oauth2_toast_reset">Đã đăng xuất khỏi Android VR</string>
+  <string name="morphe_oauth2_toast_invalid">Mã đăng nhập VR không hợp lệ, hãy thử đăng nhập lại vào VR</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Tắt cập nhật JavaScript của trình phát</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Cố định phiên bản JavaScript của trình phát
+
+• Yêu cầu mã băm JavaScript hợp lệ
+• Mỗi mã băm thường chỉ có hiệu lực trong khoảng một tháng và bị GVS thu hồi khi hết hạn
+• Khi bị thu hồi, video sẽ không còn phát được nữa"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Bạn cần cung cấp một mã băm JavaScript của trình phát còn hiệu lực.
+
+Bạn sẽ không còn xem được video nếu mã băm hết hạn."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Mã băm JavaScript của trình phát</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Nhập mã băm JavaScript hợp lệ của trình phát</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">Tắt giao thức QUIC</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">Tắt âm thanh DRC</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Buộc ngôn ngữ âm thanh gốc</string>
+  <string name="morphe_force_original_audio_summary">Luôn phát âm thanh gốc của video thay vì bản lồng tiếng</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Proxy mạng</string>
+  <string name="morphe_proxy_screen_summary">Định tuyến các kết nối mạng được hỗ trợ qua proxy</string>
+  <string name="morphe_proxy_enabled_title">Bật proxy</string>
+  <string name="morphe_proxy_enabled_summary">Định tuyến các kết nối mạng được hỗ trợ qua proxy HTTP hoặc HTTPS đã cấu hình</string>
+  <string name="morphe_proxy_host_title">Máy chủ proxy</string>
+  <string name="morphe_proxy_host_summary">Nhập tên miền hoặc địa chỉ IP của máy chủ proxy</string>
+  <string name="morphe_proxy_port_title">Cổng proxy</string>
+  <string name="morphe_proxy_port_summary">Cổng của máy chủ proxy</string>
+  <string name="morphe_proxy_https_title">Dùng HTTP proxy</string>
+  <string name="morphe_proxy_https_summary">Kết nối đến máy chủ proxy bằng HTTPS thay vì HTTP</string>
+  <string name="morphe_proxy_auth_enabled_title">Xác thực proxy</string>
+  <string name="morphe_proxy_auth_enabled_summary">Gửi xác thực Basic kèm theo các yêu cầu proxy</string>
+  <string name="morphe_proxy_auth_username_title">Tên người dùng proxy</string>
+  <string name="morphe_proxy_auth_username_summary">Tên người dùng để xác thực proxy Basic</string>
+  <string name="morphe_proxy_auth_password_title">Mật khẩu proxy</string>
+  <string name="morphe_proxy_auth_password_summary">Mật khẩu để xác thực proxy Basic</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Cho phép chuyển sang trực tiếp</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Kết nối trực tiếp nếu proxy gặp sự cố</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Ẩn quảng cáo toàn màn hình</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">Để dùng tính năng này, hãy đổi \"Giả mạo luồng phát video\" thành Android Reel hoặc TV</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Rút gọn liên kết chia sẻ</string>
+  <string name="morphe_sanitize_sharing_links_summary">Xóa các tham số theo dõi khỏi liên kết được chia sẻ</string>
+  <string name="morphe_replace_music_with_youtube_title">Đổi liên kết chia sẻ thành youtube.com</string>
+  <string name="morphe_replace_music_with_youtube_summary">Thay music.youtube.com bằng youtube.com khi chia sẻ liên kết</string>
+  <string name="morphe_replace_links_with_shortener_title">Đổi liên kết chia sẻ thành youtu.be</string>
+  <string name="morphe_replace_links_with_shortener_summary">Buộc các video dùng định dạng youtu.be</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Bộ đệm giao thức nhật ký gỡ lỗi</string>
+  <string name="morphe_debug_protobuffer_summary">Bổ sung thông tin chi tiết hơn giúp nhà phát triển xác định các thành phần trong ứng dụng</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Bật cài đặt này sẽ ghi lại dữ liệu bố cục bổ sung, bao gồm cả văn bản trên màn hình cho một số thành phần giao diện người dùng.
+
+Điều này có thể giúp xác định các thành phần khi tạo bộ lọc tùy chỉnh.
+
+Tuy nhiên, bật tính năng này cũng sẽ ghi lại một số dữ liệu người dùng, chẳng hạn như địa chỉ IP của bạn."</string>
+</resources>

@@ -1,0 +1,165 @@
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+    <!-- misc.settings.settingsResourcePatch -->
+    <string name="morphe_settings_submenu_title">Settings</string>
+    <string name="morphe_settings_title" translatable="false">Morphe</string>
+    <string name="morphe_settings_confirm_user_dialog_title">Are you sure you want to proceed?</string>
+    <string name="morphe_settings_save">Save</string>
+    <string name="morphe_settings_reset">Reset</string>
+    <string name="morphe_settings_reset_color">Reset color</string>
+    <string name="morphe_settings_color_invalid">Invalid color</string>
+    <string name="morphe_settings_restart_title">Restart required</string>
+    <string name="morphe_settings_restart_dialog_message">Restart the app for this change to take effect.</string>
+    <string name="morphe_settings_restart">Restart</string>
+    <!-- String is also duplicated in Reddit import / export preference -->
+    <string name="morphe_settings_import">Import</string>
+    <string name="morphe_settings_import_copy">Copy</string>
+    <string name="morphe_settings_import_reset">Morphe settings reset to default</string>
+    <string name="morphe_settings_import_success">Imported %d settings</string>
+    <string name="morphe_settings_import_failure_parse">Import failed: %s</string>
+    <string name="morphe_settings_search_hint">Search settings</string>
+    <string name="morphe_settings_search_no_results_title">No results found for \'%s\'</string>
+    <string name="morphe_settings_search_no_results_summary">Try another keyword</string>
+    <string name="morphe_settings_search_recent_searches">Recent searches</string>
+    <string name="morphe_settings_search_remove_message">Remove from search history?</string>
+    <string name="morphe_settings_search_clear_history">Clear search history</string>
+    <string name="morphe_settings_search_clear_history_message">Are you sure you want to clear all search history?</string>
+    <string name="morphe_settings_search_tips_title">Search Tips</string>
+    <string name="morphe_settings_search_tips_summary">"• Tap a path to navigate to it
+• Long-press a setting to navigate to it
+• Press Enter to save a search query to history
+• Search ignores casing and punctuation
+• Parent settings appear above disabled child settings"</string>
+    <string name="morphe_settings_search_empty_history_title">Search history is empty</string>
+    <string name="morphe_settings_search_empty_history_summary">To save search history, type a search query and press Enter</string>
+    <string name="morphe_settings_search_history_title">Show settings search history</string>
+    <string name="morphe_show_menu_icons_title">Show Morphe setting icons</string>
+    <string name="morphe_language_title">Morphe language</string>
+    <string name="morphe_language_user_dialog_message">"Translations for some languages may be missing or incomplete.
+
+To translate new languages or improve the existing translations, visit morphe.software/translate"</string>
+    <string name="morphe_language_DEFAULT">App language</string>
+    <string name="morphe_pref_import_export_title">Import / Export</string>
+    <string name="morphe_pref_import_export_summary">Import / Export Morphe settings</string>
+    <string name="morphe_settings_import_file">Import from file</string>
+    <string name="morphe_settings_import_file_success">Settings imported successfully, tap Save to apply</string>
+    <string name="morphe_settings_import_file_failed">Failed to import settings</string>
+    <string name="morphe_settings_export_file">Export to file</string>
+    <string name="morphe_settings_export_file_success">Settings exported successfully</string>
+    <string name="morphe_settings_export_file_failed">Failed to export settings</string>
+
+    <!-- String is also duplicated in Reddit about preference -->
+    <string name="morphe_settings_about_links_body_version_current">You are using the latest Morphe Patches version &lt;i>%s&lt;/i></string>
+    <string name="morphe_settings_about_links_body_version_outdated">You are using Morphe Patches version &lt;i>%1$s&lt;/i>&lt;br>&lt;br>&lt;b>Update available: &lt;i>%2$s&lt;/i>&lt;/b>&lt;br>&lt;br>To update your patches, use Morphe to repatch this app</string>
+    <string name="morphe_settings_about_links_dev_header">Note</string>
+    <string name="morphe_settings_about_links_dev_body">This version is a pre-release and you may experience unexpected issues</string>
+    <string name="morphe_settings_about_links_header">Official links</string>
+    <string name="morphe_settings_about_links_website">Website</string>
+    <string name="morphe_settings_about_links_donate">Donate</string>
+    <string name="morphe_settings_about_links_translations">Translations</string>
+    <string name="morphe_settings_about_links_credits">Credits</string>
+    <string name="morphe_settings_about_links_dev_header_up_to_date">Up to date</string>
+    <string name="morphe_settings_about_links_dev_header_update_available">Update available</string>
+    <string name="morphe_settings_about_contributors_current">Current development</string>
+    <string name="morphe_settings_about_contributors_prior">Prior development</string>
+    <string name="morphe_settings_about_links_morphe">Active development</string>
+    <string name="morphe_settings_about_links_rvx">2022 &#8209; 2025</string>
+    <string name="morphe_settings_about_links_rv">2022 &#8209; 2025</string>
+    <string name="morphe_settings_about_links_vanced">2019 &#8209; 2022</string>
+    <string name="morphe_settings_about_links_licenses">License notices</string>
+    <string name="morphe_settings_about_licenses_loading">Loading...</string>
+
+    <!-- misc.debugging.enableDebuggingPatch -->
+    <string name="morphe_debug_screen_title">Debugging</string>
+    <string name="morphe_debug_screen_summary">Configure advanced developer options and diagnostic logs</string>
+    <string name="morphe_debug_title">Enable debug logging</string>
+    <string name="morphe_debug_stacktrace_title">Debug log stack trace</string>
+    <string name="morphe_debug_stacktrace_summary">Includes stack traces in debug logs to help identify errors</string>
+    <string name="morphe_debug_toast_on_error_title">Show toast on Morphe error</string>
+    <string name="morphe_debug_toast_on_error_user_dialog_message">"Turning off error toasts hides all Morphe error notifications.
+
+You will not be notified of any unexpected events."</string>
+    <string name="morphe_debug_export_logs_title">Export debug logs</string>
+    <string name="morphe_debug_export_logs_summary">Export Morphe debug logs</string>
+    <string name="morphe_debug_export_logs_file">Export to file</string>
+    <string name="morphe_debug_export_logs_success">Debug logs exported successfully</string>
+    <string name="morphe_debug_export_logs_failed">Failed to export debug logs</string>
+    <string name="morphe_debug_logs_search_hint">Search debug logs...</string>
+    <string name="morphe_debug_export_logs_clear">Clear</string>
+    <string name="morphe_debug_logs_disabled">Debug logging is disabled</string>
+    <string name="morphe_debug_logs_none_found">No debug logs found</string>
+    <string name="morphe_debug_logs_copied_to_clipboard">Debug logs copied</string>
+    <string name="morphe_debug_logs_failed_to_export">Failed to export debug logs: %s</string>
+    <string name="morphe_debug_logs_clear_toast">Debug logs cleared</string>
+    <string name="morphe_debug_feature_flags_manager_title">Feature flags manager</string>
+    <string name="morphe_debug_feature_flags_manager_summary">Manage boolean feature flags</string>
+    <string name="morphe_debug_feature_flags_manager_active_header">Active feature flags (%d)</string>
+    <string name="morphe_debug_feature_flags_manager_blocked_header">Blocked feature flags (%d)</string>
+    <string name="morphe_debug_feature_flags_manager_search_hint">Search feature flags...</string>
+    <string name="morphe_debug_feature_flags_manager_toast_saved">Feature flags saved</string>
+    <string name="morphe_debug_feature_flags_manager_toast_reset">Feature flags reset</string>
+    <string name="morphe_debug_feature_flags_manager_toast_copied">Feature flags copied to clipboard</string>
+    <string name="morphe_debug_feature_flags_manager_toast_no_flags">Restart the app to use this setting</string>
+
+    <!-- Could be its own resource file, but for simplicity it's shared among all apps. -->
+    <!-- misc.gms.gmsCoreSupportResourcePatch -->
+    <string name="microg_settings_title" translatable="false">MicroG</string>
+    <string name="microg_settings_summary">Open the MicroG settings</string>
+    <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+    <string name="gms_core_toast_not_installed_message">MicroG is not installed. Install it.</string>
+    <string name="gms_core_dialog_title">Action needed</string>
+    <!-- "Don't kill my app" should be kept in English and not translated -->
+    <string name="gms_core_dialog_not_whitelisted_not_allowed_in_background_message">"MicroG does not have permission to run in the background.
+
+Follow the \"Don\'t kill my app\" guide for your phone, and apply the instructions to your MicroG installation.
+
+This is required for the app to work."</string>
+    <string name="gms_core_dialog_open_website_text">Open website</string>
+    <string name="gms_core_dialog_not_whitelisted_using_battery_optimizations_message">"MicroG battery optimizations must be disabled to prevent issues.
+
+Disabling battery optimizations for MicroG will not negatively affect battery usage.
+
+Tap the continue button and allow optimization changes."</string>
+    <string name="gms_core_dialog_continue_text">Continue</string>
+    <string name="morphe_gms_core_battery_optimization_dialog_title">Show MicroG battery optimization dialog</string>
+    <string name="morphe_gms_core_battery_optimization_dialog_user_dialog_message">"Disabling this will hide the MicroG battery optimization prompt.
+
+If battery optimizations are not changed then you may experience:
+• App may randomly close
+• Notifications may not work
+• Background playback may not work"</string>
+
+    <!-- misc.gms.linkHandlingPatch -->
+    <string name="morphe_link_handling_title">App link handling</string>
+    <string name="morphe_link_handling_summary">Configure links to open in this app</string>
+    <string name="morphe_link_handling_step1_title">Step 1: Disable original app links</string>
+    <string name="morphe_link_handling_step1_message">Open the original app\'s settings and disable all domain links</string>
+    <string name="morphe_link_handling_step2_title">Step 2: Enable patched app links</string>
+    <string name="morphe_link_handling_step2_message">Open the patched app\'s settings and enable all domain links</string>
+    <string name="morphe_link_handling_open">Open settings</string>
+
+    <!-- misc.checks.experimentalAppNoticePatch -->
+    <string name="morphe_experimental_app_version_dialog_title">🚨 Experimental Alert 🚨</string>
+    <string name="morphe_experimental_app_version_dialog_message">"You are using an experimental app version of ⚠️ &lt;b>%1$s&lt;/b>
+&lt;br/>&lt;br/>
+🔧 Expect quirky app behavior or unidentified bugs as we fine tune the patches for this app version.
+&lt;br/>&lt;br/>
+If you want the most trouble free experience, then &lt;b>uninstall&lt;/b> this and patch the recommended app version of ✅ &lt;b>%2$s&lt;/b>"</string>
+    <string name="morphe_experimental_app_version_dialog_confirm">⚠️ I want experimental</string>
+    <string name="morphe_experimental_app_version_dialog_open_homepage">✅ I want stable</string>
+</resources>

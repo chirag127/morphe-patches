@@ -1,0 +1,208 @@
+! ============================================================
+! ViX (com.univision.prendetv) — SSAI / HTTPS FILTER RULES v1.0 (AGP)
+! Target: Android TV build 4.46.0_tv  |  Status: CONFIRMED via PC HAR capture
+! Modeled on the Fox One SSAI v5.0 ruleset.
+!
+! v1.0 CHANGELOG (from v0.1 draft):
+!   - Captured a real AdGuard log (PC client, web player, same backend ViX
+!     uses on Android TV) during a live channel session with a scheduled
+!     mid-roll. This confirmed the actual ad-insertion mechanism and made
+!     §2/3/4 of the v0.1 draft (segment-path intercept, manifest $replace,
+!     param stripping) UNNECESSARY. See "WHAT THE HAR CONFIRMED" below.
+! ============================================================
+!
+! WHAT THE HAR CONFIRMED:
+!   - ViX's live ad system is GOOGLE DAI POD SERVING, fronted by Lura as a
+!     reseller/relay (NOT classic client-built VAST/VMAP, NOT Yospace).
+!     The actual ad session request observed:
+!       POST dai.google.com/ssai/pods/api/v1/network/<N>/custom_asset/<asset>/stream
+!            ?...&vad_type=linear&ad_rule=1&vpos=midroll&mridx=0&pod=1
+!            &iu=/<N>/vix.tv/viewer/live/web_desktop/<channel>
+!            &cust_params=stream_type%3Dlive%26...
+!     This is the DAI "stream request" call — it returns a GAM session
+!     (a stream id) that Lura then stitches into the manifest.
+!   - The player then fetches the actual playable manifest from LURA, not
+!     Google, at:
+!       dcs4-live.mp.lura.live/server/podserve2/<id>/manifest.mpd?gam_stream_id=<id>...   (live)
+!       dcs4-vod.mp.lura.live/vod/p/manifest.mpd?encp=...                                  (VOD)
+!     "podserve2" / "/vod/p/" = Lura's wrapper around Google DAI Pod
+!     Serving — this is where ad pods get stitched into the manifest
+!     server-side (true SSAI: indistinguishable from content at the HTTP
+!     layer once stitched).
+!   - CRITICAL FINDING: in the capture, dai.google.com and
+!     pubads.g.doubleclick.net were ALREADY blocked by AdGuard's stock
+!     filters (FiredFilterId 15 / -10074 — not a custom rule). The DAI
+!     stream-request POST never got a response (StatusCode 0, connection
+!     refused). Immediately after, the manifest request to
+!     dcs4-live.mp.lura.live/server/podserve2/.../manifest.mpd used
+!     gam_stream_id=mock-stream — i.e. when the GAM/DAI session can't be
+!     established, Lura's client SDK falls back to a LOCAL MOCK STREAM ID
+!     and requests a plain (non-ad) stitched manifest. Playback continued
+!     normally afterward (live segments kept streaming from
+!     vix-gmedia-01.mp.lura.live with no errors).
+!   - Segment URLs for both live and VOD give NO path-level signal that
+!     would distinguish an ad segment from a content segment:
+!       live:  vix-gmedia-01.mp.lura.live/live/ephemeral/<token>/<channel>/<bitrate>/<id>/<seq>/segment_<n>-video.mp4
+!       vod:   vix-vodgmedia-03.mp.lura.live/pkg/v2/<blob>/video-<hash>-<n>.mp4
+!     Sequence numbers are continuous and opaque — this CONFIRMS true SSAI
+!     stitching (ad and content segments are the same shape, same host,
+!     same naming scheme). §2 of the v0.1 draft (ad-segment path intercept)
+!     is therefore not just unconfirmed, it's IMPOSSIBLE: there is no
+!     selector that separates an ad segment from a content segment once
+!     stitching has occurred. The only viable intervention point is
+!     upstream of stitching — i.e. the DAI stream-request call itself.
+!   - Because of the above, §3 (manifest $replace for EXT-X-DATERANGE/SCTE)
+!     and §4 (GAM param stripping on the Lura play/manifest endpoints) are
+!     also dropped: there's nothing left to strip once the DAI session
+!     never starts — the manifest Lura serves back is already ad-free
+!     (mock-stream), not an ad-laden manifest needing surgical edits.
+!   - Cert pinning: still only PerimeterX in-code (confirmed in earlier dex
+!     analysis); the hosts above are not pinned, so the companion
+!     network_security_config patch (already in the morphe repo) is
+!     sufficient to let AdGuard see this traffic on Android TV.
+!
+! NET EFFECT: this ruleset is now a precise host/endpoint blocklist around
+! the DAI session-establishment call, rather than a content-layer rewrite
+! list. Much simpler and lower-risk than the Fox One ruleset (which has to
+! fight Yospace's pre-built ad-laden manifests at the content layer).
+! ============================================================
+
+
+! ------------------------------------------------------------
+! 0. ALLOWLISTS — APP + CONTENT (keep playback alive)
+! No blanket allow on the Lura media CDN hosts is needed: nothing below
+! redirects or rewrites their responses, so default-allow already applies.
+! Kept explicit for clarity / to protect against overzealous third-party
+! blocklists that might otherwise catch these by accident.
+! ------------------------------------------------------------
+@@||vix.com^$important
+@@||www.vix.com^$important
+@@||api.vix.com^$important
+@@||client-api.vix.com^$important
+@@||images.vix.com^$important
+@@||assets.vix.com^$important
+@@||vix.tv^$important
+! LuraPlayer control plane (auth/license/play/DRM) — must pass
+@@||access.mp.lura.live^$important
+@@||access-s.mp.lura.live^$important
+@@||license.mp.lura.live^$important
+@@||drm3.mp.lura.live^$important
+@@||nxs.mp.lura.live^$important
+! Manifest delivery (podserve2/vod-p) and media segment CDN — must pass.
+! These never carry ads once §1 below stops the DAI session from forming.
+@@||dcs4-live.mp.lura.live^$important
+@@||dcs4-vod.mp.lura.live^$important
+@@||mp.lura.live^$important
+
+
+! ------------------------------------------------------------
+! 1. GOOGLE DAI POD SERVING — block the session BEFORE it forms
+! This is the entire fix. Confirmed by HAR: blocking these two endpoints
+! causes Lura to fall back to gam_stream_id=mock-stream (a content-only,
+! non-ad manifest) instead of stalling or erroring. Hard block (not
+! redirect) is safe here because the call happens before any manifest
+! request, not mid-segment — there is no stream to interrupt yet.
+! ------------------------------------------------------------
+||dai.google.com/ssai/pods/api/v1/network/*/custom_asset/*/stream$important
+||dai.google.com^$important
+||pubads.g.doubleclick.net/gampad/ads$important
+||securepubads.g.doubleclick.net/gampad/ads$important
+||imasdk.googleapis.com^$important
+
+
+! ------------------------------------------------------------
+! 2. AD-SEGMENT PATH INTERCEPT — NOT APPLICABLE (see header)
+! Confirmed via HAR: live + VOD segment URLs (vix-gmedia-*.mp.lura.live,
+! vix-vodgmedia-*.mp.lura.live) carry no ad/content distinguishing token.
+! Once §1 prevents the DAI session, there are no ad segments to intercept.
+! ------------------------------------------------------------
+
+
+! ------------------------------------------------------------
+! 3. MANIFEST AD-MARKER STRIPPING — NOT APPLICABLE (see header)
+! With no GAM session, dcs4-live/dcs4-vod return a plain manifest
+! (gam_stream_id=mock-stream observed in HAR). Nothing to strip.
+! ------------------------------------------------------------
+
+
+! ------------------------------------------------------------
+! 4. MANIFEST/PLAY PARAMETER STRIPPING — NOT APPLICABLE (see header)
+! ------------------------------------------------------------
+
+
+! ------------------------------------------------------------
+! 5. VIEWABILITY / OM-SDK / AD TELEMETRY — safe to hard block
+! Confirmed present in HAR: player-analytics.mp.lura.live (already caught
+! by stock AdGuard filters in the capture), w3.mp.lura.live/omsdk.
+! These are beacons, not playback.
+! ------------------------------------------------------------
+||w3.mp.lura.live/omsdk/*$important
+||player-analytics.mp.lura.live^$important
+||logging.mp.lura.live^$important
+||crashcart.mp.lura.live^$important
+||pagead2.googlesyndication.com^$important
+||googleadservices.com^$important
+||googlesyndication.com^$important
+
+
+! ------------------------------------------------------------
+! 6. INTERACTIVE / PROGRAMMATIC AD ECOSYSTEM (belt + suspenders;
+! Innovid is already neutralised in-app by the morphe patch)
+! ------------------------------------------------------------
+||innovid.com^$important
+||innovid.tv^$important
+||doubleverify.com^$important
+||adsafeprotected.com^$important
+||ispot.tv^$important
+||adsrvr.org^$important
+
+
+! ------------------------------------------------------------
+! 7. MEASUREMENT TELEMETRY — safe to block (not playback-critical)
+! Confirmed present in HAR: cws.conviva.com (+ ipv4/ipv6 variants).
+! ------------------------------------------------------------
+||cws.conviva.com^$important
+||*.conviva.com^$important
+||imrworldwide.com^$important
+||secure-gl.imrworldwide.com^$important
+
+
+! ------------------------------------------------------------
+! 8. DO NOT BLOCK (would break app/login/playback)
+!   - PerimeterX (collector-*.pxchk.net / px-cdn.net / px-cloud.net) — bot
+!     defense, CERT-PINNED in-code. Confirmed present in HAR
+!     (collector-pxk9q1jq56.{pxchk.net,px-cdn.net,px-cloud.net}). Blocking
+!     or MITM-ing it can lock you out of login/playback.
+!   - access*.mp.lura.live / license.mp.lura.live / drm3.mp.lura.live —
+!     DRM/license/fairplay. Confirmed present in HAR (drm3.mp.lura.live/fp).
+!   - dcs4-live / dcs4-vod / mp.lura.live media+manifest hosts — must stay
+!     reachable; §1 makes them ad-free without needing to touch them.
+!   - newrelic (js-agent.newrelic.com), appsflyer (websdk.appsflyer.com) —
+!     marketing/crash telemetry, not ad-insertion. Optional to block, but
+!     don't redirect/rewrite — host-block only if you want them gone.
+! ------------------------------------------------------------
+
+
+! ------------------------------------------------------------
+! 9. RESIDUAL UNKNOWNS / FOLLOW-UP
+!   - This HAR was captured from the PC/web client, not the Android TV
+!     app. The backend (Lura + DAI pod serving) is shared infrastructure,
+!     so the endpoints/behavior above should carry over, but the Android
+!     TV app's exact request params (iu= ad unit path, network code) were
+!     NOT independently re-verified on-device. If ads still appear on
+!     Android TV after applying the network_security_config companion
+!     patch + this ruleset, capture a HAR from the TV itself (via the
+!     AdGuard CA + this network_security_config patch) and diff against
+!     this file.
+!   - VOD ad insertion was not observed triggering a DAI stream-request in
+!     this capture (no on-demand title with ads was played). dcs4-vod's
+!     /vod/p/manifest.mpd request was seen, but its DAI-equivalent call
+!     (likely dai.google.com/ssai/pods/api/v1/network/*/custom_asset/*/stream
+!     with vad_type=linear&pod=1 but no vpos=midroll, or a vod-specific
+!     variant) was not captured. §1's blanket ||dai.google.com^ rule should
+!     still cover it since it targets the whole DAI surface, not just the
+!     live path — flagged here in case VOD behaves differently.
+! ------------------------------------------------------------
+! ============================================================
+! END — ViX SSAI / HTTPS FILTER RULES v1.0 (AGP) — CONFIRMED
+! ============================================================
