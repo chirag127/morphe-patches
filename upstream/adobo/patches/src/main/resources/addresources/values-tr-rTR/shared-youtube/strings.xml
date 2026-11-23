@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shared with YouTube and YT Music -->
+<!--
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.initialization.initializationPatch -->
+  <string name="morphe_restart_first_run">Kurulumu tamamlamak için yeniden başlatın</string>
+  <!-- layout.branding.baseCustomBrandingPatch -->
+  <string name="morphe_custom_branding_name_title">Uygulama adı</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_icon_entry_7 -->
+  <string name="morphe_custom_branding_name_entry_5">Özel</string>
+  <string name="morphe_custom_branding_icon_title">Uygulama simgesi</string>
+  <string name="morphe_custom_branding_icon_entry_1">Orijinal</string>
+  <string name="morphe_custom_branding_icon_entry_2">Morphe siyah</string>
+  <string name="morphe_custom_branding_icon_entry_3">Morphe koyu</string>
+  <string name="morphe_custom_branding_icon_entry_4">Morphe açık</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_5">Morphe play açık</string>
+  <!-- Translation should match morphe_custom_branding_notification_icon_entry_3 -->
+  <string name="morphe_custom_branding_icon_entry_6">Morphe play siyah</string>
+  <!-- Translations of this should be identical to morphe_custom_branding_name_entry_5 -->
+  <string name="morphe_custom_branding_icon_entry_7">Özel</string>
+  <string name="morphe_custom_branding_notification_icon_title">Bildirim simgesi</string>
+  <string name="morphe_custom_branding_notification_icon_entry_1">Uygulama simgesini takip et</string>
+  <string name="morphe_custom_branding_notification_icon_entry_3">Morphe play</string>
+  <!-- misc.dns.checkWatchHistoryDomainNameResolutionPatch -->
+  <string name="morphe_check_watch_history_domain_name_dialog_title">Morphe Bildirimi</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_message">İzleme geçmişiniz kaydedilmiyor.&lt;br&gt;&lt;br&gt;Bu büyük ihtimalle bir reklam engelleyici DNS\'den veya proxy\'den kaynaklanıyor.&lt;br&gt;&lt;br&gt;Bunu düzeltmek için, &lt;b&gt;s.youtube.com&lt;/b&gt; adresini beyaz listeye ekleyin veya bütün engelleyici DNSleri ve proxy\'leri kapatın.</string>
+  <string name="morphe_check_watch_history_domain_name_dialog_ignore">Bir daha gösterme</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_screen_title">Video akışlarını taklit et</string>
+  <string name="morphe_spoof_video_streams_screen_summary">Oynatma sorunlarını önlemek için istemci video akışlarını taklit et</string>
+  <string name="morphe_spoof_video_streams_title">Video akışlarını taklit et</string>
+  <string name="morphe_spoof_video_streams_summary">"Çoğu kullanıcı için oynatma sorunlarını uyumlu bir video akışı isteyerek düzeltir
+
+YouTube Premium kullanıcısıysanız, bu ayar gerekli olmayabilir"</string>
+  <string name="morphe_spoof_video_streams_no_clients_toast">Hiçbir istemci akışı alınamadı</string>
+  <string name="morphe_spoof_video_streams_user_dialog_message">Bu ayarı devre dışı bırakmak oynatma sorunlarına yol açabilir.</string>
+  <!-- "Spoof video streams" must use the same translation as morphe_spoof_video_streams_title.
+         "Sign in to Android VR" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_about_title -->
+  <string name="morphe_spoof_video_streams_no_clients_suggest_vr_toast">Şunu etkinleştirmeyi dene: Video akışlarını taklit et &gt; Android VR oturum açma</string>
+  <string name="morphe_spoof_video_streams_client_type_title">Varsayılan istemci</string>
+  <!-- Ensure this translation matches the translation of morphe_spoof_video_streams_no_clients_suggest_vr_toast -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_title">Android VR oturum açma</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary">Android VR oturumu açılmadı. Oturum açmak için buraya dokunun</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_signed_in">Şu anda Android VR oturumu açık</string>
+  <!-- "Default client" must be the same translated text as morphe_spoof_video_streams_client_type_title -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_about_summary_disabled">Bu özelliği kullanmak için \'Varsayılan istemci\'yi Android VR olarak değiştirin</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_title">Android VR\'da oturum aç</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_not_signed_in_message">"Android VR'de oturum açmak, bazı kullanıcılar için oynatma sorunlarını çözebilir.
+
+Oturum açmak için, devam et butonuna basın."</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_continue">Devam et</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_dialog_reset">Çıkış yap</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_title">Talimatlar</string>
+  <!-- "Open website" must use the same translation as morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website -->
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_message">"Etkinleştirme kodu: %s
+
+1. 'Bir cihaz bağlayın' web sitesini açmak için aşağıdaki 'Web sitesini aç'a dokunun 
+2. Yukarıda gösterilen etkinleştirme kodunu panodan yapıştırın (veya elle yazın) 
+3. İstenirse Google'da oturum açın. Birden fazla hesabınız varsa bu YouTube hesabını seçin 
+4. 'YouTube VR erişimine izin ver' seçeneğine dokunun 
+5. 'Cihaz bağlandı' mesajını gördükten sonra bu uygulamaya dönün"</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_activation_code_dialog_open_website">Web sitesini aç</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_activation_code_failed">Aktivasyon kodu oluşturulamadı</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_toast_get_authorization_code_failed">Kimlik doğrulama anahtarı oluşturulamadı</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_title">Başarıyla oturum açıldı</string>
+  <string name="morphe_spoof_video_streams_sign_in_android_vr_success_dialog_message">"Kimlik doğrulama kaydedildi
+
+• Morphe ayarlarınız, Android VR kimlik doğrulamasını içe/dışa aktarmaz 
+• Bu uygulama 6 ay boyunca kullanılmazsa Google bu kimlik doğrulamasını kaldıracaktır 
+• Google şifrenizi değiştirirseniz veya bu cihazı Google ayarlarınızdan kaldırırsanız tekrar oturum açmanız gerekir"</string>
+  <string name="morphe_oauth2_connection_failure_timeout">OAuth2 geçici olarak kullanılamıyor (API zaman aşımına uğradı)</string>
+  <string name="morphe_oauth2_connection_failure_status_400">Android VR oturum süresi doldu, VR\'da tekrar oturum açmayı deneyin</string>
+  <string name="morphe_oauth2_connection_failure_status">OAuth2 geçici olarak kullanılamıyor (durum %d)</string>
+  <string name="morphe_oauth2_connection_failure_generic">OAuth2 geçici olarak kullanılamıyor</string>
+  <string name="morphe_oauth2_connection_failure_auth_not_approved">VR oturumu açılamadı, web sitesi kimlik doğrulaması onaylanmadı</string>
+  <string name="morphe_oauth2_connection_failure_auth_error">VR oturumu açılamadı: %s</string>
+  <string name="morphe_oauth2_toast_reset">Android VR oturumu kapatıldı</string>
+  <string name="morphe_oauth2_toast_invalid">Geçersiz VR oturum açma belirteci, VR\'da tekrar oturum açmayı deneyin</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_title">Oynatıcı JavaScript güncellemesini devre dışı bırak</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_summary">"Oynatıcı JavaScript'ini belirli bir sürüme kilitler
+
+• Geçerli bir oynatıcı JavaScript hash'i gereklidir
+• Oynatıcı JavaScript hash'leri yaklaşık bir ay geçerlidir ve eski hash'ler GVS tarafından iptal edilir
+• Hash iptal edilirse oynatma başarısız olur"</string>
+  <string name="morphe_spoof_video_streams_disable_player_js_update_user_dialog_message">"Geçerli bir oynatıcı JavaScript hash'i sağlamanız gerekir.
+
+Oynatıcı JavaScript hash'i güncel değilse oynatma başarısız olur."</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_title">Oynatıcı JavaScript hash</string>
+  <string name="morphe_spoof_video_streams_player_js_hash_value_summary">Geçerli bir oynatıcı JavaScript hash değeri girin</string>
+  <!-- misc.quic.disableQUICProtocolPatch -->
+  <string name="morphe_disable_quic_protocol_title">QUIC protokolünü devre dışı bırak</string>
+  <!-- misc.audio.drc.disableDRCAudioPatch  -->
+  <string name="morphe_disable_drc_audio_title">DRC sesi devre dışı bırak</string>
+  <!-- misc.audio.tracks.forceOriginalAudioPatch -->
+  <string name="morphe_force_original_audio_title">Orijinal ses dilini zorla</string>
+  <string name="morphe_force_original_audio_summary">Videoda dublajlı versiyon yerine her zaman orijinal ses parçasını oynatır</string>
+  <!-- misc.proxy.networkProxyPatch -->
+  <string name="morphe_proxy_screen_title">Ağ proxy\'si</string>
+  <string name="morphe_proxy_screen_summary">Proxy üzerinden ağ isteklerini yönlendir</string>
+  <string name="morphe_proxy_enabled_title">Proxy\'yi etkinleştir</string>
+  <string name="morphe_proxy_enabled_summary">Yapılandırılmış bir HTTP veya HTTPS proxy\'si üzerinden desteklenen ağ istekleri yönlendirilir</string>
+  <string name="morphe_proxy_host_title">Proxy sunucusu</string>
+  <string name="morphe_proxy_host_summary">Proxy sunucusunun ana bilgisayar adı veya IP adresi</string>
+  <string name="morphe_proxy_port_title">Proxy portu</string>
+  <string name="morphe_proxy_port_summary">Proxy sunucusunun portu</string>
+  <string name="morphe_proxy_https_title">HTTPS proxy\'si kullan</string>
+  <string name="morphe_proxy_https_summary">Proxy sunucusuna bağlanmak için HTTP yerine HTTPS kullanın</string>
+  <string name="morphe_proxy_auth_enabled_title">Proxy kimlik doğrulaması</string>
+  <string name="morphe_proxy_auth_enabled_summary">Proxy istekleriyle birlikte Temel kimlik doğrulaması gönderir</string>
+  <string name="morphe_proxy_auth_username_title">Proxy kullanıcı adı</string>
+  <string name="morphe_proxy_auth_username_summary">Temel proxy kimlik doğrulaması için kullanıcı adı</string>
+  <string name="morphe_proxy_auth_password_title">Proxy parolası</string>
+  <string name="morphe_proxy_auth_password_summary">Temel proxy kimlik doğrulaması için parola</string>
+  <string name="morphe_proxy_allow_direct_fallback_title">Doğrudan yedeğe izin ver</string>
+  <string name="morphe_proxy_allow_direct_fallback_summary">Proxy başarısız olursa doğrudan bağlan</string>
+  <!-- ad.hideFullscreenAdsPatch -->
+  <string name="morphe_hide_fullscreen_ads_title">Tam ekran reklamları gizle</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <string name="morphe_force_original_audio_not_available">Bu özelliği kullanmak için \'Video akışlarını taklit et\' ayarını Android Reel veya TV olarak değiştirin</string>
+  <!-- misc.privacy.sanitizeSharingLinksPatch -->
+  <string name="morphe_sanitize_sharing_links_title">Paylaşım bağlantılarını temizle</string>
+  <string name="morphe_sanitize_sharing_links_summary">Paylaşılan bağlantılardan izleme sorgu parametrelerini kaldırır</string>
+  <string name="morphe_replace_music_with_youtube_title">Paylaşım bağlantılarını youtube.com olarak değiştir</string>
+  <string name="morphe_replace_music_with_youtube_summary">Paylaşılan bağlantılarda music.youtube.com adresini youtube.com ile değiştirir</string>
+  <string name="morphe_replace_links_with_shortener_title">Paylaşım bağlantılarını youtu.be olarak değiştir</string>
+  <string name="morphe_replace_links_with_shortener_summary">Videoları kısaltılmış youtu.be URL formatını kullanmaya zorlar</string>
+  <!-- misc.debugging.enableDebuggingPatch -->
+  <string name="morphe_debug_protobuffer_title">Hata ayıklama günlük protokol arabelleği</string>
+  <string name="morphe_debug_protobuffer_summary">Geliştiricilerin uygulama bileşenlerini belirlemesine yardımcı olacak ek günlük bilgileri ekler</string>
+  <string name="morphe_debug_protobuffer_user_dialog_message">"Bu ayarı etkinleştirmek, bazı kullanıcı arayüzü bileşenleri için ekrandaki metin de dahil olmak üzere ek düzen verilerini günlüğe kaydeder.
+
+Bu, özel filtreler oluştururken bileşenleri tanımlamaya yardımcı olabilir.
+
+Ancak, bunun etkinleştirilmesi IP adresiniz gibi bazı kullanıcı verilerini de günlüğe kaydeder."</string>
+</resources>

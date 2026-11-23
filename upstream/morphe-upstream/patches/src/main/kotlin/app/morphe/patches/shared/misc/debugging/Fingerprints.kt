@@ -1,0 +1,59 @@
+package app.morphe.patches.shared.misc.debugging
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.string
+import com.android.tools.smali.dexlib2.AccessFlags
+
+internal object ExperimentFlagUtilFingerprint : Fingerprint(
+    returnType = "L",
+    filters = listOf(
+        string("Unable to parse proto typed experiment flag: ")
+    ),
+    custom = { method, _ ->
+        // 'public static' or 'public static final'
+        AccessFlags.STATIC.isSet(method.accessFlags)
+                && AccessFlags.PUBLIC.isSet(method.accessFlags)
+                // listOf("L", "J", "[B") or listOf("L", "J")
+                && method.parameters.let {
+                    (it.size == 2 || it.size == 3) && it[1].type == "J"
+                }
+    }
+)
+
+internal object ExperimentalBooleanFeatureFlagFingerprint : Fingerprint(
+    classFingerprint = ExperimentFlagUtilFingerprint,
+    returnType = "Z",
+    parameters = listOf("L", "J", "Z"),
+    custom = { method, _ ->
+        // 'public static' or 'public static final'
+        AccessFlags.STATIC.isSet(method.accessFlags)
+                && AccessFlags.PUBLIC.isSet(method.accessFlags)
+    }
+)
+
+internal object ExperimentalDoubleFeatureFlagFingerprint : Fingerprint(
+    classFingerprint = ExperimentFlagUtilFingerprint,
+    returnType = "D",
+    parameters = listOf("L", "J", "D"),
+    custom = { method, _ ->
+        AccessFlags.STATIC.isSet(method.accessFlags)
+    }
+)
+
+internal object ExperimentalLongFeatureFlagFingerprint : Fingerprint(
+    classFingerprint = ExperimentFlagUtilFingerprint,
+    returnType = "J",
+    parameters = listOf("L", "J", "J"),
+    custom = { method, _ ->
+        AccessFlags.STATIC.isSet(method.accessFlags)
+    }
+)
+
+internal object ExperimentalStringFeatureFlagFingerprint : Fingerprint(
+    classFingerprint = ExperimentFlagUtilFingerprint,
+    returnType = "Ljava/lang/String;",
+    parameters = listOf("L", "J", "Ljava/lang/String;"),
+    custom = { method, _ ->
+        AccessFlags.STATIC.isSet(method.accessFlags)
+    }
+)

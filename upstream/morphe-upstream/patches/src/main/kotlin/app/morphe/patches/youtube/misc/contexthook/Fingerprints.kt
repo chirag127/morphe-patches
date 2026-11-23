@@ -1,0 +1,180 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to this code.
+ */
+
+package app.morphe.patches.youtube.misc.contexthook
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
+import app.morphe.patcher.InstructionLocation.MatchAfterWithin
+import app.morphe.patcher.fieldAccess
+import app.morphe.patcher.methodCall
+import app.morphe.patcher.opcode
+import app.morphe.patcher.string
+import app.morphe.util.getReference
+import app.morphe.util.indexOfFirstInstruction
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.Method
+import com.android.tools.smali.dexlib2.iface.reference.MethodReference
+
+internal const val CLIENT_INFO_CLASS =
+    $$"Lcom/google/protos/youtube/api/innertube/InnertubeContext$ClientInfo;"
+
+internal object AuthenticationChangeListenerFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
+    returnType = "V",
+    strings = listOf("Authentication changed while request was being made"),
+    custom = { method, _ ->
+        // TODO: Convert this to an instruction filter
+        indexOfMessageLiteBuilderReference(method) >= 0
+    }
+)
+
+internal fun indexOfMessageLiteBuilderReference(method: Method, type: String = "L") =
+    method.indexOfFirstInstruction {
+        val reference = getReference<MethodReference>()
+        opcode == Opcode.INVOKE_VIRTUAL &&
+                reference?.parameterTypes?.isEmpty() == true &&
+                reference.returnType.startsWith(type)
+    }
+
+private object BuildClientContextBodyConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    filters = listOf(
+        string("Android Wear"),
+        opcode(Opcode.IF_EQZ),
+        string("Android Automotive", location = MatchAfterImmediately()),
+        string("Android"),
+        fieldAccess(opcode = Opcode.IPUT_OBJECT, location = MatchAfterImmediately())
+    )
+)
+
+internal object BuildClientContextBodyFingerprint : Fingerprint(
+    classFingerprint = BuildClientContextBodyConstructorFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "L",
+    parameters = listOf(),
+    filters = listOf(
+        fieldAccess(opcode = Opcode.SGET, name = "SDK_INT"),
+        fieldAccess(opcode = Opcode.IPUT_OBJECT, definingClass = CLIENT_INFO_CLASS, type = "Ljava/lang/String;"),
+        opcode(Opcode.OR_INT_LIT16),
+    )
+)
+
+internal object BuildDummyClientContextBodyFingerprint : Fingerprint(
+    filters = listOf(
+        fieldAccess(opcode = Opcode.IGET_OBJECT, name = "instance"),
+        string("10.29", location = MatchAfterWithin(10)),
+        fieldAccess(
+            opcode = Opcode.IPUT_OBJECT,
+            definingClass = CLIENT_INFO_CLASS,
+            type = "Ljava/lang/String;",
+            location = MatchAfterImmediately()
+        ),
+        fieldAccess(
+            opcode = Opcode.IPUT_OBJECT,
+            type = CLIENT_INFO_CLASS,
+        ),
+    )
+)
+
+private object ClientFormFactorEnumConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.STATIC, AccessFlags.CONSTRUCTOR),
+    strings = listOf(
+        "UNKNOWN_FORM_FACTOR",
+        "SMALL_FORM_FACTOR",
+        "LARGE_FORM_FACTOR",
+        "AUTOMOTIVE_FORM_FACTOR",
+        "WEARABLE_FORM_FACTOR",
+    )
+)
+
+internal object ClientFormFactorEnumOrdinalFingerprint : Fingerprint(
+    classFingerprint = ClientFormFactorEnumConstructorFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "L",
+    parameters = listOf("I")
+)
+
+internal object BrowseEndpointParentFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    strings = listOf("browseId"),
+)
+
+internal object GetWatchEndpointConstructorPrimaryFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("get_watch"),
+    custom = { _, classDef ->
+        classDef.fields.find { it.type == "Ljava/util/function/Consumer;" } != null
+    }
+)
+
+internal object GetWatchEndpointConstructorSecondaryFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("get_watch"),
+    custom = { _, classDef ->
+        classDef.fields.find { it.type == "Ljava/util/function/Consumer;" } == null
+    }
+)
+
+internal object GuideEndpointConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("guide"),
+)
+
+internal object NextEndpointParentFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    strings = listOf("watchNextType"),
+)
+
+internal object PlayerEndpointParentFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    strings = listOf("dataExpiredForSeconds"),
+)
+
+internal object ReelCreateItemsEndpointConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("reel/create_reel_items"),
+)
+
+internal object ReelItemWatchEndpointConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("reel/reel_item_watch"),
+)
+
+internal object ReelWatchSequenceEndpointConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("reel/reel_watch_sequence"),
+)
+
+internal object SearchRequestBuildParametersFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Ljava/lang/String;",
+    parameters = listOf(),
+    filters = listOf(
+        string("searchFormData"),
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            name = "toByteArray",
+            location = MatchAfterImmediately()
+        ),
+        opcode(Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately()),
+    )
+)
+
+internal object TranscriptEndpointConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    returnType = "V",
+    strings = listOf("get_transcript"),
+)

@@ -1,0 +1,654 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.extension.youtube.patches.components;
+
+import static app.morphe.extension.shared.ByteTrieSearch.convertStringsToBytes;
+import static app.morphe.extension.youtube.patches.LayoutReloadObserverPatch.isActionBarVisible;
+import static app.morphe.extension.youtube.shared.NavigationBar.NavigationButton;
+
+import android.view.View;
+import android.widget.FrameLayout;
+
+import com.google.android.libraries.youtube.rendering.ui.pivotbar.PivotBar;
+
+import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.List;
+
+import app.morphe.extension.shared.ByteTrieSearch;
+import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.patches.components.BufferAsciiStrings;
+import app.morphe.extension.shared.patches.components.ByteArrayFilterGroup;
+import app.morphe.extension.shared.patches.components.ByteArrayFilterGroupList;
+import app.morphe.extension.shared.patches.components.ContextInterface;
+import app.morphe.extension.shared.patches.components.Filter;
+import app.morphe.extension.shared.patches.components.StringFilterGroup;
+import app.morphe.extension.shared.patches.components.StringFilterGroupList;
+import app.morphe.extension.youtube.settings.Settings;
+import app.morphe.extension.youtube.shared.EngagementPanel;
+import app.morphe.extension.youtube.shared.NavigationBar;
+import app.morphe.extension.youtube.shared.PlayerType;
+import app.morphe.extension.youtube.shared.ShortsPlayerState;
+import kotlin.Unit;
+
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
+public final class ShortsFilter extends Filter {
+    private static final boolean HIDE_SHORTS_NAVIGATION_BAR = Settings.HIDE_SHORTS_NAVIGATION_BAR.get();
+    private static final String COMPONENT_TYPE = "ComponentType";
+    private final String REEL_CHANNEL_BAR_PATH = "reel_channel_bar.e";
+
+    /**
+     * For paid promotion label and subscribe button that appears in the channel bar.
+     */
+    private final String REEL_METAPANEL_PATH = "reel_metapanel.e";
+
+    /**
+     * For paid promotion label and subscribe button that appears in the channel bar.
+     */
+    private final String REEL_PLAYER_OVERLAY_PATH = "reel_player_overlay.e";
+
+    /**
+     * Tags that appears when opening the Shorts player.
+     */
+    private static final List<String> REEL_WATCH_FRAGMENT_INIT_PLAYBACK = Arrays.asList("r_fs", "r_ts");
+
+    /**
+     * Vertical padding between the bottom of the screen and the seekbar, when the Shorts navigation bar is hidden.
+     */
+    public static final int HIDDEN_NAVIGATION_BAR_VERTICAL_HEIGHT = 100;
+
+    /**
+     * BottomBarContainer is the parent view of {@link PivotBar},
+     * And can be hidden using {@link View#setVisibility} only when it is initialized.
+     * <p>
+     * If it was not hidden with {@link View#setVisibility} when it was initialized,
+     * it should be hidden with {@link FrameLayout.LayoutParams}.
+     * <p>
+     * When Shorts is opened, {@link FrameLayout.LayoutParams} should be changed to 0dp,
+     * When Shorts is closed, {@link FrameLayout.LayoutParams} should be changed to the original.
+     */
+    private static WeakReference<View> bottomBarContainerRef = new WeakReference<>(null);
+    private static WeakReference<PivotBar> pivotBarRef = new WeakReference<>(null);
+
+    private static final FrameLayout.LayoutParams zeroLayoutParams = new FrameLayout.LayoutParams(0, 0);
+    private static FrameLayout.LayoutParams originalLayoutParams;
+
+    private final StringFilterGroup shortsCompactFeedVideo;
+    private final ByteTrieSearch shortsCompactFeedVideoBuffer;
+    private final StringFilterGroup channelProfile;
+    private final ByteArrayFilterGroup channelProfileShelfHeader;
+
+    private final StringFilterGroup autoDubbedLabel;
+    private final StringFilterGroup subscribeButton;
+    private final StringFilterGroup joinButton;
+    private final StringFilterGroup shelfHeaderIdentifier;
+    private final StringFilterGroup shelfHeaderPath;
+
+    private final StringFilterGroup reelCarousel;
+    private final ByteArrayFilterGroupList reelCarouselBuffer = new ByteArrayFilterGroupList();
+
+    private final StringFilterGroup suggestedAction;
+    private final ByteArrayFilterGroupList suggestedActionsBuffer = new ByteArrayFilterGroupList();
+
+    private final StringFilterGroup useButtons;
+    private final ByteArrayFilterGroupList useButtonsBuffer = new ByteArrayFilterGroupList();
+
+    private final StringFilterGroup shortsActionBar;
+    private final StringFilterGroup shortsActionButton;
+    private final StringFilterGroupList shortsActionButtonGroupList = new StringFilterGroupList();
+
+    public ShortsFilter() {
+        //
+        // Identifier components.
+        //
+
+        var shortsIdentifiers = new StringFilterGroup(
+                null, // Setting is based on navigation state.
+                "shorts_shelf",
+                "inline_shorts",
+                "shorts_grid",
+                "shorts_video_cell"
+        );
+
+        channelProfile = new StringFilterGroup(
+                Settings.HIDE_SHORTS_CHANNEL,
+                "shorts_pivot_item"
+        );
+
+        channelProfileShelfHeader = new ByteArrayFilterGroup(
+                Settings.HIDE_SHORTS_CHANNEL,
+                "Shorts"
+        );
+
+        // Feed Shorts shelf header.
+        // Use a different filter group for this pattern, as it requires an additional check after matching.
+        shelfHeaderIdentifier = new StringFilterGroup(
+                null,
+                "shelf_header.e"
+        );
+
+        addIdentifierCallbacks(shortsIdentifiers, channelProfile, shelfHeaderIdentifier);
+
+        //
+        // Path components.
+        //
+
+        shortsCompactFeedVideo = new StringFilterGroup(
+                null,
+                // Shorts that appear in the feed/search when the device is using tablet layout.
+                "compact_video.e",
+                // 'video_lockup_with_attachment.e' is shown instead of 'compact_video.e' for some users
+                "video_lockup_with_attachment.e",
+                // Search results that appear in a horizontal shelf.
+                "video_card.e");
+
+        // Filter out items that use the 'frame0' thumbnail and other Shorts specific images.
+        // 'frame0' is a valid thumbnail for both regular videos and Shorts,
+        // but it appears these thumbnails are only used for Shorts.
+        shortsCompactFeedVideoBuffer = new ByteTrieSearch(convertStringsToBytes(
+                "/frame0.jpg",
+                "/oardefault.jpg", // Vertical orientation video.
+                "/oar1.jpg",
+                "/oar2.jpg",
+                "/oar3.jpg")
+        );
+
+        shelfHeaderPath = new StringFilterGroup(
+                null,
+                "shelf_header.e"
+        );
+
+        // Shorts player components.
+        StringFilterGroup pausedOverlayButtons = new StringFilterGroup(
+                Settings.HIDE_SHORTS_PAUSED_OVERLAY_BUTTONS,
+                "shorts_paused_state"
+        );
+
+        StringFilterGroup channelBar = new StringFilterGroup(
+                Settings.HIDE_SHORTS_CHANNEL_BAR,
+                REEL_CHANNEL_BAR_PATH
+        );
+
+        StringFilterGroup fullVideoLinkLabel = new StringFilterGroup(
+                Settings.HIDE_SHORTS_FULL_VIDEO_LINK_LABEL,
+                "reel_multi_format_link"
+        );
+
+        StringFilterGroup videoTitle = new StringFilterGroup(
+                Settings.HIDE_SHORTS_VIDEO_TITLE,
+                "shorts_video_title_item"
+        );
+
+        StringFilterGroup reelSoundMetadata = new StringFilterGroup(
+                Settings.HIDE_SHORTS_SOUND_METADATA_LABEL,
+                "reel_sound_metadata"
+        );
+
+        StringFilterGroup soundButton = new StringFilterGroup(
+                Settings.HIDE_SHORTS_SOUND_BUTTON,
+                "reel_pivot_button"
+        );
+
+        StringFilterGroup infoPanel = new StringFilterGroup(
+                Settings.HIDE_SHORTS_INFO_PANEL,
+                "shorts_info_panel_overview"
+        );
+
+        StringFilterGroup likeFountain = new StringFilterGroup(
+                Settings.HIDE_SHORTS_LIKE_FOUNTAIN,
+                "like_fountain.e"
+        );
+
+        StringFilterGroup likeButton = new StringFilterGroup(
+                Settings.HIDE_SHORTS_LIKE_BUTTON,
+                "shorts_like_button.e",
+                "reel_like_button.e",
+                "reel_like_toggled_button.e"
+        );
+
+        StringFilterGroup dislikeButton = new StringFilterGroup(
+                Settings.HIDE_SHORTS_DISLIKE_BUTTON,
+                "shorts_dislike_button.e",
+                "reel_dislike_button.e",
+                "reel_dislike_toggled_button.e"
+        );
+
+        StringFilterGroup previewComment = new StringFilterGroup(
+                Settings.HIDE_SHORTS_PREVIEW_COMMENT,
+                // Preview comment that can popup while a Short is playing.
+                // Uses no bundled icons, and instead the users profile photo is shown.
+                "participation_bar.e"
+        );
+
+        StringFilterGroup livePreview = new StringFilterGroup(
+                Settings.HIDE_SHORTS_LIVE_PREVIEW,
+                // Live Shorts preview that can popup while scrolling through Shorts player.
+                // Can be removed if a way to disable live Shorts is found.
+                "live_preview_page_vm.e"
+        );
+
+        autoDubbedLabel = new StringFilterGroup(
+                Settings.HIDE_SHORTS_AUTO_DUBBED_LABEL,
+                "badge.e"
+        );
+
+        joinButton = new StringFilterGroup(
+                Settings.HIDE_SHORTS_JOIN_BUTTON,
+                "sponsor_button"
+        );
+
+        subscribeButton = new StringFilterGroup(
+                Settings.HIDE_SHORTS_SUBSCRIBE_BUTTON,
+                "subscribe_button"
+        );
+
+        shortsActionBar = new StringFilterGroup(
+                null,
+                "shorts_action_bar.e",
+                "reel_action_bar.e"
+        );
+
+        reelCarousel = new StringFilterGroup(
+                null,
+                "reel_carousel.e"
+        );
+
+        reelCarouselBuffer.addAll(
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_AI_BUTTON,
+                        "yt_outline_info_circle",
+                        "yt_outline_experimental_info_circle"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_SOUND_METADATA_LABEL,
+                        "yt_outline_audio", // Doesn't seem to be needed as v20.14.43 uses 'yt_outline_experimental_audio' as well. But still just in case.
+                        "yt_outline_experimental_audio"
+                )
+        );
+
+        shortsActionButton = new StringFilterGroup(
+                null,
+                // Can be any of:
+                // button.eml
+                // shorts_video_action_button.eml
+                // reel_action_button.eml
+                // reel_pivot_button.eml
+                "button.e"
+        );
+
+        useButtons = new StringFilterGroup(
+                null,
+                REEL_PLAYER_OVERLAY_PATH,
+                REEL_METAPANEL_PATH,
+                "floating_action_button.e"
+        );
+
+        useButtonsBuffer.addAll(
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_USE_SOUND_BUTTON,
+                        "yt_outline_camera_",
+                        "yt_outline_experimental_camera_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_USE_TEMPLATE_BUTTON,
+                        "yt_outline_template_add_",
+                        "yt_outline_experimental_template_add_"
+                )
+        );
+
+        suggestedAction = new StringFilterGroup(
+                null,
+                "suggested_action.e"
+        );
+
+        addPathCallbacks(
+                shortsCompactFeedVideo, shelfHeaderPath, joinButton, subscribeButton, livePreview,
+                suggestedAction, pausedOverlayButtons, channelBar, infoPanel, previewComment,
+                autoDubbedLabel, fullVideoLinkLabel, videoTitle, soundButton, useButtons, likeFountain,
+                reelCarousel, reelSoundMetadata, likeButton, dislikeButton, shortsActionBar
+        );
+
+        //
+        // All other action buttons.
+        //
+        shortsActionButtonGroupList.addAll(
+                new StringFilterGroup(
+                        Settings.HIDE_SHORTS_COMMENTS_BUTTON,
+                        "id.reel_comment_button"
+                ),
+                new StringFilterGroup(
+                        Settings.HIDE_SHORTS_SHARE_BUTTON,
+                        "id.reel_share_button"
+                ),
+                new StringFilterGroup(
+                        Settings.HIDE_SHORTS_REMIX_BUTTON,
+                        "id.reel_remix_button"
+                )
+        );
+
+        //
+        // Suggested actions.
+        //
+        suggestedActionsBuffer.addAll(
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_PREVIEW_COMMENT,
+                        // Preview comment that can popup while a Short is playing.
+                        // Uses no bundled icons, and instead the users profile photo is shown.
+                        "shorts-comments-panel"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_SHOP_BUTTON,
+                        "yt_outline_bag_",
+                        "yt_outline_experimental_bag_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_TAGGED_PRODUCTS,
+                        // Product buttons show pictures of the products, and does not have any unique icons to identify.
+                        // Instead, use a unique identifier found in the buffer.
+                        "PAproduct_listZ"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_LOCATION_LABEL,
+                        "yt_outline_location_point_",
+                        "yt_outline_experimental_location_point_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_SAVE_SOUND_BUTTON,
+                        "yt_outline_bookmark_",
+                        // 'Save sound' button. It seems this has been removed and only 'Save music' is used.
+                        // Still hide this in case it's still present.
+                        "yt_outline_list_add_",
+                        "yt_outline_experimental_list_add_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_SEARCH_SUGGESTIONS,
+                        "yt_outline_search_",
+                        "yt_outline_experimental_search_"
+
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_SUPER_THANKS_BUTTON,
+                        "yt_outline_dollar_sign_heart_",
+                        "yt_outline_experimental_dollar_sign_heart_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_USE_TEMPLATE_BUTTON,
+                        //  "Use this template" can appear in two different places.
+                        "yt_outline_template_add_",
+                        "yt_outline_experimental_template_add_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_UPCOMING_BUTTON,
+                        "yt_outline_bell_",
+                        "yt_outline_experimental_bell_"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_EFFECT_BUTTON,
+                        // https://www.gstatic.com/youtube/effects/xeno/arcade/effects/icons/
+                        "/arcade/effects/icons/"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_GREEN_SCREEN_BUTTON,
+                        "greenscreen_temp"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_NEW_POSTS_BUTTON,
+                        "yt_outline_box_pencil",
+                        "yt_outline_experimental_box_pencil"
+                ),
+                new ByteArrayFilterGroup(
+                        Settings.HIDE_SHORTS_HASHTAG_BUTTON,
+                        "yt_outline_hashtag_",
+                        "yt_outline_experimental_hashtag_"
+                )
+        );
+    }
+
+    private boolean isEverySuggestedActionFilterEnabled() {
+        for (ByteArrayFilterGroup group : suggestedActionsBuffer) {
+            if (!group.isEnabled()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean isFiltered(ContextInterface contextInterface,
+                              String identifier,
+                              String accessibility,
+                              String path,
+                              byte[] buffer,
+                              BufferAsciiStrings asciiStrings,
+                              StringFilterGroup matchedGroup,
+                              FilterContentType contentType,
+                              int contentIndex) {
+        if (contentType == FilterContentType.IDENTIFIER) {
+            if (matchedGroup == shelfHeaderIdentifier) {
+                // Shelf header reused in history/channel/etc.
+                // Shorts header is always index 0
+                if (contentIndex != 0) {
+                    return false;
+                }
+                // Check ConversationContext to not hide shelf header in channel profile
+                // This value does not exist in the shelf header in the channel profile
+                if (!contextInterface.isHomeFeedOrRelatedVideo()) {
+                    return false;
+                }
+            } else if (matchedGroup == channelProfile) {
+                return true;
+            }
+
+            return shouldHideShortsFeedItems();
+        }
+
+        if (contentType == FilterContentType.PATH) {
+            if (matchedGroup == subscribeButton || matchedGroup == joinButton || matchedGroup == autoDubbedLabel) {
+                // Selectively filter to avoid false positive filtering of other subscribe/join buttons.
+                return path.startsWith(REEL_CHANNEL_BAR_PATH) || path.startsWith(REEL_METAPANEL_PATH)
+                        || path.startsWith(REEL_PLAYER_OVERLAY_PATH);
+            }
+
+            if (matchedGroup == reelCarousel) {
+                return reelCarouselBuffer.check(buffer).isFiltered();
+            }
+
+            if (matchedGroup == shortsCompactFeedVideo) {
+                return shouldHideShortsFeedItems()
+                        // When a video is autoplaying in the feed, no new components are drawn on the screen.
+                        // Therefore, filtering is skipped when the current PlayerType is [INLINE_MINIMAL].
+                        && PlayerType.getCurrent() != PlayerType.INLINE_MINIMAL
+                        // The litho path of the feed video is 'video_lockup_with_attachment.e'.
+                        // It appears [shortsCompactFeedVideoBuffer] is used after 20 seconds during autoplay in the feed in YouTube 20.44.38.
+                        // If the Shorts shelf is hidden on the Home feed, the video in the feed will be hidden after 20 seconds have passed since autoplay began in the feed.
+                        // See: https://github.com/MorpheApp/morphe-patches/issues/773.
+                        && shortsCompactFeedVideoBuffer.matches(buffer);
+            }
+
+            if (matchedGroup == shelfHeaderPath) {
+                // Shelf header reused in history/channel/etc.
+                // Shorts header is always index 0
+                if (contentIndex != 0) {
+                    return false;
+                }
+                // Check ConversationContext to not hide shelf header in channel profile
+                // This value does not exist in the shelf header in the channel profile
+                if (!contextInterface.isHomeFeedOrRelatedVideo()) {
+                    return channelProfileShelfHeader.check(buffer).isFiltered();
+                }
+
+                return shouldHideShortsFeedItems();
+            }
+
+            // Video action buttons (comment, share, remix) have the same path.
+            // Like and dislike are separate path filters and don't require buffer searching.
+            if (matchedGroup == shortsActionBar) {
+                if (shortsActionButton.check(path).isFiltered()) {
+                    return shortsActionButtonGroupList.check(accessibility).isFiltered();
+                }
+                return false;
+            }
+
+            if (matchedGroup == useButtons) {
+                return path.contains("|button.e") && useButtonsBuffer.check(buffer).isFiltered();
+            }
+
+            if (matchedGroup == suggestedAction) {
+                // Skip searching the buffer if all suggested actions are set to hidden.
+                // This has a secondary effect of hiding all new un-identified actions
+                // under the assumption that the user wants all suggestions hidden.
+                if (isEverySuggestedActionFilterEnabled()) {
+                    return true;
+                }
+
+                return suggestedActionsBuffer.check(buffer).isFiltered();
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean shouldHideShortsFeedItems() {
+        // Known issue if hide home is on but at least one other hide is off:
+        //
+        // Shorts suggestions will load in the background if a video is opened and
+        // immediately minimized before any suggestions are loaded.
+        // In this state the player type will show minimized, which cannot
+        // distinguish between Shorts suggestions loading in the player and between
+        // scrolling through search/home/subscription tabs while a player is minimized.
+        final boolean hideHome = Settings.HIDE_SHORTS_HOME.get();
+        final boolean hideSubscriptions = Settings.HIDE_SHORTS_SUBSCRIPTIONS.get();
+        final boolean hideSearch = Settings.HIDE_SHORTS_SEARCH.get();
+        final boolean hideVideoDescription = Settings.HIDE_SHORTS_VIDEO_DESCRIPTION.get();
+        final boolean hideHistory = Settings.HIDE_SHORTS_HISTORY.get();
+
+        if (!hideHome && !hideSubscriptions && !hideSearch && !hideVideoDescription && !hideHistory) {
+            return false;
+        }
+        if (hideHome && hideSubscriptions && hideSearch && hideVideoDescription && hideHistory) {
+            return true;
+        }
+
+        // Must check player type first, as search bar can be active behind the player.
+        if (PlayerType.getCurrent().isMaximizedOrFullscreen() || isActionBarVisible.get()) {
+            return EngagementPanel.isDescription()
+                    ? hideVideoDescription // Player video description panel opened.
+                    : hideHome; // For now, consider Shorts under video player the same as the home feed.
+        }
+
+        // Must check second, as search can be from any tab.
+        if (NavigationBar.isSearchBarActive()) {
+            return hideSearch;
+        }
+
+        // Avoid checking navigation button status if all other Shorts should show.
+        if (!hideHome && !hideSubscriptions && !hideHistory) {
+            return false;
+        }
+
+        // Check navigation absolutely last since the check may block this thread.
+        NavigationButton selectedNavButton = NavigationButton.getSelectedNavigationButton();
+        if (selectedNavButton == null) {
+            return hideHome; // Unknown tab, treat the same as home.
+        }
+
+        return switch (selectedNavButton) {
+            case HOME -> hideHome;
+            case SEARCH -> hideSearch;
+            case SUBSCRIPTIONS -> hideSubscriptions;
+            case LIBRARY -> hideHistory;
+            default -> false;
+        };
+    }
+
+    /**
+     * Injection point.
+     */
+    public static int getSoundButtonSize(int original) {
+        if (Settings.HIDE_SHORTS_SOUND_BUTTON.get()) {
+            return 0;
+        }
+
+        return original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void setBottomBarContainer(View view) {
+        if (HIDE_SHORTS_NAVIGATION_BAR && view.getLayoutParams() instanceof FrameLayout.LayoutParams lp) {
+            bottomBarContainerRef = new WeakReference<>(view);
+            if (originalLayoutParams == null) {
+                originalLayoutParams = lp;
+
+                ShortsPlayerState.getOnChange().addObserver((Boolean isOpen) -> {
+                    View navigationBar = bottomBarContainerRef.get();
+                    if (navigationBar != null && navigationBar.getLayoutParams() instanceof FrameLayout.LayoutParams) {
+                        FrameLayout.LayoutParams params;
+                        if (isOpen) {
+                            params = zeroLayoutParams;
+                            Logger.printDebug(() -> "Hiding bottom bar container by setting layout params");
+                        } else {
+                            params = originalLayoutParams;
+                        }
+                        navigationBar.setLayoutParams(params);
+                    }
+                    return Unit.INSTANCE;
+                });
+            }
+        }
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void setPivotBar(PivotBar view) {
+        if (HIDE_SHORTS_NAVIGATION_BAR) {
+            pivotBarRef = new WeakReference<>(view);
+        }
+    }
+
+    /**
+     * Injection point.
+     */
+    public static void hidePivotBar(String tag) {
+        if (HIDE_SHORTS_NAVIGATION_BAR) {
+            if (REEL_WATCH_FRAGMENT_INIT_PLAYBACK.contains(tag)) {
+                PivotBar pivotBar = pivotBarRef.get();
+                if (pivotBar == null) return;
+
+                Logger.printDebug(() -> "Hiding pivot bar by setting to GONE");
+                pivotBar.setVisibility(View.GONE);
+            } else {
+                Logger.printDebug(() -> "Ignoring tag: " + tag);
+            }
+        }
+    }
+
+    /**
+     * Injection point.
+     */
+    public static int getNavigationBarHeight(int original) {
+        return HIDE_SHORTS_NAVIGATION_BAR
+                ? HIDDEN_NAVIGATION_BAR_VERTICAL_HEIGHT
+                : original;
+    }
+
+    /**
+     * Injection point.
+     */
+    public static boolean allowDoubleTapToLike(boolean originalValue) {
+        return originalValue && !Settings.DISABLE_SHORTS_DOUBLE_TAP_TO_LIKE.get();
+    }
+}

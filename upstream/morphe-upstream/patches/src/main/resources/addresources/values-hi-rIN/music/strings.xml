@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- layout.branding.customBrandingPatch -->
+  <!-- layout.branding.header.changeHeaderPatch -->
+  <string name="morphe_header_logo_title">हेडर लोगो</string>
+  <string name="morphe_header_logo_entry_1">डिफ़ॉल्ट</string>
+  <string name="morphe_header_logo_entry_3">कस्टम</string>
+  <!-- misc.settings.settingsPatch -->
+  <!-- In languages where "About" is ambiguous, translate this as "About Morphe" (i.e., About this app). -->
+  <string name="morphe_settings_music_screen_0_about_title">इसके बारे में</string>
+  <string name="morphe_settings_music_screen_1_ads_title">विज्ञापन</string>
+  <string name="morphe_settings_music_screen_2_general_title">सामान्य</string>
+  <string name="morphe_settings_music_screen_3_player_title">प्लेयर</string>
+  <string name="morphe_settings_music_screen_6_misc_title">विविध</string>
+  <!-- ad.general.hideAdsPatch -->
+  <string name="morphe_music_hide_get_premium_label_title">\'गेट म्यूज़िक प्रीमियम\' लेबल छिपाएं</string>
+  <!-- ad.video.hideVideoAdsPatch -->
+  <string name="morphe_music_hide_video_ads_title">विडियो विज्ञापन छिपाएं</string>
+  <!-- interaction.crossfade.crossfadePatch -->
+  <string name="morphe_music_crossfade_screen_title">क्रॉसफ़ेड</string>
+  <string name="morphe_music_crossfade_screen_summary">ट्रैक को आपस में सहजता से मिलाएं</string>
+  <string name="morphe_music_crossfade_enabled_title">क्रॉसफ़ेड सक्षम करें</string>
+  <string name="morphe_music_crossfade_curve_title">फे़ड वक्र</string>
+  <string name="morphe_music_crossfade_curve_entry_equal_power">समान शक्ति</string>
+  <string name="morphe_music_crossfade_curve_entry_ease_out_cubic">सूक्ष्म होल्ड</string>
+  <string name="morphe_music_crossfade_curve_entry_ease_out_quad">कोमल आसानी</string>
+  <string name="morphe_music_crossfade_curve_entry_smoothstep">चिकना एस-वक्र</string>
+  <!-- Empty string because custom preference handles the title itself -->
+  <string name="morphe_music_crossfade_curve_preview_outgoing">आउटगोइंग</string>
+  <string name="morphe_music_crossfade_curve_preview_incoming">इनकमिंग</string>
+  <string name="morphe_music_crossfade_duration_title">क्रॉसफ़ेड अवधि</string>
+  <string name="morphe_crossfade_duration_250ms">250 मिलीसेकंड</string>
+  <string name="morphe_crossfade_duration_500ms">500 मिलीसेकंड</string>
+  <string name="morphe_crossfade_duration_750ms">750 मिलीसेकंड</string>
+  <string name="morphe_crossfade_duration_1000ms">1 सेकंड</string>
+  <string name="morphe_crossfade_duration_2000ms">2 सेकंड</string>
+  <string name="morphe_crossfade_duration_3000ms">3 सेकंड</string>
+  <string name="morphe_crossfade_duration_4000ms">4 सेकंड</string>
+  <string name="morphe_crossfade_duration_5000ms">5 सेकंड</string>
+  <string name="morphe_crossfade_duration_6000ms">6 सेकंड</string>
+  <string name="morphe_crossfade_duration_7000ms">7 सेकंड</string>
+  <string name="morphe_crossfade_duration_8000ms">8 सेकंड</string>
+  <string name="morphe_crossfade_duration_9000ms">9 सेकंड</string>
+  <string name="morphe_crossfade_duration_10000ms">10 सेकंड</string>
+  <string name="morphe_crossfade_duration_11000ms">11 सेकंड</string>
+  <string name="morphe_crossfade_duration_12000ms">12 सेकंड</string>
+  <string name="morphe_music_crossfade_on_skip_title">मैनुअल स्किप पर क्रॉसफ़ेड</string>
+  <string name="morphe_music_crossfade_on_skip_summary">जब आप मैन्युअल रूप से अगले ट्रैक पर जाते हैं तो क्रॉसफ़ेड प्रभाव लागू करें</string>
+  <string name="morphe_music_crossfade_on_auto_advance_title">ऑटो-एडवांस पर क्रॉसफ़ेड</string>
+  <string name="morphe_music_crossfade_on_auto_advance_summary">जब कोई ट्रैक स्वाभाविक रूप से समाप्त होता है तो क्रॉसफ़ेड प्रभाव लागू करें</string>
+  <string name="morphe_music_crossfade_session_control_title">सत्र नियंत्रण</string>
+  <string name="morphe_music_crossfade_session_control_summary">क्रॉसफ़ेड को रोकने या फिर से शुरू करने के लिए शफ़ल बटन को लंबे समय तक दबाएं</string>
+  <string name="morphe_music_crossfade_paused_toast">इस सत्र के लिए क्रॉसफ़ेड रोका गया</string>
+  <string name="morphe_music_crossfade_resumed_toast">क्रॉसफ़ेड फिर से शुरू हुआ</string>
+  <string name="morphe_music_crossfade_video_mode_disabled_toast">क्रॉसफ़ेड सक्षम होने पर वीडियो मोड उपलब्ध नहीं है</string>
+  <string name="morphe_music_crossfade_cast_unstable_toast">ऑडियो कास्ट या मिरर करते समय क्रॉसफ़ेड को रोका गया है। कास्ट/मिरर पर क्रॉसफ़ेड अस्थिर है और इसे ठीक नहीं किया जा सकता है।</string>
+  <string name="morphe_music_crossfade_about_title">इसके बारे में</string>
+  <string name="morphe_music_crossfade_about_summary">क्रॉसफ़ेड कैसे काम करता है — और कब यह काम नहीं करता है</string>
+  <!-- Banner row has no text; it shows a full-width graphic via a custom layout. -->
+  <string name="morphe_music_crossfade_about_how_title">यह कैसे काम करता है</string>
+  <string name="morphe_music_crossfade_about_how_summary">"क्रॉसफ़ेड एक गाने के अंत को अगले गाने की शुरुआत के साथ ओवरलैप करता है, आपके चुने हुए अवधि और वक्र पर एक को फीका करते हुए दूसरे को ऊपर उठाता है।
+
+यह ऑटो-एडवांस (जब कोई गाना अपने आप खत्म हो जाता है) और मैनुअल स्किप पर चलता है — प्रत्येक के लिए ऊपर एक अलग टॉगल होता है। ऑटो-एडवांस पर, मिश्रण गाने के खत्म होने से कुछ सेकंड पहले शुरू होता है।
+
+इसके लिए YouTube Music 9.x या उसके बाद के संस्करण की आवश्यकता है।"</string>
+  <string name="morphe_music_crossfade_about_best_title">यह सबसे अच्छा किसके साथ काम करता है</string>
+  <string name="morphe_music_crossfade_about_best_summary">सामान्य गाने से गाने का प्लेबैक और ऑटो-एडवांस, रिपीट-वन (गाना खुद में क्रॉसफ़ेड होता है), और स्थानीय ऑडियो — फोन स्पीकर, वायर्ड हेडफ़ोन, ब्लूटूथ या यूएसबी।</string>
+  <string name="morphe_music_crossfade_about_quirks_title">ठीक से काम नहीं कर रहा है</string>
+  <string name="morphe_music_crossfade_about_quirks_summary">"क्रॉसफ़ेड चालू रहने पर संगीत वीडियो केवल ऑडियो के रूप में चलते हैं (वीडियो देखने के लिए शफ़ल को लंबे समय तक दबाएं)
+
+आपके फ़ेड अवधि से कम गाने फ़ेड को छोड़ सकते हैं
+
+लॉक स्क्रीन या अधिसूचना संक्रमण के बीच एक पुरानी स्थिति दिखा सकती है"</string>
+  <string name="morphe_music_crossfade_about_known_title">ज्ञात मुद्दे</string>
+  <string name="morphe_music_crossfade_about_known_summary">"पहले गाने के रूप में सेट एक संगीत वीडियो - या क्यू के बाहर से शुरू किया गया एक - ऑडियो-ओनली मोड शुरू होने से पहले वीडियो के रूप में दिखाई दे सकता है
+
+संगीत वीडियो देखने के लिए क्रॉसफ़ेड को रोकने से कुछ वीडियो काले हो सकते हैं (जिनकी ऑडियो स्वयं वीडियो से आती है)। गाने चुनने से पहले क्रॉसफ़ेड को रोकें"</string>
+  <string name="morphe_music_crossfade_about_unsupported_title">बिल्कुल काम नहीं करता</string>
+  <string name="morphe_music_crossfade_about_unsupported_summary">"कास्टिंग या ऑडियो मिररिंग (क्रोमकास्ट, स्क्रीन या ऑडियो मिररिंग) - क्रॉसफ़ेड रुक जाएगा क्योंकि यह वहां अस्थिर है और शायद कभी भी ठीक नहीं हो पाएगा.
+
+YouTube Music 8.x - क्रॉसफ़ेड केवल 9.x और उसके बाद के संस्करणों पर चलता है"</string>
+  <string name="morphe_music_crossfade_about_credit_title">श्रेय</string>
+  <string name="morphe_music_crossfade_about_credit_summary">VazerOG द्वारा क्रॉसफ़ेड सुविधा</string>
+  <!-- interaction.permanentrepeat.permanentRepeatPatch -->
+  <string name="morphe_music_play_permanent_repeat_title">स्थायी पुनरावृत्ति सक्षम करें</string>
+  <!-- layout.buttons.hideButtonsPatch -->
+  <string name="morphe_music_hide_cast_button_title">कास्ट बटन छिपाएं</string>
+  <string name="morphe_music_hide_history_button_title">इतिहास बटन छिपाएं</string>
+  <string name="morphe_music_hide_notification_button_title">अधिसूचना बटन छिपाएं</string>
+  <string name="morphe_music_hide_search_button_title">खोज बटन छिपाएं</string>
+  <!-- layout.startpage.changeStartPagePatch -->
+  <string name="morphe_change_start_page_title">प्रारंभ पृष्ठ</string>
+  <string name="morphe_change_start_page_entry_default">डिफ़ॉल्ट</string>
+  <string name="morphe_change_start_page_entry_charts">चാർ्ट्स</string>
+  <string name="morphe_change_start_page_entry_episodes_for_later">बाद में देखने के लिए एपिसोड</string>
+  <string name="morphe_change_start_page_entry_explore">अन्वेषण करना</string>
+  <string name="morphe_change_start_page_entry_history">इतिहास</string>
+  <string name="morphe_change_start_page_entry_library">लाइब्रेरी</string>
+  <string name="morphe_change_start_page_entry_liked_music">पसंदीदा संगीत</string>
+  <string name="morphe_change_start_page_entry_playlists">प्लेलिस्ट</string>
+  <string name="morphe_change_start_page_entry_search">खोज करना</string>
+  <string name="morphe_change_start_page_entry_subscriptions">सब्सक्रिप्शंस</string>
+  <!-- layout.compactheader.hideCategoryBarPatch -->
+  <string name="morphe_music_hide_category_bar_title">श्रेणी बार छिपाएं</string>
+  <!-- layout.miniplayer.changeMiniplayerColorPatch -->
+  <string name="morphe_music_change_miniplayer_color_title">मिनीप्लेयर रंग बदलें</string>
+  <string name="morphe_music_change_miniplayer_color_summary">मिनीप्लेयर के रंग को फुलस्क्रीन प्लेयर से मिलाता है</string>
+  <!-- layout.miniplayer.miniplayerNextPreviousButtonsPatch -->
+  <string name="morphe_music_miniplayer_next_button_title">मिनीप्लेयर में अगला बटन दिखाएँ</string>
+  <string name="morphe_music_miniplayer_previous_button_title">पिछला बटन मिनीप्लेयर में दिखाया गया है</string>
+  <!-- layout.miniplayer.enableForcedMiniplayerPatch -->
+  <string name="morphe_music_enable_forced_miniplayer_title">सशर्त मिनीप्लेयर सक्षम करें</string>
+  <string name="morphe_music_enable_forced_miniplayer_summary">प्लेयर को नए ट्रैक शुरू होने पर स्वचालित रूप से फुलस्क्रीन में विस्तार करने से रोकता है</string>
+  <!-- layout.miniplayer.enableSwipeToDismissMiniplayerPatch -->
+  <string name="morphe_music_enable_swipe_to_dismiss_miniplayer_title">मिनीप्लेयर को स्वाइप करके खारिज करने को सक्षम करें</string>
+  <string name="morphe_music_enable_swipe_to_dismiss_miniplayer_summary">मिनीप्लेयर पर नीचे स्वाइप करके उसे खारिज करने की अनुमति देता है</string>
+  <!-- layout.navigationbar.navigationBarPatch -->
+  <string name="morphe_music_navigation_bar_screen_title">नविगेशन बार</string>
+  <string name="morphe_music_navigation_bar_screen_summary">नीचे नेविगेशन बार में कौन से बटन दिखाई दें, यह चुनें</string>
+  <!-- 'Home' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_home_button_title">होम बटन छिपाएं</string>
+  <!-- 'Samples' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_samples_button_title">सैंपल बटन छिपाएं</string>
+  <!-- 'Explore' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_explore_button_title">एक्सप्लोर बटन छिपाएं</string>
+  <!-- 'Library' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_library_button_title">लाइब्रेरी बटन छिपाएं</string>
+  <!-- 'Upgrade' should be translated using the same localized wording YouTube Music displays for the tab. -->
+  <string name="morphe_music_hide_navigation_bar_upgrade_button_title">अपग्रेड बटन छिपाएं</string>
+  <string name="morphe_music_hide_navigation_bar_title">नविगेशन बार छिपाएं</string>
+  <string name="morphe_music_hide_navigation_bar_labels_title">नविगेशन बटन लेबल छिपाएं</string>
+  <!-- layout.upgradebutton.hideUpgradeButtonPatch -->
+  <string name="morphe_music_hide_upgrade_button_title">अपग्रेड बटन छिपाएं</string>
+  <!-- interaction.scrobbling.scrobblingPatch -->
+  <string name="morphe_music_scrobbling_summary">Last.fm और ListenBrainz एकीकरण कॉन्फ़िगर करें</string>
+  <string name="morphe_music_scrobbling_summary_logged_out">लॉग इन नहीं किया गया। कॉन्फ़िगर करने के लिए टैप करें</string>
+  <string name="morphe_music_scrobbling_log_out">लॉग आउट करें</string>
+  <string name="morphe_music_scrobbling_logged_out_toast">लॉग आउट किया गया</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_enabled_title">स्क्रोब्लिंग सक्षम करें</string>
+  <string name="morphe_music_scrobbling_now_playing_title">\"अभी चल रहा है\" स्थिति सबमिट करें</string>
+  <string name="morphe_music_scrobbling_min_song_duration_title">न्यूनतम गीत अवधि</string>
+  <!-- 'scrobbled' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_min_song_duration_summary">इसकी तुलना में छोटे गाने स्क्रोबल्ड नहीं किए जाएंगे</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_percent_title">स्क्रोबल देरी प्रतिशत</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_percent_summary">गीत के इस प्रतिशत को सुनने के बाद स्क्रोबल को ट्रिगर करें</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_seconds_title">स्क्रोबल देरी सेकंड</string>
+  <!-- 'scrobble' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_delay_seconds_summary">इस संख्या में सेकंड के लिए सुनने के बाद स्क्रोबल को ट्रिगर करें</string>
+  <string name="morphe_music_listenbrainz_token_title">ListenBrainz खाता</string>
+  <string name="morphe_music_listenbrainz_token_summary_logged_in">लॉग इन किया गया। खाता प्रबंधित करने के लिए टैप करें</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_listenbrainz_token_dialog_instruction">स्क्रबिंग सक्षम करने के लिए अपना ListenBrainz यूजर टोकन दर्ज करें</string>
+  <string name="morphe_music_listenbrainz_token_dialog_hint">टोकन</string>
+  <string name="morphe_music_listenbrainz_token_dialog_get_token">टोकन प्राप्त करें</string>
+  <string name="morphe_music_listenbrainz_token_dialog_verify">सत्यापित करें</string>
+  <string name="morphe_music_listenbrainz_token_status_empty">कृपया एक टोकन दर्ज करें</string>
+  <string name="morphe_music_listenbrainz_token_status_validating">सत्यापित किया जा रहा है...</string>
+  <string name="morphe_music_listenbrainz_token_status_valid">मान्य टोकन! उपयोगकर्ता: %s</string>
+  <string name="morphe_music_listenbrainz_token_status_invalid">अमान्य टोकन: %s</string>
+  <string name="morphe_music_listenbrainz_token_status_invalid_unknown">अज्ञात</string>
+  <string name="morphe_music_listenbrainz_token_status_failed">सत्यापन विफल: %s</string>
+  <string name="morphe_music_listenbrainz_token_toast_cleared">टोकन साफ़ किया गया</string>
+  <string name="morphe_music_listenbrainz_token_toast_saved">टोकन सहेजा गया</string>
+  <string name="morphe_music_listenbrainz_token_toast_invalid_warning">चेतावनी: सहेजा गया टोकन अमान्य है!</string>
+  <string name="morphe_music_lastfm_love_on_like_title">पसंद किए गए ट्रैक को पसंद करें</string>
+  <string name="morphe_music_lastfm_love_on_like_summary">जब आप YouTube Music पर पसंद करते हैं, तो Last.fm पर स्वचालित रूप से ट्रैक को पसंद करें (और जब नापसंद या अस्वीकृत किया जाए तो प्यार हटा दें)</string>
+  <string name="morphe_music_lastfm_token_title">Last.fm खाता</string>
+  <string name="morphe_music_lastfm_token_summary_logged_in">%s के रूप में लॉग इन किया गया। खाता प्रबंधित करने के लिए टैप करें</string>
+  <string name="morphe_music_lastfm_token_dialog_instruction">लॉग इन करने के लिए अपने Last.fm क्रेडेंशियल दर्ज करें</string>
+  <string name="morphe_music_lastfm_token_dialog_username_hint">उपयोगकर्ता नाम</string>
+  <string name="morphe_music_lastfm_token_dialog_password_hint">पासवर्ड</string>
+  <string name="morphe_music_lastfm_token_dialog_login">लॉग इन करें</string>
+  <string name="morphe_music_lastfm_token_status_empty">कृपया उपयोगकर्ता नाम और पासवर्ड दर्ज करें</string>
+  <string name="morphe_music_lastfm_token_status_logging_in">लॉग इन किया जा रहा है...</string>
+  <string name="morphe_music_lastfm_token_status_success">सफलतापूर्वक लॉग इन किया गया!</string>
+  <string name="morphe_music_lastfm_token_status_no_session">Last.fm से सेशन प्राप्त करने में विफल</string>
+  <string name="morphe_music_lastfm_token_status_failed">लॉगिन विफल: %s</string>
+  <string name="morphe_music_lastfm_token_toast_saved">Last.fm क्रेडेंशियल सहेजे गए!</string>
+  <string name="morphe_settings_music_scrobbling_metadata_title">मेटाडेटा सफाई</string>
+  <string name="morphe_music_scrobbling_metadata_cleanup_title">मेटाडेटा साफ़ करें</string>
+  <string name="morphe_music_scrobbling_metadata_cleanup_summary">शीर्षकों, कलाकारों और एल्बमों से सामान्य अव्यवस्था (जैसे \"आधिकारिक वीडियो\", \"रीमास्टर\", \"लाइव\") को स्वचालित रूप से स्क्रबिंग से पहले साफ़ करें</string>
+  <string name="morphe_music_scrobbling_custom_regex_title">कस्टम रेगएक्स सफाई</string>
+  <string name="morphe_music_scrobbling_custom_regex_summary">एक कस्टम रेगुलर एक्सप्रेशन दर्ज करें ताकि गाने के शीर्षक, कलाकारों या एल्बम से अतिरिक्त टेक्स्ट हटाया जा सके। उदाहरण: (?i)\\s*\\((clean|explicit)\\)</string>
+  <string name="morphe_music_scrobbling_parse_title_title">शीर्षक से कलाकार और ट्रैक का विश्लेषण करें</string>
+  <string name="morphe_music_scrobbling_parse_title_summary">\" - \" विभाजक का उपयोग करके वीडियो शीर्षक से कलाकार और ट्रैक नाम निकालें। उन पुनः अपलोड सामग्री के लिए उपयोगी जहां चैनल नाम को कलाकार के रूप में उपयोग किया जा सकता है।</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_about_title">स्क्रबिंग के बारे में</string>
+  <!-- 'scrobbling' must be kept untranslated -->
+  <string name="morphe_music_scrobbling_about_summary">"स्क्रोबलिंग स्वचालित रूप से आपके YouTube Music उपयोग को आपके Last.fm या ListenBrainz प्रोफ़ाइल के साथ सिंक करता है
+
+यह सुनिश्चित करने के लिए कि बैकग्राउंड प्लेबैक के दौरान स्क्रोबलिंग सिंक हो, सुनिश्चित करें कि YouTube Music के ऐप बैटरी उपयोग को \"अनियंत्रित\" पर सेट किया गया है।"</string>
+</resources>

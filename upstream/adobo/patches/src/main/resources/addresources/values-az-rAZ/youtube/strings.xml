@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Strings with new lines must be raw strings where they're wrapped in quotes and new lines are not encoded.
+    Raw strings still requires escaping embedded double quotes but escaping embedded single quotes is optional.
+
+    Raw strings are required because Crowdin AI translations regularly gets confused and
+    replace \n with an encoded new line character.
+
+    Bad:
+        <string name="summary_key">First \'item\' text\nSecond \"item\" text</string>
+
+    Good:
+        <string name="summary_key">"First 'item' text
+Second \"item\" text"</string>
+
+-->
+<resources>
+  <!-- misc.settings.settingsPatch -->
+  <!-- In languages where "About" is ambiguous, translate this as "About Morphe" (i.e., About this app). -->
+  <string name="morphe_settings_screen_00_about_title">Haqqında</string>
+  <string name="morphe_settings_screen_01_ads_title">Reklamlar</string>
+  <string name="morphe_settings_screen_02_alt_thumbnails_title">Seçmə miniatürlər</string>
+  <string name="morphe_settings_screen_03_feed_title">Axın</string>
+  <string name="morphe_settings_screen_04_general_title">Ümumi</string>
+  <string name="morphe_settings_screen_05_player_title">Oynadıcı</string>
+  <string name="morphe_settings_screen_06_shorts_title">Shorts</string>
+  <string name="morphe_settings_screen_07_seekbar_title">Çevirmə cizgisi</string>
+  <string name="morphe_settings_screen_08_swipe_controls_title">Sürüşdürmə nəzarətçiləri</string>
+  <string name="morphe_settings_screen_11_misc_title">Çoxvariantlı</string>
+  <string name="morphe_settings_screen_12_video_title">Video</string>
+  <string name="morphe_restore_old_settings_menus_title">Köhnə YouTube ayarları görünüşün bərpa et</string>
+  <!-- misc.backgroundplayback.backgroundPlaybackPatch -->
+  <string name="morphe_remove_background_playback_restrictions_title">Fon oynatma məhdudiyyətlərini təmizlə</string>
+  <string name="morphe_shorts_disable_background_playback_title">Arxa plan oynatmanı qapat</string>
+  <!-- layout.disableLayoutUpdatesPatch -->
+  <string name="morphe_disable_layout_updates_title">Tərtibat yenilənmələrini qapat</string>
+  <string name="morphe_disable_layout_updates_summary">Tətbiq tərtibatını yeniləməkdə serverə mane olur</string>
+  <string name="morphe_disable_layout_updates_user_dialog_message">"Tətbiq tərtibatı ilk quraşdırılanda istifadə olunan tərtibata qayıdır.
+
+Bəzi server əsaslı tərtibatlar qayıtmaya bilər.
+
+Dəyişikliklər ehtiva edir:
+• Oynadıcı açılan menyusundakı elementlər (və ya əlaqəli tənzimləmələr) işləməyə bilər.
+• Diyirlənən nömrələr animasiya olunmur.
+• Kitabxana tabeli görünür.
+• Video təsvirinin Musiqi bölməsi işləməyə bilər.
+• Oynadıcı açılan menyu elementləri gizlədilə bilməz.
+• Hesab keçirmə düyməsi Kitabxana tabelində görünməyə bilər."</string>
+  <!-- layout.hide.general.hideLayoutComponentsPatch -->
+  <string name="morphe_hide_feed_flyout_menu_title">Axın açılan menyu filtrini aktivləşdir</string>
+  <string name="morphe_hide_feed_flyout_menu_filter_strings_title">Axın açılan menyu filtri</string>
+  <string name="morphe_hide_feed_flyout_menu_filter_strings_summary">Yeni cərgələrlə ayrılan, çeşidləmək üçün açılan menyu adlarını qeyd et</string>
+  <string name="morphe_hide_account_menu_title">Kitabxananı / Aşağı menyu filtrinizi aktivləşdirin</string>
+  <string name="morphe_hide_account_menu_filter_strings_title">Kitabxananı / Aşağı menyu filtriniz</string>
+  <string name="morphe_hide_account_menu_filter_strings_summary">Filtrləmək üçün Kitabxana / Siz alt menyu adlarını yeni sətirlərlə ayrılmış şəkildə qeyd et</string>
+  <string name="morphe_hide_album_cards_title">Albom kartlarını gizlət</string>
+  <string name="morphe_hide_album_cards_summary">Albom kartlarını sənətkar təsviri altında gizlədir</string>
+  <string name="morphe_hide_artist_cards_title">Sənətçi kartlarını gizlət</string>
+  <string name="morphe_hide_artist_cards_summary">Axtarış nəticələri yuxarısında sənətkar kartını gizlədir</string>
+  <string name="morphe_hide_auto_dubbed_label_title">\'Avtomatik dublyaj\' etiketini gizlət</string>
+  <string name="morphe_hide_community_posts_title">İcma elanların gizlət</string>
+  <string name="morphe_hide_compact_banner_title">Yığcam afişaları gizlət</string>
+  <string name="morphe_hide_compact_banner_summary">Sıx panelləri və bəzi elementlər arası boşluğu gizlədir</string>
+  <string name="morphe_hide_expandable_card_title">Videoların aşağısında genişlənən kartlar</string>
+  <string name="morphe_hide_expandable_card_entry_1">Hamısını göstər</string>
+  <string name="morphe_hide_expandable_card_entry_2">Yalnız məhsul kartını gizlət</string>
+  <string name="morphe_hide_expandable_card_entry_3">Yalnız xülasə kartını gizlət</string>
+  <string name="morphe_hide_expandable_card_entry_4">Məhsul və xülasə kartlarını gizlət</string>
+  <string name="morphe_hide_expandable_card_entry_5">Hamısını gizlət</string>
+  <string name="morphe_hide_floating_microphone_button_title">Üzən mikrofon düyməsini gizlət</string>
+  <string name="morphe_hide_floating_microphone_button_summary">Axtarış təklifləri ekranının aşağı-sağ küncündəki üzən mikrofon düyməsin gizlədir</string>
+  <string name="morphe_hide_horizontal_shelves_title">Üfüqi hissələri gizlət</string>
+  <string name="morphe_hide_horizontal_shelves_summary">Son xəbərlər, bəyənə biləcəyiniz icma postları, izləməyə davam edin, daha çox kanal kəşf edin, daha çox mövzu kəşf edin, sizin üçün, ən son videolar, ən uyğun, yaradıcı icmasından postlar, alış-veriş və yenidən izləyin kimi üfüqi cərgələri gizlədir</string>
+  <string name="morphe_hide_hyped_label_title">Hayp edildi etiketin gizlət</string>
+  <string name="morphe_hide_image_shelf_title">Şəkil cərgəsin gizlət</string>
+  <string name="morphe_hide_image_shelf_summary">Axtarış nəticələrində şəkil cərgələrin gizlədir</string>
+  <!-- 'Latest videos' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears in the Home feed for refreshing the feed. -->
+  <string name="morphe_hide_latest_videos_button_title">Gizlət \'Son videolar\' düyməsini</string>
+  <string name="morphe_hide_latest_videos_button_summary">Ev axınının yuxarısında görünən mavi \"Ən son videolar\" panelin gizlədir</string>
+  <string name="morphe_hide_mix_playlists_title">Qarışıq pleylistləri gizlət</string>
+  <string name="morphe_hide_movies_section_title">Filmlər bölməsini gizlət</string>
+  <!-- 'Notify me' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears in the Subscriptions feed for future livestreams or unreleased videos. -->
+  <string name="morphe_hide_notify_me_button_title">\"Mənə bildir\" düyməsini gizlət</string>
+  <string name="morphe_hide_notify_me_button_summary">Planlaşdırılmış canlı yayımlar və premyeralar üçün xatırlatma düyməsini gizlədir</string>
+  <string name="morphe_hide_playables_title">Oynadılan elementləri gizlət</string>
+  <string name="morphe_hide_playables_summary">Oyunlar oynamağa imkan verən xüsusiyyəti gizlədir</string>
+  <string name="morphe_hide_search_term_thumbnails_title">Axtarış termini miniatürlərini gizlət</string>
+  <string name="morphe_hide_search_term_thumbnails_summary">Axtarışın avtomatik tamamlanma siyahısındakı miniatür önizləmələrin gizlədir</string>
+  <!-- 'Show more' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears when searching for a YouTube creator. -->
+  <string name="morphe_hide_show_more_button_title">\'Daha çox göstər\' düyməsini gizlət</string>
+  <string name="morphe_hide_show_more_button_summary">Axtarış nəticələrində videoların aşağısındakı genişləndirmə düyməsini gizlədir</string>
+  <string name="morphe_hide_subscribed_channels_bar_title">Abunə kanal çubuğunu gizlə</string>
+  <string name="morphe_hide_surveys_title">Sorğuları gizlət</string>
+  <string name="morphe_hide_surveys_summary">Axın tövsiyəsi dəqiqliyi haqqında təftişləri və xatırlatmaları gizlət</string>
+  <string name="morphe_hide_ticket_shelf_title">Bilet bölməsin gizlət</string>
+  <!-- 'People also watched' and 'You might also like' should be translated using the same localized wording YouTube displays for the label. -->
+  <string name="morphe_hide_video_recommendation_labels_title">Video tövsiyə etiketlərini gizlət</string>
+  <string name="morphe_hide_video_recommendation_labels_summary">Axtarış nəticələrində \"İnsanlar həmçinin izləyiblər\" və \"Bunu da bəyənə bilərsiniz\" etiketlərini gizlədir</string>
+  <string name="morphe_hide_web_search_results_title">Veb axtarış nəticələrini gizlət</string>
+  <string name="morphe_hide_web_search_results_summary">Axtarış nəticələrindən \"Vebdən nəticə\" bölməsini gizlədir</string>
+  <string name="morphe_hide_you_may_like_section_title">\"Bəyənə bilərsiniz\" bölməsini gizlət</string>
+  <!-- https://logos.fandom.com/wiki/YouTube/Yoodles -->
+  <string name="morphe_hide_youtube_doodles_title">YouTube Doodle-ları gizlət</string>
+  <string name="morphe_hide_youtube_doodles_summary">YouTube simvolunda mövsümi və hadisə əsaslı animasiyaları gizlədir</string>
+  <string name="morphe_hide_youtube_doodles_user_dialog_message">YouTube Doodles-ların görünməsi fərdi sərlövhələrin görünməsinin qarşısını ala bilər.</string>
+  <string name="morphe_hide_channel_bar_title">Kanal çubuğunu gizlət</string>
+  <string name="morphe_hide_channel_watermark_title">Kanal filiqranını gizlət</string>
+  <string name="morphe_hide_crowdfunding_box_title">İanə qutusunu gizlət</string>
+  <string name="morphe_hide_emergency_box_title">Ciddi vəziyyət qutularını gizlət</string>
+  <string name="morphe_hide_info_panels_title">Məlumat lövhələrini gizlət</string>
+  <string name="morphe_hide_info_panels_summary">Tibbi məlumat kimi məlumatlandırıcı məzmun lövhələrini gizlədir</string>
+  <!-- 'Join' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears in the video player for certain videos. -->
+  <string name="morphe_hide_join_membership_button_title">Qoşul düyməsin gizlət</string>
+  <!-- 'Live chat replay' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears when in fullscreen for live streamed videos after opening live chat. -->
+  <string name="morphe_hide_live_chat_replay_button_title">\"Canlı söhbət oxudulması\" düyməsin gizlət</string>
+  <string name="morphe_hide_live_chat_replay_button_summary">Tam ekran rejimində söhbətin təkrar oxudulması düyməsin gizlədir</string>
+  <string name="morphe_hide_medical_panels_title">Tibbi lövhələri gizlət</string>
+  <string name="morphe_hide_snackbar_title">Ani bildiriş zolağını gizlət</string>
+  <string name="morphe_hide_subscribers_community_guidelines_title">Abunəçi təlimatlarını gizlət</string>
+  <string name="morphe_hide_sync_button_title">\"Videoya sinxronizasiya et\" düyməsin gizlət</string>
+  <string name="morphe_hide_timed_reactions_title">Vaxtlı reaksiyaları gizlət</string>
+  <string name="morphe_hide_timed_reactions_summary">İstifadəçilərə şərh bölməsində və canlı söhbətdə emojilərlə qarşılıq verməyə imkan verən xüsusiyyəti gizlədir</string>
+  <string name="morphe_hide_video_title_title">Video başlığını gizlət</string>
+  <string name="morphe_hide_video_title_summary">Tam ekran rejimindəki video başlığı gizlədilir</string>
+  <string name="morphe_sanitize_video_subtitle_title">Video titrin təmizlə</string>
+  <string name="morphe_sanitize_video_subtitle_summary">Video titrdən \"#\", \"İanə toplayan\", \"Mağaza\" və \"məhsullar\" kimi ifadələri təmizləyir</string>
+  <string name="morphe_hide_description_components_screen_title">Video təsviri</string>
+  <string name="morphe_hide_description_components_screen_summary">Video təsvirində hansı elementlər görünür seç</string>
+  <string name="morphe_hide_ai_generated_video_summary_section_title">\"AI tərəfindən yaradılan video xülasəsi\" bölməsini gizlət</string>
+  <string name="morphe_hide_ask_section_title">Soruş bölməsini gizlət</string>
+  <string name="morphe_hide_attributes_section_title">Atributlar bölməsin gizlət</string>
+  <string name="morphe_hide_attributes_section_summary">Seçilən yerlər, Oyunlar, Musiqi və Qeyd edilən insanlar gizlədilir</string>
+  <string name="morphe_hide_chapters_section_title">Fəsillər bölməsini gizlət</string>
+  <string name="morphe_hide_corrections_section_title">Düzəlişlər bölməsini gizlət</string>
+  <string name="morphe_hide_course_progress_section_title">\"Kurs irəliləyişi\" bölməsin gizlət</string>
+  <string name="morphe_hide_explore_section_title">Kəşf edin bölməsin gizlət</string>
+  <string name="morphe_hide_explore_section_summary">Bu kursu araşdırın və Podkasti araşdırın bölmələrin gizlədir</string>
+  <string name="morphe_hide_explore_course_section_title">\"Bu kursu araşdırın\" bölməsini gizlət</string>
+  <string name="morphe_hide_explore_podcast_section_title">\"Podkasti araşdırın\" bölməsini gizlət</string>
+  <string name="morphe_hide_featured_channels_section_title">Seçilmiş kanallar bölməsini gizlət</string>
+  <string name="morphe_hide_featured_links_section_title">Seçilən keçidlər bölməsini gizlət</string>
+  <string name="morphe_hide_featured_places_section_title">\'Seçilən yerlər\' bölməsini gizlət</string>
+  <string name="morphe_hide_featured_videos_section_title">Seçilən videolar bölməsini gizlət</string>
+  <string name="morphe_hide_gaming_section_title">Oyun bölməsini gizlət</string>
+  <string name="morphe_hide_how_this_was_made_section_title">\'Bu kontent necə hazırlanıb\' Bölməsini Gizlət</string>
+  <string name="morphe_hide_hype_points_title">Dəstək xalların gizlət</string>
+  <string name="morphe_hide_info_cards_section_title">Məlumat kartları bölməsini gizlət</string>
+  <string name="morphe_hide_key_concepts_section_title">\'Əsas konseptlər\' bölməsini gizlət</string>
+  <string name="morphe_hide_music_section_title">Musiqi bölməsini gizlət</string>
+  <string name="morphe_hide_quizzes_section_title">Testlər bölməsini gizlət</string>
+  <string name="morphe_hide_subscribe_button_title">Abunə ol düyməsini gizlət</string>
+  <string name="morphe_hide_transcript_section_title">Transkript bölməsini gizlət</string>
+  <string name="morphe_hide_video_details_section_title">\"Video detalları\" bölməsini gizlət</string>
+  <string name="morphe_hide_filter_bar_screen_title">Filtr çubuğu</string>
+  <string name="morphe_hide_filter_bar_screen_summary">Sürüşdürmə kateqoriyası hissəcikləri harada gizlədilir seç</string>
+  <string name="morphe_hide_filter_bar_feed_in_feed_title">Axınlarda gizlət</string>
+  <string name="morphe_hide_filter_bar_feed_in_related_videos_title">Əlaqəli videolarda gizlət</string>
+  <string name="morphe_hide_filter_bar_feed_in_search_title">Axtarış nəticələrində gizlət</string>
+  <string name="morphe_hide_filter_bar_feed_in_history_title">Baxış tarixçəsində gizlət</string>
+  <string name="morphe_channel_screen_title">Kanal səhifəsi</string>
+  <string name="morphe_channel_screen_summary">Kanal səhifəsində hansı elementlər görünür seç</string>
+  <string name="morphe_hide_channel_tab_title">Kanal tabel filtrini aktivləşdir</string>
+  <string name="morphe_hide_channel_tab_filter_strings_title">Kanal tabeli filtri</string>
+  <string name="morphe_hide_channel_tab_filter_strings_summary">Yeni cərgələrlə ayrılan, çeşidləmək üçün kanal tabel adlarını qeyd et</string>
+  <!-- 'Community' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_community_button_title">Şərhlər düyməsin gizlət</string>
+  <!-- 'Join' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_join_button_title">Qoşul düyməsin gizlə</string>
+  <string name="morphe_hide_links_preview_title">Keçidlərin önizləməsini gizlət</string>
+  <string name="morphe_hide_links_preview_summary">Kanal sərlövhəsində kliklənilən veb linkləri gizlədir</string>
+  <string name="morphe_hide_members_shelf_title">Üzvlər cərgəsini gizlət</string>
+  <string name="morphe_hide_members_shelf_summary">Kanal üzvlərinin siyahısını gizlədir</string>
+  <string name="morphe_hide_posts_shelf_title">Postlar tabelin gizlət</string>
+  <!-- 'Store' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_store_button_title">Paylaş düyməsini gizlət</string>
+  <!-- 'Subscribe' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_subscribe_button_in_channel_page_title">Abunə ol düyməsini gizlət</string>
+  <string name="morphe_comments_screen_title">Şərhlər</string>
+  <string name="morphe_comments_screen_summary">Şərhlər bölməsində hansı elementlər görünür seç</string>
+  <string name="morphe_hide_comments_carousel_title">Şərhləri sürüşdürmə filtrini aktivləşdir</string>
+  <string name="morphe_hide_comments_carousel_summary">"• Sürüşdürmə elementinin dəqiq adını qeyd etdiyinizə əmin ol (məsələn; soruş, bu videonu hayp edin, YouTube Music-də dinlə və s.)
+• Sürüşdürmə elementlərini gizlətmə gözlənilməz yan təsirlərə səbəb ola bilər
+• Bütün sürüşdürmə elementləri gizlədilibsə, bütün şərhlər bölməsi də gizlədiləcək"</string>
+  <string name="morphe_hide_comments_carousel_filter_strings_title">Şərhləri sürüşdürmə filtri</string>
+  <string name="morphe_hide_comments_carousel_filter_strings_summary">Yeni cərgələrlə ayrılan, çeşidləmək üçün şərhləri sürüşdürmə adlarını qeyd et</string>
+  <string name="morphe_hide_comments_ai_chat_summary_title">Sİ söhbət xülasəsini gizlət</string>
+  <string name="morphe_hide_comments_channel_guidelines_title">Kanal təlimatlarını gizlət</string>
+  <string name="morphe_hide_comments_prompts_title">Şərh sorğularını gizlət</string>
+  <string name="morphe_hide_comments_prompts_summary">Şərhlər bölməsində məzmuna uyğun məlumat mesajlarını gizlədir</string>
+  <string name="morphe_hide_comments_by_members_header_title">\'Üzvlərin şərhləri\' başlığını gizlət</string>
+  <string name="morphe_hide_comments_section_title">Şərhlər bölməsini gizlət</string>
+  <string name="morphe_hide_comments_section_in_home_feed_title">Ev axınında şərhlər bölməsini gizlət</string>
+  <string name="morphe_hide_comments_community_guidelines_title">İcma təlimatlarını gizlət</string>
+  <string name="morphe_hide_comments_create_a_short_button_title">\"Shorts Yarat\" düyməsini gizlət</string>
+  <string name="morphe_hide_comments_emoji_and_timestamp_buttons_title">Emoji və Vaxt damğası düymələrini gizlət</string>
+  <string name="morphe_hide_comments_info_button_title">Məlumat düyməsini gizlət</string>
+  <string name="morphe_hide_comments_live_chat_donators_bar_title">Canlı söhbət ianəçiləri tabelin gizlət</string>
+  <string name="morphe_hide_comments_preview_comment_title">Önbaxış şərhin gizlət</string>
+  <string name="morphe_hide_comments_preview_comment_summary">Bütün şərh bölməsin açmazdan əvvəl videonun aşağısında şərh önizləməsini gizlədir</string>
+  <string name="morphe_hide_comments_thanks_button_title">Təşəkkür Düyməsini Gizlət</string>
+  <string name="morphe_sanitize_comments_category_bar_title">Kateqoriya tabelin təmizlə</string>
+  <string name="morphe_sanitize_comments_category_bar_summary">\"Yuxarı\" və \"Ən Yeni\" istisna olmaqla, bütün şərh çeşidləmə seçimlərini gizlədir</string>
+  <string name="morphe_custom_filter_screen_title">Şəxsi filtr</string>
+  <string name="morphe_custom_filter_screen_summary">Hər hansı elementi gizlətmək üçün fərdi filtrləri tənzimlə</string>
+  <string name="morphe_custom_filter_title">Fərdi filtri aktivləşdir</string>
+  <string name="morphe_custom_filter_strings_title">Fərdi filtr</string>
+  <!-- 'Component path builder strings' is the technical name for identifying the Litho UI layout items to hide. This is an advanced feature and most users will never use this. -->
+  <string name="morphe_custom_filter_strings_summary">Yeni cərgələrlə ayrılan, filtr üçün element yol qurucusu sətirlərinin siyahısı</string>
+  <string name="morphe_custom_filter_toast_invalid_syntax">Etibarsız fərdi filtr: %s</string>
+  <string name="morphe_hide_view_count_title">Baxış sayını gizlət</string>
+  <!-- Translations should match the language used in 'morphe_hide_upload_time_summary'. -->
+  <string name="morphe_hide_view_count_summary">"Məhdudiyyətlər:
+• Shorts cərgələri, kanal səhifələri və axtarış nəticələri baxış sayını yenə də göstərə bilər
+• Bu xüsusiyyət avtomobil tərtibatı ilə işləmir"</string>
+  <string name="morphe_hide_upload_time_title">Yüklənilmə vaxtını gizlət</string>
+  <!-- Translations should match the language used in 'morphe_hide_view_count_summary'. -->
+  <string name="morphe_hide_upload_time_summary">"Məhdudiyyətlər:
+• Shorts cərgələri, kanal səhifələri və axtarış nəticələri yüklənmə vaxtlarını hələ də göstərə bilər
+• Bu xüsusiyyət avtomobil tərtibatı ilə işləmir"</string>
+  <string name="morphe_hide_keyword_content_screen_title">Açar söz çeşidləyici</string>
+  <string name="morphe_hide_keyword_content_screen_summary">Videoları axınlarda və axtarışda gizlətmək üçün xüsusi sözlər və ya ifadələr seç</string>
+  <string name="morphe_hide_keyword_content_home_title">Ev videolarını açar sözlərə görə gizlət</string>
+  <string name="morphe_hide_keyword_content_search_title">Axtarış nəticələrini açar sözlərlə gizlət</string>
+  <string name="morphe_hide_keyword_content_subscriptions_title">Abunəlik videolarını açar sözlərlə gizlət</string>
+  <string name="morphe_hide_keyword_content_comments_title">Şərhləri açar sözlərə görə gizlət</string>
+  <string name="morphe_hide_keyword_content_phrases_title">Gizlədiləcək açar sözlər</string>
+  <!-- For localization, it is preferred, but not required, if 'LeBlanc' is replaced with a localized name or a familiar word that has upper case letters in the middle of the word.
+         This is because keywords can be in any language, and showing an example in the localized script helps convey this. -->
+  <string name="morphe_hide_keyword_content_phrases_summary">"Gizlətmək üçün açar sözlər və ifadələri yeni sətirlərlə ayrılmış şəkildə qeyd et
+
+Açar sözlər video başlıqlarında və ya kanal adlarında görünən hər hansı mətn ola bilər
+
+Ortada böyük hərflər olan sözlər tam uyğunlaşmalıdır (məsələn: iPhone, TikTok, LeBlanc)"</string>
+  <string name="morphe_hide_keyword_content_about_title">Açar söz filtrləməsi haqqında</string>
+  <string name="morphe_hide_keyword_content_about_summary">"Ev / Abunəliklər / Axtarış / Şərhlər açar söz ifadələrinə uyğun məzmunu gizlətmək üçün filtrlənir
+
+Məhdudiyyətlər:
+• Shorts kanal adına görə gizlədilə bilməz
+• Bəzi UI elementləri gizlədilməyə bilər
+• Açar söz axtarışı heç bir nəticə göstərməyə bilər"</string>
+  <string name="morphe_hide_keyword_content_about_whole_words_title">Bütün sözləri uyğunlaşdır</string>
+  <!-- Translations must use a localized example. For languages that do not use spaces between words (Chinese, Japanese, etc.) the English AI example should be used since no localized examples exist. Or if using machine translations, or if nobody wants to think of a localized example, then the English 'ai' example should be left as-is. -->
+  <string name="morphe_hide_keyword_content_about_whole_words_summary">Açar söz/frazanın qoşa dırnaqlarla əhatə olunması video adları və kanal adlarının qismən uyğunlaşmasına mane olacaq &lt;br&gt;&lt;br&gt;Məsələn,&lt;br&gt;&lt;b&gt;\"ai\"&lt;/b&gt; videonu gizlədəcək:&lt;b&gt;How does AI work?&lt;/b&gt;&lt;br&gt; lakin gizlətməyəcək: Düzgün;&lt;b&gt;What does fair use mean?&lt;/b&gt;</string>
+  <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="morphe_hide_keyword_toast_invalid_common">Açar söz istifadə edilə bilmir: %s</string>
+  <string name="morphe_hide_keyword_toast_invalid_common_whole_word_required">Açar söz istifadəsi üçün istinad əlavə et: %s</string>
+  <string name="morphe_hide_keyword_toast_invalid_conflicting">Açar sözün ziddiyyətli hissəcikləri var: %s</string>
+  <string name="morphe_hide_keyword_toast_invalid_length">Açar söz çox qısadır və istinad tələb edir: %s</string>
+  <string name="morphe_hide_keyword_toast_invalid_broad">Açar söz, bütün videoları gizlədəcək: %s</string>
+  <!-- ad.general.hideAdsPatch -->
+  <string name="morphe_hide_creator_store_shelf_title">Yaradıcı mağaza bölümün gizlət</string>
+  <string name="morphe_hide_end_screen_store_banner_title">Son ekran mağaza afişasın gizlət</string>
+  <string name="morphe_hide_general_ads_title">Ümumi reklamları gizlət</string>
+  <string name="morphe_hide_merchandise_banners_title">Məhsul afişaların gizlət</string>
+  <!-- 'Includes paid promotion' should be translated using the same localized wording YouTube displays for the label. -->
+  <string name="morphe_hide_paid_promotion_label_title">\"Ödənişli tanıtım daxildir\" etiketini gizlət</string>
+  <string name="morphe_hide_player_popup_ads_title">Oynadıcı ani açılan reklamlarını gizlət</string>
+  <string name="morphe_hide_self_sponsor_ads_title">Öz-sponsorlu kartları gizlət</string>
+  <string name="morphe_hide_shopping_links_title">Alış-veriş linklərini gizlət</string>
+  <string name="morphe_hide_youtube_premium_promotions_title">YouTube Premium reklamlarını gizlət</string>
+  <!-- ad.video.videoAdsPatch -->
+  <string name="morphe_hide_video_ads_title">Video reklamlarını gizlət</string>
+  <!-- interaction.doubletap.doubleTapLengthPatch -->
+  <!-- interaction.copyvideolink.copyVideoLinkButtonPatch -->
+  <string name="morphe_share_copy_link_button_success">Link buferə köçürüldü</string>
+  <string name="morphe_share_copy_link_with_timestamp_button_success">Vaxt möhürü olan link buferə köçürüldü</string>
+  <string name="morphe_copy_video_link_button_title">Video linki köçürmə düyməsini göstər</string>
+  <string name="morphe_copy_video_link_button_summary">Video linki köçürmək üçün toxun, vaxt möhürü ilə köçürmək üçün toxun və saxla</string>
+  <string name="morphe_copy_video_link_with_timestamp_button_title">Vaxt möhürünü birbaşa köçür</string>
+  <string name="morphe_copy_video_link_with_timestamp_button_summary">​\"Video linkini köçür\" düyməsinin toxunma və basıb saxlama fəaliyyətlərini əksinə dəyiş</string>
+  <!-- interaction.dialog.removeViewerDiscretionDialogPatch -->
+  <string name="morphe_remove_viewer_discretion_dialog_title">İzləyici mülahizə dialoqun sil</string>
+  <string name="morphe_remove_viewer_discretion_dialog_summary">Bu, yaş məhdudiyyətini ötürmür. Sadəcə birbaşa qəbul edir</string>
+  <!-- layout.hide.signintotv.disableSignInToTVPopupPatch -->
+  <string name="morphe_disable_sign_in_to_tv_popup_title">TV ani görüntüsü girişin qapat</string>
+  <!-- interaction.doubletap.disableDoubleTapActionsPatch -->
+  <string name="morphe_disable_chapter_skip_double_tap_title">Cüt toxunuşla fəsil ötürülməsini qapat</string>
+  <string name="morphe_disable_chapter_skip_double_tap_summary">Tək barmaqla bilmədən aktivləşə bilən, fəsilləri ötürən iki barmaqla cüt toxunma jestini qapadır</string>
+  <!-- interaction.downloads.downloadsPatch -->
+  <string name="morphe_external_downloader_screen_title">Xarici yükləmələr</string>
+  <string name="morphe_external_downloader_screen_summary">Üçüncü tərəf yükləmə tətbiqləri ilə videoları yüklə</string>
+  <string name="morphe_external_downloader_title">Xarici yükləmə düyməsini göstər</string>
+  <string name="morphe_external_downloader_summary">Video oynadıcıda xarici yükləyicinizi açan örtük düyməsini göstərir</string>
+  <!-- 'Download action button' should match the language used in 'morphe_hide_download_button_title'. -->
+  <string name="morphe_external_downloader_action_button_title">Yükləmə fəaliyyət düyməsin qəbul etmə</string>
+  <string name="morphe_external_downloader_action_button_summary">YouTube-un qurulmuş yükləmə xüsusiyyətini xarici yükləyicinizlə əvəzləyir</string>
+  <string name="morphe_external_downloader_name_title">Yükləyici paketi adı</string>
+  <string name="morphe_external_downloader_name_summary">Quraşdırılan xarici yükləyici tətbiqinizin paket adı</string>
+  <string name="morphe_external_downloader_other_item_hint">Paket adını yerləşdir</string>
+  <string name="morphe_external_downloader_other_item">Digər</string>
+  <string name="morphe_external_downloader_not_found_title">Tətbiq quraşdırılmayıb</string>
+  <string name="morphe_external_downloader_not_installed_warning">%s quraşdırılmayıb. Lütfən, bunu quraşdır.</string>
+  <string name="morphe_external_downloader_package_not_found_warning">"Paket adı ilə quraşdırılan tətbiq tapılmadı: %s
+
+Paket adının düzgün olduğun yoxla və tətbiqi quraşdırın"</string>
+  <string name="morphe_external_downloader_empty_warning">Paket adı boş ola bilməz</string>
+  <!-- video.voiceovertranslation.voiceOverTranslationPatch -->
+  <string name="morphe_vot_screen_title">Səs üstələyici tərcümə</string>
+  <string name="morphe_vot_screen_summary">Cihazdakı mətni nitqə çevirməni istifadə edərək video titrlərini oynatma ilə sinxronlaşdırıb ucadan oxu</string>
+  <string name="morphe_vot_enabled_title">Səs üstələyici tərcümə</string>
+  <string name="morphe_vot_caption_language_title">Dil</string>
+  <string name="morphe_vot_translation_service_title">Tərcümə təminatçısı</string>
+  <string name="morphe_vot_original_audio_volume_title">Orijinal səs səviyyəsi</string>
+  <string name="morphe_vot_original_audio_volume_summary">Tərcümə səslənərkən orijinal YouTube səsinin səviyyəsi</string>
+  <string name="morphe_vot_translation_volume_title">Tərcümə səs səviyyəsi</string>
+  <string name="morphe_vot_translation_volume_summary">Dublyaj olunmuş tərcümə səsinin səviyyəsi</string>
+  <string name="morphe_vot_max_speech_rate_title">Ən yüksək danışıq sürəti</string>
+  <string name="morphe_vot_max_speech_rate_summary">Danışığı titr bölümünə uyğunlaşdıranda ən yüksək sürət misli</string>
+  <string name="morphe_vot_mymemory_info_summary">"Pulsuz tərcümə API-si, API açarı tələb olunmur. Pulsuz paketdə hər gün 5.000 simvola qədər və ya e-poçt ünvanı ilə hər gün 50.000 simvola qədər.
+
+MyMemory.translated.net-i açmaq üçün buraya toxun"</string>
+  <string name="morphe_vot_mymemory_email_title">MyMemory e-poçtu</string>
+  <string name="morphe_vot_mymemory_email_summary">Könüllü. Gündəlik həddi 5.000-dən 50.000 simvola qədər artırmaq üçün MyMemory e-poçt ünvanınızı qeyd edin. Gizli limitdən istifadə etmək üçün boş buraxın</string>
+  <string name="morphe_vot_openrouter_info_summary">"OpenRouter vasitəsilə ödənişli Sİ tərcüməsi. Bir dəfə balansınızı artırın və minlərlə videonu tərcümə edin. Mistral Nemo ən ucuz seçimdir, Gemma 4 isə ən yüksək keyfiyyət təklif edir.
+
+OpenRouter.ai-ı açmaq üçün buraya toxunun"</string>
+  <string name="morphe_vot_openrouter_api_key_title">OpenRouter API açarı</string>
+  <string name="morphe_vot_openrouter_api_key_summary">OpenRouter API açarınız. OpenRouter.ai &gt; İş sahəsi &gt; API Açarların-da açar yaradın</string>
+  <string name="morphe_vot_openrouter_model_title">OpenRouter Modeli</string>
+  <string name="morphe_vot_openrouter_model_custom">Fərdi</string>
+  <string name="morphe_vot_openrouter_not_configured_title">OpenRouter tənzimlənməyib</string>
+  <string name="morphe_vot_openrouter_not_configured_message">Bu təminatçını seçməzdən əvvəl tənzimləmələrdə OpenRouter API açarınızı qeyd edin</string>
+  <string name="morphe_vot_cost_free">Pulsuz</string>
+  <!-- %s is dollar cost, e.g. $0.10 per 100 hours -->
+  <string name="morphe_vot_cost_per_hour">Hər 100 video saatına %s</string>
+  <string name="morphe_vot_tts_voice_type">Səs</string>
+  <string name="morphe_vot_tts_system">Sistem</string>
+  <string name="morphe_vot_voice_gender_male_multilingual">Çoxdilli kişi</string>
+  <string name="morphe_vot_voice_gender_female_multilingual">Çoxdilli qadın</string>
+  <string name="morphe_vot_voice_gender_male">Kişi</string>
+  <string name="morphe_vot_voice_gender_female">Qadın</string>
+  <string name="morphe_vot_tts_sample">Dəyişmə vaxtıdır!</string>
+  <string name="morphe_vot_http_error_title">Tərcümə əlçatan deyil</string>
+  <string name="morphe_vot_http_error_message">"Tərcümə xidməti HTTP %s xətası qaytardı. IP ünvanınız deyəsən 24 saatlıq norma limitinə məruz qalıb.
+
+​Tərcümələri istifadə etməyə davam etmək üçün tənzimləmələrdə başqa tərcümə təminatçısına keç və ya VPN istifadə et"</string>
+  <string name="morphe_vot_do_not_show_again">Təkrar göstərmə</string>
+  <string name="morphe_vot_export_api_key_warning">"Tənzimləmələriniz OpenRouter API açarını ehtiva edir.
+
+API açarınız heç vaxt paylaşılmamalıdır. Buna girişi olan hər bir kəs OpenRouter balansınızı istifadə edə bilər"</string>
+  <string name="morphe_vot_openrouter_credits_title">OpenRouter balans limitinə çatıldı</string>
+  <!-- interaction.loop.loopVideoPatch -->
+  <string name="morphe_loop_video_title">Video təkrarlamanı aktivləşdir</string>
+  <!-- interaction.loop.loopVideoButtonPatch -->
+  <string name="morphe_loop_video_button_title">Video Təkrarlama düyməsini göstər</string>
+  <string name="morphe_loop_video_button_toast_on">Video təkrarlama açıqdır</string>
+  <string name="morphe_loop_video_button_toast_off">Video təkrarlama qapalıdır</string>
+  <string name="morphe_loop_video_range_label_start">Başlanğıc</string>
+  <string name="morphe_loop_video_range_label_end">Bitmə</string>
+  <string name="morphe_loop_video_range_clear">Təmizlə</string>
+  <!-- interaction.playall.playAllButtonPatch -->
+  <string name="morphe_play_all_button_title">Hamısını oynat düyməsini göstər</string>
+  <string name="morphe_play_all_button_type_title">Pleylist yaratma rejimi</string>
+  <string name="morphe_play_all_button_type_entry_0">Bütün məzmunlar (Vaxta görə çeşidlə, Artan)</string>
+  <string name="morphe_play_all_button_type_entry_1">Bütün məzmunlar (Vaxta görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_2">Bütün məzmunlar (Populyarlığa görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_3">Yalnız videolar (Vaxta görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_4">Yalnız videolar (Populyarlığa görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_5">Yalnız Shorts (Vaxta görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_6">Yalnız Shorts (Populyarlığa görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_7">Yalnız yayımlanan videolar (Vaxta görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_8">Yalnız yayımlanan videolar (Populyarlığa görə çeşidlə)</string>
+  <string name="morphe_play_all_button_type_entry_9">Bütün üzvlərə xüsusi məzmunlar</string>
+  <string name="morphe_play_all_button_type_entry_10">Üzvlərə məxsus videolar</string>
+  <string name="morphe_play_all_button_type_entry_11">Üzvlərə məxsus Shorts</string>
+  <string name="morphe_play_all_button_type_entry_12">Üzvlərə məxsus canlı yayımlar</string>
+  <string name="morphe_play_all_button_not_available_toast">Kanal ID uyuşmazlığına görə pleylist yaratmaq olmur</string>
+  <!-- interaction.reload.reloadVideoPatch -->
+  <string name="morphe_reload_video_button_title">Videonu Təkrar yüklə düyməsini göstər</string>
+  <string name="morphe_dismiss_player_not_available_toast">Video ID-si əlçatmazdır. Xahiş olunur, videonu əl ilə təkrar yüklə</string>
+  <!-- interaction.savetowatchlater.saveToWatchLaterPatch -->
+  <string name="morphe_save_to_watch_later_button_title">Daha sonra izləmək üçün saxla Düyməsini Göstər</string>
+  <string name="morphe_save_to_watch_later_success_toast">Video uğurla sonra izləyin pleylistində saxlanıldı</string>
+  <string name="morphe_save_to_watch_later_already_exists_toast">Bu video artıq sonra izləyin pleylistində saxlanılıb</string>
+  <string name="morphe_save_to_watch_later_error_toast">Bu videonu sonra izləyin pleylistində saxlamaq olmur</string>
+  <!-- interaction.livering.openChannelOfLiveAvatarPatch -->
+  <!-- interaction.seekbar.disablePreciseSeekingGesturePatch -->
+  <string name="morphe_disable_precise_seeking_gesture_title">Dəqiq irəli-geri çəkmə jestini qapat</string>
+  <!-- interaction.seekbar.livestreamDvrPatch -->
+  <string name="morphe_livestream_dvr_title">Canlı yayım DVR-ni aktivləşdir</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <!-- interaction.seekbar.enableSlideToSeekPatch -->
+  <string name="morphe_slide_to_seek_title">Çevirmək üçün sürüşdürməni aktivləşdir</string>
+  <!-- interaction.seekbar.enableTapToSeekPatch -->
+  <string name="morphe_tap_to_seek_title">Çevirmək üçün toxunu aktivləşdir</string>
+  <!-- interaction.swipecontrols.swipeControlsPatch -->
+  <string name="morphe_swipe_brightness_title">Parlaqlıq jestini aktivləşdir</string>
+  <string name="morphe_swipe_brightness_summary">Parlaqlığı nizamlamaq üçün tam ekran rejiminin sol tərəfində şaquli sürüşdür</string>
+  <string name="morphe_swipe_volume_title">Səs səviyyəsi jestini aktivləşdir</string>
+  <string name="morphe_swipe_volume_summary">Səsi nizamlamaq üçün tam ekran rejiminin sağ tərəfində şaquli sürüşdür</string>
+  <string name="morphe_swipe_zone_label_native">Yerli</string>
+  <string name="morphe_swipe_press_to_engage_title">Sürüşdürmə jesti üçün sıxmanı aktiv et</string>
+  <string name="morphe_swipe_press_to_engage_summary">Sürüşdürmə jesti aşkarlanmazdan öncə basıb saxlamaq lazım olur</string>
+  <string name="morphe_swipe_haptic_feedback_title">Əks-əlaqə reaksiyasını aktivləşdir</string>
+  <string name="morphe_swipe_save_and_restore_brightness_title">Parlaqlığı saxla və bərpa et</string>
+  <string name="morphe_swipe_save_and_restore_brightness_summary">Tam ekran rejiminə girəndə/çıxanda parlaqlıq səviyyəsini xatırlayır</string>
+  <string name="morphe_swipe_lowest_value_enable_auto_brightness_title">Avto-parlaqlıq jestini aktivləşdir</string>
+  <string name="morphe_swipe_lowest_value_enable_auto_brightness_summary">Parlaqlığı ən aşağı dəyərinə sürüşdürmə sistemin avtomatik parlaqlığını aktivləşdirir</string>
+  <string name="morphe_swipe_lowest_value_enable_auto_brightness_overlay_text">Avtomatik</string>
+  <string name="morphe_swipe_overlay_timeout_title">Sürüşdürmə örtüyü müddəti</string>
+  <string name="morphe_swipe_overlay_timeout_summary">Örtüyün göründüyü millisaniyələrin sayı</string>
+  <string name="morphe_swipe_overlay_background_opacity_title">Sürüşdürmə cildi arxa plan qeyri-şəffaflığı</string>
+  <string name="morphe_swipe_overlay_background_opacity_summary">Şəffaflıq səviyyəsini tənzimlə (0 şəffafdır, 100 qeyri-şəffafdır)</string>
+  <string name="morphe_swipe_overlay_background_opacity_invalid_toast">Sürüşmə qeyri-şəffaflığı 0-100 arası olmalıdır</string>
+  <string name="morphe_swipe_overlay_progress_brightness_color_title">Sürüşdürmə örtüyü parlaqlıq rəngi</string>
+  <string name="morphe_swipe_overlay_progress_brightness_color_summary">Parlaqlıq nizamlayıcılarının çəkmə cizgisinin rəngin təyin et</string>
+  <string name="morphe_swipe_overlay_progress_volume_color_title">Sürüşdürmə örtüyü səs səviyyəsi rəngi</string>
+  <string name="morphe_swipe_overlay_progress_volume_color_summary">Səs nizamlayıcılarının çəkmə cizgisinin rəngin təyin et</string>
+  <string name="morphe_swipe_text_overlay_size_title">Sürüşdürmə örtüyü mətn ölçüsü</string>
+  <string name="morphe_swipe_text_overlay_size_summary">Ekrandakı mətnin ölçüsünü nizamla (1-30)</string>
+  <string name="morphe_swipe_text_overlay_size_invalid_toast">Mətn ölçüsü 1-30 arası olmalıdır</string>
+  <string name="morphe_swipe_threshold_title">Sürüşdürmə böyüklük həddi</string>
+  <string name="morphe_swipe_threshold_summary">Nizamlama aktivləşməzdən əvvəl tələb olunan sürüşdürmə məsafəsini təyin et</string>
+  <string name="morphe_swipe_volume_sensitivity_title">Səs səviyyəsin sürüşdürmə təzyiqi</string>
+  <string name="morphe_swipe_overlay_style_title">Sürüşmə örtüyü üslubu</string>
+  <string name="morphe_swipe_overlay_style_entry_1">Üfüqi örtük</string>
+  <string name="morphe_swipe_overlay_style_entry_2">Üfüqi örtük (ən kiçik- yüksək)</string>
+  <string name="morphe_swipe_overlay_style_entry_3">Üfüqi örtük (ən kiçik - mərkəz)</string>
+  <string name="morphe_swipe_overlay_style_entry_4">Dairəvi örtük</string>
+  <string name="morphe_swipe_overlay_style_entry_5">Dairəvi örtük (ən kiçik)</string>
+  <string name="morphe_swipe_overlay_style_entry_6">Şaquli örtük</string>
+  <string name="morphe_swipe_overlay_style_entry_7">Şaquli örtük (ən kiçik)</string>
+  <string name="morphe_swipe_change_video_title">Videoları ötürmək üçün sürüşdürməni aktiv et</string>
+  <string name="morphe_swipe_change_video_summary">Növbəti yaxud əvvəlki videoya keçmək üçün tam ekran rejimində sürüşdür</string>
+  <!-- layout.buttons.action.hideButtonsPatch -->
+  <string name="morphe_action_buttons_screen_title">Fəaliyyət düymələri</string>
+  <string name="morphe_action_buttons_screen_summary">Portret və tam ekran rejimlərində hansı fəaliyyət düymələri görünür seç</string>
+  <string name="morphe_portrait_buttons">Portret düymələri</string>
+  <string name="morphe_disable_like_subscribe_glow_title">Bəyən və Abunə Ol parıltısını söndür</string>
+  <string name="morphe_disable_like_subscribe_glow_summary">Yaradıcı onları xatırladanda Bəyən və Abunə ol düymələrinin parıldamasını əngəlləyir</string>
+  <string name="morphe_hide_action_bar_title">Fəaliyyət tabelin gizlət</string>
+  <string name="morphe_hide_like_dislike_button_title">\"Bəyənmə\" və \"Bəyənməmə\" düyməsini gizlət</string>
+  <!-- 'Share' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_share_button_title">Paylaş düyməsini gizlət</string>
+  <!-- 'Stop ads' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_stop_ads_button_title">\'Reklamları dayandırın\" düyməsin gizlət</string>
+  <!-- Button does not have any text and is only shown as an icon, and only when the video information area is collapsed to a compact state. -->
+  <string name="morphe_hide_comments_button_title">Şərhlər düyməsin gizlət</string>
+  <!-- 'Connect' should be translated using the same localized wording YouTube displays for the button. -->
+  <!-- 'Report' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears on live streamed videos. -->
+  <string name="morphe_hide_report_button_title">Xəbər verin düyməsini gizlət</string>
+  <!-- 'Remix' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_remix_button_title">Remix düyməsini gizlət</string>
+  <!-- 'Download' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_download_button_title">Endirin düyməsini gizlət</string>
+  <!-- 'Hype' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears on videos uploaded by the logged-in user. -->
+  <string name="morphe_hide_hype_button_title">Dəstək düyməsini gizlət</string>
+  <!-- 'Promote' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_promote_button_title">Reklam edin düyməsini gizlət</string>
+  <!-- 'Thanks' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_thanks_button_title">Təşəkkür Düyməsini Gizlət</string>
+  <!-- 'Ask' should be translated using the same localized wording YouTube displays for the button.
+          This button usually appears if the user IP is from a specific region such as the USA or EU. -->
+  <string name="morphe_hide_ask_button_title">Soruş düyməsini gizlət</string>
+  <!-- 'Clip' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_clip_button_title">Kəsmə düyməsini gizlət</string>
+  <!-- 'Shop' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_shop_button_title">Mağaza düyməsini gizlət</string>
+  <!-- 'Save' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_save_button_title">Saxla düyməsini gizlət</string>
+  <string name="morphe_fullscreen_buttons">Tam ekran düymələri</string>
+  <string name="morphe_hide_quick_actions_title">Fəaliyyət tabelin gizlət</string>
+  <string name="morphe_hide_quick_actions_ask_button_title">Soruş düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_comments_button_title">Şərhlər düyməsin gizlət</string>
+  <string name="morphe_hide_quick_actions_dislike_button_title">Bəyənməmə düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_like_button_title">Bəyənmə düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_live_chat_button_title">\"Canlı söhbət\" düyməsin gizlət</string>
+  <string name="morphe_hide_quick_actions_mix_button_title">Miks düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_more_button_title">Daha çox düyməsin gizlət</string>
+  <string name="morphe_hide_quick_actions_more_videos_button_title">\"Daha çox video\" düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_playlist_button_title">Pleylist düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_save_button_title">Saxlayın düyməsini gizlət</string>
+  <string name="morphe_hide_quick_actions_share_button_title">Paylaş düyməsini gizlət</string>
+  <!-- layout.captions.captionsPatch -->
+  <string name="morphe_captions_screen_title">Titrlər</string>
+  <string name="morphe_captions_screen_summary">Avtomatik titrləri və titr bazaların idarə et</string>
+  <!-- layout.captions.autoCaptionsPatch -->
+  <string name="morphe_auto_captions_style_title">Avtomatik titrlərin görünüşü</string>
+  <string name="morphe_auto_captions_style_entry_1">Həmişə göstər</string>
+  <string name="morphe_auto_captions_style_entry_2">Heç vaxt göstərilmir</string>
+  <string name="morphe_auto_captions_style_entry_3">Səsli olduqda göstər</string>
+  <string name="morphe_auto_captions_style_entry_4">Sessiz halda göstər</string>
+  <string name="morphe_auto_captions_style_legacy_entry_1">Avtomatik titrləri göstər</string>
+  <string name="morphe_auto_captions_style_legacy_entry_2">Avtomatik titrləri gizlət</string>
+  <!-- layout.captions.captionCookiesPatch -->
+  <string name="morphe_set_caption_cookies_title">Titr məlumatlarını yerləşdir</string>
+  <string name="morphe_caption_cookies_title">Titr bazaları</string>
+  <string name="morphe_get_caption_cookies_title">Titr məlumatların əldə et</string>
+  <string name="morphe_get_caption_cookies_failed">Məlumatları əldə etmək olmadı</string>
+  <string name="morphe_get_caption_cookies_duplicate">Bazalar artıq var</string>
+  <string name="morphe_get_caption_cookies_success">Bazalar uğurla yeniləndi</string>
+  <!-- layout.captions.transcriptPatch -->
+  <string name="morphe_fix_transcript_title">Transkripti düzəlt</string>
+  <string name="morphe_fix_transcript_summary">Transkripti yükləməyə mane ola biləcək ilkin status yoxlanılması uğursuzluğun həll edir</string>
+  <!-- layout.buttons.navigation.navigationButtonsPatch -->
+  <string name="morphe_navigation_buttons_screen_title">Fəaliyyət düymələri</string>
+  <string name="morphe_navigation_buttons_screen_summary">Aşağı fəaliyyət cərgəsində hansı düymələr görünür seç</string>
+  <!-- 'Home' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_hide_home_button_title">Ev düyməsini gizlət</string>
+  <!-- 'Shorts' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_hide_shorts_button_title">Shorts düyməsini gizlət</string>
+  <!-- 'Create' has no display name. Translate normally. -->
+  <string name="morphe_hide_create_button_title">Yarat düyməsini gizlət</string>
+  <!-- 'Subscriptions' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_hide_subscriptions_button_title">Abunəliklər düyməsini gizlət</string>
+  <!-- 'Notifications' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_hide_notifications_button_title">Bildirişlər düyməsin gizlət</string>
+  <string name="morphe_show_search_button_title">Axtarış düyməsini göstər</string>
+  <string name="morphe_show_search_button_index_title">Axtarış düyməsi mövqeyi</string>
+  <string name="morphe_show_settings_button_title">Ayarlar düyməsini göstər</string>
+  <string name="morphe_show_settings_button_index_title">Ayarlar düyməsi mövqeyi</string>
+  <string name="morphe_show_settings_button_type_title">Ayarlar düyməsi fəaliyyəti</string>
+  <string name="morphe_show_settings_button_type_summary">İşlək olduqda Morphe tənzimləmələrin, qapadılanda YouTube tənzimləmələrin açır</string>
+  <string name="morphe_hide_navigation_button_labels_title">Fəaliyyət düymə etiketlərini gizlət</string>
+  <string name="morphe_hide_navigation_bar_title">Fəaliyyət çubuğunu gizlət</string>
+  <string name="morphe_hide_navigation_bar_user_dialog_message">"Bu, \"Siz\" tabeli də daxil olmaqla fəaliyyət cərgəsin tamamilə gizlədir.
+
+Tənzimləmələrə daxil olmaq üçün Ümumi → Alətlər Cərgəsi→ Tənzimləmələri Göstər vasitəsilə Tənzimləmələr düyməsini aktivləşdir."</string>
+  <string name="morphe_narrow_navigation_buttons_title">Nəzarət düymələri ucqar olsun</string>
+  <string name="morphe_narrow_navigation_buttons_summary">Düymələr arasında üfüqi boşluğu azaldır</string>
+  <string name="morphe_navigation_bar_animations_title">Naviqasiya paneli animasiyalarını aktivləşdirin</string>
+  <string name="morphe_navigation_bar_animations_summary">Tabellər arasında keçərkən keçidləri canlandırır</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_title">Fəaliyyət cərgəsin avtomatik gizlətməsini qapat</string>
+  <string name="morphe_disable_auto_hide_navigation_bar_summary">Sürüşdürərkən fəaliyyət zolağın görünən saxlayır</string>
+  <string name="morphe_disable_translucent_status_bar_title">Yarımşəffaf mövqe cizgisin qapat</string>
+  <string name="morphe_disable_translucent_status_bar_summary">Status zolağın tamamilə qeyri-şəffaf edir</string>
+  <string name="morphe_disable_translucent_status_bar_user_dialog_message">"Məhdudiyyətlər: 
+• Video oynadıcının yuxarısında qara zolaq görünə bilər.
+• Sistem fəaliyyət cərgəsi şəffaf olaraq dəyişə bilər və videolarda şərh mümkün deyil."</string>
+  <string name="morphe_disable_translucent_navigation_bar_light_title">Açıq temada şəffaf cizgini qapat</string>
+  <string name="morphe_disable_translucent_navigation_bar_light_summary">İşıq rejimində fəaliyyət zolağın tam qeyri-şəffaf edir</string>
+  <string name="morphe_disable_translucent_navigation_bar_dark_title">Qaranlıq rejimdə şəffaf cərgəni qapat</string>
+  <string name="morphe_disable_translucent_navigation_bar_dark_summary">Qaranlıq rejimində fəaliyyət zolağın tam qeyri-şəffaf edir</string>
+  <string name="morphe_toolbar_screen_title">Alətlər çubuğu</string>
+  <string name="morphe_toolbar_screen_summary">Alətlər zolağında hansı elementlər görünür seç</string>
+  <string name="morphe_hide_toolbar_cast_button_title">Yayımla düyməsini gizlət</string>
+  <string name="morphe_hide_toolbar_chat_button_title">Söhbət düyməsin gizlət</string>
+  <string name="morphe_hide_toolbar_create_button_title">Yarat düyməsini gizlət</string>
+  <string name="morphe_hide_toolbar_microphone_button_title">Mikrofon düyməsini gizlət</string>
+  <string name="morphe_hide_toolbar_notification_button_title">Bildirişlər düyməsin gizlət</string>
+  <string name="morphe_hide_toolbar_search_button_title">Axtarış düyməsini gizlət</string>
+  <string name="morphe_show_toolbar_settings_button_title">Ayarlar düyməsini göstər</string>
+  <string name="morphe_show_toolbar_settings_button_index_title">Ayarlar düyməsi mövqeyi</string>
+  <string name="morphe_show_toolbar_settings_button_type_title">Ayarlar düyməsi fəaliyyəti</string>
+  <string name="morphe_show_toolbar_settings_button_type_summary">İşə salındıqda, toxunma Morphe tənzimləmələrin açır və uzun basma YouTube tənzimləmələrin açır, dəyişdirmək üçün qapat</string>
+  <!-- layout.hide.player.flyoutmenupanel.hidePlayerFlyoutMenuPatch -->
+  <string name="morphe_hide_player_flyout_title">Açılan menyu</string>
+  <string name="morphe_hide_player_flyout_summary">Açılan menyuda hansı elementlər görünür seç</string>
+  <!-- 'Audio track' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_audio_track_title">\'Audio Trek\' seçimin gizlət</string>
+  <!-- 'Spoof video streams' should match the language used in 'morphe_spoof_video_streams_screen_title'.
+          'Android Reel' and 'TV' must be kept untranslated. -->
+  <string name="morphe_hide_player_flyout_audio_track_not_available">"'Audio Trek' menyusu gizlidir
+
+'Audio Trek' menyusunu göstərmək üçün 'Video yayımları saxtalaşdır'- ı 'Android Reel' yaxud 'TV'-ə dəyiş"</string>
+  <string name="morphe_hide_player_flyout_audio_track_footer_title">\'Audio Trek\' seçimi alt yazısın gizlət</string>
+  <!-- 'Captions' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_captions_title">Subtitrlər seçimini gizlət</string>
+  <string name="morphe_hide_player_flyout_captions_footer_title">Subtitrlər seçimi alt yazısın gizlət</string>
+  <string name="morphe_hide_player_flyout_captions_header_title">Subtitrlər seçimi sərlövhəsin gizlət</string>
+  <!-- 'Additional settings / More' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_additional_settings_title">\'Əlavə ayarlar\'-ı / Ardı seçimin gizlət</string>
+  <!-- 'Sleep timer' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_sleep_timer_title">\"Yuxu taymeri\" seçimin gizlət</string>
+  <!-- 'Loop video' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_loop_video_title">\"Videonu təkrar oxudun\" seçimin gizlət</string>
+  <!-- 'Ambient mode' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_ambient_mode_title">\'Ambient rejim\' seçimin gizlət</string>
+  <!-- 'Stable volume' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_stable_volume_title">\"Sabit səs səviyyəsi\" seçimin gizlət</string>
+  <!-- 'Help & feedback' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_help_title">\'Yardım və geri əlaqə\' seçimin gizlət</string>
+  <!-- 'Playback speed' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_speed_title">\"Oxutma sürəti\" seçimin gizlət</string>
+  <!-- 'Lock screen' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_lock_screen_title">\'Ekran kilidi\' seçimin gizlət</string>
+  <!-- 'Listen with YouTube Music' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_listen_with_youtube_music_title">\'YouTube Music ilə dinləyin\' seçimin gizlət</string>
+  <!-- 'Watch in VR' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_watch_in_vr_title">\"VR-da izləyin\" seçimin gizlət</string>
+  <!-- 'Quality' should be translated using the same localized wording YouTube displays for the menu item. -->
+  <string name="morphe_hide_player_flyout_quality_title">Keyfiyyət seçimin gizlət</string>
+  <string name="morphe_hide_player_flyout_quality_footer_title">Keyfiyyət seçimi alt yazısın gizlət</string>
+  <string name="morphe_hide_player_flyout_quality_header_title">Keyfiyyət seçimi sərlövhəsin gizlət</string>
+  <!-- layout.hide.autoplaypreview.hideAutoplayPreviewPatch -->
+  <string name="morphe_hide_autoplay_preview_title">Avtomatik önizləmə önizlənməsini gizlət</string>
+  <string name="morphe_hide_autoplay_preview_summary">Avtomatik oynatma başlamazdan öncə tam ekranda gözlənilən video önizləməsini gizlədir</string>
+  <!-- layout.buttons.overlay.hidePlayerOverlayButtonsPatch -->
+  <string name="morphe_overlay_buttons_screen_title">Örtük düymələri</string>
+  <string name="morphe_overlay_buttons_screen_summary">Video oynadıcı üzərində hansı düymələr görünür seç</string>
+  <string name="morphe_hide_autoplay_button_title">Avtomatik oynatma düyməsini gizlət</string>
+  <!-- This button does not display any text, but 'Captions' should match the language used in 'morphe_hide_player_flyout_captions_title'. -->
+  <string name="morphe_hide_captions_button_title">Titrlər Düyməsin Gizlət</string>
+  <string name="morphe_hide_cast_button_title">Yayımla düyməsini gizlət</string>
+  <string name="morphe_hide_collapse_button_title">Qatlama düyməsini gizlət</string>
+  <string name="morphe_hide_fullscreen_button_title">Tam ekran düyməsini gizlət</string>
+  <string name="morphe_hide_player_control_buttons_background_title">Oynadıcı idarəetmələri fonunu gizlət</string>
+  <string name="morphe_hide_player_control_buttons_background_summary">Video oynadıcı tənzimləyiciləri əhatəsində qara kölgələnməni gizlədir</string>
+  <string name="morphe_hide_player_previous_next_buttons_title">Əvvəlki &amp; Növbəti düymələrini gizlət</string>
+  <string name="morphe_hide_settings_button_title">Ayarlar düyməsini gizlət</string>
+  <!-- layout.hide.endscreencards.hideEndScreenCardsPatch -->
+  <string name="morphe_hide_end_screen_cards_title">Son ekran kartlarını gizlət</string>
+  <!-- layout.hide.ambientmode.ambientModePatch -->
+  <string name="morphe_ambient_mode_screen_title">Ambient rejimi</string>
+  <string name="morphe_ambient_mode_screen_summary">Ambient rejimi görünüşün və enerji məhdudiyyətlərin idarə et</string>
+  <string name="morphe_bypass_ambient_mode_restrictions_title">Ambient rejimi məhdudiyyətlərini yan keç</string>
+  <string name="morphe_bypass_ambient_mode_restrictions_summary">Ambient rejimini batareya qənaətçisi rejimində işlək saxlamağa icazə verir</string>
+  <string name="morphe_disable_ambient_mode_title">Ambient rejimini qapat</string>
+  <string name="morphe_disable_fullscreen_ambient_mode_title">Tam ekranda Ambient rejimini qapat</string>
+  <!-- layout.hide.infocards.hideInfocardsPatch -->
+  <string name="morphe_hide_info_cards_title">Məlumat kartlarını gizlət</string>
+  <!-- layout.hide.rollingnumber.disableRollingNumberAnimationPatch -->
+  <string name="morphe_disable_rolling_number_animations_title">Sürüşən rəqəm animasiyaların söndür</string>
+  <string name="morphe_disable_rolling_number_animations_summary">Bəyənmə saymalarında və baxış saymalarında sayma animasiyasını dayandırır</string>
+  <!-- layout.hide.seekbar.hideSeekbarPatch -->
+  <string name="morphe_hide_seekbar_title">Video oynadıcı irəli-geri çəkmə cizgisin gizlət</string>
+  <string name="morphe_hide_seekbar_thumbnail_title">Video miniatür irəli-geri çəkmə cizgisin gizlət</string>
+  <string name="morphe_fullscreen_large_seekbar_title">Tam ekran böyük irəli-geri çəkmə cizgisin aktivləşdir</string>
+  <!-- layout.hide.shorts.hideShortsComponentsPatch -->
+  <string name="morphe_shorts_player_screen_title">Shorts oynadıcı</string>
+  <string name="morphe_shorts_player_screen_summary">Shorts oynadıcıda hansı elementlər görünür seç</string>
+  <string name="morphe_hide_shorts_category_title">\"Shorts\"u gizlət</string>
+  <string name="morphe_hide_shorts_channel_title">Kanal səhifəsində gizlət</string>
+  <!-- 'Home' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_hide_shorts_home_title">Ev axınında &amp; əlaqəli videolarda gizlət</string>
+  <string name="morphe_hide_shorts_search_title">Axtarış nəticələrində gizlət</string>
+  <!-- 'Subscriptions' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_hide_shorts_subscriptions_title">Abunəliklər axınında gizlət</string>
+  <string name="morphe_hide_shorts_video_description_title">Video təsvirində gizlət</string>
+  <string name="morphe_hide_shorts_history_title">Baxış tarixçəsində gizlət</string>
+  <string name="morphe_hide_shorts_ai_button_title">Sİ düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_auto_dubbed_label_title">Avtomatik dublyaj labelini gizlət</string>
+  <string name="morphe_hide_shorts_super_thanks_button_title">Super Təşəkkür Al düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_effect_button_title">Effekt düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_green_screen_button_title">Yaşıl ekran düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_hashtag_button_title">Mövzu etiketi düyməsini gizlət</string>
+  <!-- 'Join' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_shorts_join_button_title">Qoşul düyməsin gizlə</string>
+  <string name="morphe_hide_shorts_live_preview_title">Keçidlərin önizləməsini gizlət</string>
+  <string name="morphe_hide_shorts_location_label_title">Məkan etiketini gizlət</string>
+  <string name="morphe_hide_shorts_new_posts_button_title">Yeni elanlar düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_paused_overlay_buttons_title">Dayandırma örtük düymələrini gizlət</string>
+  <string name="morphe_hide_shorts_preview_comment_title">Öncül baxış şərhini gizlət</string>
+  <string name="morphe_hide_shorts_save_sound_button_title">Musiqini saxla düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_search_suggestions_title">Axtarış təkliflərini gizlət</string>
+  <string name="morphe_hide_shorts_shop_button_title">Mağaza düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_subscribe_button_title">Abunə ol düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_tagged_products_title">Etiketlənmiş məhsulları gizlət</string>
+  <string name="morphe_hide_shorts_upcoming_button_title">Yaxınlaşan düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_use_sound_button_title">Bu səsi işlət düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_use_template_button_title">Bu şablonu işlət düyməsini gizlət</string>
+  <!-- YouTube may no longer use this feature and this setting may be obsolete. -->
+  <string name="morphe_hide_shorts_like_fountain_title">Bəyənmə düyməsi fontan animasiyasın gizlət</string>
+  <string name="morphe_hide_shorts_like_button_title">Bəyənmə düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_dislike_button_title">Bəyənməmə düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_comments_button_title">Şərhlər düyməsin gizlət</string>
+  <!-- 'Share' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_shorts_share_button_title">Paylaş düyməsini gizlət</string>
+  <!-- 'Remix' should be translated using the same localized wording YouTube displays for the button. -->
+  <string name="morphe_hide_shorts_remix_button_title">Remix düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_sound_button_title">Səs düyməsini gizlət</string>
+  <string name="morphe_hide_shorts_info_panel_title">Məlumat panelini gizlət</string>
+  <string name="morphe_hide_shorts_channel_bar_title">Kanal çubuğunu gizlət</string>
+  <string name="morphe_hide_shorts_video_title_title">Video başlığını gizlət</string>
+  <string name="morphe_hide_shorts_sound_metadata_label_title">Səs üst məlumat etiketini gizlət</string>
+  <string name="morphe_hide_shorts_full_video_link_label_title">Video keçidi etiketini gizlət</string>
+  <string name="morphe_disable_shorts_double_tap_to_like_title">Bəyənmək üçün cüt toxunuşu qapat</string>
+  <string name="morphe_hide_shorts_navigation_bar_title">Fəaliyyət çubuğunu gizlət</string>
+  <!-- layout.hide.endscreensuggestedvideo.hideEndScreenSuggestedVideoPatch -->
+  <string name="morphe_hide_end_screen_suggested_video_title">Son ekran bildirilən videonu gizlət</string>
+  <!-- layout.hide.relatedvideos.hideRelatedVideosPatch -->
+  <string name="morphe_hide_player_related_videos_title">Əlaqəli videoları gizlət</string>
+  <!-- layout.hide.relatedvideooverlay.hideRelatedVideoOverlayPatch -->
+  <!-- layout.hide.time.hideTimestampPatch -->
+  <string name="morphe_hide_timestamp_title">Video vaxt möhürünü gizlət</string>
+  <!-- layout.panels.popup.disablePlayerPopupPanelsPatch -->
+  <!-- layout.player.fullscreen.exitFullscreenPatch -->
+  <string name="morphe_exit_fullscreen_entry_1">Qapalı</string>
+  <string name="morphe_exit_fullscreen_entry_4">Şaquli və üfüqi</string>
+  <!-- layout.player.fullscreen.disableFullscreenGesturesPatch -->
+  <!-- layout.player.fullscreen.openVideosFullscreenPatch -->
+  <string name="morphe_open_videos_fullscreen_entry_1">Qapalıdı</string>
+  <string name="morphe_open_videos_fullscreen_entry_2">Şaquli</string>
+  <string name="morphe_open_videos_fullscreen_entry_3">Üfüqi</string>
+  <!-- layout.player.overlay.customPlayerOverlayOpacityPatch -->
+  <string name="morphe_player_overlay_opacity_title">Oynadıcı örtüyünün qeyri-şəffaflığı</string>
+  <string name="morphe_player_overlay_opacity_summary">Şəffaflıq səviyyəsini tənzimlə (0 şəffafdır, 100 qeyri-şəffafdır)</string>
+  <string name="morphe_player_overlay_opacity_invalid_toast">Oynadıcı örtüyü qeyri-şəffaflığı 0-100 arası olmalıdır</string>
+  <!-- layout.returnyoutubedislike.returnYouTubeDislikePatch -->
+  <!-- Brief notification (toast) shown if network connection times out. Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="morphe_ryd_failure_connection_timeout">\"Bəyənməmə\" müvəqqəti əlçatmazdır (API vaxtı bitdi)</string>
+  <string name="morphe_ryd_failure_connection_status_code">Bəyənməmə əlçatmazdır (status %d)</string>
+  <string name="morphe_ryd_failure_client_rate_limit_requested">Bəyənməmələr mövcud deyil (qəbuledici API limiti)</string>
+  <string name="morphe_ryd_failure_generic">Bəyənməmə əlçatmazdır (%s)</string>
+  <!-- Brief notification (Toast) shown if the user enables RYD while a video is opened, and then tries to vote for the video. -->
+  <string name="morphe_ryd_failure_ryd_enabled_while_playing_video_then_user_voted">Ryd ilə səsvermə üçün videonu yenidən yüklə</string>
+  <!-- Video likes have been set to hidden by the video uploader. -->
+  <string name="morphe_ryd_video_likes_hidden_by_video_owner">Sahib tərəfindən gizlədilib</string>
+  <string name="morphe_ryd_shorts_title">\"Shorts\"da bəyənməmə sayını göstər</string>
+  <!-- Translations should match the language used in 'morphe_sb_enable_compact_skip_button'. -->
+  <string name="morphe_ryd_estimated_like_title">Təxmini bəyənmələri göstər</string>
+  <!-- Statistic strings are shown in the settings only when Morphe debug mode is enabled. Typical users will never see these. -->
+  <string name="morphe_ryd_statistics_category_title">Bu cihazda Return YouTube Dislike API statistikası</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeAverage_title">Orta hesabla API cavab müddəti</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeMin_title">Ən aşağı API cavab müddəti</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeMax_title">Ən yüksək API cavab müddəti</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeLast_title">Son video üzrə API cavab müddəti</string>
+  <string name="morphe_ryd_statistics_getFetchCallResponseTimeLast_rate_limit_summary">Bəyənməmələr müvəqqəti olaraq əlçatmazdır - Qəbuledici API sürət limiti var</string>
+  <string name="morphe_ryd_statistics_getFetchCallCount_title">API alınan səsvermədə zəng sayı</string>
+  <string name="morphe_ryd_statistics_getFetchCallCount_zero_summary">Heç bir şəbəkə istəyi olmadı</string>
+  <string name="morphe_ryd_statistics_getFetchCallCount_non_zero_summary">%d şəbəkə istəyi oldu</string>
+  <string name="morphe_ryd_statistics_getFetchCallNumberOfFailures_title">API alınan səsvermədə bitən müddət</string>
+  <string name="morphe_ryd_statistics_getFetchCallNumberOfFailures_zero_summary">Heç bir şəbəkə istəyi üçün vaxt bitmədi</string>
+  <string name="morphe_ryd_statistics_getFetchCallNumberOfFailures_non_zero_summary">%d şəbəkə istəyi üçün vaxt bitdi</string>
+  <string name="morphe_ryd_statistics_getNumberOfRateLimitRequestsEncountered_title">API qəbuledici sürət məhdudiyyətləri</string>
+  <string name="morphe_ryd_statistics_getNumberOfRateLimitRequestsEncountered_zero_summary">Qəbuledici sürət məhdudiyyəti olmadı</string>
+  <string name="morphe_ryd_statistics_getNumberOfRateLimitRequestsEncountered_non_zero_summary">Qəbuledici sürət limiti %d dəfə baş verdi</string>
+  <string name="morphe_ryd_statistics_millisecond_text">%d millisaniyə</string>
+  <!-- layout.searchbar.wideSearchbarPatch -->
+  <string name="morphe_wide_searchbar_title">Geniş axtarış cizgisin aktivləşdir</string>
+  <!-- layout.sponsorblock.sponsorBlockPatch -->
+  <!-- layout.formfactor.changeFormFactorPatch -->
+  <string name="morphe_change_form_factor_entry_1">İlkin</string>
+  <string name="morphe_change_form_factor_entry_2">Telefon</string>
+  <string name="morphe_change_form_factor_entry_3">Planşet</string>
+  <string name="morphe_change_form_factor_entry_4">Avtomobil</string>
+  <!-- "Restore old video action bar" must be translated the same as morphe_restore_old_video_action_bar_title -->
+  <!-- layout.spoofappversion.spoofAppVersionPatch -->
+  <string name="morphe_spoof_app_version_title">Tətbiq versiyasını saxtalaşdır</string>
+  <string name="morphe_spoof_app_version_user_dialog_message">"Tətbiq versiyası köhnə YouTube versiyasına saxtalaşdırılacaq.
+
+Bu tətbiqin görünüşün və xüsusiyyətlərin dəyişdirəcək, lakin bilinməyən yan təsirlər ola bilər.
+
+Sonradan qapadılarsa, UI səhvlərin önləmək üçün tətbiq məlumatların silmək tövsiyə olunur."</string>
+  <string name="morphe_spoof_app_version_target_title">Saxta tətbiq versiyası hədəfi</string>
+  <!-- misc.sharesheet.openSystemShareSheetPatch -->
+  <string name="morphe_open_system_share_sheet_title">Sistem paylaşım səhifəsin aç</string>
+  <!-- layout.music.overrideYouTubeMusicButtonsPatch -->
+  <!-- layout.startpage.changeStartPagePatch -->
+  <string name="morphe_change_start_page_title">Başlanğıc səhifəsi</string>
+  <string name="morphe_change_start_page_entry_default">İlkin</string>
+  <string name="morphe_change_start_page_entry_all_subscriptions">Bütün abunəliklər</string>
+  <string name="morphe_change_start_page_entry_browse">Kanallara nəzər yetir</string>
+  <string name="morphe_change_start_page_entry_courses">Kurslar / Öyrənmə</string>
+  <string name="morphe_change_start_page_entry_explore">Kəşf et</string>
+  <string name="morphe_change_start_page_entry_fashion">Moda &amp; Gözəllik</string>
+  <string name="morphe_change_start_page_entry_gaming">Oyun</string>
+  <string name="morphe_change_start_page_entry_history">Tarixçə</string>
+  <string name="morphe_change_start_page_entry_library">Kitabxana</string>
+  <string name="morphe_change_start_page_entry_liked_videos">Bəyənilən videolar</string>
+  <string name="morphe_change_start_page_entry_live">Canlı</string>
+  <string name="morphe_change_start_page_entry_movies">Filmlər</string>
+  <string name="morphe_change_start_page_entry_music">Musiqi</string>
+  <string name="morphe_change_start_page_entry_news">Xəbərlər</string>
+  <string name="morphe_change_start_page_entry_notifications">Bildirişlər</string>
+  <string name="morphe_change_start_page_entry_playlists">Pleylistlər</string>
+  <string name="morphe_change_start_page_entry_search">Axtarış</string>
+  <string name="morphe_change_start_page_entry_shopping">Mağaza</string>
+  <string name="morphe_change_start_page_entry_shorts">Shorts</string>
+  <string name="morphe_change_start_page_entry_sports">İdman</string>
+  <string name="morphe_change_start_page_entry_subscriptions">Abunəliklər</string>
+  <string name="morphe_change_start_page_entry_trending">Trendlər</string>
+  <string name="morphe_change_start_page_entry_virtual_reality">Faktiki Həyat</string>
+  <string name="morphe_change_start_page_entry_watch_later">Sonra izlə</string>
+  <string name="morphe_change_start_page_entry_your_clips">Klipləriniz</string>
+  <!-- layout.shortsnoresume.disableShortsResumingOnStartupPatch -->
+  <!-- layout.shortsplayer.shortsPlayerTypePatch -->
+  <string name="morphe_shorts_player_type_title">Shorts-u bununla aç</string>
+  <string name="morphe_shorts_player_type_shorts">Shorts oynadıcı</string>
+  <string name="morphe_shorts_player_type_regular_player">Müntəzəm oynadıcı</string>
+  <string name="morphe_shorts_player_type_regular_player_fullscreen">Müntəzəm oynadıcı tam ekran</string>
+  <!-- layout.shortsautoplay.shortsAutoplayPatch -->
+  <string name="morphe_shorts_autoplay_title">Shorts-ları avto-oynatma</string>
+  <!-- layout.miniplayer.miniplayerPatch -->
+  <string name="morphe_miniplayer_screen_title">Kiçik oynadıcı</string>
+  <string name="morphe_miniplayer_type_title">Kiçik oynadıcı növü</string>
+  <string name="morphe_miniplayer_type_entry_0">Qeyri-aktivdir</string>
+  <string name="morphe_miniplayer_type_entry_1">İlkin</string>
+  <string name="morphe_miniplayer_type_entry_2">Ən kiçik</string>
+  <string name="morphe_miniplayer_type_entry_3">Planşet</string>
+  <string name="morphe_miniplayer_type_entry_4">Müasir 1</string>
+  <string name="morphe_miniplayer_type_entry_5">Müasir 2</string>
+  <string name="morphe_miniplayer_type_entry_6">Müasir 3</string>
+  <string name="morphe_miniplayer_type_entry_7">Müasir 4</string>
+  <string name="morphe_miniplayer_disable_rounded_corners_title">Dəyirmi küncləri qapat</string>
+  <string name="morphe_miniplayer_disable_drag_and_drop_title">Sürüklə və burax-ı qapat</string>
+  <string name="morphe_miniplayer_disable_horizontal_drag_title">Üfüqi sürükləmə jestini qapat</string>
+  <string name="morphe_miniplayer_hide_overlay_buttons_title">Örtük düymələrini gizlət</string>
+  <string name="morphe_miniplayer_width_dip_invalid_toast">Piksel ölçüsü, %1$s - %2$s arası olmalıdır</string>
+  <string name="morphe_miniplayer_opacity_title">Örtük qeyri-şəffaflığı</string>
+  <string name="morphe_miniplayer_opacity_summary">Şəffaflıq səviyyəsini tənzimlə (0 şəffafdır, 100 qeyri-şəffafdır)</string>
+  <string name="morphe_miniplayer_opacity_invalid_toast">Kiçik Oynadıcı örtük qeyri-şəffaflığı 0-100 arası olmalıdır</string>
+  <!-- layout.theme.themePatch -->
+  <string name="morphe_gradient_loading_screen_title">Dəyişkən yükləmə ekranını aktivləşdir</string>
+  <string name="morphe_splash_screen_animation_style_title">Sıçrama ekran üslubu</string>
+  <string name="morphe_splash_screen_animation_style_entry_1">Qapalıdı</string>
+  <string name="morphe_splash_screen_animation_style_entry_2">Rəng</string>
+  <string name="morphe_splash_screen_animation_style_entry_3">Saya</string>
+  <string name="morphe_seekbar_custom_color_title">Fərdi çevirmə cizgisi rəngini aktivləşdir</string>
+  <string name="morphe_seekbar_custom_color_invalid">Etibarsız çevirmə cizgisi rəng dəyəri</string>
+  <!-- layout.branding.customBrandingPatch -->
+  <!-- layout.branding.header.changeHeaderPatch -->
+  <string name="morphe_header_logo_title">Başlıq simvolu</string>
+  <string name="morphe_header_logo_entry_1">İlkin</string>
+  <string name="morphe_header_logo_entry_2">Müntəzəm</string>
+  <!-- Translations should match the language used in 'morphe_custom_branding_icon_entry_3'. -->
+  <string name="morphe_header_logo_entry_5">Məxluq</string>
+  <!-- layout.thumbnails.bypassImageRegionRestrictionsPatch -->
+  <string name="morphe_bypass_image_region_restrictions_title">Təsvir bölgə məhdudiyyətlərini ötür</string>
+  <!-- layout.thumbnails.alternativeThumbnailsPatch -->
+  <!-- 'Home' should be translated using the same localized wording YouTube displays for the tab. -->
+  <!-- 'Subscriptions' should be translated using the same localized wording YouTube displays for the tab. -->
+  <!-- 'You' should be translated using the same localized wording YouTube displays for the tab. -->
+  <string name="morphe_alt_thumbnail_options_entry_1">Orijinal miniatürlər</string>
+  <string name="morphe_alt_thumbnail_options_entry_2">DeArrow &amp; Orijinal miniatürlər</string>
+  <string name="morphe_alt_thumbnail_options_entry_3">DeArrow &amp; Kadr çəkilişlər</string>
+  <string name="morphe_alt_thumbnail_options_entry_4">Kadr çəkilişləri</string>
+  <string name="morphe_alt_thumbnail_dearrow_api_url_title">DeArrow API\'nin sonuncu əlaqəsi</string>
+  <string name="morphe_alt_thumbnail_dearrow_api_url_summary">DeArrow miniatür keşinin son əlaqəsinin URL-si</string>
+  <string name="morphe_alt_thumbnail_stills_about_title">Statik video kadrları</string>
+  <string name="morphe_alt_thumbnail_stills_about_summary">Durğun kadrlar, hər videonun əvvəlindən/ortasından/sonundan götürülür. Bu təsvirlər YouTube-da qurulu gəlir və xarici API istifadə edilmir</string>
+  <string name="morphe_alt_thumbnail_stills_fast_title">Sürətli kadr çəkilişləri istifadə et</string>
+  <string name="morphe_alt_thumbnail_stills_time_entry_1">Başlanğıc</string>
+  <string name="morphe_alt_thumbnail_stills_time_entry_2">Orta</string>
+  <string name="morphe_alt_thumbnail_stills_time_entry_3">Bitmə</string>
+  <!-- Translations of this should not be longer than the original English text, otherwise the text can be clipped and not entirely shown. -->
+  <string name="morphe_alt_thumbnail_dearrow_error">DeArrow müvəqqəti mövcud deyil (status kodu: %s) </string>
+  <string name="morphe_alt_thumbnail_dearrow_error_generic">DeArrow müvəqqəti olaraq mövcud deyil</string>
+  <!-- misc.announcements.announcementsPatch -->
+  <!-- misc.playercontrols.playerControlsPatch -->
+  <string name="morphe_restore_old_player_buttons_title">Köhnə oynadıcı düymə üslubun bərpa et</string>
+  <string name="morphe_restore_old_player_buttons_summary">Qalın video oynadıcı tənzimləyicilərin köhnə, daha nazik görüntü üslubuna qaytarır</string>
+  <!-- misc.dimensions.spoof.spoofDeviceDimensionsPatch -->
+  <string name="morphe_spoof_device_dimensions_title">Cihaz ölçülərini saxtalaşdır</string>
+  <string name="morphe_spoof_device_dimensions_user_dialog_message">Bunu aktivləşdirmə, video oynatma donmalarına, daha pis batareya istismarına və bilinməyən yan təsirlərə səbəb ola bilər.</string>
+  <!-- misc.hapticfeedback.disableHapticFeedbackPatch -->
+  <string name="morphe_disable_haptic_feedback_title">Əks-əlaqə reaksiyası</string>
+  <string name="morphe_disable_haptic_feedback_chapters_title">Fəsillər reaksiyasın qapat</string>
+  <string name="morphe_disable_haptic_feedback_precise_seeking_title">Dəqiq irəli-geri çəkmə toxunuş hissin qapat</string>
+  <string name="morphe_disable_haptic_feedback_seek_undo_title">Geriyə çevirmə toxunuş hissini qapat</string>
+  <string name="morphe_disable_haptic_feedback_zoom_title">Yaxınlaşdırma reaksiyasın qapat</string>
+  <!-- misc.medianotification.mediaNotificationControlsPatch -->
+  <!-- misc.gms.accountCredentialsInvalidTextPatch -->
+  <string name="microg_offline_account_login_error">Bu yaxınlarda hesabınıza giriş məlumatlarınızı dəyişmisinizsə, MicroG-ni silin və təkrar quraşdırın.</string>
+  <!-- misc.links.bypassLinkRedirectsPatch -->
+  <!-- misc.links.openLinksExternallyPatch -->
+  <string name="morphe_external_browser_title">Bağlantıları brauzerdə aç</string>
+  <!-- video.quality.rememberVideoQualityPatch -->
+  <!-- Translations should match the language used in 'morphe_custom_playback_speeds_auto'. -->
+  <string name="morphe_video_quality_default_entry_1">Avtomatik</string>
+  <string name="morphe_video_quality_default_wifi_title">Wi-Fi şəbəkəsində ilkin video keyfiyyəti</string>
+  <string name="morphe_video_quality_default_mobile_title">Mobil şəbəkədə ilkin video keyfiyyəti</string>
+  <string name="morphe_shorts_quality_default_wifi_title">Wi-Fi şəbəkəsində ilkin Shorts keyfiyyəti</string>
+  <string name="morphe_shorts_quality_default_mobile_title">Mobil şəbəkədə ilkin Shorts keyfiyyəti</string>
+  <string name="morphe_remember_video_quality_mobile">mobil</string>
+  <string name="morphe_remember_video_quality_wifi">wi-fi</string>
+  <string name="morphe_remember_video_quality_toast">İlkin %1$s keyfiyyəti %2$s kimi dəyişdi</string>
+  <string name="morphe_remember_video_quality_toast_shorts">Shorts-un %1$s keyfiyyəti %2$s olaraq dəyişdirildi</string>
+  <!-- video.speed.button.playbackSpeedButtonPatch -->
+  <!-- video.quality.button.videoQualityDialogButtonPatch -->
+  <!-- video.speed.custom.customPlaybackSpeedPatch -->
+  <string name="morphe_custom_speed_menu_title">Fərdi oynatma sürəti siyahısı</string>
+  <string name="morphe_restore_old_speed_menu_title">Köhnə oynatma sürəti menyusunu bərpa et</string>
+  <string name="morphe_custom_playback_speeds_title">Fərdi oynatma sürəti</string>
+  <string name="morphe_custom_playback_speeds_parse_exception">Fərdi oynatma sürətləri etibarsızdır</string>
+  <string name="morphe_custom_playback_speeds_auto">Avtomatik</string>
+  <!-- video.speed.remember.rememberPlaybackSpeedPatch -->
+  <string name="morphe_remember_playback_speed_last_selected_title">Oynatma sürətin xatırla</string>
+  <string name="morphe_remember_playback_speed_last_selected_toast_title">Sürət dəyişikliyi bildirişləri</string>
+  <string name="morphe_playback_speed_default_title">İlkin oynatma sürəti</string>
+  <!-- video.codecs.disableVideoCodecsPatch -->
+  <string name="morphe_disable_hdr_video_title">HDR Videonu Qapat</string>
+  <string name="morphe_force_avc_codec_title">AVC (H.264) kodlayıcıya zorla</string>
+  <string name="morphe_force_avc_codec_user_dialog_message">"Faydalar:
+• Batareya ömrünü uzada bilər
+• Köhnə cihazlarda çatışmayan video ayırdetmələrin bərpa edə bilər
+
+Məhdudiyyətlər:
+• Maksimum ayırdetmə 1080p-dir
+• Video oynatma VP9 və ya AV1-dən daha çox internet məlumatı işlədəcək
+• HDR videoları AVC istifadə etməyəcək
+• Bəzi cihazlar AVC-ni zorlaya bilməz"</string>
+  <!-- 'Spoof video streams' should be the same translation used for 'morphe_spoof_video_streams_screen_title'. -->
+  <!-- video.quality.advancedVideoQualityMenuPatch -->
+  <string name="morphe_advanced_video_quality_menu_title">Qabaqcıl video keyfiyyət siyahısın göstər</string>
+  <!-- video.quality.hidePremiumVideoQualityPatch -->
+  <string name="morphe_hide_premium_video_quality_title">Premium keyfiyyət seçimlərini gizlət</string>
+  <!-- video.quality.prioritizeVideoQualityPatch -->
+  <string name="morphe_prioritize_video_quality_title">Video keyfiyyətini üstələ</string>
+  <!-- misc.fix.playback.spoofVideoStreamsPatch -->
+  <string name="morphe_spoof_video_streams_av1_title">Android VR AV1-ə icazə ver</string>
+  <string name="morphe_spoof_video_streams_av1_summary">Android VR qəbuledici istifadə edərkən AV1 təminatını dekodlamağa icazə verir</string>
+  <string name="morphe_spoof_video_streams_av1_user_dialog_message">"Bu tənzimləməni aktivləşdirmə proqram təminatlı AV1 kodlayıcı istifadə edə bilər.
+
+Video oynatma AV1 ilə ilişə bilər və ya kadrlar buraxıla bilər."</string>
+  <string name="morphe_spoof_video_streams_about_title">Saxtakarlıq yan təsirləri</string>
+  <string name="morphe_spoof_video_streams_about_experimental">• Təcrübi qəbuledici və hər vaxt işləməyi dayandıra bilər</string>
+  <string name="morphe_spoof_video_streams_about_playback_failure">• Video 01:00-da dayana bilər və ya bəzi bölgələrdə mövcud olmaya bilər</string>
+  <string name="morphe_spoof_video_streams_about_no_audio_tracks">• Səs treki menyusu çatışmır</string>
+  <string name="morphe_spoof_video_streams_about_no_av1">• AV1 video kodlayıcı yoxdur</string>
+  <string name="morphe_spoof_video_streams_about_no_immersive_mode">• 360° VR geniş rejimi əlçatan deyil</string>
+  <string name="morphe_spoof_video_streams_about_no_stable_volume">• Sabit səs yoxdur</string>
+  <string name="morphe_spoof_video_streams_about_js">• Deobfuscation pozularsa, oynatma uğursuz ola bilər</string>
+  <!-- "Force original audio" should match the language used in 'morphe_force_original_audio_title'. -->
+  <string name="morphe_spoof_video_streams_about_no_force_original_audio">• \"Orijinal səsi zorla\" əlçatmazdır</string>
+  <string name="morphe_spoof_video_streams_player_js_variant_title">Oynadıcı JavaScript seçimi</string>
+  <string name="morphe_spoof_video_streams_stats_for_nerds_title">İstək üçün Statistikada saxtalaşdırmanı göstər</string>
+  <!-- misc.fix.videoactionbar.restoreOldVideoActionBarPatch -->
+</resources>

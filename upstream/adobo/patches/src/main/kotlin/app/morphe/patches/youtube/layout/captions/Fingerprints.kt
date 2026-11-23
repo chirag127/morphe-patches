@@ -1,0 +1,87 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-patches
+ *
+ * Original hard forked code:
+ * https://github.com/ReVanced/revanced-patches/commit/724e6d61b2ecd868c1a9a37d465a688e83a74799
+ *
+ * See the included NOTICE file for GPLv3 §7(b) and §7(c) terms that apply to Morphe contributions.
+ */
+
+package app.morphe.patches.youtube.layout.captions
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterWithin
+import app.morphe.patcher.OpcodesFilter
+import app.morphe.patcher.fieldAccess
+import app.morphe.patcher.literal
+import app.morphe.patcher.methodCall
+import app.morphe.patcher.opcode
+import app.morphe.patcher.string
+import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+
+internal object StartVideoInformerFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    filters = OpcodesFilter.opcodesToFilters(
+        Opcode.INVOKE_INTERFACE,
+        Opcode.RETURN_VOID,
+    ),
+    strings = listOf("pc")
+)
+
+private object SubtitleManagerFingerprintClassFingerprint : Fingerprint(
+    returnType = "Z",
+    parameters = listOf("L", "Landroid/view/accessibility/CaptioningManager;"),
+    filters = listOf(
+        fieldAccess("Ljava/util/concurrent/TimeUnit;->SECONDS:Ljava/util/concurrent/TimeUnit;"),
+        methodCall("Landroid/view/accessibility/CaptioningManager;->isEnabled()Z"),
+    ),
+    custom = { method, _ ->
+        AccessFlags.STATIC.isSet(method.accessFlags)
+    }
+)
+
+internal object SubtitleManagerFingerprint : Fingerprint(
+    classFingerprint = SubtitleManagerFingerprintClassFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("L"),
+    filters = listOf(
+        string(""),
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            parameters = listOf(),
+            returnType = "Z"
+        ),
+        opcode(opcode = Opcode.IF_EQZ, location = MatchAfterWithin(3))
+    )
+)
+
+/**
+ * YouTube 20.26+
+ */
+internal object NoVolumeCaptionsFeatureFlagFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Z",
+    filters = listOf(
+        literal(45692436L)
+    )
+)
+
+internal object TimedTextUrlFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "L",
+    parameters = listOf("L"),
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            smali = $$"Lorg/chromium/net/CronetEngine;->newUrlRequestBuilder(Ljava/lang/String;Lorg/chromium/net/UrlRequest$Callback;Ljava/util/concurrent/Executor;)Lorg/chromium/net/UrlRequest$Builder;",
+        ),
+        methodCall(
+            opcode = Opcode.INVOKE_STATIC,
+            smali = "Lorg/chromium/net/UploadDataProviders;->create(Ljava/nio/ByteBuffer;)Lorg/chromium/net/UploadDataProvider;",
+        )
+    )
+)
