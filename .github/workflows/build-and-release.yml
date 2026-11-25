@@ -103,7 +103,7 @@ jobs:
           java-version: '21'
 
       - name: Download patch bundle
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: patches-bundle
           path: bundle
